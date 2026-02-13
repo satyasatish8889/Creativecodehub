@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Creative Code Hub - Sign Up</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        body {
+            background-color: #f8f9fa;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+        }
+        .card {
+            border: none;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+            width: 100%;
+            max-width: 600px;
+            margin: 2rem auto;
+        }
+        .card-header {
+            background: linear-gradient(135deg, #6e8efb, #a777e3);
+            color: white;
+            border-radius: 10px 10px 0 0 !important;
+            padding: 1.5rem;
+            text-align: center;
+        }
+        .card-body {
+            padding: 2rem;
+        }
+        .form-control:focus {
+            border-color: #a777e3;
+            box-shadow: 0 0 0 0.2rem rgba(167, 119, 227, 0.25);
+        }
+        .btn-primary {
+            background: linear-gradient(135deg, #6e8efb, #a777e3);
+            border: none;
+            padding: 10px 0;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        .btn-primary:hover {
+            background: linear-gradient(135deg, #5a7df4, #8f5fe8);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        .btn-link {
+            color: #6e8efb;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        .btn-link:hover {
+            color: #5a7df4;
+            text-decoration: underline;
+        }
+        .alert {
+            border-radius: 8px;
+            margin-bottom: 1.5rem;
+        }
+        .input-group-text {
+            background-color: #f8f9fa;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-12 col-lg-8">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="mb-0">Join Creative Code Hub</h3>
+                        <p class="mb-0">Create your account to get started</p>
+                    </div>
+                    <div class="card-body">
+                        {% with messages = get_flashed_messages(with_categories=true) %}
+                            {% if messages %}
+                                {% for category, message in messages %}
+                                    <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+                                        {{ message }}
+                                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                    </div>
+                                {% endfor %}
+                            {% endif %}
+                        {% endwith %}
+                        
+                        <form method="POST" action="{{ url_for('signup') }}" class="needs-validation" novalidate>
+                            <input type="hidden" name="csrf_token" value="{{ csrf_token }}"/>
+                            
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label for="name" class="form-label">Full Name</label>
+                                    <div class="input-group">
+                                        <span class="input-group-text"><i class="fas fa-user"></i></span>
+                                        <input type="text" class="form-control form-control-lg" id="name" name="name" required>
+                                    </div>
+                                    <div class="invalid-feedback">
+                                        Please enter your full name.
+                                    </div>
+                                </div>
+                                
+                                <div class="col-md-6 mb-3">
+                                    <label for="email" class="form-label">Email address</label>
+                                    <div class="input-group">
+                                        <span class="input-group-text"><i class="fas fa-envelope"></i></span>
+                                        <input type="email" class="form-control form-control-lg" id="email" name="email" required>
+                                    </div>
+                                    <div class="invalid-feedback">
+                                        Please enter a valid email address.
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label for="password" class="form-label">Password</label>
+                                    <div class="input-group">
+                                        <span class="input-group-text"><i class="fas fa-lock"></i></span>
+                                        <input type="password" class="form-control form-control-lg" id="password" name="password" required>
+                                    </div>
+                                    <div class="invalid-feedback">
+                                        Please enter a password.
+                                    </div>
+                                </div>
+                                
+                                <div class="col-md-6 mb-3">
+                                    <label for="confirm_password" class="form-label">Confirm Password</label>
+                                    <div class="input-group">
+                                        <span class="input-group-text"><i class="fas fa-lock"></i></span>
+                                        <input type="password" class="form-control form-control-lg" id="confirm_password" name="confirm_password" required>
+                                    </div>
+                                    <div class="invalid-feedback">
+                                        Passwords must match.
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label class="form-label">How Did You Hear About Us?</label>
+                                <div class="d-flex flex-wrap gap-3">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="referral_source" id="social" value="social" checked>
+                                        <label class="form-check-label" for="social">
+                                            <i class="fas fa-hashtag me-1"></i> Social Media
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="referral_source" id="college" value="college">
+                                        <label class="form-check-label" for="college">
+                                            <i class="fas fa-university me-1"></i> College
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="referral_source" id="friend" value="friend">
+                                        <label class="form-check-label" for="friend">
+                                            <i class="fas fa-user-friends me-1"></i> Friend
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="referral_source" id="other" value="other">
+                                        <label class="form-check-label" for="other">
+                                            <i class="fas fa-ellipsis-h me-1"></i> Other
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label for="college_name" class="form-label">College Name</label>
+                                    <div class="input-group">
+                                        <span class="input-group-text"><i class="fas fa-school"></i></span>
+                                        <input type="text" class="form-control form-control-lg" id="college_name" name="college_name" required>
+                                    </div>
+                                    <div class="invalid-feedback">
+                                        Please enter your college name.
+                                    </div>
+                                </div>
+                                
+                                <div class="col-md-6 mb-3">
+                                    <label for="branch" class="form-label">Branch</label>
+                                    <div class="input-group">
+                                        <span class="input-group-text"><i class="fas fa-code-branch"></i></span>
+                                        <input type="text" class="form-control form-control-lg" id="branch" name="branch" required>
+                                    </div>
+                                    <div class="invalid-feedback">
+                                        Please enter your branch.
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label for="graduation_year" class="form-label">Year of Graduation</label>
+                                    <div class="input-group">
+                                        <span class="input-group-text"><i class="fas fa-calendar-alt"></i></span>
+                                        <input type="number" class="form-control form-control-lg" id="graduation_year" name="graduation_year" min="2023" max="2030" required>
+                                    </div>
+                                    <div class="invalid-feedback">
+                                        Please enter a valid graduation year.
+                                    </div>
+                                </div>
+                                
+                                <div class="col-md-6 mb-4">
+                                    <label for="phone" class="form-label">Phone Number</label>
+                                    <div class="input-group">
+                                        <span class="input-group-text"><i class="fas fa-phone"></i></span>
+                                        <input type="tel" class="form-control form-control-lg" id="phone" name="phone" pattern="[0-9]{10}" required>
+                                    </div>
+                                    <div class="invalid-feedback">
+                                        Please enter a valid 10-digit phone number.
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="d-grid gap-2">
+                                <button type="submit" class="btn btn-primary btn-lg">
+                                    <i class="fas fa-user-plus me-2"></i>Create Account
+                                </button>
+                                <p class="text-center mt-3 mb-0">
+                                    Already have an account? 
+                                    <a href="{{ url_for('login') }}" class="fw-bold text-decoration-none">Sign In</a>
+                                </p>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+    // Form validation
+    (function () {
+        'use strict'
+        
+        // Fetch all the forms we want to apply custom Bootstrap validation styles to
+        var forms = document.querySelectorAll('.needs-validation')
+        
+        // Loop over them and prevent submission
+        Array.prototype.slice.call(forms).forEach(function (form) {
+            form.addEventListener('submit', function (event) {
+                if (!form.checkValidity()) {
+                    event.preventDefault()
+                    event.stopPropagation()
+                }
+                
+                // Check if passwords match
+                const password = document.getElementById('password')
+                const confirmPassword = document.getElementById('confirm_password')
+                
+                if (password.value !== confirmPassword.value) {
+                    confirmPassword.setCustomValidity("Passwords don't match")
+                    confirmPassword.reportValidity()
+                    event.preventDefault()
+                    event.stopPropagation()
+                } else {
+                    confirmPassword.setCustomValidity('')
+                }
+                
+                form.classList.add('was-validated')
+            }, false)
+        })
+    })()
+    </script>
+</body>
+</html>

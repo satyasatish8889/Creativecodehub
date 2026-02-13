@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Careers - Creative Code Hub</title>
+    <link rel="icon" type="image/png" href="images/logo/cc-hub-logo.png">
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top">
+        <div class="container">
+            <!-- Brand Logo -->
+            <a class="navbar-brand" href="index.html">
+                <img src="images/logo/cc-hub-logo.png" alt="Creative Code Hub" class="logo">
+            </a>
+            
+            <!-- Mobile Toggle Button -->
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" 
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <!-- Navigation Links -->
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav mx-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="courses.html">Courses</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="internship.html">Internship</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="project.html">Projects</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="about.html">About Us</a>
+                    </li>
+                    <li class="nav-item">
+                     <a class="nav-link active" href="career.html">Career</a>
+                    </li>
+                </ul>
+
+                <!-- Right Side: Dark Mode Toggle + Enroll Button -->
+                <div class="navbar-right d-flex align-items-center">
+                    <!-- Dark Mode Toggle -->
+                    <div class="nav-dark-mode">
+                        <button id="themeToggle" class="theme-toggle" aria-label="Toggle dark mode">
+                            <span class="sun">☀️</span>
+                            <span class="moon">🌙</span>
+                        </button>
+                    </div>
+                    
+                    <!-- Enroll Button -->
+                    <a href="underprocess.html" class="cc-hub-cta-btn" target="_blank">
+                        <i class="fas fa-rocket me-2"></i>LMS Portal
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="career-hero">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-8 mx-auto text-center">
+                    <h1 class="hero-title">Build Your Career With CreativeCode Hub</h1>
+                    <p class="hero-subtitle">Join our innovative team and shape the future of technology education. Explore exciting opportunities that match your skills and ambitions.</p>
+                    <div class="hero-buttons">
+                        <a href="#job-listings" class="hero-btn primary-btn">Browse Jobs</a>
+                        <a href="#post-job" class="hero-btn secondary-btn">Post a Job</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Job Search Section -->
+    <section class="job-search-section">
+        <div class="container">
+            <div class="section-header text-center mb-5">
+                <h2 class="title">Find Your Dream Job</h2>
+                <p class="section-subtitle">Search through our latest job openings and find the perfect match for your skills</p>
+            </div>
+
+            <div class="search-form-container">
+                <form class="search-form">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="job-title">Job Title</label>
+                                <input type="text" id="job-title" class="form-control" placeholder="e.g. Frontend Developer">
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="location">Location</label>
+                                <input type="text" id="location" class="form-control" placeholder="e.g. Kakinada, Remote">
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="category">Category</label>
+                                <select id="category" class="form-control">
+                                    <option value="">All Categories</option>
+                                    <option value="development">Development</option>
+                                    <option value="design">Design</option>
+                                    <option value="marketing">Marketing</option>
+                                    <option value="training">Training</option>
+                                    <option value="administration">Administration</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <button type="submit" class="search-btn">Search Jobs</button>
+                </form>
+                <div class="quick-filters mt-4">
+                    <h3>Popular Searches:</h3>
+                    <div class="job-tags">
+                        <span class="job-tag">Full Stack Developer</span>
+                        <span class="job-tag">UI/UX Designer</span>
+                        <span class="job-tag">Digital Marketer</span>
+                        <span class="job-tag">Python Trainer</span>
+                        <span class="job-tag">Internship</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Job Listings Section -->
+    <section class="job-listings-section" id="job-listings">
+        <div class="container">
+            <div class="section-header text-center mb-5">
+                <h2 class="title">Latest Job Openings</h2>
+                <p class="section-subtitle">Explore our current opportunities and take the next step in your career</p>
+            </div>
+
+            <div class="job-listings">
+                <!-- Job 1 -->
+                <div class="job-card featured">
+                    <div class="featured-badge">Featured</div>
+                    <div class="job-header">
+                        <h3 class="job-title">Frontend Developer</h3>
+                        <p class="job-company">CreativeCode Hub</p>
+                        <div class="job-meta">
+                            <span class="job-meta-item"><i class="fas fa-map-marker-alt"></i> Kakinada, India</span>
+                            <span class="job-meta-item"><i class="fas fa-briefcase"></i> Full-time</span>
+                            <span class="job-meta-item"><i class="far fa-clock"></i> 2 days ago</span>
+                        </div>
+                    </div>
+                    <div class="job-description">
+                        We're looking for a skilled Frontend Developer with experience in React.js to join our team and help build amazing user experiences.
+                    </div>
+                    <div class="job-skills">
+                        <span class="skill-tag">React.js</span>
+                        <span class="skill-tag">JavaScript</span>
+                        <span class="skill-tag">HTML5</span>
+                        <span class="skill-tag">CSS3</span>
+                    </div>
+                    <div class="job-footer">
+                        <span class="job-salary">₹5L - ₹10L / year</span>
+                        <div class="job-actions">
+                            <button class="apply-btn">Apply Now</button>
+                            <button class="save-btn"><i class="far fa-bookmark"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Job 2 -->
+                <div class="job-card">
+                    <div class="job-header">
+                        <h3 class="job-title">UI/UX Designer</h3>
+                        <p class="job-company">CreativeCode Hub</p>
+                        <div class="job-meta">
+                            <span class="job-meta-item"><i class="fas fa-map-marker-alt"></i> Remote</span>
+                            <span class="job-meta-item"><i class="fas fa-briefcase"></i> Full-time</span>
+                            <span class="job-meta-item"><i class="far fa-clock"></i> 1 week ago</span>
+                        </div>
+                    </div>
+                    <div class="job-description">
+                        Join our design team to create beautiful and intuitive user interfaces for our educational platforms and applications.
+                    </div>
+                    <div class="job-skills">
+                        <span class="skill-tag">UI/UX Design</span>
+                        <span class="skill-tag">Figma</span>
+                        <span class="skill-tag">Adobe XD</span>
+                        <span class="skill-tag">Prototyping</span>
+                    </div>
+                    <div class="job-footer">
+                        <span class="job-salary">₹4L - ₹8L / year</span>
+                        <div class="job-actions">
+                            <button class="apply-btn">Apply Now</button>
+                            <button class="save-btn"><i class="far fa-bookmark"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Job 3 -->
+                <div class="job-card">
+                    <div class="job-header">
+                        <h3 class="job-title">Python Trainer</h3>
+                        <p class="job-company">CreativeCode Hub</p>
+                        <div class="job-meta">
+                            <span class="job-meta-item"><i class="fas fa-map-marker-alt"></i> Kakinada, India</span>
+                            <span class="job-meta-item"><i class="fas fa-briefcase"></i> Part-time</span>
+                            <span class="job-meta-item"><i class="far fa-clock"></i> 3 days ago</span>
+                        </div>
+                    </div>
+                    <div class="job-description">
+                        We're looking for an experienced Python trainer to teach our students the fundamentals of Python programming and web development.
+                    </div>
+                    <div class="job-skills">
+                        <span class="skill-tag">Python</span>
+                        <span class="skill-tag">Django</span>
+                        <span class="skill-tag">Flask</span>
+                        <span class="skill-tag">Teaching</span>
+                    </div>
+                    <div class="job-footer">
+                        <span class="job-salary">₹300 - ₹500 / hour</span>
+                        <div class="job-actions">
+                            <button class="apply-btn">Apply Now</button>
+                            <button class="save-btn"><i class="far fa-bookmark"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Job 4 -->
+                <div class="job-card">
+                    <div class="job-header">
+                        <h3 class="job-title">Digital Marketing Specialist</h3>
+                        <p class="job-company">CreativeCode Hub</p>
+                        <div class="job-meta">
+                            <span class="job-meta-item"><i class="fas fa-map-marker-alt"></i> Remote</span>
+                            <span class="job-meta-item"><i class="fas fa-briefcase"></i> Full-time</span>
+                            <span class="job-meta-item"><i class="far fa-clock"></i> 1 week ago</span>
+                        </div>
+                    </div>
+                    <div class="job-description">
+                        We need a creative Digital Marketing Specialist to develop and implement effective digital marketing campaigns.
+                    </div>
+                    <div class="job-skills">
+                        <span class="skill-tag">SEO</span>
+                        <span class="skill-tag">Social Media</span>
+                        <span class="skill-tag">Content Marketing</span>
+                        <span class="skill-tag">Google Ads</span>
+                    </div>
+                    <div class="job-footer">
+                        <span class="job-salary">₹3.5L - ₹7L / year</span>
+                        <div class="job-actions">
+                            <button class="apply-btn">Apply Now</button>
+                            <button class="save-btn"><i class="far fa-bookmark"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Job 5 -->
+                <div class="job-card">
+                    <div class="job-header">
+                        <h3 class="job-title">Internship Coordinator</h3>
+                        <p class="job-company">CreativeCode Hub</p>
+                        <div class="job-meta">
+                            <span class="job-meta-item"><i class="fas fa-map-marker-alt"></i> Kakinada, India</span>
+                            <span class="job-meta-item"><i class="fas fa-briefcase"></i> Full-time</span>
+                            <span class="job-meta-item"><i class="far fa-clock"></i> 5 days ago</span>
+                        </div>
+                    </div>
+                    <div class="job-description">
+                        Manage our internship programs, coordinate with students and companies, and ensure successful internship experiences.
+                    </div>
+                    <div class="job-skills">
+                        <span class="skill-tag">Coordination</span>
+                        <span class="skill-tag">Communication</span>
+                        <span class="skill-tag">HR</span>
+                        <span class="skill-tag">Organization</span>
+                    </div>
+                    <div class="job-footer">
+                        <span class="job-salary">₹2.5L - ₹4.5L / year</span>
+                        <div class="job-actions">
+                            <button class="apply-btn">Apply Now</button>
+                            <button class="save-btn"><i class="far fa-bookmark"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Job 6 -->
+                <div class="job-card">
+                    <div class="job-header">
+                        <h3 class="job-title">Backend Developer (Node.js)</h3>
+                        <p class="job-company">CreativeCode Hub</p>
+                        <div class="job-meta">
+                            <span class="job-meta-item"><i class="fas fa-map-marker-alt"></i> Remote</span>
+                            <span class="job-meta-item"><i class="fas fa-briefcase"></i> Full-time</span>
+                            <span class="job-meta-item"><i class="far fa-clock"></i> 2 days ago</span>
+                        </div>
+                    </div>
+                    <div class="job-description">
+                        Looking for an experienced Backend Developer to build scalable and efficient server-side applications using Node.js.
+                    </div>
+                    <div class="job-skills">
+                        <span class="skill-tag">Node.js</span>
+                        <span class="skill-tag">Express.js</span>
+                        <span class="skill-tag">MongoDB</span>
+                        <span class="skill-tag">REST APIs</span>
+                    </div>
+                    <div class="job-footer">
+                        <span class="job-salary">₹6L - ₹12L / year</span>
+                        <div class="job-actions">
+                            <button class="apply-btn">Apply Now</button>
+                            <button class="save-btn"><i class="far fa-bookmark"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Career News Section -->
+    <section class="career-news-section">
+        <div class="container">
+            <div class="section-header text-center mb-5">
+                <h2 class="title">Career Tips & News</h2>
+                <p class="section-subtitle">Stay updated with the latest career advice and industry trends</p>
+            </div>
+
+            <div class="news-grid">
+                <div class="news-card">
+                    <div class="news-image">
+                        <img src="images/career-tips-1.jpg" alt="Career Tips" onerror="this.src='https://via.placeholder.com/400x250/667eea/ffffff?text=Career+Tips'">
+                    </div>
+                    <div class="news-content">
+                        <span class="news-category">Career Advice</span>
+                        <h3>10 Tips for Acing Your Technical Interview</h3>
+                        <p class="news-excerpt">Learn the best strategies to prepare for and excel in your next technical interview.</p>
+                        <a href="#" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+
+                <div class="news-card">
+                    <div class="news-image">
+                        <img src="images/career-tips-2.jpg" alt="Industry Trends" onerror="this.src='https://via.placeholder.com/400x250/764ba2/ffffff?text=Industry+Trends'">
+                    </div>
+                    <div class="news-content">
+                        <span class="news-category">Industry Trends</span>
+                        <h3>Top 5 In-Demand Tech Skills for 2024</h3>
+                        <p class="news-excerpt">Discover the most sought-after technical skills that employers are looking for this year.</p>
+                        <a href="#" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+
+                <div class="news-card">
+                    <div class="news-image">
+                        <img src="images/career-tips-3.jpg" alt="Resume Tips" onerror="this.src='https://via.placeholder.com/400x250/4facfe/ffffff?text=Resume+Tips'">
+                    </div>
+                    <div class="news-content">
+                        <span class="news-category">Resume Tips</span>
+                        <h3>How to Write a Standout Tech Resume</h3>
+                        <p class="news-excerpt">Follow these expert tips to create a resume that gets you noticed by recruiters.</p>
+                        <a href="#" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Post Job Section -->
+    <section class="post-job-section" id="post-job">
+        <div class="container">
+            <div class="section-header text-center mb-5">
+                <h2 class="title">Post a Job Opening</h2>
+                <p class="section-subtitle">Are you looking to hire talented professionals? Post your job opening and reach qualified candidates</p>
+            </div>
+
+            <div class="post-job-form">
+                <form id="job-posting-form">
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="job-title-post">Job Title*</label>
+                                <input type="text" id="job-title-post" class="form-control" required>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="company-name">Company Name*</label>
+                                <input type="text" id="company-name" class="form-control" required>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="job-type">Job Type*</label>
+                                <select id="job-type" class="form-control" required>
+                                    <option value="">Select Job Type</option>
+                                    <option value="full-time">Full-time</option>
+                                    <option value="part-time">Part-time</option>
+                                    <option value="contract">Contract</option>
+                                    <option value="internship">Internship</option>
+                                    <option value="freelance">Freelance</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="location-post">Location*</label>
+                                <input type="text" id="location-post" class="form-control" required>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <label for="job-description">Job Description*</label>
+                        <textarea id="job-description" class="form-control" rows="5" required></textarea>
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <label for="requirements">Requirements & Skills*</label>
+                        <textarea id="requirements" class="form-control" rows="3" required></textarea>
+                        <small class="form-text">Separate skills with commas (e.g., JavaScript, React, Node.js)</small>
+                    </div>
+
+                    <div class="row mb-3">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="min-salary">Minimum Salary (₹)</label>
+                                <input type="number" id="min-salary" class="form-control">
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="max-salary">Maximum Salary (₹)</label>
+                                <input type="number" id="max-salary" class="form-control">
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="salary-period">Per</label>
+                                <select id="salary-period" class="form-control">
+                                    <option value="year">Year</option>
+                                    <option value="month">Month</option>
+                                    <option value="hour">Hour</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group mb-4">
+                        <label for="application-email">Application Email*</label>
+                        <input type="email" id="application-email" class="form-control" required>
+                    </div>
+
+                    <button type="submit" class="submit-btn">Post Job</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-about">
+                <div class="footer-logo">
+                    <img src="images/logo/cc-hub-logo.png" alt="CodeHub Logo" loading="lazy">
+                </div>
+                <p>Empowering the next generation of developers with quality education and practical skills.</p>
+                <div class="social-links">
+                    <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+            <div class="footer-links">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="underprocess.html" class="cc-hub-cta-btn" target="_blank">Get LMS</a></li>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="internship.html">Internship</a></li>
+                    <li><a href="courses.html">Courses</a></li>
+                    <li><a href="training.html">Training</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                </ul>
+            </div>
+            <div class="footer-links">
+                <h3>Courses</h3>
+                <ul>
+                    <li><a href="courses.html">Full Stack Courses</a></li>
+                    <li><a href="courses.html">Hybrid Courses</a></li>
+                    <li><a href="courses.html">Scratch Training</a></li>
+                    <li><a href="courses.html">Internship Training</a></li>
+                </ul>
+            </div>
+            <div class="footer-contact">
+                <h3>Contact Us</h3>
+                <p><i class="fas fa-map-marker-alt"></i> Kakinada, <i class="fas fa-map-marker-alt"></i> Vishakapatnam</p>
+                <p><i class="fas fa-phone"></i> +91 7075775888, <br> +91 7093947788</p>
+                <p><i class="fas fa-envelope"></i> info@creativecodehub.in</p>
+            </div>
+        </div>
+        <div class="copyright">
+            &copy; 2024 Creative-Code-Hub. All Rights Reserved.
+        </div>
+    </footer>
+
+    <!-- Floating Social Media Button -->
+    <div class="floating-social">
+        <div class="social-toggle">
+            <img src="images/logo/cc-hub-logo.png" width=50% alt="CC-HUB Logo" loading="lazy">
+        </div>
+        <div class="social-links">
+            <a href="https://wa.me/917075779888" target="_blank" class="whatsapp">
+                <i class="fab fa-whatsapp"></i>
+            </a>
+            <a href="https://www.instagram.com/creativecodehub" target="_blank" class="instagram">
+                <i class="fab fa-instagram"></i>
+            </a>
+            <a href="https://www.facebook.com/yourpage" target="_blank" class="facebook">
+                <i class="fab fa-facebook-f"></i>
+            </a>
+            <a href="https://maps.app.goo.gl/8tZUZKWh3uiPoUWJ9?g_st=aw" target="_blank" class="location">
+                <i class="fa-solid fa-location-dot"></i>
+            </a>
+        </div>
+    </div>
+
+    <!-- WhatsApp Floating Icon -->
+    <a href="https://wa.me/917075779888" target="_blank" class="whatsapp-left">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Main JavaScript File -->
+    <script src="script.js"></script>
+    
+    <!-- Career-specific JavaScript -->
+    <script>
+        // Career-specific functions
+        function initCareerPage() {
+            console.log('Career page initialized');
+            
+            // Job search form submission
+            document.querySelector('.search-form')?.addEventListener('submit', function(e) {
+                e.preventDefault();
+                alert('Search functionality would filter job listings based on your criteria');
+            });
+
+            // Job posting form submission
+            document.getElementById('job-posting-form')?.addEventListener('submit', function(e) {
+                e.preventDefault();
+                alert('Job posting submitted! In a real implementation, this would be sent to the server.');
+                this.reset();
+            });
+
+            // Apply button functionality
+            document.querySelectorAll('.apply-btn').forEach(button => {
+                button.addEventListener('click', function() {
+                    const jobTitle = this.closest('.job-card').querySelector('.job-title').textContent;
+                    alert(`Applying for: ${jobTitle}\nIn a real implementation, this would open an application form.`);
+                });
+            });
+
+            // Save job functionality
+            document.querySelectorAll('.save-btn').forEach(button => {
+                button.addEventListener('click', function() {
+                    const jobTitle = this.closest('.job-card').querySelector('.job-title').textContent;
+                    const icon = this.querySelector('i');
+                    
+                    if (icon.classList.contains('far')) {
+                        icon.classList.remove('far');
+                        icon.classList.add('fas');
+                        this.style.color = 'var(--primary-color)';
+                        alert(`Saved: ${jobTitle}`);
+                    } else {
+                        icon.classList.remove('fas');
+                        icon.classList.add('far');
+                        this.style.color = '#666';
+                        alert(`Removed: ${jobTitle} from saved jobs`);
+                    }
+                });
+            });
+
+            // Add animation to job cards on scroll
+            const jobCards = document.querySelectorAll('.job-card');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach((entry, index) => {
+                    if (entry.isIntersecting) {
+                        setTimeout(() => {
+                            entry.target.style.opacity = '1';
+                            entry.target.style.transform = 'translateY(0)';
+                        }, index * 100);
+                    }
+                });
+            }, { threshold: 0.1 });
+            
+            jobCards.forEach(card => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(30px)';
+                card.style.transition = 'all 0.6s ease';
+                observer.observe(card);
+            });
+        }
+
+        // Initialize when DOM is loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            initCareerPage();
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Creative Code Hub - Learn, Build, Succeed</title>
+    <link rel="icon" type="image/png" href="images/logo/cc-hub-logo.png">
+    
+    <!-- Performance Optimized Assets -->
+    <link rel="preconnect" href="https://cdn.jsdelivr.net">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600&display=swap" rel="stylesheet">
+    
+    <!-- Main Styles -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <!-- Navigation -->
+<nav class="navbar navbar-expand-lg navbar-light fixed-top">
+    <div class="container">
+        <!-- Brand Logo -->
+        <a class="navbar-brand" href="index.html">
+            <img src="images/logo/cc-hub-logo.png" alt="Creative Code Hub" class="logo">
+        </a>
+        
+        <!-- Mobile Toggle Button -->
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" 
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <!-- Navigation Links -->
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav mx-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="index.html">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="courses.html">Courses</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="internship.html">Internship</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="project.html">Projects</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="about.html">About Us</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="career.html">Career</a>
+                </li>
+            </ul>
+
+            <!-- Right Side: Dark Mode Toggle + Enroll Button -->
+            <div class="navbar-right d-flex align-items-center">
+                <!-- Dark Mode Toggle -->
+                <div class="nav-dark-mode">
+                    <button id="themeToggle" class="theme-toggle" aria-label="Toggle dark mode">
+                        <span class="sun">☀️</span>
+                        <span class="moon">🌙</span>
+                    </button>
+                </div>
+                
+                <!-- Enroll Button -->
+                <a href="underprocess.html" class="cc-hub-cta-btn" target="_blank">
+                    <i class="fas fa-rocket me-2"></i>LMS Portal
+                </a>
+            </div>
+        </div>
+    </div>
+</nav>
+    <!-- Hero Section -->
+    <header class="hero">
+        <!-- Floating Elements -->
+        <div class="floating-element">&lt;div&gt;Full Stack&lt;/div&gt;</div>
+        <div class="floating-element">function code() { }</div>
+        <div class="floating-element">.hybrid { flex: 1; }</div>
+        <div class="floating-element">const future = new Career();</div>
+        
+        <!-- Slides -->
+        <div class="hero-slides">
+            <!-- Slide 1 - Full Stack Course -->
+            <div class="hero-slide slide-fullstack active">
+                <div class="slide-content">
+                    <h1 class="hero-title">Master Full Stack Development</h1>
+                    <p class="hero-subtitle">Become a complete developer with our comprehensive Full Stack program. Learn frontend, backend, databases, and deployment in one powerful course.</p>
+                    <div class="hero-buttons">
+                        <a href="courses.html#fullstack" class="hero-btn primary">View Full Stack Course</a>
+                        <a href="quote.html" class="hero-btn">Get Syllabus</a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Slide 2 - Hybrid Courses -->
+            <div class="hero-slide slide-hybrid">
+                <div class="slide-content">
+                    <h1 class="hero-title">Flexible Hybrid Learning</h1>
+                    <p class="hero-subtitle">Combine online convenience with classroom benefits. Our hybrid model gives you the best of both worlds - learn at your pace with expert guidance.</p>
+                    <div class="hero-buttons">
+                        <a href="courses.html#hybrid" class="hero-btn primary">Explore Hybrid Options</a>
+                        <a href="quote.html" class="hero-btn">Schedule Demo</a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Slide 3 - Training & Placements -->
+            <div class="hero-slide slide-training">
+                <div class="slide-content">
+                    <h1 class="hero-title">Training with 100% Placement</h1>
+                    <p class="hero-subtitle">Get industry-ready training with guaranteed placement assistance. 500+ students placed with an average package of 6 LPA.</p>
+                    <div class="hero-buttons">
+                        <a href="training.html" class="hero-btn primary">View Training Programs</a>
+                        <a href="career.html" class="hero-btn">Placement Details</a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Slide 4 - LMS Portal -->
+            <div class="hero-slide slide-lms">
+                <div class="slide-content">
+                    <h1 class="hero-title">Advanced LMS Portal</h1>
+                    <p class="hero-subtitle">Access course materials, video lectures, coding exercises, and track your progress 24/7 through our comprehensive Learning Management System.</p>
+                    <div class="hero-buttons">
+                        <a href="login.html" class="hero-btn primary">Access LMS Portal</a>
+                        <a href="quote.html" class="hero-btn">Get Demo Access</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Navigation Arrows -->
+        <button class="slide-arrow prev">‹</button>
+        <button class="slide-arrow next">›</button>
+        
+        <!-- Slide Dots -->
+        <div class="slide-nav">
+            <div class="slide-dot active" data-slide="0"></div>
+            <div class="slide-dot" data-slide="1"></div>
+            <div class="slide-dot" data-slide="2"></div>
+            <div class="slide-dot" data-slide="3"></div>
+        </div>
+    </header>
+
+    <!-- Vision & Mission Section -->
+    <div class="vision-mission-section">
+        <div class="vision-mission-container">
+            <!-- Row 1 -->
+            <div class="card vision">
+                <div class="card-icon">
+                    <i class="fas fa-eye"></i>
+                </div>
+                <h3>Vision</h3>
+                <p>To be a leading force in transforming digital creativity by blending art and technology—crafting interactive, meaningful, and boundary-pushing experiences that inspire the next generation of creators.</p>
+            </div>
+            
+            <div class="card mission">
+                <div class="card-icon">
+                    <i class="fas fa-bullseye"></i>
+                </div>
+                <h3>Mission</h3>
+                <p>Our mission is to harness the power of code as a creative tool to design innovative digital solutions, educate aspiring coders and artists, and build a vibrant community where imagination meets technology.</p>
+            </div>
+
+            <!-- Row 2 -->
+            <div class="card core-values">
+                <div class="card-icon">
+                    <i class="fas fa-heart"></i>
+                </div>
+                <h3>Core Values</h3>
+                <p>We value creativity as our foundation, embrace innovation through constant exploration, foster collaboration to build meaningful work, uphold craftsmanship in every detail, commit to lifelong learning, and practice ethical responsibility in all we create.</p>
+            </div>
+            
+            <div class="card mission approach">
+                <div class="card-icon">
+                    <i class="fa-solid fa-handshake"></i>
+                </div>
+                <h3>Our Approach</h3>
+                <p>We believe creativity and code go hand in hand. Our approach combines design thinking, technical experimentation, and user-focused development to build digital experiences that are not only visually engaging but also intuitive and impactful.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Creative Code Hub Section -->
+    <section class="cc-hub-section">
+        <div class="cc-hub-container">
+            <div class="cc-hub-content">
+                <h3>CREATIVE CODE HUB</h3>
+                <p>
+                    Creative Code Hub is a training and placement institute dedicated to building strong careers in software development. We offer hands-on training in programming languages, full stack development, data structures, and real-time projects to prepare students for the demands of today's tech industry. In addition to our regular training programs, we provide a Learning Management System (LMS) for practice, assessments, and placement-focused training to ensure students are industry-ready.
+                </p>
+            </div>
+            
+            <!-- Interactive CC-Hub Section -->
+            <div class="interactive-cc-hub">
+                <!-- Center Logo -->
+                <div class="cc-hub-center-logo">
+                    <div class="cc-hub-logo-circle">
+                        <img src="images/logo/cc-hub-logo.png" alt="Creative Code Hub Logo" class="cc-hub-logo-img" loading="lazy">
+                    </div>
+                </div>
+
+                <!-- Interactive Nodes -->
+                <div class="cc-hub-node node-training" data-content="lms-support-content">
+                    <div class="cc-hub-node-circle">
+                        <i class="fas fa-laptop-code"></i>
+                    </div>
+                    <span class="cc-hub-node-label">LMS Support</span>
+                </div>
+
+                <div class="cc-hub-node node-placement" data-content="mentor-support-content">
+                    <div class="cc-hub-node-circle">
+                        <i class="fas fa-briefcase"></i>
+                    </div>
+                    <span class="cc-hub-node-label">Mentor Support</span>
+                </div>
+
+                <div class="cc-hub-node node-projects" data-content="tech-training-content">
+                    <div class="cc-hub-node-circle">
+                        <i class="fas fa-project-diagram"></i>
+                    </div>
+                    <span class="cc-hub-node-label">Tech. Training</span>
+                </div>
+
+                <div class="cc-hub-node node-lms" data-content="projects-content">
+                    <div class="cc-hub-node-circle">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <span class="cc-hub-node-label">Real Time Projects</span>
+                </div>
+
+                <div class="cc-hub-node node-career" data-content="crt-content">
+                    <div class="cc-hub-node-circle">
+                        <i class="fas fa-user-tie"></i>
+                    </div>
+                    <span class="cc-hub-node-label">CRT</span>
+                </div>
+
+                <div class="cc-hub-node node-support" data-content="placements-content">
+                    <div class="cc-hub-node-circle">
+                        <i class="fas fa-hands-helping"></i>
+                    </div>
+                    <span class="cc-hub-node-label">Placements</span>
+                </div>
+
+                <!-- Animated SVG Lines -->
+                <svg class="cc-hub-connection-lines" width="100%" height="100%">
+                    <!-- Lines will be drawn dynamically -->
+                </svg>
+            </div>
+
+            <!-- Content Panels -->
+            <div class="cc-hub-content-panels">
+                <!-- LMS Support Panel -->
+                <div id="lms-support-content" class="cc-hub-panel">
+                    <button class="close-cc-hub-panel">&times;</button>
+                    <h4>LMS Support</h4>
+                    <div class="cc-hub-panel-content">
+                        <p>Our comprehensive Learning Management System provides 24/7 access to course materials, video lectures, coding exercises, and progress tracking.</p>
+                        <div class="cc-hub-features">
+                            <div class="feature-item">
+                                <i class="fas fa-video"></i>
+                                <span>Video Lectures</span>
+                            </div>
+                            <div class="feature-item">
+                                <i class="fas fa-code"></i>
+                                <span>Coding Exercises</span>
+                            </div>
+                            <div class="feature-item">
+                                <i class="fas fa-chart-line"></i>
+                                <span>Progress Tracking</span>
+                            </div>
+                        </div>
+                        <a href="underprocess.html" class="cc-hub-cta-btn" target="_blank">Get LMS Access</a>
+                    </div>
+                </div>
+
+                <!-- Mentor Support Panel -->
+                <div id="mentor-support-content" class="cc-hub-panel">
+                    <button class="close-cc-hub-panel">&times;</button>
+                    <h4>Mentor Support</h4>
+                    <div class="cc-hub-panel-content">
+                        <p>Get personalized guidance from industry experts with 1:1 mentorship sessions, career counseling, and technical support.</p>
+                        <div class="cc-hub-features">
+                            <div class="feature-item">
+                                <i class="fas fa-users"></i>
+                                <span>1:1 Sessions</span>
+                            </div>
+                            <div class="feature-item">
+                                <i class="fas fa-graduation-cap"></i>
+                                <span>Expert Mentors</span>
+                            </div>
+                            <div class="feature-item">
+                                <i class="fas fa-clock"></i>
+                                <span>24/7 Support</span>
+                            </div>
+                        </div>
+                        <a href="quote.html" class="cc-hub-cta-btn">Connect with Mentor</a>
+                    </div>
+                </div>
+
+                <!-- Tech Training Panel -->
+                <div id="tech-training-content" class="cc-hub-panel">
+                    <button class="close-cc-hub-panel">&times;</button>
+                    <h4>Technical Training</h4>
+                    <div class="cc-hub-panel-content">
+                        <p>Comprehensive technical training programs covering the latest technologies and programming languages with hands-on projects.</p>
+                        <div class="cc-hub-features">
+                            <div class="feature-item">
+                                <i class="fab fa-react"></i>
+                                <span>Frontend Development</span>
+                            </div>
+                            <div class="feature-item">
+                                <i class="fab fa-node-js"></i>
+                                <span>Backend Development</span>
+                            </div>
+                            <div class="feature-item">
+                                <i class="fas fa-database"></i>
+                                <span>Database Management</span>
+                            </div>
+                        </div>
+                        <a href="quote.html" class="cc-hub-cta-btn">Enroll in Training</a>
+                    </div>
+                </div>
+
+                <!-- Real Time Projects Panel -->
+                <div id="projects-content" class="cc-hub-panel">
+                    <button class="close-cc-hub-panel">&times;</button>
+                    <h4>Real Time Projects</h4>
+                    <div class="cc-hub-panel-content">
+                        <p>Work on industry-relevant projects that simulate real-world scenarios and build your portfolio with hands-on experience.</p>
+                        <div class="cc-hub-features">
+                            <div class="feature-item">
+                                <i class="fas fa-industry"></i>
+                                <span>Industry Projects</span>
+                            </div>
+                            <div class="feature-item">
+                                <i class="fas fa-tasks"></i>
+                                <span>Live Projects</span>
+                            </div>
+                            <div class="feature-item">
+                                <i class="fas fa-briefcase"></i>
+                                <span>Portfolio Building</span>
+                            </div>
+                        </div>
+                        <a href="quote.html" class="cc-hub-cta-btn">Start Your Project</a>
+                    </div>
+                </div>
+
+                <!-- CRT Panel -->
+                <div id="crt-content" class="cc-hub-panel">
+                    <button class="close-cc-hub-panel">&times;</button>
+                    <h4>CRT Training</h4>
+                    <div class="cc-hub-panel-content">
+                        <p>Campus Recruitment Training program designed to prepare you for technical interviews, aptitude tests, and group discussions.</p>
+                        <div class="cc-hub-features">
+                            <div class="feature-item">
+                                <i class="fas fa-laptop-code"></i>
+                                <span>Coding Tests</span>
+                            </div>
+                            <div class="feature-item">
+                                <i class="fas fa-brain"></i>
+                                <span>Aptitude Training</span>
+                            </div>
+                            <div class="feature-item">
+                                <i class="fas fa-comments"></i>
+                                <span>GD Preparation</span>
+                            </div>
+                        </div>
+                        <a href="quote.html" class="cc-hub-cta-btn">Join CRT Program</a>
+                    </div>
+                </div>
+
+                <!-- Campus Placements Panel -->
+                <div id="placements-content" class="cc-hub-panel">
+                    <button class="close-cc-hub-panel">&times;</button>
+                    <h4>Campus Placements</h4>
+                    <div class="cc-hub-panel-content">
+                        <p>100% placement assistance with tie-ups with top companies, interview preparation, and career guidance.</p>
+                        <div class="cc-hub-features">
+                            <div class="feature-item">
+                                <i class="fas fa-handshake"></i>
+                                <span>Company Tie-ups</span>
+                            </div>
+                            <div class="feature-item">
+                                <i class="fas fa-user-tie"></i>
+                                <span>Interview Prep</span>
+                            </div>
+                            <div class="feature-item">
+                                <i class="fas fa-briefcase"></i>
+                                <span>Job Assistance</span>
+                            </div>
+                        </div>
+                        <a href="quote.html" class="cc-hub-cta-btn">Get Placement Support</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <div class="stats-container">
+        <div class="stat-item">
+            <i class="fas fa-chalkboard-teacher"></i>
+            <div class="counter-wrapper">
+                <div class="counter" data-target="20">0</div>
+                <div class="counter-plus">+</div>
+            </div>
+            <p>Certified Trainers</p>
+        </div>
+        <div class="stat-item">
+            <i class="fas fa-book"></i>
+            <div class="counter-wrapper">
+                <div class="counter" data-target="50">0</div>
+                <div class="counter-plus">+</div>
+            </div>
+            <p>Courses</p>
+        </div>
+        <div class="stat-item">
+            <i class="fas fa-users"></i>
+            <div class="counter-wrapper">
+                <div class="counter" data-target="1000">0</div>
+                <div class="counter-plus">+</div>
+            </div>
+            <p>Students</p>
+        </div>
+        <div class="stat-item">
+            <i class="fas fa-project-diagram"></i>
+            <div class="counter-wrapper">
+                <div class="counter" data-target="10">0</div>
+                <div class="counter-plus">+</div>
+            </div>
+            <p>Projects</p>
+        </div>
+    </div>
+
+    <!-- Services Section -->
+    <section class="services-section">
+        <div class="service">
+            <div class="icon-wrapper">
+            <i class="fas fa-chalkboard-teacher"></i>
+            </div>
+            <div class="service-content">
+            <h3>EFFECTIVE CLASSES</h3>
+            <p>Interactive and well-structured sessions led by industry experts, focusing on hands-on learning, real-world projects, and doubt resolution to ensure skill mastery.</p>
+            </div>
+        </div>
+
+        <div class="service">
+            <div class="icon-wrapper">
+            <i class="fas fa-briefcase"></i>
+            </div>
+            <div class="service-content">
+            <h3>INTERNSHIP</h3>
+            <p>Practical work experience where trainees apply their skills in real projects, gaining industry exposure and improving employability.</p>
+            </div>
+        </div>
+
+        <div class="service">
+            <div class="icon-wrapper">
+            <i class="fas fa-laptop-house"></i>
+            </div>
+            <div class="service-content">
+            <h3>LMS-PORTAL</h3>
+            <p>A Learning Management System offering course materials, video lectures, quizzes, progress tracking, and certifications in a centralized digital platform.</p>
+            </div>
+        </div>
+
+        <div class="service">
+            <div class="icon-wrapper">
+            <i class="fas fa-graduation-cap"></i>
+            </div>
+            <div class="service-content">
+            <h3>TRAINING</h3>
+            <p>Structured programs covering technical (coding, tools) and soft skills (communication, teamwork) through workshops, mentorship, and assessments</p>
+            </div>
+        </div>
+        <div class="service">
+            <div class="icon-wrapper">
+            <i class="fas fa-user-tie"></i>
+            </div>
+            <div class="service-content">
+            <h3>JOB CURRICULUM</h3>
+            <p>Career-focused syllabus aligned with industry demands, including resume building, interview prep, and placement assistance.</p>
+            </div>
+        </div>
+        <div class="service">
+            <div class="icon-wrapper">
+            <i class="fas fa-book-open"></i>
+            </div>
+            <div class="service-content">
+            <h3>COURSES</h3>
+            <p>Industry-relevant programs (e.g., Full Stack Development, Data Science, Cloud Computing) with certifications to enhance job readiness.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quote Section -->
+    <section class="quote-section">
+        <div class="quote-container">
+            <h2 class="quote-title">Request a Quote</h2>
+            <form class="quote-form" id="quoteForm">
+                <div class="form-group">
+                    <label for="firstName">First Name</label>
+                    <input type="text" id="firstName" name="firstName" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="lastName">Last Name</label>
+                    <input type="text" id="lastName" name="lastName" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="phone">Contact Number</label>
+                    <input type="tel" id="phone" name="phone" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="message">Your Message</label>
+                    <textarea id="message" name="message" class="form-control" rows="4" required></textarea>
+                </div>
+                <button type="submit" class="submit-btn">Submit Request</button>
+
+                <div id="formFeedback" class="feedback-message"></div>
+            </form>
+        </div>
+    </section>
+
+    <!-- Collaborations Section -->
+    <div class="collaborations-section">
+        <div class="section-header">
+            <h2 class="title">Our Creative Code Hub Collaborators</h2>
+        </div>
+
+        <div class="logos-container">
+            <!-- Row 1 - Left to Right -->
+            <div class="logos-scroll-row row-right">
+                <div class="logo-item">
+                    <img src="images/collab/videmy.jpg" alt="Videmy" loading="lazy">
+                </div>
+                <div class="logo-item">
+                    <img src="images/collab/party_nights.jpg" alt="Party Nights" loading="lazy">
+                </div>
+                <div class="logo-item">
+                    <img src="images/collab/bow.jpg" alt="BOW" loading="lazy">
+                </div>
+                <div class="logo-item">
+                    <img src="images/collab/digipro.jpg" alt="Digipro" loading="lazy">
+                </div>
+                <div class="logo-item">
+                    <img src="images/collab/fantom.jpg" alt="Fantom" loading="lazy">
+                </div>
+                <div class="logo-item">
+                    <img src="images/collab/iconsure.jpg" alt="Iconsure" loading="lazy">
+                </div>
+                <div class="logo-item">
+                    <img src="images/collab/kiet.jpg" alt="KIET" loading="lazy">
+                </div>
+                <div class="logo-item">
+                    <img src="images/collab/mini_pictures.jpg" alt="Mini Pictures" loading="lazy">
+                </div>
+                <!-- Duplicate for seamless loop -->
+                <div class="logo-item">
+                    <img src="images/collab/videmy.jpg" alt="Videmy" loading="lazy">
+                </div>
+                <div class="logo-item">
+                    <img src="images/collab/party_nights.jpg" alt="Party Nights" loading="lazy">
+                </div>
+                <div class="logo-item">
+                    <img src="images/collab/bow.jpg" alt="BOW" loading="lazy">
+                </div>
+                <div class="logo-item">
+                    <img src="images/collab/digipro.jpg" alt="Digipro" loading="lazy">
+                </div>
+            </div>
+            
+            <!-- Row 2 - Right to Left -->
+            <div class="logos-scroll-row row-left">
+                <div class="logo-item">
+                    <img src="images/collab/narasaraopeta.jpg" alt="Narasaraopeta" loading="lazy">
+                </div>
+                <div class="logo-item">
+                    <img src="images/collab/pydah.jpg" alt="Pydah College" loading="lazy">
+                </div>
+                <div class="logo-item">
+                    <img src="images/collab/sanjeev degree.jpg" alt="Sanjeev Degree" loading="lazy">
+                </div>
+                <div class="logo-item">
+                    <img src="images/collab/sr.jpg" alt="SR College" loading="lazy">
+                </div>
+                <div class="logo-item">
+                    <img src="images/collab/sri vasavi.jpg" alt="Sri Vasavi" loading="lazy">
+                </div>
+                <div class="logo-item">
+                    <img src="images/collab/ssdch.jpg" alt="SSDCH" loading="lazy">
+                </div>
+                <div class="logo-item">
+                    <img src="images/collab/sunrise.jpg" alt="Sunrise" loading="lazy">
+                </div>
+                <div class="logo-item">
+                    <img src="images/collab/vignan.jpg" alt="Vignan" loading="lazy">
+                </div>
+                <!-- Duplicate for seamless loop -->
+                <div class="logo-item">
+                    <img src="images/collab/narasaraopeta.jpg" alt="Narasaraopeta" loading="lazy">
+                </div>
+                <div class="logo-item">
+                    <img src="images/collab/pydah.jpg" alt="Pydah College" loading="lazy">
+                </div>
+                <div class="logo-item">
+                    <img src="images/collab/sanjeev degree.jpg" alt="Sanjeev Degree" loading="lazy">
+                </div>
+                <div class="logo-item">
+                    <img src="images/collab/sr.jpg" alt="SR College" loading="lazy">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-about">
+                <div class="footer-logo">
+                    <img src="images/logo/cc-hub-logo.png" alt="CodeHub Logo" loading="lazy">
+                </div>
+                <p>Empowering the next generation of developers with quality education and practical skills.</p>
+                <div class="social-links">
+                    <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+            <div class="footer-links">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="underprocess.html" class="cc-hub-cta-btn" target="_blank">Get LMS</a></li>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="internship.html">Internship</a></li>
+                    <li><a href="courses.html">Courses</a></li>
+                    <li><a href="training.html">Training</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                </ul>
+            </div>
+            <div class="footer-links">
+                <h3>Courses</h3>
+                <ul>
+                    <li><a href="courses.html">Full Stack Courses</a></li>
+                    <li><a href="courses.html">Hybrid Courses</a></li>
+                    <li><a href="courses.html">Scratch Training</a></li>
+                    <li><a href="courses.html">Internship Training</a></li>
+                </ul>
+            </div>
+            <div class="footer-contact">
+                <h3>Contact Us</h3>
+                <p><i class="fas fa-map-marker-alt"></i> Kakinada, <i class="fas fa-map-marker-alt"></i> Vishakapatnam</p>
+                <p><i class="fas fa-phone"></i> +91 7075775888, <br> +91 7093947788</p>
+                <p><i class="fas fa-envelope"></i> info@creativecodehub.in</p>
+            </div>
+        </div>
+        <div class="copyright">
+            &copy; 2024 Creative-Code-Hub. All Rights Reserved.
+        </div>
+    </footer>
+
+    <!-- Floating Social Media Button -->
+    <div class="floating-social">
+        <div class="social-toggle">
+            <img src="images/logo/cc-hub-logo.png" width=50% alt="CC-HUB Logo" loading="lazy">
+        </div>
+        <div class="social-links">
+            <a href="https://wa.me/917075779888" target="_blank" class="whatsapp">
+                <i class="fab fa-whatsapp"></i>
+            </a>
+            <a href="https://www.instagram.com/creativecodehub" target="_blank" class="instagram">
+                <i class="fab fa-instagram"></i>
+            </a>
+            <a href="https://www.facebook.com/yourpage" target="_blank" class="facebook">
+                <i class="fab fa-facebook-f"></i>
+            </a>
+            <a href="https://maps.app.goo.gl/8tZUZKWh3uiPoUWJ9?g_st=aw" target="_blank" class="location">
+                <i class="fa-solid fa-location-dot"></i>
+            </a>
+        </div>
+    </div>
+
+    <!-- WhatsApp Floating Icon -->
+    <a href="https://wa.me/917075779888" target="_blank" class="whatsapp-left">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="script.js"></script>
+
+    <!--Start of Tawk.to Script-->
+<script type="text/javascript">
+var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+(function(){
+var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+s1.async=true;
+s1.src='https://embed.tawk.to/695a88fa66ec30197e14202d/1je4qe5ji';
+s1.charset='UTF-8';
+s1.setAttribute('crossorigin','*');
+s0.parentNode.insertBefore(s1,s0);
+})();
+</script>
+<!--End of Tawk.to Script-->
+</body>
+</html>

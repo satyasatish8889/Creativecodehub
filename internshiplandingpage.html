@@ -1,0 +1,936 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Internship Programs | Creative Code Hub</title>
+    <link rel="icon" type="image/png" href="images/logo/cc-hub-logo.png">
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary-color: #6c63ff;
+            --secondary-color: #4a44c6;
+            --accent-color: #ff6b6b;
+            --text-primary: #333333;
+            --text-secondary: #666666;
+            --bg-primary: #ffffff;
+            --bg-secondary: #f8f9fa;
+            --bg-tertiary: #e9ecef;
+            --shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Navigation */
+        .navbar {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+            padding: 15px 0;
+            transition: var(--transition);
+        }
+
+        .navbar-brand img {
+            height: 45px;
+            transition: var(--transition);
+        }
+
+        .nav-link {
+            font-weight: 500;
+            color: var(--text-primary) !important;
+            margin: 0 10px;
+            transition: var(--transition);
+        }
+
+        .nav-link:hover, .nav-link.active {
+            color: var(--primary-color) !important;
+        }
+
+        .btn-enroll {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            border: none;
+            padding: 10px 25px;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: var(--transition);
+            box-shadow: 0 5px 15px rgba(108, 99, 255, 0.3);
+        }
+
+        .btn-enroll:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(108, 99, 255, 0.4);
+        }
+
+        /* Hero Section */
+        .hero-section {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 120px 0 80px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="rgba(255,255,255,0.1)" d="M0,96L48,112C96,128,192,160,288,186.7C384,213,480,235,576,213.3C672,192,768,128,864,128C960,128,1056,192,1152,192C1248,192,1344,128,1392,96L1440,64L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>');
+            background-size: cover;
+            background-position: center;
+            opacity: 0.3;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-title {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+
+        .hero-subtitle {
+            font-size: 1.3rem;
+            margin-bottom: 30px;
+            opacity: 0.9;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 8px 20px;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            margin-bottom: 20px;
+            backdrop-filter: blur(10px);
+        }
+
+        .btn-hero {
+            background: white;
+            color: var(--primary-color);
+            border: none;
+            padding: 15px 35px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: var(--transition);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            margin-right: 15px;
+            margin-bottom: 15px;
+        }
+
+        .btn-hero:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .btn-hero-secondary {
+            background: transparent;
+            color: white;
+            border: 2px solid rgba(255, 255, 255, 0.5);
+        }
+
+        .btn-hero-secondary:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        /* Features Section */
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 60px;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+            border-radius: 2px;
+        }
+
+        .feature-card {
+            background: var(--bg-primary);
+            border-radius: 15px;
+            padding: 40px 30px;
+            text-align: center;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            height: 100%;
+            border: 1px solid rgba(108, 99, 255, 0.1);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .feature-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 25px;
+            font-size: 2rem;
+            color: white;
+        }
+
+        .feature-title {
+            font-size: 1.4rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: var(--text-primary);
+        }
+
+        .feature-text {
+            color: var(--text-secondary);
+        }
+
+        /* Programs Section */
+        .programs-section {
+            background: var(--bg-secondary);
+            padding: 100px 0;
+        }
+
+        .program-card {
+            background: var(--bg-primary);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            margin-bottom: 30px;
+            border: 1px solid rgba(108, 99, 255, 0.1);
+        }
+
+        .program-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .program-header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 25px 30px;
+            position: relative;
+        }
+
+        .program-badge {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 5px 15px;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        .program-title {
+            font-size: 1.6rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .program-duration {
+            opacity: 0.9;
+            font-size: 0.9rem;
+        }
+
+        .program-body {
+            padding: 30px;
+        }
+
+        .program-features {
+            list-style: none;
+            padding: 0;
+            margin-bottom: 25px;
+        }
+
+        .program-features li {
+            padding: 8px 0;
+            position: relative;
+            padding-left: 30px;
+        }
+
+        .program-features li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--primary-color);
+            font-weight: bold;
+        }
+
+        .program-price {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+        }
+
+        .program-price span {
+            font-size: 1rem;
+            color: var(--text-secondary);
+            font-weight: 400;
+        }
+
+        .btn-program {
+            width: 100%;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            border: none;
+            padding: 12px;
+            border-radius: 10px;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+
+        .btn-program:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(108, 99, 255, 0.3);
+        }
+
+        /* Testimonials */
+        .testimonial-card {
+            background: var(--bg-primary);
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: var(--shadow);
+            margin: 15px;
+            border: 1px solid rgba(108, 99, 255, 0.1);
+        }
+
+        .testimonial-text {
+            font-style: italic;
+            margin-bottom: 20px;
+            color: var(--text-secondary);
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+        }
+
+        .author-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: var(--bg-secondary);
+            margin-right: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+
+        .author-info h4 {
+            margin: 0;
+            font-size: 1.1rem;
+        }
+
+        .author-info p {
+            margin: 0;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 80px 0;
+            text-align: center;
+        }
+
+        .cta-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .cta-text {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            opacity: 0.9;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .btn-cta {
+            background: white;
+            color: var(--primary-color);
+            border: none;
+            padding: 15px 40px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: var(--transition);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .btn-cta:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Footer */
+        .footer {
+            background: #1a1a2e;
+            color: white;
+            padding: 70px 0 20px;
+        }
+
+        .footer-logo {
+            margin-bottom: 20px;
+        }
+
+        .footer-logo img {
+            height: 50px;
+        }
+
+        .footer-about p {
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 25px;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+        }
+
+        .social-link {
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .social-link:hover {
+            background: var(--primary-color);
+            transform: translateY(-3px);
+        }
+
+        .footer-heading {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 25px;
+            position: relative;
+        }
+
+        .footer-heading::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 40px;
+            height: 3px;
+            background: var(--primary-color);
+            border-radius: 2px;
+        }
+
+        .footer-links {
+            list-style: none;
+            padding: 0;
+        }
+
+        .footer-links li {
+            margin-bottom: 12px;
+        }
+
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .footer-links a:hover {
+            color: white;
+            padding-left: 5px;
+        }
+
+        .footer-contact p {
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 40px;
+            margin-top: 40px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.9rem;
+        }
+
+        /* WhatsApp Float */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            width: 60px;
+            height: 60px;
+            background: #25D366;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            box-shadow: 0 5px 15px rgba(37, 211, 102, 0.4);
+            z-index: 1000;
+            transition: var(--transition);
+            animation: pulse 2s infinite;
+        }
+
+        .whatsapp-float:hover {
+            transform: scale(1.1);
+            box-shadow: 0 8px 20px rgba(37, 211, 102, 0.6);
+        }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7); }
+            70% { box-shadow: 0 0 0 15px rgba(37, 211, 102, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2.5rem;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .hero-buttons {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .btn-hero {
+                width: 100%;
+                max-width: 300px;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <img src="images/logo/cc-hub-logo.png" alt="Creative Code Hub">
+            </a>
+            
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav mx-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="courses.html">Courses</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="internship.html">Internship</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="projects.html">Projects</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="about.html">About Us</a>
+                    </li>
+                </ul>
+
+                <div class="navbar-right">
+                    <a href="#enroll" class="btn-enroll">
+                        <i class="fas fa-rocket me-2"></i>Enroll Now
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6">
+                    <div class="hero-content">
+                        <span class="hero-badge">Limited Time Offer - 30% Off</span>
+                        <h1 class="hero-title">Launch Your Tech Career with Our Internship Programs</h1>
+                        <p class="hero-subtitle">Gain real-world experience, build professional projects, and get job-ready with our industry-focused internship programs.</p>
+                        <div class="hero-buttons">
+                            <a href="#programs" class="btn btn-hero">
+                                <i class="fas fa-laptop-code me-2"></i>Explore Programs
+                            </a>
+                            <a href="#enroll" class="btn btn-hero btn-hero-secondary">
+                                <i class="fas fa-calendar-check me-2"></i>Book Free Consultation
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <!-- Placeholder for hero image -->
+                    <div style="height: 400px; background: rgba(255,255,255,0.1); border-radius: 20px; display: flex; align-items: center; justify-content: center; color: rgba(255,255,255,0.7);">
+                        <i class="fas fa-graduation-cap" style="font-size: 8rem;"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="py-5" style="padding: 100px 0;">
+        <div class="container">
+            <h2 class="section-title">Why Choose Our Internship Programs?</h2>
+            <div class="row">
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-briefcase"></i>
+                        </div>
+                        <h3 class="feature-title">Real Industry Projects</h3>
+                        <p class="feature-text">Work on live projects from actual companies and build a portfolio that stands out to employers.</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-user-tie"></i>
+                        </div>
+                        <h3 class="feature-title">Mentorship from Experts</h3>
+                        <p class="feature-text">Learn directly from industry professionals with years of experience in their fields.</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-certificate"></i>
+                        </div>
+                        <h3 class="feature-title">Industry Certifications</h3>
+                        <p class="feature-text">Earn recognized certifications that validate your skills and boost your resume.</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-handshake"></i>
+                        </div>
+                        <h3 class="feature-title">Job Placement Assistance</h3>
+                        <p class="feature-text">Get help with resume building, interview preparation, and connections to hiring partners.</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <h3 class="feature-title">Collaborative Learning</h3>
+                        <p class="feature-text">Join a community of learners and collaborate on projects in a team environment.</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <h3 class="feature-title">Career Growth</h3>
+                        <p class="feature-text">Develop the skills and experience needed to advance in your chosen career path.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Programs Section -->
+    <section class="programs-section" id="programs">
+        <div class="container">
+            <h2 class="section-title">Our Internship Programs</h2>
+            <div class="row">
+                <div class="col-lg-4 col-md-6">
+                    <div class="program-card">
+                        <div class="program-header">
+                            <span class="program-badge">Most Popular</span>
+                            <h3 class="program-title">Full Stack Development</h3>
+                            <p class="program-duration">3 Months • 40+ Hours/Week</p>
+                        </div>
+                        <div class="program-body">
+                            <ul class="program-features">
+                                <li>Frontend & Backend Development</li>
+                                <li>Database Design & Management</li>
+                                <li>API Development & Integration</li>
+                                <li>Deployment & DevOps Basics</li>
+                                <li>Agile Methodology</li>
+                                <li>Real Client Project</li>
+                            </ul>
+                            <div class="program-price">₹15,000 <span>/ one-time</span></div>
+                            <button class="btn btn-program">Enroll Now</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="program-card">
+                        <div class="program-header">
+                            <h3 class="program-title">Data Science & Analytics</h3>
+                            <p class="program-duration">3 Months • 35+ Hours/Week</p>
+                        </div>
+                        <div class="program-body">
+                            <ul class="program-features">
+                                <li>Python for Data Science</li>
+                                <li>Statistical Analysis</li>
+                                <li>Machine Learning Algorithms</li>
+                                <li>Data Visualization</li>
+                                <li>SQL & Database Querying</li>
+                                <li>Real-world Data Project</li>
+                            </ul>
+                            <div class="program-price">₹18,000 <span>/ one-time</span></div>
+                            <button class="btn btn-program">Enroll Now</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="program-card">
+                        <div class="program-header">
+                            <span class="program-badge">New</span>
+                            <h3 class="program-title">Digital Marketing</h3>
+                            <p class="program-duration">2 Months • 30+ Hours/Week</p>
+                        </div>
+                        <div class="program-body">
+                            <ul class="program-features">
+                                <li>SEO & SEM Strategies</li>
+                                <li>Social Media Marketing</li>
+                                <li>Content Marketing</li>
+                                <li>Google Analytics</li>
+                                <li>Email Marketing Campaigns</li>
+                                <li>Live Campaign Management</li>
+                            </ul>
+                            <div class="program-price">₹12,000 <span>/ one-time</span></div>
+                            <button class="btn btn-program">Enroll Now</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="py-5" style="padding: 100px 0;">
+        <div class="container">
+            <h2 class="section-title">What Our Interns Say</h2>
+            <div class="row">
+                <div class="col-lg-4">
+                    <div class="testimonial-card">
+                        <p class="testimonial-text">"The Full Stack Development internship gave me the confidence and skills to land my first job as a junior developer. The hands-on projects were exactly what I needed."</p>
+                        <div class="testimonial-author">
+                            <div class="author-avatar">RK</div>
+                            <div class="author-info">
+                                <h4>Rahul Kumar</h4>
+                                <p>Software Developer at TechSolutions</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="testimonial-card">
+                        <p class="testimonial-text">"The mentorship I received during the Data Science internship was incredible. My mentor helped me understand complex concepts and guided me through a real analytics project."</p>
+                        <div class="testimonial-author">
+                            <div class="author-avatar">PS</div>
+                            <div class="author-info">
+                                <h4>Priya Sharma</h4>
+                                <p>Data Analyst at AnalyticsPro</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="testimonial-card">
+                        <p class="testimonial-text">"I transformed from a complete beginner to a confident digital marketer. The internship program structure and support system made all the difference in my learning journey."</p>
+                        <div class="testimonial-author">
+                            <div class="author-avatar">AM</div>
+                            <div class="author-info">
+                                <h4>Anjali Mehta</h4>
+                                <p>Digital Marketing Specialist</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section" id="enroll">
+        <div class="container">
+            <h2 class="cta-title">Ready to Launch Your Career?</h2>
+            <p class="cta-text">Join hundreds of students who have transformed their careers through our internship programs. Limited seats available for the next batch.</p>
+            <a href="https://wa.me/917093947788?text=Hi,%20I'm%20interested%20in%20your%20internship%20programs.%20Can%20you%20share%20more%20details?" class="btn btn-cta" target="_blank">
+                <i class="fab fa-whatsapp me-2"></i>Chat with Us on WhatsApp
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 col-md-6 mb-5">
+                    <div class="footer-about">
+                        <div class="footer-logo">
+                            <img src="images/logo/cc-hub-logo.png" alt="Creative Code Hub">
+                        </div>
+                        <p>Empowering the next generation of developers and digital professionals with quality education and practical skills.</p>
+                        <div class="social-links">
+                            <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                            <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-6 mb-5">
+                    <h3 class="footer-heading">Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="courses.html">Courses</a></li>
+                        <li><a href="internship.html">Internship</a></li>
+                        <li><a href="projects.html">Projects</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-3 col-md-6 mb-5">
+                    <h3 class="footer-heading">Programs</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Full Stack Development</a></li>
+                        <li><a href="#">Data Science & Analytics</a></li>
+                        <li><a href="#">Digital Marketing</a></li>
+                        <li><a href="#">UI/UX Design</a></li>
+                        <li><a href="#">Mobile App Development</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-3 col-md-6 mb-5">
+                    <h3 class="footer-heading">Contact Us</h3>
+                    <div class="footer-contact">
+                        <p><i class="fas fa-map-marker-alt"></i> Kakinada, Vishakapatnam</p>
+                        <p><i class="fas fa-phone"></i> +91 7075775888</p>
+                        <p><i class="fas fa-phone"></i> +91 7093947788</p>
+                        <p><i class="fas fa-envelope"></i> info@creativecodehub.in</p>
+                    </div>
+                </div>
+            </div>
+            <div class="copyright">
+                &copy; 2024 Creative-Code-Hub. All Rights Reserved.
+            </div>
+        </div>
+    </footer>
+
+    <!-- WhatsApp Float -->
+    <a href="https://wa.me/917093947788?text=Hi,%20I'm%20interested%20in%20your%20internship%20programs.%20Can%20you%20share%20more%20details?" class="whatsapp-float" target="_blank">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        // Navbar scroll effect
+        window.addEventListener('scroll', function() {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 50) {
+                navbar.style.padding = '10px 0';
+                navbar.style.boxShadow = '0 5px 20px rgba(0, 0, 0, 0.1)';
+            } else {
+                navbar.style.padding = '15px 0';
+                navbar.style.boxShadow = '0 2px 15px rgba(0, 0, 0, 0.1)';
+            }
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    window.scrollTo({
+                        top: target.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // WhatsApp promotion message
+        function shareOnWhatsApp() {
+            const message = "Check out these amazing internship programs at Creative Code Hub! 🚀\n\n" +
+                           "• Full Stack Development\n" +
+                           "• Data Science & Analytics\n" +
+                           "• Digital Marketing\n\n" +
+                           "Gain real industry experience and boost your career! Limited seats available.\n\n" +
+                           "Learn more: [Your Website URL]";
+            
+            const encodedMessage = encodeURIComponent(message);
+            window.open(`https://wa.me/?text=${encodedMessage}`, '_blank');
+        }
+
+        // Add click event to share buttons if needed
+        // document.querySelector('.share-btn').addEventListener('click', shareOnWhatsApp);
+    </script>
+</body>
+</html>

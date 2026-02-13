@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LMS Portal - Under Construction | Creative Code Hub</title>
+    <link rel="icon" type="image/png" href="images/logo/cc-hub-logo.png">
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary-color: #6c63ff;
+            --secondary-color: #4a44c6;
+            --accent-color: #ff6b6b;
+            --text-primary: #333333;
+            --text-secondary: #666666;
+            --bg-primary: #ffffff;
+            --bg-secondary: #f8f9fa;
+            --shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-primary);
+            overflow-x: hidden;
+        }
+
+        .construction-container {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-radius: 25px;
+            padding: 60px 40px;
+            text-align: center;
+            box-shadow: var(--shadow);
+            max-width: 800px;
+            width: 90%;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .construction-container::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transform: rotate(45deg);
+            animation: shine 3s infinite;
+        }
+
+        @keyframes shine {
+            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+        }
+
+        .logo {
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 30px;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 15px 35px rgba(108, 99, 255, 0.3);
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .logo img {
+            width: 60%;
+            height: 60%;
+            filter: brightness(0) invert(1);
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
+        h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+
+        .subtitle {
+            font-size: 1.4rem;
+            color: var(--text-secondary);
+            margin-bottom: 40px;
+            font-weight: 500;
+        }
+
+        .construction-icon {
+            font-size: 5rem;
+            color: var(--primary-color);
+            margin-bottom: 30px;
+            animation: hammer 2s ease-in-out infinite;
+        }
+
+        @keyframes hammer {
+            0%, 100% { transform: rotate(0deg); }
+            25% { transform: rotate(-15deg); }
+            75% { transform: rotate(15deg); }
+        }
+
+        .progress-container {
+            background: var(--bg-secondary);
+            border-radius: 50px;
+            height: 12px;
+            margin: 40px 0;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .progress-bar {
+            background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+            height: 100%;
+            width: 75%;
+            border-radius: 50px;
+            animation: progress 2s ease-in-out infinite;
+            position: relative;
+        }
+
+        .progress-bar::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+            animation: shimmer 2s infinite;
+        }
+
+        @keyframes progress {
+            0%, 100% { width: 70%; }
+            50% { width: 75%; }
+        }
+
+        @keyframes shimmer {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+
+        .progress-text {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-bottom: 10px;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 25px;
+            margin: 40px 0;
+        }
+
+        .feature-item {
+            background: var(--bg-primary);
+            padding: 25px 20px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+            border: 1px solid rgba(108, 99, 255, 0.1);
+        }
+
+        .feature-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(108, 99, 255, 0.15);
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+        }
+
+        .feature-text {
+            font-weight: 600;
+            color: var(--text-primary);
+            font-size: 1rem;
+        }
+
+        .countdown {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin: 40px 0;
+            flex-wrap: wrap;
+        }
+
+        .countdown-item {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 20px 15px;
+            border-radius: 15px;
+            min-width: 80px;
+            box-shadow: 0 8px 20px rgba(108, 99, 255, 0.3);
+        }
+
+        .countdown-number {
+            font-size: 2rem;
+            font-weight: 700;
+            line-height: 1;
+        }
+
+        .countdown-label {
+            font-size: 0.8rem;
+            opacity: 0.9;
+            margin-top: 5px;
+        }
+
+        .notify-section {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 20px;
+            margin: 40px 0;
+            box-shadow: 0 10px 30px rgba(245, 87, 108, 0.3);
+        }
+
+        .notify-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        .notify-form {
+            display: flex;
+            gap: 15px;
+            max-width: 400px;
+            margin: 0 auto;
+        }
+
+        .email-input {
+            flex: 1;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1rem;
+            outline: none;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .notify-btn {
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(108, 99, 255, 0.3);
+        }
+
+        .notify-btn:hover {
+            background: var(--secondary-color);
+            transform: translateY(-2px);
+        }
+
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: var(--bg-secondary);
+            color: var(--text-primary);
+            text-decoration: none;
+            padding: 12px 30px;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            margin-top: 20px;
+            border: 2px solid transparent;
+        }
+
+        .back-btn:hover {
+            background: var(--primary-color);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(108, 99, 255, 0.3);
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 30px;
+        }
+
+        .social-link {
+            width: 50px;
+            height: 50px;
+            background: var(--bg-secondary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary-color);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-size: 1.2rem;
+        }
+
+        .social-link:hover {
+            background: var(--primary-color);
+            color: white;
+            transform: translateY(-3px);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .construction-container {
+                padding: 40px 25px;
+            }
+
+            h1 {
+                font-size: 2.5rem;
+            }
+
+            .subtitle {
+                font-size: 1.2rem;
+            }
+
+            .construction-icon {
+                font-size: 4rem;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .countdown {
+                gap: 10px;
+            }
+
+            .countdown-item {
+                min-width: 70px;
+                padding: 15px 10px;
+            }
+
+            .countdown-number {
+                font-size: 1.5rem;
+            }
+
+            .notify-form {
+                flex-direction: column;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .construction-container {
+                padding: 30px 20px;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+
+            .subtitle {
+                font-size: 1rem;
+            }
+
+            .construction-icon {
+                font-size: 3rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="construction-container">
+        <!-- Logo -->
+        <div class="logo">
+            <img src="images/logo/cc-hub-logo.png" alt="Creative Code Hub">
+        </div>
+
+        <!-- Main Content -->
+        <div class="construction-icon">
+            <i class="fas fa-tools"></i>
+        </div>
+
+        <h1>LMS Portal</h1>
+        <p class="subtitle">Our Learning Management System is under construction</p>
+
+        <!-- Progress Bar -->
+        <div class="progress-text">Development Progress</div>
+        <div class="progress-container">
+            <div class="progress-bar"></div>
+        </div>
+
+        <!-- Features Grid -->
+        <div class="features-grid">
+            <div class="feature-item">
+                <div class="feature-icon">
+                    <i class="fas fa-book-open"></i>
+                </div>
+                <div class="feature-text">Course Management</div>
+            </div>
+            <div class="feature-item">
+                <div class="feature-icon">
+                    <i class="fas fa-video"></i>
+                </div>
+                <div class="feature-text">Video Lessons</div>
+            </div>
+            <div class="feature-item">
+                <div class="feature-icon">
+                    <i class="fas fa-tasks"></i>
+                </div>
+                <div class="feature-text">Progress Tracking</div>
+            </div>
+            <div class="feature-item">
+                <div class="feature-icon">
+                    <i class="fas fa-certificate"></i>
+                </div>
+                <div class="feature-text">Certifications</div>
+            </div>
+        </div>
+
+        <!-- Countdown Timer -->
+        <div class="countdown">
+            <div class="countdown-item">
+                <div class="countdown-number" id="days">00</div>
+                <div class="countdown-label">Days</div>
+            </div>
+            <div class="countdown-item">
+                <div class="countdown-number" id="hours">00</div>
+                <div class="countdown-label">Hours</div>
+            </div>
+            <div class="countdown-item">
+                <div class="countdown-number" id="minutes">00</div>
+                <div class="countdown-label">Minutes</div>
+            </div>
+            <div class="countdown-item">
+                <div class="countdown-number" id="seconds">00</div>
+                <div class="countdown-label">Seconds</div>
+            </div>
+        </div>
+
+        <!-- Notification Section -->
+        <div class="notify-section">
+            <h3 class="notify-title">Get Notified When We Launch!</h3>
+            <form class="notify-form">
+                <input type="email" class="email-input" placeholder="Enter your email address" required>
+                <button type="submit" class="notify-btn">Notify Me</button>
+            </form>
+        </div>
+
+        <!-- Back Button -->
+        <a href="index.html" class="back-btn">
+            <i class="fas fa-arrow-left"></i>
+            Back to Homepage
+        </a>
+
+        <!-- Social Links -->
+        <div class="social-links">
+            <a href="#" class="social-link">
+                <i class="fab fa-whatsapp"></i>
+            </a>
+            <a href="#" class="social-link">
+                <i class="fab fa-instagram"></i>
+            </a>
+            <a href="#" class="social-link">
+                <i class="fab fa-linkedin-in"></i>
+            </a>
+            <a href="#" class="social-link">
+                <i class="fab fa-facebook-f"></i>
+            </a>
+        </div>
+    </div>
+
+    <script>
+        // Countdown Timer
+        function updateCountdown() {
+            const launchDate = new Date('2024-12-31T00:00:00').getTime();
+            const now = new Date().getTime();
+            const distance = launchDate - now;
+
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            document.getElementById('days').textContent = days.toString().padStart(2, '0');
+            document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
+            document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
+            document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
+
+            if (distance < 0) {
+                clearInterval(countdownTimer);
+                document.querySelector('.countdown').innerHTML = '<div class="launch-text">LMS Portal is Live!</div>';
+            }
+        }
+
+        // Initialize countdown
+        const countdownTimer = setInterval(updateCountdown, 1000);
+        updateCountdown();
+
+        // Notification Form
+        document.querySelector('.notify-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const email = this.querySelector('.email-input').value;
+            
+            if (email) {
+                // Simulate form submission
+                this.innerHTML = `
+                    <div style="color: white; font-weight: 600;">
+                        <i class="fas fa-check-circle" style="margin-right: 10px;"></i>
+                        Thank you! We'll notify you when we launch.
+                    </div>
+                `;
+                
+                // Here you would typically send the email to your backend
+                console.log('Email submitted:', email);
+            }
+        });
+
+        // Add some interactive effects
+        document.querySelectorAll('.feature-item').forEach(item => {
+            item.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-8px) scale(1.05)';
+            });
+            
+            item.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0) scale(1)';
+            });
+        });
+    </script>
+</body>
+</html>

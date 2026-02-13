@@ -1,0 +1,1833 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projects & Collaborations - Creative Code Hub</title>
+    <link rel="icon" type="image/png" href="images/logo/cc-hub-logo.png">
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    
+    <style>
+        /* CSS Variables for Light/Dark Mode */
+        :root {
+            --primary-color: #6c63ff;
+            --secondary-color: #4a44c6;
+            --pink-color: #e91e63;
+            --text-primary: #333333;
+            --text-secondary: #666666;
+            --bg-primary: #ffffff;
+            --bg-secondary: #f8f9fa;
+            --bg-tertiary: #e9ecef;
+            --card-bg: #ffffff;
+            --border-color: #e0e0e0;
+            --shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+
+        [data-theme="dark"] {
+            --primary-color: #7b74ff;
+            --secondary-color: #5a54d6;
+            --pink-color: #ff4081;
+            --text-primary: #ffffff;
+            --text-secondary: #b0b0b0;
+            --bg-primary: #121212;
+            --bg-secondary: #1e1e1e;
+            --bg-tertiary: #2d2d2d;
+            --card-bg: #1e1e1e;
+            --border-color: #333333;
+            --shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        }
+
+        body {
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            transition: var(--transition);
+            font-family: 'Poppins', sans-serif;
+            overflow-x: hidden;
+        }
+
+        /* Fix for scrolling */
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+        }
+
+        .projects-section {
+            min-height: 100vh;
+            padding: 100px 0 50px 0;
+        }
+
+        /* Enhanced Business CTA Styles */
+        .business-cta {
+            text-align: center;
+            margin-top: 100px;
+            padding: 50px 30px;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            border-radius: 20px;
+            position: relative;
+            overflow: hidden;
+            color: white;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+        }
+        
+        .business-cta::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="rgba(255,255,255,0.1)" d="M0,96L48,112C96,128,192,160,288,186.7C384,213,480,235,576,213.3C672,192,768,128,864,128C960,128,1056,192,1152,192C1248,192,1344,128,1392,96L1440,64L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>');
+            background-size: cover;
+            background-position: center;
+            opacity: 0.3;
+        }
+        
+        .business-cta h3 {
+            font-size: 2.2rem;
+            margin-bottom: 20px;
+            font-weight: 700;
+            position: relative;
+            z-index: 2;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        
+        .business-cta p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+            position: relative;
+            z-index: 2;
+            opacity: 0.9;
+            line-height: 1.6;
+        }
+        
+        .cta-features {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 30px;
+            margin-bottom: 40px;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .feature-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            max-width: 150px;
+        }
+        
+        .feature-icon {
+            width: 70px;
+            height: 70px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 15px;
+            font-size: 1.8rem;
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            transition: var(--transition);
+        }
+        
+        .feature-item:hover .feature-icon {
+            transform: scale(1.1) rotate(5deg);
+            background: rgba(255, 255, 255, 0.3);
+        }
+        
+        .feature-text {
+            font-size: 0.9rem;
+            font-weight: 500;
+            text-align: center;
+        }
+        
+        .cta-button {
+            position: relative;
+            z-index: 2;
+            background: white;
+            color: var(--primary-color);
+            border: none;
+            padding: 15px 40px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: var(--transition);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .cta-button:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+            background: #f0f0f0;
+        }
+        
+        /* Enhanced Project Cards */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .project-card {
+            background: var(--card-bg);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: all 0.4s ease;
+            border: 1px solid var(--border-color);
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        
+        .project-card.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .project-card:hover {
+            transform: translateY(-12px);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.2);
+        }
+        
+        /* Project Image - Smaller Size */
+        .project-image {
+            position: relative;
+            height: 180px;
+            overflow: hidden;
+            background: var(--bg-secondary);
+        }
+        
+        .project-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s ease;
+        }
+        
+        .project-card:hover .project-image img {
+            transform: scale(1.08);
+        }
+        
+        /* Image Loading State */
+        .project-image::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, var(--bg-secondary) 25%, var(--bg-tertiary) 50%, var(--bg-secondary) 75%);
+            background-size: 200% 100%;
+            animation: loading 1.5s infinite;
+            z-index: 1;
+        }
+        
+        .project-image.loaded::before {
+            display: none;
+        }
+        
+        @keyframes loading {
+            0% {
+                background-position: 200% 0;
+            }
+            100% {
+                background-position: -200% 0;
+            }
+        }
+        
+        /* Project Content */
+        .project-content {
+            padding: 25px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+        
+        .project-content h3 {
+            font-size: 1.3rem;
+            margin-bottom: 12px;
+            color: var(--pink-color);
+            text-align: center;
+            font-weight: 600;
+            line-height: 1.3;
+        }
+        
+        .project-content p {
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin-bottom: 20px;
+            text-align: center;
+            flex-grow: 1;
+            font-size: 0.95rem;
+        }
+        
+        /* Project Tags */
+        .project-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+        
+        .project-tag {
+            background: rgba(108, 99, 255, 0.1);
+            color: var(--primary-color);
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .project-tag:hover {
+            background: var(--primary-color);
+            color: white;
+            transform: scale(1.05);
+        }
+        
+        /* Project Link */
+        .project-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--primary-color);
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            margin: 0 auto;
+            padding: 8px 16px;
+            border: 2px solid var(--primary-color);
+            border-radius: 8px;
+            font-size: 0.9rem;
+        }
+        
+        .project-link:hover {
+            background: var(--primary-color);
+            color: white;
+            transform: translateX(5px);
+        }
+        
+        /* Project Categories */
+        .project-categories {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-bottom: 40px;
+        }
+        
+        .category-btn {
+            background: var(--card-bg);
+            border: 2px solid var(--border-color);
+            color: var(--text-primary);
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .category-btn:hover,
+        .category-btn.active {
+            background: var(--primary-color);
+            color: white;
+            border-color: var(--primary-color);
+            transform: translateY(-2px);
+        }
+        
+        /* Floating Business Message */
+        .floating-business-message {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0.8);
+            background: var(--card-bg);
+            border-radius: 20px;
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.3);
+            z-index: 3000;
+            width: 90%;
+            max-width: 500px;
+            overflow: hidden;
+            animation: messageEntrance 0.6s ease forwards;
+            border: 2px solid var(--primary-color);
+        }
+        
+        .floating-business-message.active {
+            display: block;
+        }
+        
+        .message-header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 25px 30px;
+            text-align: center;
+            position: relative;
+        }
+        
+        .message-header h3 {
+            margin: 0;
+            font-size: 1.6rem;
+            font-weight: 600;
+        }
+        
+        .close-message {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 1.5rem;
+            color: white;
+            cursor: pointer;
+            transition: var(--transition);
+            background: rgba(255, 255, 255, 0.2);
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .close-message:hover {
+            transform: scale(1.1);
+            background: rgba(255, 255, 255, 0.3);
+        }
+        
+        .message-body {
+            padding: 30px;
+        }
+        
+        .message-body p {
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin-bottom: 25px;
+            text-align: center;
+        }
+        
+        .message-features {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+        
+        .message-feature {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px;
+            background: var(--bg-secondary);
+            border-radius: 10px;
+            transition: var(--transition);
+        }
+        
+        .message-feature:hover {
+            background: var(--primary-color);
+            color: white;
+            transform: translateY(-3px);
+        }
+        
+        .message-feature i {
+            color: var(--primary-color);
+            font-size: 1.2rem;
+            transition: var(--transition);
+        }
+        
+        .message-feature:hover i {
+            color: white;
+        }
+        
+        .message-actions {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+        }
+        
+        .message-btn {
+            padding: 12px 25px;
+            border-radius: 8px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: var(--transition);
+            border: none;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .message-btn.primary {
+            background: var(--primary-color);
+            color: white;
+        }
+        
+        .message-btn.primary:hover {
+            background: var(--secondary-color);
+            transform: translateY(-3px);
+        }
+        
+        .message-btn.secondary {
+            background: var(--bg-secondary);
+            color: var(--text-primary);
+            border: 1px solid var(--border-color);
+        }
+        
+        .message-btn.secondary:hover {
+            background: var(--bg-tertiary);
+        }
+        
+        @keyframes messageEntrance {
+            0% {
+                opacity: 0;
+                transform: translate(-50%, -50%) scale(0.8);
+            }
+            70% {
+                transform: translate(-50%, -50%) scale(1.05);
+            }
+            100% {
+                opacity: 1;
+                transform: translate(-50%, -50%) scale(1);
+            }
+        }
+        
+        /* Enhanced Business Modal Styles */
+        .business-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 2000;
+            backdrop-filter: blur(5px);
+        }
+        
+        .modal-content {
+            background: var(--card-bg);
+            margin: 2% auto;
+            padding: 0;
+            border-radius: 20px;
+            max-width: 800px;
+            width: 90%;
+            position: relative;
+            animation: modalSlideIn 0.4s ease;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+        
+        .modal-header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 25px 30px;
+            border-radius: 20px 20px 0 0;
+            position: relative;
+        }
+        
+        .modal-header h3 {
+            margin: 0;
+            font-size: 1.8rem;
+            font-weight: 600;
+        }
+        
+        .modal-header p {
+            margin: 10px 0 0;
+            opacity: 0.9;
+        }
+        
+        .close-modal {
+            position: absolute;
+            top: 20px;
+            right: 25px;
+            font-size: 1.8rem;
+            color: white;
+            cursor: pointer;
+            transition: var(--transition);
+            background: rgba(255, 255, 255, 0.2);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .close-modal:hover {
+            transform: scale(1.1);
+            background: rgba(255, 255, 255, 0.3);
+        }
+        
+        .modal-body {
+            padding: 30px;
+        }
+        
+        .form-step {
+            display: none;
+        }
+        
+        .form-step.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: var(--text-primary);
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: var(--transition);
+            background: var(--bg-primary);
+            color: var(--text-primary);
+        }
+        
+        .form-control:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(24, 119, 242, 0.1);
+            outline: none;
+        }
+        
+        textarea.form-control {
+            resize: vertical;
+            min-height: 120px;
+        }
+        
+        .form-footer {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid var(--border-color);
+        }
+        
+        .btn-prev, .btn-next, .btn-submit {
+            padding: 12px 25px;
+            border-radius: 8px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: var(--transition);
+            border: none;
+        }
+        
+        .btn-prev {
+            background: var(--bg-secondary);
+            color: var(--text-primary);
+            border: 1px solid var(--border-color);
+        }
+        
+        .btn-prev:hover {
+            background: var(--bg-tertiary);
+        }
+        
+        .btn-next, .btn-submit {
+            background: var(--primary-color);
+            color: white;
+        }
+        
+        .btn-next:hover, .btn-submit:hover {
+            background: var(--secondary-color);
+            transform: translateY(-2px);
+        }
+        
+        .progress-bar {
+            height: 6px;
+            background: var(--bg-secondary);
+            border-radius: 3px;
+            margin-bottom: 30px;
+            overflow: hidden;
+        }
+        
+        .progress {
+            height: 100%;
+            background: var(--primary-color);
+            width: 33.33%;
+            transition: width 0.3s ease;
+        }
+        
+        .service-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .service-option {
+            background: var(--bg-secondary);
+            border: 2px solid var(--border-color);
+            border-radius: 10px;
+            padding: 15px;
+            text-align: center;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .service-option:hover {
+            border-color: var(--primary-color);
+            transform: translateY(-3px);
+        }
+        
+        .service-option.selected {
+            border-color: var(--primary-color);
+            background: rgba(24, 119, 242, 0.1);
+        }
+        
+        .service-icon {
+            font-size: 2rem;
+            margin-bottom: 10px;
+            color: var(--primary-color);
+        }
+        
+        .service-name {
+            font-weight: 600;
+            margin-bottom: 5px;
+            color: var(--text-primary);
+        }
+        
+        .service-desc {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+        
+        .budget-options {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        
+        .budget-option {
+            background: var(--bg-secondary);
+            border: 2px solid var(--border-color);
+            border-radius: 20px;
+            padding: 10px 20px;
+            cursor: pointer;
+            transition: var(--transition);
+            font-weight: 500;
+        }
+        
+        .budget-option:hover {
+            border-color: var(--primary-color);
+        }
+        
+        .budget-option.selected {
+            border-color: var(--primary-color);
+            background: rgba(24, 119, 242, 0.1);
+            color: var(--primary-color);
+        }
+        
+        .success-message {
+            text-align: center;
+            padding: 40px 20px;
+        }
+        
+        .success-icon {
+            font-size: 4rem;
+            color: #28a745;
+            margin-bottom: 20px;
+        }
+        
+        .success-message h4 {
+            color: var(--text-primary);
+            margin-bottom: 15px;
+        }
+        
+        .success-message p {
+            color: var(--text-secondary);
+            margin-bottom: 25px;
+        }
+        
+        @keyframes modalSlideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        /* Floating elements for visual interest */
+        .floating-shape {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            animation: floatShape 15s infinite ease-in-out;
+        }
+        
+        .shape-1 {
+            width: 100px;
+            height: 100px;
+            top: 10%;
+            left: 5%;
+            animation-delay: 0s;
+        }
+        
+        .shape-2 {
+            width: 150px;
+            height: 150px;
+            bottom: 10%;
+            right: 5%;
+            animation-delay: 2s;
+        }
+        
+        .shape-3 {
+            width: 70px;
+            height: 70px;
+            top: 60%;
+            left: 10%;
+            animation-delay: 4s;
+        }
+        
+        @keyframes floatShape {
+            0%, 100% {
+                transform: translateY(0) rotate(0deg);
+            }
+            33% {
+                transform: translateY(-20px) rotate(120deg);
+            }
+            66% {
+                transform: translateY(10px) rotate(240deg);
+            }
+        }
+
+        /* Dark Mode Toggle Styles */
+        .theme-toggle {
+            background: var(--bg-secondary);
+            border: 2px solid var(--border-color);
+            border-radius: 50px;
+            padding: 8px 12px;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 60px;
+            height: 35px;
+            position: relative;
+        }
+        
+        .theme-toggle .sun, .theme-toggle .moon {
+            font-size: 1.2rem;
+            transition: var(--transition);
+            position: absolute;
+        }
+        
+        .theme-toggle .sun {
+            opacity: 1;
+        }
+        
+        .theme-toggle .moon {
+            opacity: 0;
+        }
+        
+        [data-theme="dark"] .theme-toggle .sun {
+            opacity: 0;
+        }
+        
+        [data-theme="dark"] .theme-toggle .moon {
+            opacity: 1;
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .business-cta {
+                padding: 40px 20px;
+                margin-top: 80px;
+            }
+            
+            .business-cta h3 {
+                font-size: 1.8rem;
+            }
+            
+            .business-cta p {
+                font-size: 1.1rem;
+            }
+            
+            .cta-features {
+                gap: 20px;
+            }
+            
+            .feature-item {
+                max-width: 120px;
+            }
+            
+            .feature-icon {
+                width: 60px;
+                height: 60px;
+                font-size: 1.5rem;
+            }
+            
+            .modal-content {
+                width: 95%;
+                margin: 5% auto;
+            }
+            
+            .service-options {
+                grid-template-columns: 1fr;
+            }
+            
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .message-features {
+                grid-template-columns: 1fr;
+            }
+            
+            .message-actions {
+                flex-direction: column;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .business-cta {
+                padding: 30px 15px;
+            }
+            
+            .business-cta h3 {
+                font-size: 1.5rem;
+            }
+            
+            .cta-features {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .feature-item {
+                max-width: 100%;
+                flex-direction: row;
+                gap: 15px;
+            }
+            
+            .feature-icon {
+                margin-bottom: 0;
+                flex-shrink: 0;
+            }
+            
+            .feature-text {
+                text-align: left;
+            }
+            
+            .project-categories {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .category-btn {
+                width: 200px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation - REMOVED DUPLICATE -->
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top">
+        <div class="container">
+            <!-- Brand Logo -->
+            <a class="navbar-brand" href="index.html">
+                <img src="images/logo/cc-hub-logo.png" alt="Creative Code Hub" class="logo">
+            </a>
+            
+            <!-- Mobile Toggle Button -->
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" 
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <!-- Navigation Links -->
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav mx-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="courses.html">Courses</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="internship.html">Internship</a>
+                    </li>
+                  <li class="nav-item">
+                     <a class="nav-link active" href="project.html">Our Projects</a>
+                        </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="about.html">About Us</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="career.html">Career</a>
+                    </li>
+                </ul>
+
+                <!-- Right Side: Dark Mode Toggle + Enroll Button -->
+                <div class="navbar-right d-flex align-items-center">
+                    <!-- Dark Mode Toggle -->
+                    <div class="nav-dark-mode">
+                        <button id="themeToggle" class="theme-toggle" aria-label="Toggle dark mode">
+                            <span class="sun">☀️</span>
+                            <span class="moon">🌙</span>
+                        </button>
+                    </div>
+                    
+                    <!-- Enroll Button -->
+                    <a href="underprocess.html" class="cc-hub-cta-btn" target="_blank">
+                        <i class="fas fa-rocket me-2"></i>LMS Portal
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+ <!-- Enhanced Business CTA Section -->
+            <div class="business-cta">
+                <!-- Floating shapes for visual interest -->
+                <div class="floating-shape shape-1"></div>
+                <div class="floating-shape shape-2"></div>
+                <div class="floating-shape shape-3"></div>
+                
+                <h3>Transform Your Business With Digital Solutions</h3>
+                <p>We create custom websites, apps, and software that drive growth and enhance your digital presence. Let's build something amazing together!</p>
+                
+                <div class="cta-features">
+                    <div class="feature-item">
+                        <div class="feature-icon">
+                            <i class="fas fa-laptop-code"></i>
+                        </div>
+                        <div class="feature-text">Custom Websites</div>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon">
+                            <i class="fas fa-mobile-alt"></i>
+                        </div>
+                        <div class="feature-text">Mobile Apps</div>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon">
+                            <i class="fas fa-cogs"></i>
+                        </div>
+                        <div class="feature-text">Software Solutions</div>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <div class="feature-text">Digital Marketing</div>
+                    </div>
+                </div>
+                
+                <button class="cta-button" id="connectBusinessBtn">
+                    <i class="fas fa-handshake me-2"></i>Get Your Free Consultation
+                </button>
+            </div>
+            
+   <!-- Projects Section -->
+    <section class="projects-section">
+        <div class="container">
+            <div class="section-header text-center mb-5">
+                <h2 class="title">Our Collaborations</h2>
+                <p class="section-subtitle">We've partnered with diverse organizations to deliver innovative digital solutions</p>
+            </div>
+            
+            <!-- Project Categories -->
+            <div class="project-categories">
+                <button class="category-btn active" data-category="all">All Projects</button>
+                <button class="category-btn" data-category="educational">Educational Institutions</button>
+                <button class="category-btn" data-category="business">Business Websites</button>
+                <button class="category-btn" data-category="software">Software Solutions</button>
+            </div>
+           
+            <!-- Educational Institutions Projects -->
+            <div class="project-category active" id="educational">
+                <h3 class="text-center mb-4" style="color: var(--pink-color);">Educational Institutions</h3>
+                <div class="projects-grid">
+                    <!-- Project 1 -->
+                    <div class="project-card">
+                        <div class="project-image">
+                            <img src="images/collab/pydah.jpg" alt="Pydah" loading="lazy" onload="this.parentElement.classList.add('loaded')" onerror="this.parentElement.classList.add('loaded'); this.src='https://via.placeholder.com/400x200/764ba2/ffffff?text=Pydah+Institute'">
+                        </div>
+                        <div class="project-content">
+                            <h3>Pydah College of Engineering</h3>
+                            <p>College management system with attendance tracking, grade management, and student portal features.</p>
+                            <div class="project-tags">
+                                <span class="project-tag">Management System</span>
+                                <span class="project-tag">Education</span>
+                                <span class="project-tag">Web App</span>
+                            </div>
+                            <a href="#" class="project-link">View Details <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+
+                    <!-- Project 2 -->
+                    <div class="project-card">
+                        <div class="project-image">
+                            <img src="images/collab/kiet.jpg" alt="KIET" loading="lazy" onload="this.parentElement.classList.add('loaded')" onerror="this.parentElement.classList.add('loaded'); this.src='https://via.placeholder.com/400x200/4facfe/ffffff?text=KIET'">
+                        </div>
+                        <div class="project-content">
+                            <h3>Kakinada Institute of Engineering and Technology</h3>
+                            <p>IoT-based smart campus solution with energy monitoring, smart lighting, and attendance systems.</p>
+                            <div class="project-tags">
+                                <span class="project-tag">IoT</span>
+                                <span class="project-tag">Smart Campus</span>
+                                <span class="project-tag">Hardware</span>
+                            </div>
+                            <a href="#" class="project-link">View Details <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+
+                    <!-- Project 3 -->
+                    <div class="project-card">
+                        <div class="project-image">
+                            <img src="images/collab/vignan.jpg" alt="Vignan University" loading="lazy" onload="this.parentElement.classList.add('loaded')" onerror="this.parentElement.classList.add('loaded'); this.src='https://via.placeholder.com/400x200/f093fb/ffffff?text=Vignan+University'">
+                        </div>
+                        <div class="project-content">
+                            <h3>Vignan University, Guntur</h3>
+                            <p>Technical training programs and curriculum development for computer science departments.</p>
+                            <div class="project-tags">
+                                <span class="project-tag">Training</span>
+                                <span class="project-tag">Curriculum</span>
+                                <span class="project-tag">Education</span>
+                            </div>
+                            <a href="#" class="project-link">View Details <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+
+                    <!-- Project 4 -->
+                    <div class="project-card">
+                        <div class="project-image">
+                            <img src="images/collab/ggu.jpg" alt="GGU" loading="lazy" onload="this.parentElement.classList.add('loaded')" onerror="this.parentElement.classList.add('loaded'); this.src='https://via.placeholder.com/400x200/43e97b/ffffff?text=GGU+Rajahmundry'">
+                        </div>
+                        <div class="project-content">
+                            <h3>GGU Rajahmundry</h3>
+                            <p>Technical training and workshop programs for engineering students focusing on modern technologies.</p>
+                            <div class="project-tags">
+                                <span class="project-tag">Workshops</span>
+                                <span class="project-tag">Training</span>
+                                <span class="project-tag">Education</span>
+                            </div>
+                            <a href="#" class="project-link">View Details <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Business Websites Projects -->
+            <div class="project-category" id="business">
+                <h3 class="text-center mb-4" style="color: var(--pink-color);">Business Websites</h3>
+                <div class="projects-grid">
+                    <!-- Project 1 -->
+                    <div class="project-card">
+                        <div class="project-image">
+                            <img src="images/collab/sunrise.jpg" alt="Sunrise Developer" loading="lazy" onload="this.parentElement.classList.add('loaded')" onerror="this.parentElement.classList.add('loaded'); this.src='https://via.placeholder.com/400x200/f093fb/ffffff?text=Sunrise+Developer'">
+                        </div>
+                        <div class="project-content">
+                            <h3>Sunrise Developer</h3>
+                            <p>Real estate management system with property listings, virtual tours, and customer relationship management.</p>
+                            <div class="project-tags">
+                                <span class="project-tag">Real Estate</span>
+                                <span class="project-tag">CRM</span>
+                                <span class="project-tag">Web App</span>
+                            </div>
+                            <a href="#" class="project-link">View Details <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+
+                    <!-- Project 2 -->
+                    <div class="project-card">
+                        <div class="project-image">
+                            <img src="images/collab/dhaara_tech.jpg" alt="DharaTech" loading="lazy" onload="this.parentElement.classList.add('loaded')" onerror="this.parentElement.classList.add('loaded'); this.src='https://via.placeholder.com/400x200/667eea/ffffff?text=DharaTech'">
+                        </div>
+                        <div class="project-content">
+                            <h3>DharaTech</h3>
+                            <p>Website development, branding, and digital marketing solutions for a tech company based in Coimbatore.</p>
+                            <div class="project-tags">
+                                <span class="project-tag">Web Development</span>
+                                <span class="project-tag">Branding</span>
+                                <span class="project-tag">Digital Marketing</span>
+                            </div>
+                            <a href="#" class="project-link">View Details <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+
+                    <!-- Project 3 -->
+                    <div class="project-card">
+                        <div class="project-image">
+                            <img src="images/collab/wowbow.jpg" alt="WowBow Pets" loading="lazy" onload="this.parentElement.classList.add('loaded')" onerror="this.parentElement.classList.add('loaded'); this.src='https://via.placeholder.com/400x200/e74c3c/ffffff?text=WowBow+Pets'">
+                        </div>
+                        <div class="project-content">
+                            <h3>WowBow Pets Showroom</h3>
+                            <p>E-commerce website for pet supplies with product catalog, online ordering, and delivery tracking.</p>
+                            <div class="project-tags">
+                                <span class="project-tag">E-commerce</span>
+                                <span class="project-tag">Pet Supplies</span>
+                                <span class="project-tag">Web Development</span>
+                            </div>
+                            <a href="#" class="project-link">View Details <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+
+                    <!-- Project 4 -->
+                    <div class="project-card">
+                        <div class="project-image">
+                            <img src="images/collab/partynights.jpg" alt="PartyNights" loading="lazy" onload="this.parentElement.classList.add('loaded')" onerror="this.parentElement.classList.add('loaded'); this.src='https://via.placeholder.com/400x200/9b59b6/ffffff?text=PartyNights'">
+                        </div>
+                        <div class="project-content">
+                            <h3>PartyNights</h3>
+                            <p>Event management and booking platform with venue listings and party planning services.</p>
+                            <div class="project-tags">
+                                <span class="project-tag">Event Management</span>
+                                <span class="project-tag">Booking Platform</span>
+                                <span class="project-tag">Web Development</span>
+                            </div>
+                            <a href="#" class="project-link">View Details <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Software Solutions Projects -->
+            <div class="project-category" id="software">
+                <h3 class="text-center mb-4" style="color: var(--pink-color);">Software Solutions</h3>
+                <div class="projects-grid">
+                    <!-- Project 1 -->
+                    <div class="project-card">
+                        <div class="project-image">
+                            <img src="images/collab/dvp.jpg" alt="DVP Solutions" loading="lazy" onload="this.parentElement.classList.add('loaded')" onerror="this.parentElement.classList.add('loaded'); this.src='https://via.placeholder.com/400x200/43e97b/ffffff?text=DVP+Solutions'">
+                        </div>
+                        <div class="project-content">
+                            <h3>DVP Solutions</h3>
+                            <p>Enterprise software solution for financial institutions with advanced security features and compliance modules.</p>
+                            <div class="project-tags">
+                                <span class="project-tag">Enterprise</span>
+                                <span class="project-tag">Finance</span>
+                                <span class="project-tag">Security</span>
+                            </div>
+                            <a href="#" class="project-link">View Details <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+
+                    <!-- Project 2 -->
+                    <div class="project-card">
+                        <div class="project-image">
+                            <img src="images/collab/videmy.jpg" alt="Videmy Infotech" loading="lazy" onload="this.parentElement.classList.add('loaded')" onerror="this.parentElement.classList.add('loaded'); this.src='https://via.placeholder.com/400x200/8e44ad/ffffff?text=Videmy+Infotech'">
+                        </div>
+                        <div class="project-content">
+                            <h3>Videmy Infotech</h3>
+                            <p>Custom software solutions for educational technology with interactive learning modules.</p>
+                            <div class="project-tags">
+                                <span class="project-tag">EdTech</span>
+                                <span class="project-tag">Software</span>
+                                <span class="project-tag">Education</span>
+                            </div>
+                            <a href="#" class="project-link">View Details <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+
+                    <!-- Project 3 -->
+                    <div class="project-card">
+                        <div class="project-image">
+                            <img src="images/collab/minipictures.jpg" alt="Minipictures" loading="lazy" onload="this.parentElement.classList.add('loaded')" onerror="this.parentElement.classList.add('loaded'); this.src='https://via.placeholder.com/400x200/d35400/ffffff?text=Minipictures'">
+                        </div>
+                        <div class="project-content">
+                            <h3>Minipictures</h3>
+                            <p>Media management software for photography studios with editing tools and client galleries.</p>
+                            <div class="project-tags">
+                                <span class="project-tag">Media</span>
+                                <span class="project-tag">Photography</span>
+                                <span class="project-tag">Software</span>
+                            </div>
+                            <a href="#" class="project-link">View Details <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+
+                    <!-- Project 4 -->
+                    <div class="project-card">
+                        <div class="project-image">
+                            <img src="images/collab/giet.jpg" alt="GIET" loading="lazy" onload="this.parentElement.classList.add('loaded')" onerror="this.parentElement.classList.add('loaded'); this.src='https://via.placeholder.com/400x200/ff6b6b/ffffff?text=GIET'">
+                        </div>
+                        <div class="project-content">
+                            <h3>Godavari Institute of Engineering and Technology</h3>
+                            <p>Laboratory equipment tracking system with RFID technology for efficient inventory management.</p>
+                            <div class="project-tags">
+                                <span class="project-tag">RFID</span>
+                                <span class="project-tag">Inventory</span>
+                                <span class="project-tag">Education</span>
+                            </div>
+                            <a href="#" class="project-link">View Details <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Rest of your HTML remains the same for footer, modals, etc. -->
+    <!-- Floating Business Message -->
+    <div class="floating-business-message" id="floatingMessage">
+        <div class="message-header">
+            <h3>Need Technical Solutions?</h3>
+            <span class="close-message" id="closeMessage">&times;</span>
+        </div>
+        <div class="message-body">
+            <p>We specialize in creating custom digital solutions for businesses. Let's discuss how we can help transform your digital presence!</p>
+            
+            <div class="message-features">
+                <div class="message-feature">
+                    <i class="fas fa-laptop-code"></i>
+                    <span>Website Development</span>
+                </div>
+                <div class="message-feature">
+                    <i class="fas fa-mobile-alt"></i>
+                    <span>Mobile Apps</span>
+                </div>
+                <div class="message-feature">
+                    <i class="fas fa-gamepad"></i>
+                    <span>Game Development</span>
+                </div>
+                <div class="message-feature">
+                    <i class="fas fa-cogs"></i>
+                    <span>Software Solutions</span>
+                </div>
+            </div>
+            
+            <div class="message-actions">
+                <a href="https://wa.me/917093947788" target="_blank" class="message-btn primary">
+                    <i class="fab fa-whatsapp"></i> WhatsApp
+                </a>
+                <button class="message-btn secondary" id="openModalFromMessage">
+                    <i class="fas fa-envelope"></i> Get Quote
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Enhanced Business Modal -->
+    <div class="business-modal" id="businessModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Let's Build Your Digital Solution</h3>
+                <p>Tell us about your project and we'll get back to you with a customized plan</p>
+                <span class="close-modal" id="closeModal">&times;</span>
+            </div>
+            
+            <div class="modal-body">
+                <!-- Progress Bar -->
+                <div class="progress-bar">
+                    <div class="progress" id="formProgress"></div>
+                </div>
+                
+                <!-- Step 1: Service Selection -->
+                <div class="form-step active" id="step1">
+                    <h4 class="mb-4">What type of solution do you need?</h4>
+                    
+                    <div class="service-options">
+                        <div class="service-option" data-service="website">
+                            <div class="service-icon">
+                                <i class="fas fa-laptop-code"></i>
+                            </div>
+                            <div class="service-name">Website</div>
+                            <div class="service-desc">Custom website development</div>
+                        </div>
+                        
+                        <div class="service-option" data-service="mobile-app">
+                            <div class="service-icon">
+                                <i class="fas fa-mobile-alt"></i>
+                            </div>
+                            <div class="service-name">Mobile App</div>
+                            <div class="service-desc">iOS & Android applications</div>
+                        </div>
+                        
+                        <div class="service-option" data-service="software">
+                            <div class="service-icon">
+                                <i class="fas fa-cogs"></i>
+                            </div>
+                            <div class="service-name">Software</div>
+                            <div class="service-desc">Custom business software</div>
+                        </div>
+                        
+                        <div class="service-option" data-service="ecommerce">
+                            <div class="service-icon">
+                                <i class="fas fa-shopping-cart"></i>
+                            </div>
+                            <div class="service-name">E-commerce</div>
+                            <div class="service-desc">Online store development</div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-footer">
+                        <div></div> <!-- Empty div for spacing -->
+                        <button class="btn-next" id="nextToStep2">Next <i class="fas fa-arrow-right ms-2"></i></button>
+                    </div>
+                </div>
+                
+                <!-- Step 2: Project Details -->
+                <div class="form-step" id="step2">
+                    <h4 class="mb-4">Tell us about your project</h4>
+                    
+                    <div class="form-group">
+                        <label class="form-label" for="company-name">Company/Business Name</label>
+                        <input type="text" id="company-name" class="form-control" placeholder="Enter your company name">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label" for="contact-name">Your Name</label>
+                        <input type="text" id="contact-name" class="form-control" placeholder="Enter your full name">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label" for="project-description">Project Description</label>
+                        <textarea id="project-description" class="form-control" placeholder="Describe your project requirements, goals, and any specific features you need"></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Estimated Budget</label>
+                        <div class="budget-options">
+                            <div class="budget-option" data-budget="5k-15k">₹5K - ₹15K</div>
+                            <div class="budget-option" data-budget="15k-30k">₹15K - ₹30K</div>
+                            <div class="budget-option" data-budget="30k-50k">₹30K - ₹50K</div>
+                            <div class="budget-option" data-budget="50k+">₹50K+</div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-footer">
+                        <button class="btn-prev" id="backToStep1"><i class="fas fa-arrow-left me-2"></i> Back</button>
+                        <button class="btn-next" id="nextToStep3">Next <i class="fas fa-arrow-right ms-2"></i></button>
+                    </div>
+                </div>
+                
+                <!-- Step 3: Contact Information -->
+                <div class="form-step" id="step3">
+                    <h4 class="mb-4">How can we reach you?</h4>
+                    
+                    <div class="form-group">
+                        <label class="form-label" for="email">Email Address</label>
+                        <input type="email" id="email" class="form-control" placeholder="Enter your email address">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label" for="phone">Phone Number</label>
+                        <input type="tel" id="phone" class="form-control" placeholder="Enter your phone number">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label" for="timeline">Preferred Timeline</label>
+                        <select id="timeline" class="form-control">
+                            <option value="">Select your timeline</option>
+                            <option value="asap">As soon as possible</option>
+                            <option value="1-month">Within 1 month</option>
+                            <option value="3-months">Within 3 months</option>
+                            <option value="flexible">Flexible timeline</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-footer">
+                        <button class="btn-prev" id="backToStep2"><i class="fas fa-arrow-left me-2"></i> Back</button>
+                        <button class="btn-submit" id="submitForm">Submit Request</button>
+                    </div>
+                </div>
+                
+                <!-- Success Message -->
+                <div class="form-step" id="successStep">
+                    <div class="success-message">
+                        <div class="success-icon">
+                            <i class="fas fa-check-circle"></i>
+                        </div>
+                        <h4>Thank You!</h4>
+                        <p>We've received your project details. Our team will review your requirements and contact you within 24 hours to discuss next steps.</p>
+                        <button class="btn-submit" id="closeSuccess">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-about">
+                <div class="footer-logo">
+                    <img src="images/logo/cc-hub-logo.png" alt="CodeHub Logo" loading="lazy">
+                </div>
+                <p>Empowering the next generation of developers with quality education and practical skills.</p>
+                <div class="social-links">
+                    <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+            <div class="footer-links">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="underprocess.html" class="cc-hub-cta-btn" target="_blank">Get LMS</a></li>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="internship.html">Internship</a></li>
+                    <li><a href="courses.html">Courses</a></li>
+                    <li><a href="training.html">Training</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                </ul>
+            </div>
+            <div class="footer-links">
+                <h3>Courses</h3>
+                <ul>
+                    <li><a href="courses.html">Full Stack Courses</a></li>
+                    <li><a href="courses.html">Hybrid Courses</a></li>
+                    <li><a href="courses.html">Scratch Training</a></li>
+                    <li><a href="courses.html">Internship Training</a></li>
+                </ul>
+            </div>
+            <div class="footer-contact">
+                <h3>Contact Us</h3>
+                <p><i class="fas fa-map-marker-alt"></i> Kakinada, <i class="fas fa-map-marker-alt"></i> Vishakapatnam</p>
+                <p><i class="fas fa-phone"></i> +91 7075775888, <br> +91 7093947788</p>
+                <p><i class="fas fa-envelope"></i> info@creativecodehub.in</p>
+            </div>
+        </div>
+        <div class="copyright">
+            &copy; 2024 Creative-Code-Hub. All Rights Reserved.
+        </div>
+    </footer>
+
+    <!-- Floating Social Media Button -->
+    <div class="floating-social">
+        <div class="social-toggle">
+            <img src="images/logo/cc-hub-logo.png" width=50% alt="CC-HUB Logo" loading="lazy">
+        </div>
+        <div class="social-links">
+            <a href="https://wa.me/917093947788" target="_blank" class="whatsapp">
+                <i class="fab fa-whatsapp"></i>
+            </a>
+            <a href="https://www.instagram.com/creativecodehub" target="_blank" class="instagram">
+                <i class="fab fa-instagram"></i>
+            </a>
+            <a href="https://www.facebook.com/yourpage" target="_blank" class="facebook">
+                <i class="fab fa-facebook-f"></i>
+            </a>
+            <a href="https://maps.app.goo.gl/8tZUZKWh3uiPoUWJ9?g_st=aw" target="_blank" class="location">
+                <i class="fa-solid fa-location-dot"></i>
+            </a>
+        </div>
+    </div>
+
+    <!-- WhatsApp Floating Icon -->
+    <a href="https://wa.me/9170939347788" target="_blank" class="whatsapp-left">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+        <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        // Dark Mode Functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const themeToggle = document.getElementById('themeToggle');
+            const currentTheme = localStorage.getItem('theme') || 'light';
+            
+            // Set initial theme
+            document.documentElement.setAttribute('data-theme', currentTheme);
+            
+            // Toggle theme
+            themeToggle.addEventListener('click', function() {
+                const currentTheme = document.documentElement.getAttribute('data-theme');
+                const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+                
+                document.documentElement.setAttribute('data-theme', newTheme);
+                localStorage.setItem('theme', newTheme);
+            });
+
+            // Enhanced Business Modal Functionality
+            const businessModal = document.getElementById('businessModal');
+            const connectBusinessBtn = document.getElementById('connectBusinessBtn');
+            const closeModal = document.getElementById('closeModal');
+            const closeSuccess = document.getElementById('closeSuccess');
+            
+            // Form steps and navigation
+            const steps = document.querySelectorAll('.form-step');
+            const formProgress = document.getElementById('formProgress');
+            const nextToStep2 = document.getElementById('nextToStep2');
+            const nextToStep3 = document.getElementById('nextToStep3');
+            const backToStep1 = document.getElementById('backToStep1');
+            const backToStep2 = document.getElementById('backToStep2');
+            const submitForm = document.getElementById('submitForm');
+            
+            // Service selection
+            const serviceOptions = document.querySelectorAll('.service-option');
+            let selectedService = '';
+            
+            // Budget selection
+            const budgetOptions = document.querySelectorAll('.budget-option');
+            let selectedBudget = '';
+            
+            // Show modal when button is clicked
+            if (connectBusinessBtn) {
+                connectBusinessBtn.addEventListener('click', () => {
+                    businessModal.style.display = 'block';
+                    document.body.style.overflow = 'hidden';
+                });
+            }
+            
+            // Close modal
+            function closeBusinessModal() {
+                businessModal.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            }
+            
+            if (closeModal) {
+                closeModal.addEventListener('click', closeBusinessModal);
+            }
+            
+            if (closeSuccess) {
+                closeSuccess.addEventListener('click', closeBusinessModal);
+            }
+            
+            // Close modal when clicking outside
+            window.addEventListener('click', (event) => {
+                if (event.target === businessModal) {
+                    closeBusinessModal();
+                }
+            });
+            
+            // Service selection
+            serviceOptions.forEach(option => {
+                option.addEventListener('click', () => {
+                    serviceOptions.forEach(opt => opt.classList.remove('selected'));
+                    option.classList.add('selected');
+                    selectedService = option.getAttribute('data-service');
+                });
+            });
+            
+            // Budget selection
+            budgetOptions.forEach(option => {
+                option.addEventListener('click', () => {
+                    budgetOptions.forEach(opt => opt.classList.remove('selected'));
+                    option.classList.add('selected');
+                    selectedBudget = option.getAttribute('data-budget');
+                });
+            });
+            
+            // Form navigation
+            if (nextToStep2) {
+                nextToStep2.addEventListener('click', () => {
+                    if (selectedService) {
+                        showStep(2);
+                        updateProgress(66.66);
+                    } else {
+                        alert('Please select a service type');
+                    }
+                });
+            }
+            
+            if (nextToStep3) {
+                nextToStep3.addEventListener('click', () => {
+                    const companyName = document.getElementById('company-name').value;
+                    const contactName = document.getElementById('contact-name').value;
+                    const projectDesc = document.getElementById('project-description').value;
+                    
+                    if (companyName && contactName && projectDesc && selectedBudget) {
+                        showStep(3);
+                        updateProgress(100);
+                    } else {
+                        alert('Please fill in all required fields');
+                    }
+                });
+            }
+            
+            if (backToStep1) {
+                backToStep1.addEventListener('click', () => {
+                    showStep(1);
+                    updateProgress(33.33);
+                });
+            }
+            
+            if (backToStep2) {
+                backToStep2.addEventListener('click', () => {
+                    showStep(2);
+                    updateProgress(66.66);
+                });
+            }
+            
+            if (submitForm) {
+                submitForm.addEventListener('click', () => {
+                    const email = document.getElementById('email').value;
+                    const phone = document.getElementById('phone').value;
+                    const timeline = document.getElementById('timeline').value;
+                    
+                    if (email && phone && timeline) {
+                        showStep(4);
+                        
+                        setTimeout(() => {
+                            resetForm();
+                        }, 3000);
+                    } else {
+                        alert('Please fill in all required fields');
+                    }
+                });
+            }
+            
+            // Helper functions
+            function showStep(stepNumber) {
+                steps.forEach(step => step.classList.remove('active'));
+                document.getElementById(`step${stepNumber}`).classList.add('active');
+            }
+            
+            function updateProgress(percentage) {
+                if (formProgress) {
+                    formProgress.style.width = `${percentage}%`;
+                }
+            }
+            
+            function resetForm() {
+                document.getElementById('company-name').value = '';
+                document.getElementById('contact-name').value = '';
+                document.getElementById('project-description').value = '';
+                document.getElementById('email').value = '';
+                document.getElementById('phone').value = '';
+                document.getElementById('timeline').value = '';
+                
+                serviceOptions.forEach(opt => opt.classList.remove('selected'));
+                budgetOptions.forEach(opt => opt.classList.remove('selected'));
+                selectedService = '';
+                selectedBudget = '';
+                
+                showStep(1);
+                updateProgress(33.33);
+            }
+            
+            // Initialize form
+            updateProgress(33.33);
+            
+            // Project Category Filtering
+            const categoryButtons = document.querySelectorAll('.category-btn');
+            const projectCategories = document.querySelectorAll('.project-category');
+            
+            categoryButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    categoryButtons.forEach(btn => btn.classList.remove('active'));
+                    button.classList.add('active');
+                    
+                    const category = button.getAttribute('data-category');
+                    
+                    if (category === 'all') {
+                        projectCategories.forEach(cat => {
+                            cat.classList.add('active');
+                        });
+                    } else {
+                        projectCategories.forEach(cat => {
+                            cat.classList.remove('active');
+                        });
+                        document.getElementById(category).classList.add('active');
+                    }
+                });
+            });
+            
+            // Image Loading Fix
+            const projectImages = document.querySelectorAll('.project-image img');
+            
+            projectImages.forEach(img => {
+                if (img.complete) {
+                    img.parentElement.classList.add('loaded');
+                } else {
+                    img.addEventListener('load', function() {
+                        this.parentElement.classList.add('loaded');
+                    });
+                    
+                    img.addEventListener('error', function() {
+                        this.parentElement.classList.add('loaded');
+                    });
+                }
+            });
+            
+            // Add animation to project cards on scroll
+            const projectCards = document.querySelectorAll('.project-card');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach((entry, index) => {
+                    if (entry.isIntersecting) {
+                        setTimeout(() => {
+                            entry.target.classList.add('visible');
+                        }, index * 100);
+                    }
+                });
+            }, { threshold: 0.1 });
+            
+            projectCards.forEach(card => {
+                card.style.transition = 'all 0.6s ease';
+                observer.observe(card);
+            });
+            
+            // Floating Business Message
+            const floatingMessage = document.getElementById('floatingMessage');
+            const closeMessage = document.getElementById('closeMessage');
+            const openModalFromMessage = document.getElementById('openModalFromMessage');
+            
+            setTimeout(() => {
+                if (floatingMessage) {
+                    floatingMessage.classList.add('active');
+                }
+            }, 10000);
+            
+            if (closeMessage) {
+                closeMessage.addEventListener('click', () => {
+                    floatingMessage.classList.remove('active');
+                });
+            }
+            
+            if (openModalFromMessage) {
+                openModalFromMessage.addEventListener('click', () => {
+                    floatingMessage.classList.remove('active');
+                    businessModal.style.display = 'block';
+                    document.body.style.overflow = 'hidden';
+                });
+            }
+            
+            window.addEventListener('click', (event) => {
+                if (event.target === floatingMessage) {
+                    floatingMessage.classList.remove('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>

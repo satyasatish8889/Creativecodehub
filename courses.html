@@ -1,0 +1,1845 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Courses - Creative Code Hub</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Courses Page Specific Styles */
+        .courses-hero {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            text-align: center;
+            padding: 140px 20px 80px;
+            position: relative;
+            overflow: hidden;
+            min-height: 400px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 76px;
+        }
+
+        .courses-hero h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
+            position: relative;
+            z-index: 2;
+        }
+
+        .courses-hero p {
+            font-size: 1.3rem;
+            max-width: 600px;
+            margin: 0 auto;
+            text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.2);
+            position: relative;
+            z-index: 2;
+            line-height: 1.6;
+        }
+
+        /* Search Section */
+        .search-section {
+            background: var(--card-bg);
+            padding: 40px 20px;
+            margin-bottom: 0;
+        }
+
+        .search-box {
+            display: flex;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .search-input {
+            flex: 1;
+            padding: 12px 20px;
+            border: 2px solid var(--border-color);
+            border-radius: 25px 0 0 25px;
+            font-size: 1rem;
+            outline: none;
+            transition: var(--transition);
+            background: var(--bg-primary);
+            color: var(--text-primary);
+        }
+
+        .search-input:focus {
+            border-color: var(--primary-color);
+        }
+
+        .btn-search {
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 0 25px 25px 0;
+            cursor: pointer;
+            transition: var(--transition);
+            font-weight: 500;
+        }
+
+        .btn-search:hover {
+            background: var(--secondary-color);
+            transform: translateY(-2px);
+        }
+
+        /* Advanced Filter Section */
+        .advanced-filters {
+            background: var(--card-bg);
+            border-radius: 15px;
+            box-shadow: var(--shadow);
+            margin: 20px auto;
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+            max-width: 1200px;
+        }
+
+        .filter-header {
+            padding: 1.2rem 1.5rem;
+            background: var(--bg-secondary);
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .filter-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin: 0;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .filter-toggle {
+            background: none;
+            border: none;
+            color: var(--primary-color);
+            font-weight: 500;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.95rem;
+            transition: var(--transition);
+        }
+
+        .filter-toggle:hover {
+            color: var(--secondary-color);
+        }
+
+        .filter-toggle i {
+            transition: var(--transition);
+        }
+
+        .filter-toggle.collapsed i {
+            transform: rotate(180deg);
+        }
+
+        .filter-content {
+            padding: 1.5rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .filter-group {
+            margin-bottom: 0;
+        }
+
+        .filter-label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 0.8rem;
+            color: var(--text-primary);
+            font-size: 0.95rem;
+        }
+
+        .filter-select {
+            width: 100%;
+            padding: 0.7rem;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            font-size: 0.95rem;
+            transition: var(--transition);
+            cursor: pointer;
+        }
+
+        .filter-select:focus {
+            border-color: var(--primary-color);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(24, 119, 242, 0.1);
+        }
+
+        .filter-checkboxes {
+            display: flex;
+            flex-direction: column;
+            gap: 0.7rem;
+        }
+
+        .filter-checkbox {
+            display: flex;
+            align-items: center;
+            gap: 0.7rem;
+            cursor: pointer;
+            font-size: 0.95rem;
+            transition: var(--transition);
+            padding: 0.3rem 0;
+            color: var(--text-primary);
+        }
+
+        .filter-checkbox:hover {
+            color: var(--primary-color);
+        }
+
+        .filter-checkbox input {
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+        }
+
+        .filter-range {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+
+        .filter-range input {
+            flex: 1;
+            padding: 0.7rem;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            font-size: 0.95rem;
+            transition: var(--transition);
+            background: var(--bg-primary);
+            color: var(--text-primary);
+        }
+
+        .filter-range input:focus {
+            border-color: var(--primary-color);
+            outline: none;
+        }
+
+        .filter-actions {
+            padding: 1.2rem 1.5rem;
+            background: var(--bg-secondary);
+            border-top: 1px solid var(--border-color);
+            display: flex;
+            justify-content: flex-end;
+            gap: 1rem;
+        }
+
+        .btn-filter {
+            padding: 0.7rem 1.5rem;
+            border-radius: 8px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: var(--transition);
+            font-size: 0.95rem;
+        }
+
+        .btn-apply {
+            background: var(--primary-color);
+            color: white;
+            border: none;
+        }
+
+        .btn-apply:hover {
+            background: var(--secondary-color);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(24, 119, 242, 0.2);
+        }
+
+        .btn-reset {
+            background: transparent;
+            color: var(--text-secondary);
+            border: 1px solid var(--border-color);
+        }
+
+        .btn-reset:hover {
+            background: var(--bg-tertiary);
+        }
+
+        /* Results Info */
+        .results-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 2rem auto;
+            padding: 0.8rem 0;
+            max-width: 1200px;
+        }
+
+        .results-count {
+            font-weight: 600;
+            color: var(--text-primary);
+            font-size: 1.1rem;
+        }
+
+        .sort-options {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+
+        .sort-label {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+        }
+
+        .sort-select {
+            padding: 0.5rem;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            background: var(--card-bg);
+            color: var(--text-primary);
+            font-size: 0.95rem;
+            cursor: pointer;
+        }
+
+        /* Courses Grid */
+        .courses-section {
+            padding: 40px 20px;
+            background: var(--bg-primary);
+        }
+
+        .courses-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .course-card {
+            background: var(--card-bg);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            border: 1px solid var(--border-color);
+            position: relative;
+        }
+
+        .course-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .course-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: var(--pink-color);
+            color: white;
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            z-index: 2;
+        }
+
+        .course-image {
+            position: relative;
+            height: 200px;
+            overflow: hidden;
+            background: var(--bg-secondary);
+        }
+
+        .course-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .course-card:hover .course-image img {
+            transform: scale(1.05);
+        }
+
+        .course-content {
+            padding: 25px;
+        }
+
+        .course-content h3 {
+            font-size: 1.4rem;
+            margin-bottom: 10px;
+            color: var(--pink-color);
+            font-weight: 600;
+        }
+
+        .course-duration {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .course-description {
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .course-features {
+            margin-bottom: 20px;
+        }
+
+        .feature-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 8px 0;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .feature-item i {
+            color: var(--primary-color);
+            font-size: 0.8rem;
+        }
+
+        
+
+        .course-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn-enroll-course {
+            background: var(--primary-color);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition);
+            flex: 1;
+            text-align: center;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-enroll-course:hover {
+            background: var(--secondary-color);
+            transform: translateY(-2px);
+        }
+
+        .btn-details {
+            background: transparent;
+            color: var(--primary-color);
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition);
+            border: 2px solid var(--primary-color);
+            text-align: center;
+            cursor: pointer;
+        }
+
+        .btn-details:hover {
+            background: var(--primary-color);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .btn-load-more {
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            margin-top: 30px;
+        }
+
+        .btn-load-more:hover {
+            background: var(--secondary-color);
+            transform: translateY(-2px);
+        }
+
+        .d-none {
+            display: none;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .courses-hero {
+                padding: 120px 20px 60px;
+                min-height: 300px;
+            }
+            
+            .courses-hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .courses-hero p {
+                font-size: 1.1rem;
+            }
+            
+            .filter-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .results-info {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 1rem;
+            }
+            
+            .filter-actions {
+                justify-content: center;
+            }
+            
+            .courses-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .course-actions {
+                flex-direction: column;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .courses-hero {
+                padding: 100px 15px 50px;
+            }
+            
+            .courses-hero h1 {
+                font-size: 2rem;
+            }
+            
+            .courses-hero p {
+                font-size: 1rem;
+            }
+            
+            .courses-section {
+                padding: 30px 15px;
+            }
+            
+            .course-image {
+                height: 180px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top">
+        <div class="container">
+            <!-- Logo -->
+            <a class="navbar-brand" href="index.html">
+                <img src="images/logo/cc-hub.png" alt="Creative Code Hub">
+            </a>
+
+            <!-- Mobile Toggle -->
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <!-- Navigation Links -->
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav mx-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                     <a class="nav-link active" href="courses.html">Courses</a>
+                        </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="internship.html">Internship</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="project.html">Projects</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="about.html">About Us</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="career.html">Career</a>
+                    </li>
+                </ul>
+
+                <!-- Right Side: Dark Mode Toggle + Enroll Button -->
+                <div class="navbar-right d-flex align-items-center">
+                    <!-- Dark Mode Toggle -->
+                    <div class="nav-dark-mode">
+                        <button id="themeToggle" class="theme-toggle" aria-label="Toggle dark mode">
+                            <span class="sun">☀️</span>
+                            <span class="moon">🌙</span>
+                        </button>
+                    </div>
+                    
+                    <!-- Enroll Button -->
+                    <a href="underprocess.html" class="cc-hub-cta-btn" target="_blank">
+                        <i class="fas fa-rocket me-2"></i>LMS Portal
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Courses Hero Section -->
+    <section class="courses-hero">
+        <div class="bubble"></div>
+        <div class="bubble"></div>
+        <div class="bubble"></div>
+        <div class="bubble"></div>
+        
+        <div class="container">
+            <h1>Our Courses</h1>
+            <p>Comprehensive learning paths designed to transform beginners into industry-ready professionals</p>
+        </div>
+    </section>
+
+   
+
+    <div class="container">
+        <!-- Advanced Filter Section -->
+        <section class="advanced-filters">
+            <div class="filter-header">
+                <h2 class="filter-title"><i class="fas fa-filter"></i> Advanced Filters</h2>
+                <button class="filter-toggle" id="filterToggle">
+                    <span>Show Filters</span>
+                    <i class="fas fa-chevron-down"></i>
+                </button>
+            </div>
+            
+            <div class="filter-content d-none" id="filterContent">
+                <div class="filter-group">
+                    <label class="filter-label">Category</label>
+                    <select class="filter-select" id="categoryFilter">
+                        <option value="all">All Categories</option>
+                        <option value="foundation">Foundation & Core</option>
+                        <option value="frontend">Frontend Development</option>
+                        <option value="backend">Backend Development</option>
+                        <option value="database">Database Technologies</option>
+                        <option value="mobile">Mobile Development</option>
+                        <option value="ai-ml">AI/ML & Data Science</option>
+                        <option value="cloud-devops">Cloud & DevOps</option>
+                        <option value="specialized">Specialized & Advanced</option>
+                    </select>
+                </div>
+                
+                <div class="filter-group">
+                    <label class="filter-label">Difficulty Level</label>
+                    <div class="filter-checkboxes">
+                        <label class="filter-checkbox">
+                            <input type="checkbox" value="beginner" class="difficulty-filter"> Beginner
+                        </label>
+                        <label class="filter-checkbox">
+                            <input type="checkbox" value="intermediate" class="difficulty-filter"> Intermediate
+                        </label>
+                        <label class="filter-checkbox">
+                            <input type="checkbox" value="advanced" class="difficulty-filter"> Advanced
+                        </label>
+                    </div>
+                </div>
+                
+                <div class="filter-group">
+                    <label class="filter-label">Duration</label>
+                    <select class="filter-select" id="durationFilter">
+                        <option value="all">Any Duration</option>
+                        <option value="1-2">1-2 Months</option>
+                        <option value="3-4">3-4 Months</option>
+                       
+                    </select>
+                </div>
+                
+               
+                
+                <div class="filter-group">
+                    <label class="filter-label">Course Features</label>
+                    <div class="filter-checkboxes">
+                        <label class="filter-checkbox">
+                            <input type="checkbox" value="certificate" class="feature-filter"> Certificate
+                        </label>
+                        <label class="filter-checkbox">
+                            <input type="checkbox" value="projects" class="feature-filter"> Projects
+                        </label>
+                        <label class="filter-checkbox">
+                            <input type="checkbox" value="placement" class="feature-filter"> Placement Support
+                        </label>
+                        <label class="filter-checkbox">
+                            <input type="checkbox" value="mentorship" class="feature-filter"> Mentorship
+                        </label>
+                    </div>
+                </div>
+                
+                <div class="filter-group">
+                    
+                </div>
+            </div>
+            
+            <div class="filter-actions">
+                <button class="btn-filter btn-reset" id="resetFilters">Reset Filters</button>
+                <button class="btn-filter btn-apply" id="applyFilters">Apply Filters</button>
+            </div>
+        </section>
+
+        <!-- Results Info -->
+        <section class="results-info">
+            <div class="results-count">
+                Showing <span id="coursesCount">61</span> courses
+            </div>
+            <div class="sort-options">
+                <span class="sort-label">Sort by:</span>
+                <select class="sort-select" id="sortOptions">
+                    <option value="popularity">Popularity</option>
+                    <option value="duration">Duration</option>
+                    <option value="difficulty">Difficulty</option>
+                    <option value="rating">Rating</option>
+                  
+                </select>
+            </div>
+        </section>
+    </div>
+
+    <!-- Courses Grid Section -->
+    <section class="courses-section">
+        <div class="container">
+            <div class="courses-grid" id="coursesGrid">
+                <!-- Courses will be dynamically loaded here -->
+            </div>
+            
+            
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-about">
+                <div class="footer-logo">
+                    <img src="images/logo/cc-hub-logo.png" alt="CodeHub Logo" loading="lazy">
+                </div>
+                <p>Empowering the next generation of developers with quality education and practical skills.</p>
+                <div class="social-links">
+                    <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+            <div class="footer-links">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="underprocess.html" class="cc-hub-cta-btn" target="_blank">Get LMS</a></li>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="internship.html">Internship</a></li>
+                    <li><a href="courses.html">Courses</a></li>
+                    <li><a href="training.html">Training</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                </ul>
+            </div>
+            <div class="footer-links">
+                <h3>Courses</h3>
+                <ul>
+                    <li><a href="courses.html">Full Stack Courses</a></li>
+                    <li><a href="courses.html">Hybrid Courses</a></li>
+                    <li><a href="courses.html">Frontend Courses</a></li>
+                    <li><a href="courses.html">Backend Courses</a></li>
+                </ul>
+            </div>
+            <div class="footer-contact">
+                <h3>Contact Us</h3>
+                <p><i class="fas fa-map-marker-alt"></i> Kakinada, <i class="fas fa-map-marker-alt"></i> Vishakapatnam</p>
+                <p><i class="fas fa-phone"></i> +91 7075775888, <br> +91 7093947788</p>
+                <p><i class="fas fa-envelope"></i> info@creativecodehub.in</p>
+            </div>
+        </div>
+        <div class="copyright">
+            &copy; 2024 Creative-Code-Hub. All Rights Reserved.
+        </div>
+    </footer>
+
+    <!-- Floating Social Media Button -->
+    <div class="floating-social">
+        <div class="social-toggle">
+            <img src="images/logo/cc-hub-logo.png" alt="CC-HUB Logo" loading="lazy">
+        </div>
+        <div class="social-links">
+            <a href="https://wa.me/917075779888" target="_blank" class="whatsapp">
+                <i class="fab fa-whatsapp"></i>
+            </a>
+            <a href="https://www.instagram.com/creativecodehub" target="_blank" class="instagram">
+                <i class="fab fa-instagram"></i>
+            </a>
+            <a href="https://www.facebook.com/yourpage" target="_blank" class="facebook">
+                <i class="fab fa-facebook-f"></i>
+            </a>
+            <a href="https://maps.app.goo.gl/8tZUZKWh3uiPoUWJ9?g_st=aw" target="_blank" class="location">
+                <i class="fa-solid fa-location-dot"></i>
+            </a>
+        </div>
+    </div>
+
+    <!-- WhatsApp Floating Icon -->
+    <a href="https://wa.me/917093947788" target="_blank" class="whatsapp-left">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Dark Mode Toggle
+        const themeToggle = document.getElementById('themeToggle');
+        const currentTheme = localStorage.getItem('theme') || 'light';
+
+        document.documentElement.setAttribute('data-theme', currentTheme);
+
+        themeToggle.addEventListener('click', () => {
+            const currentTheme = document.documentElement.getAttribute('data-theme');
+            const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+            
+            document.documentElement.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+        });
+
+        // Floating Social Toggle
+        const floatingSocial = document.querySelector('.floating-social');
+        const socialToggle = document.querySelector('.social-toggle');
+
+        if (socialToggle) {
+            socialToggle.addEventListener('click', () => {
+                floatingSocial.classList.toggle('active');
+            });
+
+            // Close floating social when clicking outside
+            document.addEventListener('click', (e) => {
+                if (!floatingSocial.contains(e.target)) {
+                    floatingSocial.classList.remove('active');
+                }
+            });
+        }
+
+        // All 61 Courses Data
+        const coursesData = [
+            // Foundation & Core Programming (12 courses)
+            {
+                id: 1,
+                title: "Programming Fundamentals with C",
+                category: "foundation",
+                difficulty: "beginner",
+                duration: "2",
+                languages: ["c"],
+                features: ["certificate", "projects", "mentorship"],
+                semester: "1-2",
+                
+                description: "Learn the fundamentals of programming using C language. Perfect for absolute beginners.",
+                image: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=400&h=250&fit=crop"
+            },
+            {
+                id: 2,
+                title: "Object-Oriented Programming with C++",
+                category: "foundation",
+                difficulty: "intermediate",
+                duration: "3",
+                languages: ["c++"],
+                features: ["certificate", "projects", "mentorship"],
+                semester: "3-4",
+                
+                description: "Master OOP concepts with C++. Learn classes, inheritance, polymorphism and more.",
+                image: "https://images.unsplash.com/photo-1579468118864-1b9ea3c0db4a?w=400&h=250&fit=crop"
+            },
+            {
+                id: 3,
+                title: "Java Programming Basics",
+                category: "foundation",
+                difficulty: "beginner",
+                duration: "2",
+                languages: ["java"],
+                features: ["certificate", "projects", "mentorship"],
+                semester: "1-2",
+                
+                description: "Start your programming journey with Java. Learn core concepts and build simple applications.",
+                image: "https://images.unsplash.com/photo-1580894894513-541e068a3e2b?w=400&h=250&fit=crop"
+            },
+            {
+                id: 4,
+                title: "Python for Beginners",
+                category: "foundation",
+                difficulty: "beginner",
+                duration: "2",
+                languages: ["python"],
+                features: ["certificate", "projects", "mentorship"],
+                semester: "1-2",
+                
+                description: "Learn Python programming from scratch. Perfect for beginners and data science enthusiasts.",
+                image: "https://images.unsplash.com/photo-1526379879527-8559ecfcaec0?w=400&h=250&fit=crop"
+            },
+            {
+                id: 5,
+                title: "Data Structures & Algorithms",
+                category: "foundation",
+                difficulty: "intermediate",
+                duration: "4",
+                languages: ["python", "java", "c++"],
+                features: ["certificate", "projects", "mentorship"],
+                semester: "3-4",
+                
+                description: "Master essential data structures and algorithms for technical interviews.",
+                image: "https://images.unsplash.com/photo-1509228468518-180dd4864904?w=400&h=250&fit=crop"
+            },
+            {
+                id: 6,
+                title: "Computer Organization & Architecture",
+                category: "foundation",
+                difficulty: "intermediate",
+                duration: "3",
+                languages: [],
+                features: ["certificate", "projects", "mentorship"],
+                semester: "3-4",
+                
+                description: "Understand how computers work at the hardware level.",
+                image: "https://images.unsplash.com/photo-1518709268805-4e9042af2176?w=400&h=250&fit=crop"
+            },
+            {
+                id: 7,
+                title: "Discrete Mathematics for CS",
+                category: "foundation",
+                difficulty: "intermediate",
+                duration: "3",
+                languages: [],
+                features: ["certificate", "projects", "mentorship"],
+                semester: "1-2",
+                
+                description: "Mathematical foundations for computer science and programming.",
+                image: "https://images.unsplash.com/photo-1635070041078-e363dbe005cb?w=400&h=250&fit=crop"
+            },
+            {
+                id: 8,
+                title: "Operating Systems Fundamentals",
+                category: "foundation",
+                difficulty: "intermediate",
+                duration: "3",
+                languages: ["c"],
+                features: ["certificate", "projects", "mentorship"],
+                semester: "5-6",
+                
+                description: "Learn about process management, memory management, and file systems.",
+                image: "https://images.unsplash.com/photo-1542831371-29b0f74f9713?w=400&h=250&fit=crop"
+            },
+            {
+                id: 9,
+                title: "Database Management Systems",
+                category: "foundation",
+                difficulty: "beginner",
+                duration: "2",
+                languages: ["sql"],
+                features: ["certificate", "projects", "mentorship"],
+                semester: "3-4",
+                
+                description: "Introduction to database concepts and SQL programming.",
+                image: "https://images.unsplash.com/photo-1548092372-0d1bd40894a3?w=400&h=250&fit=crop"
+            },
+            {
+                id: 10,
+                title: "Software Engineering Principles",
+                category: "foundation",
+                difficulty: "intermediate",
+                duration: "3",
+                languages: [],
+                features: ["certificate", "projects", "mentorship"],
+                semester: "5-6",
+                
+                description: "Learn software development methodologies and best practices.",
+                image: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=400&h=250&fit=crop"
+            },
+            {
+                id: 11,
+                title: "Computer Networks Basics",
+                category: "foundation",
+                difficulty: "intermediate",
+                duration: "3",
+                languages: [],
+                features: ["certificate", "projects", "mentorship"],
+                semester: "5-6",
+                
+                description: "Fundamentals of computer networking and communication protocols.",
+                image: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=400&h=250&fit=crop"
+            },
+            {
+                id: 12,
+                title: "Web Technologies Fundamentals",
+                category: "foundation",
+                difficulty: "beginner",
+                duration: "2",
+                languages: ["html", "css", "javascript"],
+                features: ["certificate", "projects", "mentorship"],
+                semester: "1-2",
+                
+                description: "Introduction to web development with HTML, CSS, and JavaScript.",
+                image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=400&h=250&fit=crop"
+            },
+
+            // Frontend Development (8 courses)
+           /* {
+                id: 13,
+                title: "HTML5 & CSS3 Mastery",
+                category: "frontend",
+                difficulty: "beginner",
+                duration: "2",
+                languages: ["html", "css"],
+                features: ["certificate", "projects", "mentorship"],
+                semester: "1-2",
+                
+                description: "Master modern HTML5 and CSS3 for creating beautiful, responsive websites.",
+                image: "https://images.unsplash.com/photo-1621839673705-6617adf9e890?w=400&h=250&fit=crop"
+            },*/
+            {
+                id: 14,
+                title: "JavaScript ES6+ Advanced",
+                category: "frontend",
+                difficulty: "intermediate",
+                duration: "3",
+                languages: ["javascript"],
+                features: ["certificate", "projects", "mentorship"],
+                semester: "3-4",
+                
+                description: "Advanced JavaScript concepts including ES6+ features and modern patterns.",
+                image: "https://images.unsplash.com/photo-1579468118864-1b9ea3c0db4a?w=400&h=250&fit=crop"
+            },
+            {
+                id: 15,
+                title: "React.js Complete Guide",
+                category: "frontend",
+                difficulty: "intermediate",
+                duration: "4",
+                languages: ["javascript"],
+                features: ["certificate", "projects", "mentorship"],
+                semester: "5-6",
+                
+                description: "Complete React.js development from basics to advanced concepts.",
+                image: "https://images.unsplash.com/photo-1633356122544-f134324a6cee?w=400&h=250&fit=crop"
+            },
+            {
+                id: 16,
+                title: "Angular Framework",
+                category: "frontend",
+                difficulty: "intermediate",
+                duration: "4",
+                languages: ["javascript", "typescript"],
+                features: ["certificate", "projects", "mentorship"],
+                semester: "5-6",
+                
+                description: "Build enterprise-level applications with Angular framework.",
+                image: "https://images.unsplash.com/photo-1593720213428-28a5b9e94613?w=400&h=250&fit=crop"
+            },
+            {
+                id: 17,
+                title: "Vue.js Development",
+                category: "frontend",
+                difficulty: "intermediate",
+                duration: "3",
+                languages: ["javascript"],
+                features:["certificate", "projects", "mentorship"],
+                semester: "5-6",
+                
+                description: "Learn Vue.js for building modern, reactive web applications.",
+                image: "https://images.unsplash.com/photo-1608306448197-e83633f1261c?w=400&h=250&fit=crop"
+            },
+            {
+                id: 18,
+                title: "Responsive Web Design",
+                category: "frontend",
+                difficulty: "beginner",
+                duration: "2",
+                languages: ["html", "css"],
+                features: ["certificate", "projects", "mentorship"],
+                semester: "3-4",
+                
+                description: "Create websites that work perfectly on all devices and screen sizes.",
+                image: "https://images.unsplash.com/photo-1558655146-9f40138edfeb?w=400&h=250&fit=crop"
+            },
+            {
+                id: 19,
+                title: "Frontend Build Tools (Webpack, Vite)",
+                category: "frontend",
+                difficulty: "intermediate",
+                duration: "2",
+                languages: ["javascript"],
+                features: ["certificate", "projects", "mentorship"],
+                semester: "5-6",
+                
+                description: "Master modern frontend build tools and development workflows.",
+                image: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=400&h=250&fit=crop"
+            },
+            {
+                id: 20,
+                title: "Progressive Web Apps (PWA)",
+                category: "frontend",
+                difficulty: "advanced",
+                duration: "3",
+                languages: ["javascript"],
+                features: ["certificate", "projects", "mentorship"],
+                semester: "7-8",
+                
+                description: "Build Progressive Web Apps that work offline and feel like native apps.",
+                image: "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=400&h=250&fit=crop"
+            },
+
+            // Backend Development (10 courses)
+            {
+                id: 21,
+                title: "Node.js & Express.js",
+                category: "backend",
+                difficulty: "intermediate",
+                duration: "4",
+                languages: ["javascript"],
+                features: ["certificate", "projects", "mentorship"],
+                semester: "5-6",
+                
+                description: "Build scalable server-side applications with Node.js and Express.js.",
+                image: "https://images.unsplash.com/photo-1627398242454-45a1465c2479?w=400&h=250&fit=crop"
+            },
+            {
+                id: 22,
+                title: "Python Django Framework",
+                category: "backend",
+                difficulty: "intermediate",
+                duration: "4",
+                languages: ["python"],
+                features: ["certificate", "projects", "mentorship"],
+                semester: "5-6",
+                
+                description: "Build robust web applications with Django, Python's popular web framework.",
+                image: "https://images.unsplash.com/photo-1526379879527-8559ecfcaec0?w=400&h=250&fit=crop"
+            },
+            {
+                id: 23,
+                title: "Spring Boot (Java)",
+                category: "backend",
+                difficulty: "intermediate",
+                duration: "4",
+                languages: ["java"],
+                features: ["certificate", "projects", "mentorship"],
+                semester: "5-6",
+                
+                description: "Develop enterprise Java applications with Spring Boot framework.",
+                image: "https://images.unsplash.com/photo-1580894894513-541e068a3e2b?w=400&h=250&fit=crop"
+            },
+            {
+                id: 24,
+                title: "ASP.NET Core",
+                category: "backend",
+                difficulty: "intermediate",
+                duration: "4",
+                languages: ["c#"],
+                features: ["certificate", "projects", "mentorship"],
+                semester: "5-6",
+                
+                description: "Build modern web applications with Microsoft's ASP.NET Core framework.",
+                image: "https://images.unsplash.com/photo-1611224923853-80b023f02d71?w=400&h=250&fit=crop"
+            },
+            {
+                id: 25,
+                title: "PHP & Laravel",
+                category: "backend",
+                difficulty: "intermediate",
+                duration: "4",
+                languages: ["php"],
+                features: ["certificate", "projects", "mentorship"],
+                semester: "5-6",
+                
+                description: "Master PHP and Laravel framework for web development.",
+                image: "https://images.unsplash.com/photo-1599508704512-2f19efd1e35f?w=400&h=250&fit=crop"
+            },
+            {
+                id: 26,
+                title: "REST API Development",
+                category: "backend",
+                difficulty: "intermediate",
+                duration: "3",
+                languages: ["javascript", "python"],
+                features: ["certificate", "projects", "mentorship"],
+                semester: "5-6",
+                
+                description: "Learn to design and build RESTful APIs for web and mobile applications.",
+                image: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=400&h=250&fit=crop"
+            },
+            {
+                id: 27,
+                title: "GraphQL APIs",
+                category: "backend",
+                difficulty: "advanced",
+                duration: "3",
+                languages: ["javascript"],
+                features:["certificate", "projects", "mentorship"],
+                semester: "7-8",
+                
+                description: "Build efficient APIs with GraphQL for modern applications.",
+                image: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=400&h=250&fit=crop"
+            },
+            {
+                id: 28,
+                title: "Microservices Architecture",
+                category: "backend",
+                difficulty: "advanced",
+                duration: "4",
+                languages: ["java", "javascript"],
+                features: ["certificate", "projects", "mentorship"],
+                semester: "7-8",
+                
+                description: "Design and implement microservices-based architectures.",
+                image: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=400&h=250&fit=crop"
+            },
+            {
+                id: 29,
+                title: "Serverless Computing",
+                category: "backend",
+                difficulty: "advanced",
+                duration: "3",
+                languages: ["javascript", "python"],
+                features: ["certificate", "projects", "mentorship"],
+                semester: "7-8",
+                
+                description: "Build applications using serverless architecture with AWS Lambda.",
+                image: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=400&h=250&fit=crop"
+            },
+            {
+                id: 30,
+                title: "API Security & Authentication",
+                category: "backend",
+                difficulty: "advanced",
+                duration: "3",
+                languages: ["javascript", "python"],
+                features: ["certificate", "projects", "mentorship"],
+                semester: "7-8",
+                
+                description: "Implement secure authentication and authorization for APIs.",
+                image: "https://images.unsplash.com/photo-1556075798-4825dfaaf498?w=400&h=250&fit=crop"
+            },
+
+            // Database Technologies (6 courses)
+            {
+                id: 31,
+                title: "SQL & Database Design",
+                category: "database",
+                difficulty: "beginner",
+                duration: "2",
+                languages: ["sql"],
+                features: ["certificate", "projects", "mentorship"],
+                semester: "3-4",
+                
+                description: "Introduction to database concepts and SQL programming.",
+                image: "https://images.unsplash.com/photo-1548092372-0d1bd40894a3?w=400&h=250&fit=crop"
+            },
+            {
+                id: 32,
+                title: "MongoDB & NoSQL",
+                category: "database",
+                difficulty: "intermediate",
+                duration: "3",
+                languages: ["javascript"],
+                features: ["certificate", "projects", "mentorship"],
+                semester: "5-6",
+                
+                description: "Learn NoSQL databases with MongoDB for modern web applications.",
+                image: "https://images.unsplash.com/photo-1611273426858-450d8e3c9fce?w=400&h=250&fit=crop"
+            },
+            {
+                id: 33,
+                title: "PostgreSQL Advanced",
+                category: "database",
+                difficulty: "intermediate",
+                duration: "3",
+                languages: ["sql"],
+                features: ["certificate", "projects", "mentorship"],
+                semester: "5-6",
+                
+                description: "Advanced PostgreSQL features and optimization techniques.",
+                image: "https://images.unsplash.com/photo-1548092372-0d1bd40894a3?w=400&h=250&fit=crop"
+            },
+            {
+                id: 34,
+                title: "Redis Caching",
+                category: "database",
+                difficulty: "intermediate",
+                duration: "2",
+                languages: [],
+                features: ["certificate", "projects", "mentorship"],
+                semester: "5-6",
+                
+                description: "Implement caching strategies with Redis for performance optimization.",
+                image: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=400&h=250&fit=crop"
+            },
+            {
+                id: 35,
+                title: "Database Optimization",
+                category: "database",
+                difficulty: "advanced",
+                duration: "3",
+                languages: ["sql"],
+                features: ["certificate", "projects", "mentorship"],
+                semester: "7-8",
+                
+                description: "Advanced techniques for database performance tuning and optimization.",
+                image: "https://images.unsplash.com/photo-1548092372-0d1bd40894a3?w=400&h=250&fit=crop"
+            },
+            {
+                id: 36,
+                title: "Data Warehousing",
+                category: "database",
+                difficulty: "advanced",
+                duration: "4",
+                languages: ["sql"],
+                features: ["certificate", "projects", "mentorship"],
+                semester: "7-8",
+                
+                description: "Design and implement data warehouses for business intelligence.",
+                image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=400&h=250&fit=crop"
+            },
+
+            // Mobile Development (5 courses)
+            {
+                id: 37,
+                title: "Android Development (Kotlin)",
+                category: "mobile",
+                difficulty: "intermediate",
+                duration: "4",
+                languages: ["kotlin"],
+                features: ["certificate", "projects", "mentorship"],
+                semester: "5-6",
+                
+                description: "Build native Android applications using Kotlin programming language.",
+                image: "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=400&h=250&fit=crop"
+            },
+            {
+                id: 38,
+                title: "iOS Development (Swift)",
+                category: "mobile",
+                difficulty: "intermediate",
+                duration: "4",
+                languages: ["swift"],
+                features: ["certificate", "projects", "mentorship"],
+                semester: "5-6",
+                
+                description: "Develop iOS applications using Swift and Apple's development tools.",
+                image: "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=400&h=250&fit=crop"
+            },
+            {
+                id: 39,
+                title: "React Native",
+                category: "mobile",
+                difficulty: "intermediate",
+                duration: "4",
+                languages: ["javascript"],
+                features: ["certificate", "projects", "mentorship"],
+                semester: "5-6",
+                
+                description: "Build cross-platform mobile apps with React Native.",
+                image: "https://images.unsplash.com/photo-1633356122544-f134324a6cee?w=400&h=250&fit=crop"
+            },
+            {
+                id: 40,
+                title: "Flutter Development",
+                category: "mobile",
+                difficulty: "intermediate",
+                duration: "4",
+                languages: ["dart"],
+                features: ["certificate", "projects", "mentorship"],
+                semester: "5-6",
+                
+                description: "Create beautiful native apps with Flutter and Dart.",
+                image: "https://images.unsplash.com/photo-1551650975-87deedd944c3?w=400&h=250&fit=crop"
+            },
+            {
+                id: 41,
+                title: "Mobile App Security",
+                category: "mobile",
+                difficulty: "advanced",
+                duration: "3",
+                languages: [],
+                features: ["certificate", "projects", "mentorship"],
+                semester: "7-8",
+                
+                description: "Security best practices for mobile application development.",
+                image: "https://images.unsplash.com/photo-1556075798-4825dfaaf498?w=400&h=250&fit=crop"
+            },
+
+            // AI/ML & Data Science (8 courses)
+            {
+                id: 42,
+                title: "Machine Learning Fundamentals",
+                category: "ai-ml",
+                difficulty: "intermediate",
+                duration: "5",
+                languages: ["python"],
+                features: ["certificate", "projects", "mentorship"],
+                semester: "7-8",
+                
+                description: "Introduction to machine learning concepts and algorithms using Python.",
+                image: "https://images.unsplash.com/photo-1555255707-c07966088b7b?w=400&h=250&fit=crop"
+            },
+            {
+                id: 43,
+                title: "Deep Learning with TensorFlow",
+                category: "ai-ml",
+                difficulty: "advanced",
+                duration: "6",
+                languages: ["python"],
+                features: ["certificate", "projects", "mentorship"],
+                semester: "7-8",
+                
+                description: "Advanced deep learning techniques using TensorFlow framework.",
+                image: "https://images.unsplash.com/photo-1555255707-c07966088b7b?w=400&h=250&fit=crop"
+            },
+            {
+                id: 44,
+                title: "Natural Language Processing",
+                category: "ai-ml",
+                difficulty: "advanced",
+                duration: "4",
+                languages: ["python"],
+                features: ["certificate", "projects", "mentorship"],
+                semester: "7-8",
+                
+                description: "Process and analyze human language data with NLP techniques.",
+                image: "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=400&h=250&fit=crop"
+            },
+            {
+                id: 45,
+                title: "Computer Vision",
+                category: "ai-ml",
+                difficulty: "advanced",
+                duration: "4",
+                languages: ["python"],
+                features: ["certificate", "projects", "mentorship"],
+                semester: "7-8",
+                
+                description: "Implement computer vision algorithms for image and video analysis.",
+                image: "https://images.unsplash.com/photo-1518709268805-4e9042af2176?w=400&h=250&fit=crop"
+            },
+            {
+                id: 46,
+                title: "Data Analysis with Python",
+                category: "ai-ml",
+                difficulty: "intermediate",
+                duration: "3",
+                languages: ["python"],
+                features: ["certificate", "projects", "mentorship"],
+                semester: "5-6",
+                
+                description: "Data analysis and visualization using Python libraries.",
+                image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=400&h=250&fit=crop"
+            },
+            {
+                id: 47,
+                title: "Big Data Analytics",
+                category: "ai-ml",
+                difficulty: "advanced",
+                duration: "5",
+                languages: ["python", "sql"],
+                features: ["certificate", "projects", "mentorship"],
+                semester: "7-8",
+               
+                description: "Process and analyze large datasets with big data technologies.",
+                image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=400&h=250&fit=crop"
+            },
+            {
+                id: 48,
+                title: "AI Ethics & Responsible AI",
+                category: "ai-ml",
+                difficulty: "intermediate",
+                duration: "2",
+                languages: [],
+                features: ["certificate", "projects", "mentorship"],
+                semester: "5-6",
+                
+                description: "Ethical considerations and responsible practices in AI development.",
+                image: "https://images.unsplash.com/photo-1555255707-c07966088b7b?w=400&h=250&fit=crop"
+            },
+            {
+                id: 49,
+                title: "Reinforcement Learning",
+                category: "ai-ml",
+                difficulty: "advanced",
+                duration: "4",
+                languages: ["python"],
+                features: ["certificate", "projects", "mentorship"],
+                semester: "7-8",
+                
+                description: "Advanced reinforcement learning algorithms and applications.",
+                image: "https://images.unsplash.com/photo-1555255707-c07966088b7b?w=400&h=250&fit=crop"
+            },
+
+            // Cloud & DevOps (6 courses)
+            {
+                id: 50,
+                title: "AWS Cloud Practitioner",
+                category: "cloud-devops",
+                difficulty: "beginner",
+                duration: "2",
+                languages: [],
+                features: ["certificate", "projects", "mentorship"],
+                semester: "3-4",
+                
+                description: "Fundamentals of AWS cloud services and infrastructure.",
+                image: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=400&h=250&fit=crop"
+            },
+            {
+                id: 51,
+                title: "Docker & Containerization",
+                category: "cloud-devops",
+                difficulty: "intermediate",
+                duration: "3",
+                languages: [],
+                features: ["certificate", "projects", "mentorship"],
+                semester: "5-6",
+                
+                description: "Containerize applications with Docker for efficient deployment.",
+                image: "https://images.unsplash.com/photo-1627398242454-45a1465c2479?w=400&h=250&fit=crop"
+            },
+            {
+                id: 52,
+                title: "Kubernetes Orchestration",
+                category: "cloud-devops",
+                difficulty: "advanced",
+                duration: "4",
+                languages: [],
+                features: ["certificate", "projects", "mentorship"],
+                semester: "7-8",
+                
+                description: "Orchestrate containerized applications with Kubernetes.",
+                image: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=400&h=250&fit=crop"
+            },
+            {
+                id: 53,
+                title: "CI/CD Pipelines",
+                category: "cloud-devops",
+                difficulty: "intermediate",
+                duration: "3",
+                languages: [],
+                features: ["certificate", "projects", "mentorship"],
+                semester: "5-6",
+                
+                description: "Implement continuous integration and deployment pipelines.",
+                image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=400&h=250&fit=crop"
+            },
+            {
+                id: 54,
+                title: "Infrastructure as Code (Terraform)",
+                category: "cloud-devops",
+                difficulty: "advanced",
+                duration: "3",
+                languages: [],
+                features: ["certificate", "projects", "mentorship"],
+                semester: "7-8",
+                
+                description: "Manage infrastructure using code with Terraform.",
+                image: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=400&h=250&fit=crop"
+            },
+            {
+                id: 55,
+                title: "Cloud Security",
+                category: "cloud-devops",
+                difficulty: "advanced",
+                duration: "3",
+                languages: [],
+                features: ["certificate", "projects", "mentorship"],
+                semester: "7-8",
+                
+                description: "Security best practices for cloud infrastructure and applications.",
+                image: "https://images.unsplash.com/photo-1556075798-4825dfaaf498?w=400&h=250&fit=crop"
+            },
+
+            // Specialized & Advanced (6 courses)
+            {
+                id: 56,
+                title: "Cybersecurity Fundamentals",
+                category: "specialized",
+                difficulty: "intermediate",
+                duration: "3",
+                languages: [],
+                features: ["certificate", "projects", "mentorship"],
+                semester: "5-6",
+                
+                description: "Fundamental concepts and practices in cybersecurity.",
+                image: "https://images.unsplash.com/photo-1556075798-4825dfaaf498?w=400&h=250&fit=crop"
+            },
+            {
+                id: 57,
+                title: "Blockchain Development",
+                category: "specialized",
+                difficulty: "advanced",
+                duration: "4",
+                languages: ["javascript", "solidity"],
+                features: ["certificate", "projects", "mentorship"],
+                semester: "7-8",
+                
+                description: "Develop decentralized applications with blockchain technology.",
+                image: "https://images.unsplash.com/photo-1639762681485-074b7f938ba0?w=400&h=250&fit=crop"
+            },
+            {
+                id: 58,
+                title: "IoT Programming",
+                category: "specialized",
+                difficulty: "intermediate",
+                duration: "3",
+                languages: ["python", "c++"],
+                features: ["certificate", "projects", "mentorship"],
+                semester: "5-6",
+                
+                description: "Program Internet of Things devices and applications.",
+                image: "https://images.unsplash.com/photo-1558618666-fcd25856cd25?w=400&h=250&fit=crop"
+            },
+            {
+                id: 59,
+                title: "Game Development with Unity",
+                category: "specialized",
+                difficulty: "intermediate",
+                duration: "4",
+                languages: ["c#"],
+                features: ["certificate", "projects", "mentorship"],
+                semester: "5-6",
+                
+                description: "Create games using Unity game engine and C# programming.",
+                image: "https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=400&h=250&fit=crop"
+            },
+            {
+                id: 60,
+                title: "Quantum Computing Basics",
+                category: "specialized",
+                difficulty: "advanced",
+                duration: "3",
+                languages: ["python"],
+                features:["certificate", "projects", "mentorship"],
+                semester: "7-8",
+                
+                description: "Introduction to quantum computing concepts and algorithms.",
+                image: "https://images.unsplash.com/photo-1635070041078-e363dbe005cb?w=400&h=250&fit=crop"
+            },
+            {
+                id: 61,
+                title: "AR/VR Development",
+                category: "specialized",
+                difficulty: "advanced",
+                duration: "4",
+                languages: ["c#"],
+                features: ["certificate", "projects", "mentorship"],
+                semester: "7-8",
+                
+                description: "Develop augmented and virtual reality applications.",
+                image: "https://images.unsplash.com/photo-1592478411213-6153e4ebc696?w=400&h=250&fit=crop"
+            }
+        ];
+
+        // Initialize the page
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeCourses();
+            initializeFilters();
+        });
+
+        function initializeCourses() {
+            const coursesGrid = document.getElementById('coursesGrid');
+            coursesGrid.innerHTML = '';
+            
+            coursesData.forEach(course => {
+                const courseCard = createCourseCard(course);
+                coursesGrid.appendChild(courseCard);
+            });
+            
+            updateCoursesCount();
+        }
+
+        function createCourseCard(course) {
+            const card = document.createElement('div');
+            card.className = 'course-card';
+            card.setAttribute('data-category', course.category);
+            card.setAttribute('data-difficulty', course.difficulty);
+            card.setAttribute('data-duration', course.duration);
+            card.setAttribute('data-languages', course.languages.join(','));
+            card.setAttribute('data-features', course.features.join(','));
+          
+            card.innerHTML = `
+                ${course.features.includes('placement') ? '<div class="course-badge">Placement Support</div>' : ''}
+                <div class="course-image">
+                    <img src="${course.image}" alt="${course.title}" loading="lazy">
+                </div>
+                <div class="course-content">
+                    <h3>${course.title}</h3>
+                    <p class="course-duration"><i class="fas fa-clock me-2"></i>${course.duration} Months</p>
+                    <p class="course-description">${course.description}</p>
+                    
+                    <div class="course-features">
+                        ${course.features.map(feature => `
+                            <div class="feature-item">
+                                <i class="fas fa-check-circle"></i>
+                                <span>${feature.charAt(0).toUpperCase() + feature.slice(1)}</span>
+                            </div>
+                        `).join('')}
+                    </div>
+                    
+                  
+                    
+                    <div class="course-actions">
+                        <a href="quote.html?course=${course.id}" class="btn-enroll-course">
+                            <i class="fas fa-shopping-cart me-2"></i>Enroll Now
+                        </a>
+                        <button class="btn-details" onclick="showCourseDetails(${course.id})">
+                            <i class="fas fa-info-circle me-2"></i>Details
+                        </button>
+                    </div>
+                </div>
+            `;
+            
+            return card;
+        }
+
+        function initializeFilters() {
+            // Filter toggle functionality
+            const filterToggle = document.getElementById('filterToggle');
+            const filterContent = document.getElementById('filterContent');
+            
+            filterToggle.addEventListener('click', function() {
+                filterContent.classList.toggle('d-none');
+                this.classList.toggle('collapsed');
+                
+                if (filterContent.classList.contains('d-none')) {
+                    this.querySelector('span').textContent = 'Show Filters';
+                } else {
+                    this.querySelector('span').textContent = 'Hide Filters';
+                }
+            });
+
+            // Apply filters functionality
+            document.getElementById('applyFilters').addEventListener('click', applyFilters);
+            document.getElementById('resetFilters').addEventListener('click', resetFilters);
+            
+            // Search functionality
+            document.querySelector('.search-input').addEventListener('input', applyFilters);
+            
+            // Sort functionality
+            document.getElementById('sortOptions').addEventListener('change', applyFilters);
+        }
+
+        function applyFilters() {
+            // Get filter values
+            const category = document.getElementById('categoryFilter').value;
+            const difficulty = Array.from(document.querySelectorAll('.difficulty-filter:checked')).map(cb => cb.value);
+            const duration = document.getElementById('durationFilter').value;
+            const languages = Array.from(document.querySelectorAll('.language-filter:checked')).map(cb => cb.value);
+            const features = Array.from(document.querySelectorAll('.feature-filter:checked')).map(cb => cb.value);
+            const searchQuery = document.querySelector('.search-input').value.toLowerCase();
+            const sortBy = document.getElementById('sortOptions').value;
+            
+            
+            // Filter courses
+            const filteredCourses = coursesData.filter(course => {
+                // Category filter
+                if (category !== 'all' && course.category !== category) return false;
+                
+                // Difficulty filter
+                if (difficulty.length > 0 && !difficulty.includes(course.difficulty)) return false;
+                
+                // Duration filter
+                if (duration !== 'all') {
+                    const courseDuration = parseInt(course.duration);
+                    let durationMatch = false;
+                    switch(duration) {
+                        case '1-2': durationMatch = courseDuration <= 2; break;
+                        case '3-4': durationMatch = courseDuration >= 3 && courseDuration <= 4; break;
+                        case '5-6': durationMatch = courseDuration >= 5 && courseDuration <= 6; break;
+                        case '6+': durationMatch = courseDuration > 6; break;
+                    }
+                    if (!durationMatch) return false;
+                }
+                
+                // Languages filter
+                if (languages.length > 0) {
+                    const hasLanguage = languages.some(lang => course.languages.includes(lang));
+                    if (!hasLanguage) return false;
+                }
+                
+                // Features filter
+                if (features.length > 0) {
+                    const hasAllFeatures = features.every(feature => course.features.includes(feature));
+                    if (!hasAllFeatures) return false;
+                }
+                
+               
+                // Search filter
+                if (searchQuery && !course.title.toLowerCase().includes(searchQuery) && 
+                    !course.description.toLowerCase().includes(searchQuery)) return false;
+                
+                return true;
+            });
+            
+            // Sort courses
+            filteredCourses.sort((a, b) => {
+                switch(sortBy) {
+                    case 'popularity': return b.id - a.id; // Using ID as popularity proxy
+                    case 'duration': return parseInt(a.duration) - parseInt(b.duration);
+                    case 'difficulty': 
+                        const difficultyOrder = { 'beginner': 1, 'intermediate': 2, 'advanced': 3 };
+                        return difficultyOrder[a.difficulty] - difficultyOrder[b.difficulty];
+                   
+                    default: return 0;
+                }
+            });
+            
+            // Display filtered courses
+            displayCourses(filteredCourses);
+        }
+
+        function displayCourses(courses) {
+            const coursesGrid = document.getElementById('coursesGrid');
+            coursesGrid.innerHTML = '';
+            
+            courses.forEach(course => {
+                const courseCard = createCourseCard(course);
+                coursesGrid.appendChild(courseCard);
+            });
+            
+            updateCoursesCount(courses.length);
+        }
+
+        function updateCoursesCount(count) {
+            document.getElementById('coursesCount').textContent = count || coursesData.length;
+        }
+
+        function resetFilters() {
+            // Reset all filter inputs
+            document.getElementById('categoryFilter').value = 'all';
+            document.querySelectorAll('.difficulty-filter').forEach(cb => cb.checked = false);
+            document.getElementById('durationFilter').value = 'all';
+            document.querySelectorAll('.language-filter').forEach(cb => cb.checked = false);
+            document.querySelectorAll('.feature-filter').forEach(cb => cb.checked = false);
+           
+            document.querySelector('.search-input').value = '';
+            document.getElementById('sortOptions').value = 'popularity';
+            
+            // Show all courses
+            displayCourses(coursesData);
+        }
+
+        function showCourseDetails(courseId) {
+            const course = coursesData.find(c => c.id === courseId);
+            if (course) {
+                alert(`Course Details: ${course.title}\n\nDescription: ${course.description}\n\nDuration: ${course.duration} months\nPrice: ₹${course.price}\n\nFeatures: ${course.features.join(', ')}`);
+            }
+        }
+
+        // Load More functionality
+        document.getElementById('loadMore').addEventListener('click', function() {
+            alert('Loading more courses...');
+            // In a real implementation, you would fetch more courses from an API
+        });
+    </script>
+</body>
+</html>

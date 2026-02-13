@@ -1,0 +1,898 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎓 Creative Code Hub - AI Internship Programs 2024</title>
+    <meta name="description" content="Join AI-powered internship programs. Instant registration for students. Get ISO certificate + placement assistance.">
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+            color: white;
+            min-height: 100vh;
+            padding-bottom: 50px;
+        }
+        
+        /* AI Bot Poster Banner */
+        .ai-poster-banner {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 0 0 30px 30px;
+            padding: 25px 20px;
+            text-align: center;
+            margin-bottom: 25px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .ai-poster-banner::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 1px, transparent 1px);
+            background-size: 30px 30px;
+            animation: float 20s linear infinite;
+        }
+        
+        @keyframes float {
+            0% { transform: translate(0, 0) rotate(0deg); }
+            100% { transform: translate(-30px, -30px) rotate(360deg); }
+        }
+        
+        .ai-robot {
+            font-size: 60px;
+            margin-bottom: 15px;
+            display: block;
+            animation: bounce 2s infinite;
+        }
+        
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        .banner-title {
+            font-size: 1.8rem;
+            font-weight: 800;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .banner-subtitle {
+            font-size: 1rem;
+            opacity: 0.9;
+            margin-bottom: 20px;
+        }
+        
+        .highlight-badge {
+            display: inline-block;
+            background: rgba(255,255,255,0.2);
+            backdrop-filter: blur(10px);
+            border-radius: 50px;
+            padding: 8px 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin: 5px;
+            border: 2px solid rgba(255,255,255,0.3);
+        }
+        
+        /* Poster Cards */
+        .poster-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 25px;
+            margin: 20px auto;
+            border: 2px solid rgba(255,255,255,0.15);
+            box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+            max-width: 500px;
+            transition: transform 0.3s ease;
+        }
+        
+        .poster-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(102, 126, 234, 0.5);
+        }
+        
+        .card-title {
+            color: #fff;
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .card-title i {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            padding: 10px;
+            border-radius: 12px;
+        }
+        
+        /* Internship Grid */
+        .internship-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 15px;
+            margin: 20px 0;
+        }
+        
+        .internship-card {
+            background: rgba(255,255,255,0.05);
+            border-radius: 15px;
+            padding: 20px;
+            border-left: 5px solid #667eea;
+            transition: all 0.3s ease;
+        }
+        
+        .internship-card:hover {
+            background: rgba(102, 126, 234, 0.2);
+            transform: translateX(5px);
+        }
+        
+        .internship-badge {
+            display: inline-block;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+        
+        .fullstack-badge { background: linear-gradient(135deg, #667eea, #764ba2); }
+        .python-badge { background: linear-gradient(135deg, #4CAF50, #2E7D32); }
+        .java-badge { background: linear-gradient(135deg, #FF9800, #F57C00); }
+        .mern-badge { background: linear-gradient(135deg, #61DAFB, #2196F3); }
+        .cloud-badge { background: linear-gradient(135deg, #4285F4, #0D47A1); }
+        .ai-badge { background: linear-gradient(135deg, #9C27B0, #6A1B9A); }
+        .data-badge { background: linear-gradient(135deg, #00BCD4, #00838F); }
+        .basic-badge { background: linear-gradient(135deg, #78909C, #455A64); }
+        
+        /* Features */
+        .feature-list {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .feature-list li {
+            padding: 12px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .feature-list li:last-child {
+            border-bottom: none;
+        }
+        
+        .feature-list i {
+            color: #4CAF50;
+            font-size: 1.2rem;
+            min-width: 25px;
+        }
+        
+        /* Student Form */
+        .student-form {
+            background: rgba(255,255,255,0.95);
+            border-radius: 25px;
+            padding: 30px;
+            margin: 30px auto;
+            max-width: 500px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+        
+        .form-title {
+            color: #333;
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 25px;
+            text-align: center;
+        }
+        
+        .form-control {
+            background: white;
+            border: 2px solid #e0e0e0;
+            border-radius: 12px;
+            padding: 15px 20px;
+            font-size: 1rem;
+            margin-bottom: 20px;
+            color: #333;
+            transition: all 0.3s ease;
+        }
+        
+        .form-control:focus {
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.2);
+        }
+        
+        .form-select {
+            background: white url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23333' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e") no-repeat right 0.75rem center/16px 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 12px;
+            padding: 15px 20px;
+            font-size: 1rem;
+            margin-bottom: 20px;
+            color: #333;
+        }
+        
+        .whatsapp-btn {
+            background: linear-gradient(135deg, #25D366, #128C7E);
+            color: white;
+            border: none;
+            border-radius: 15px;
+            padding: 18px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            width: 100%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            transition: all 0.3s ease;
+            margin-top: 20px;
+        }
+        
+        .whatsapp-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(37, 211, 102, 0.4);
+        }
+        
+        .whatsapp-btn i {
+            font-size: 1.5rem;
+        }
+        
+        /* Testimonials */
+        .testimonial-slider {
+            background: rgba(255,255,255,0.1);
+            border-radius: 20px;
+            padding: 25px;
+            margin: 30px auto;
+            max-width: 500px;
+        }
+        
+        .testimonial-item {
+            text-align: center;
+        }
+        
+        .testimonial-text {
+            font-style: italic;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+        
+        .student-info {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+        }
+        
+        .student-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid #667eea;
+        }
+        
+        /* Contact Info */
+        .contact-info {
+            text-align: center;
+            padding: 25px;
+            margin-top: 30px;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            margin: 15px 0;
+            font-size: 1.1rem;
+        }
+        
+        .contact-item i {
+            color: #667eea;
+            font-size: 1.3rem;
+        }
+        
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 25px;
+            margin-top: 30px;
+            color: rgba(255,255,255,0.7);
+            font-size: 0.9rem;
+        }
+        
+        /* Animation for form */
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .animated {
+            animation: slideUp 0.6s ease-out;
+        }
+        
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .ai-poster-banner {
+                padding: 20px 15px;
+            }
+            
+            .banner-title {
+                font-size: 1.5rem;
+            }
+            
+            .poster-card {
+                padding: 20px;
+                margin: 15px;
+            }
+            
+            .student-form {
+                padding: 25px 20px;
+                margin: 20px;
+            }
+            
+            .form-title {
+                font-size: 1.5rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .ai-robot {
+                font-size: 50px;
+            }
+            
+            .banner-title {
+                font-size: 1.3rem;
+            }
+            
+            .highlight-badge {
+                font-size: 0.8rem;
+                padding: 6px 15px;
+            }
+            
+            .internship-card {
+                padding: 15px;
+            }
+            
+            .card-title {
+                font-size: 1.3rem;
+            }
+        }
+        
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: rgba(255,255,255,0.1);
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border-radius: 4px;
+        }
+        
+        /* Selection */
+        ::selection {
+            background: rgba(102, 126, 234, 0.5);
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <!-- AI Bot Poster Banner -->
+    <div class="ai-poster-banner">
+        <div class="ai-robot">🤖</div>
+        <h1 class="banner-title">AI-POWERED INTERNSHIP PROGRAMS 2024</h1>
+        <p class="banner-subtitle">Get ISO Certificate + Placement Assistance + Live Projects</p>
+        <div>
+            <span class="highlight-badge">🎓 For College Students</span>
+            <span class="highlight-badge">⏳ 3-6 Months Duration</span>
+            <span class="highlight-badge">🤖 AI Career Guidance</span>
+            <span class="highlight-badge">📱 WhatsApp Registration</span>
+        </div>
+    </div>
+
+    <!-- Course Combinations Poster -->
+    <div class="container">
+        <div class="poster-card animated">
+            <h2 class="card-title"><i class="fas fa-layer-group"></i> SPECIALIZED INTERNSHIP COMBINATIONS</h2>
+            
+            <div class="internship-grid">
+                <!-- Full Stack Java -->
+                <div class="internship-card">
+                    <span class="internship-badge fullstack-badge">FULL STACK</span>
+                    <span class="internship-badge java-badge">JAVA</span>
+                    <h4>Full Stack Java Developer</h4>
+                    <p>Java + Spring Boot + React + MySQL</p>
+                    <small><i class="fas fa-clock"></i> 6 Months | <i class="fas fa-certificate"></i> ISO Certified</small>
+                </div>
+                
+                <!-- Full Stack Python -->
+                <div class="internship-card">
+                    <span class="internship-badge fullstack-badge">FULL STACK</span>
+                    <span class="internship-badge python-badge">PYTHON</span>
+                    <h4>Full Stack Python Developer</h4>
+                    <p>Python + Django + React + PostgreSQL</p>
+                    <small><i class="fas fa-clock"></i> 6 Months | <i class="fas fa-certificate"></i> ISO Certified</small>
+                </div>
+                
+                <!-- MERN Stack -->
+                <div class="internship-card">
+                    <span class="internship-badge mern-badge">MERN STACK</span>
+                    <h4>MERN Stack Developer</h4>
+                    <p>MongoDB + Express + React + Node.js</p>
+                    <small><i class="fas fa-clock"></i> 6 Months | <i class="fas fa-certificate"></i> ISO Certified</small>
+                </div>
+                
+                <!-- Cloud Computing -->
+                <div class="internship-card">
+                    <span class="internship-badge cloud-badge">CLOUD COMPUTING</span>
+                    <h4>AWS Cloud Engineering</h4>
+                    <p>AWS + Docker + Kubernetes + DevOps</p>
+                    <small><i class="fas fa-clock"></i> 5 Months | <i class="fas fa-certificate"></i> AWS Certified</small>
+                </div>
+                
+                <!-- AI & ML -->
+                <div class="internship-card">
+                    <span class="internship-badge ai-badge">AI & MACHINE LEARNING</span>
+                    <h4>AI & ML Engineer</h4>
+                    <p>Python + TensorFlow + Deep Learning + NLP</p>
+                    <small><i class="fas fa-clock"></i> 6 Months | <i class="fas fa-certificate"></i> Advanced</small>
+                </div>
+                
+                <!-- Data Science -->
+                <div class="internship-card">
+                    <span class="internship-badge data-badge">DATA SCIENCE</span>
+                    <h4>Data Science & Analytics</h4>
+                    <p>Python + SQL + Tableau + ML Algorithms</p>
+                    <small><i class="fas fa-clock"></i> 5 Months | <i class="fas fa-certificate"></i> Industry Projects</small>
+                </div>
+            </div>
+        </div>
+
+        <!-- Basic Programming Courses -->
+        <div class="poster-card animated" style="animation-delay: 0.2s">
+            <h2 class="card-title"><i class="fas fa-graduation-cap"></i> BASIC PROGRAMMING COURSES</h2>
+            
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <div class="internship-card">
+                        <span class="internship-badge basic-badge">BEGINNER</span>
+                        <h4>C Programming</h4>
+                        <p>Complete C language with DSA basics</p>
+                        <small><i class="fas fa-clock"></i> 2 Months | Foundation Course</small>
+                    </div>
+                </div>
+                
+                <div class="col-md-6 mb-3">
+                    <div class="internship-card">
+                        <span class="internship-badge basic-badge">INTERMEDIATE</span>
+                        <h4>C++ with OOP</h4>
+                        <p>Object Oriented Programming + STL</p>
+                        <small><i class="fas fa-clock"></i> 3 Months | Placement Focused</small>
+                    </div>
+                </div>
+                
+                <div class="col-md-6 mb-3">
+                    <div class="internship-card">
+                        <span class="internship-badge basic-badge">CORE</span>
+                        <h4>Core Java</h4>
+                        <p>Java Fundamentals + Advanced Concepts</p>
+                        <small><i class="fas fa-clock"></i> 3 Months | Industry Standard</small>
+                    </div>
+                </div>
+                
+                <div class="col-md-6 mb-3">
+                    <div class="internship-card">
+                        <span class="internship-badge basic-badge">BEGINNER</span>
+                        <h4>Python Basics</h4>
+                        <p>Python Programming + Libraries</p>
+                        <small><i class="fas fa-clock"></i> 2 Months | Easy Learning</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Features -->
+        <div class="poster-card animated" style="animation-delay: 0.4s">
+            <h2 class="card-title"><i class="fas fa-star"></i> WHAT YOU GET</h2>
+            
+            <ul class="feature-list">
+                <li><i class="fas fa-certificate"></i> <strong>ISO 9001:2015 Certificate</strong> - Internationally recognized</li>
+                <li><i class="fas fa-briefcase"></i> <strong>Placement Assistance</strong> - Resume building + Interview prep</li>
+                <li><i class="fas fa-laptop-code"></i> <strong>Live Projects</strong> - Real-world experience</li>
+                <li><i class="fas fa-users"></i> <strong>1:1 Mentorship</strong> - Industry expert guidance</li>
+                <li><i class="fas fa-file-code"></i> <strong>GitHub Portfolio</strong> - Showcase your work</li>
+                <li><i class="fas fa-headset"></i> <strong>24/7 Doubt Support</strong> - Via WhatsApp & AI Chat</li>
+                <li><i class="fas fa-rocket"></i> <strong>Startup Incubation</strong> - For innovative projects</li>
+                <li><i class="fas fa-handshake"></i> <strong>Company Tie-ups</strong> - Direct placement opportunities</li>
+            </ul>
+        </div>
+
+        <!-- Student Registration Form -->
+        <div class="student-form animated" style="animation-delay: 0.6s">
+            <h2 class="form-title">📝 STUDENT REGISTRATION</h2>
+            
+            <form id="studentRegistration">
+                <input type="text" class="form-control" id="fullName" placeholder="Full Name" required>
+                
+                <input type="email" class="form-control" id="email" placeholder="Email Address" required>
+                
+                <input type="tel" class="form-control" id="phone" placeholder="WhatsApp Number" required>
+                
+                <input type="text" class="form-control" id="college" placeholder="College/University Name" required>
+                
+                <select class="form-select" id="stream" required>
+                    <option value="">Select Your Stream</option>
+                    <option value="cse">Computer Science & Engineering</option>
+                    <option value="it">Information Technology</option>
+                    <option value="ece">Electronics & Communication</option>
+                    <option value="eee">Electrical & Electronics</option>
+                    <option value="mech">Mechanical Engineering</option>
+                    <option value="civil">Civil Engineering</option>
+                    <option value="other">Other Engineering</option>
+                    <option value="bsc">B.Sc (Computers/IT)</option>
+                    <option value="bca">BCA</option>
+                    <option value="mca">MCA</option>
+                    <option value="non_eng">Non-Engineering</option>
+                </select>
+                
+                <select class="form-select" id="year" required>
+                    <option value="">Select Current Year</option>
+                    <option value="1">1st Year</option>
+                    <option value="2">2nd Year</option>
+                    <option value="3">3rd Year</option>
+                    <option value="4">4th Year</option>
+                    <option value="final">Final Year</option>
+                    <option value="passed">Recently Passed Out</option>
+                </select>
+                
+                <select class="form-select" id="internshipType" required>
+                    <option value="">Select Preferred Internship</option>
+                    <optgroup label="Specialized Combinations">
+                        <option value="fullstack_java">Full Stack Java Developer</option>
+                        <option value="fullstack_python">Full Stack Python Developer</option>
+                        <option value="mern_stack">MERN Stack Developer</option>
+                        <option value="cloud_computing">AWS Cloud Engineering</option>
+                        <option value="ai_ml">AI & Machine Learning</option>
+                        <option value="data_science">Data Science & Analytics</option>
+                    </optgroup>
+                    <optgroup label="Basic Programming">
+                        <option value="c_programming">C Programming</option>
+                        <option value="cpp_oop">C++ with OOP</option>
+                        <option value="core_java">Core Java</option>
+                        <option value="python_basics">Python Basics</option>
+                    </optgroup>
+                    <optgroup label="Need Guidance">
+                        <option value="need_guidance">Need AI Guidance for Selection</option>
+                        <option value="custom_combination">Want Custom Combination</option>
+                    </optgroup>
+                </select>
+                
+                <div class="form-check mb-4">
+                    <input class="form-check-input" type="checkbox" id="placementAssistance" checked>
+                    <label class="form-check-label" for="placementAssistance" style="color: #333;">
+                        I want placement assistance and interview preparation
+                    </label>
+                </div>
+                
+                <button type="button" class="whatsapp-btn" onclick="submitRegistration()">
+                    <i class="fab fa-whatsapp"></i>
+                    <span>REGISTER VIA WHATSAPP</span>
+                </button>
+                
+                <p class="text-center mt-3" style="color: #666; font-size: 0.9rem;">
+                    <i class="fas fa-shield-alt"></i> Your information is secure. We'll contact within 24 hours.
+                </p>
+            </form>
+        </div>
+
+        <!-- Testimonials -->
+        <div class="testimonial-slider animated" style="animation-delay: 0.8s">
+            <div class="testimonial-item">
+                <p class="testimonial-text">"Got placed at TCS with 6 LPA after completing Full Stack Java internship. The AI guidance helped me choose the right path!"</p>
+                <div class="student-info">
+                    <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Student" class="student-avatar">
+                    <div>
+                        <h5 style="margin: 0; color: white;">Rajesh Kumar</h5>
+                        <small style="opacity: 0.8;">CSE Final Year, JNTU</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Contact Information -->
+        <div class="contact-info animated" style="animation-delay: 1s">
+            <h3 style="margin-bottom: 25px; font-weight: 700;">📞 GET IN TOUCH</h3>
+            
+            <div class="contact-item">
+                <i class="fab fa-whatsapp"></i>
+                <span>+91 7075775888 (24/7 WhatsApp)</span>
+            </div>
+            
+            <div class="contact-item">
+                <i class="fas fa-phone"></i>
+                <span>+91 7093947788 (Office)</span>
+            </div>
+            
+            <div class="contact-item">
+                <i class="fas fa-envelope"></i>
+                <span>info@creativecodehub.in</span>
+            </div>
+            
+            <div class="contact-item">
+                <i class="fas fa-map-marker-alt"></i>
+                <span>Kakinada & Visakhapatnam, AP</span>
+            </div>
+            
+            <div class="contact-item">
+                <i class="fas fa-robot"></i>
+                <span>AI Chat Support: Always Available</span>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <p>© 2024 Creative Code Hub. All Internship Programs include ISO Certification and Placement Assistance.</p>
+            <p style="margin-top: 10px; font-size: 0.8rem; opacity: 0.6;">
+                AI-Powered Learning Platform • Industry-Ready Skills • 500+ Students Placed
+            </p>
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        // Form Submission to WhatsApp
+        function submitRegistration() {
+            // Get form values
+            const fullName = document.getElementById('fullName').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const phone = document.getElementById('phone').value.trim();
+            const college = document.getElementById('college').value.trim();
+            const stream = document.getElementById('stream').value;
+            const year = document.getElementById('year').value;
+            const internshipType = document.getElementById('internshipType').value;
+            const placementAssistance = document.getElementById('placementAssistance').checked;
+            
+            // Validation
+            if (!fullName || !email || !phone || !college || !stream || !year || !internshipType) {
+                alert('Please fill all required fields!');
+                return;
+            }
+            
+            // Format WhatsApp message
+            const streamNames = {
+                'cse': 'Computer Science & Engineering',
+                'it': 'Information Technology',
+                'ece': 'Electronics & Communication',
+                'eee': 'Electrical & Electronics',
+                'mech': 'Mechanical Engineering',
+                'civil': 'Civil Engineering',
+                'other': 'Other Engineering',
+                'bsc': 'B.Sc (Computers/IT)',
+                'bca': 'BCA',
+                'mca': 'MCA',
+                'non_eng': 'Non-Engineering'
+            };
+            
+            const yearNames = {
+                '1': '1st Year',
+                '2': '2nd Year',
+                '3': '3rd Year',
+                '4': '4th Year',
+                'final': 'Final Year',
+                'passed': 'Recently Passed Out'
+            };
+            
+            const internshipNames = {
+                'fullstack_java': 'Full Stack Java Developer',
+                'fullstack_python': 'Full Stack Python Developer',
+                'mern_stack': 'MERN Stack Developer',
+                'cloud_computing': 'AWS Cloud Engineering',
+                'ai_ml': 'AI & Machine Learning',
+                'data_science': 'Data Science & Analytics',
+                'c_programming': 'C Programming',
+                'cpp_oop': 'C++ with OOP',
+                'core_java': 'Core Java',
+                'python_basics': 'Python Basics',
+                'need_guidance': 'Need AI Guidance for Selection',
+                'custom_combination': 'Want Custom Combination'
+            };
+            
+            const message = `🎓 *NEW INTERNSHIP REGISTRATION* 🎓
+
+👤 *Student Details:*
+• Name: ${fullName}
+• Email: ${email}
+• WhatsApp: ${phone}
+• College: ${college}
+• Stream: ${streamNames[stream] || stream}
+• Year: ${yearNames[year] || year}
+
+🎯 *Internship Interest:*
+${internshipNames[internshipType] || internshipType}
+${placementAssistance ? '✓ Placement Assistance Requested' : ''}
+
+📅 *Submitted:* ${new Date().toLocaleString()}
+🌐 *Source:* AI Internship Landing Page
+
+Please contact the student for further enrollment process.`;
+
+            // Encode message for WhatsApp URL
+            const encodedMessage = encodeURIComponent(message);
+            const whatsappURL = `https://wa.me/917075775888?text=${encodedMessage}`;
+            
+            // Open WhatsApp
+            window.open(whatsappURL, '_blank');
+            
+            // Show success message
+            setTimeout(() => {
+                alert('✅ Registration submitted successfully!\n\nWe have opened WhatsApp for you. Please send the pre-filled message to complete your registration.\n\nOur team will contact you within 24 hours.');
+                
+                // Optional: Reset form
+                document.getElementById('studentRegistration').reset();
+            }, 500);
+        }
+
+        // Add interactivity to cards
+        document.querySelectorAll('.internship-card').forEach(card => {
+            card.addEventListener('click', function() {
+                const title = this.querySelector('h4').textContent;
+                document.getElementById('internshipType').value = title.toLowerCase().replace(/\s+/g, '_');
+                
+                // Scroll to form
+                document.querySelector('.student-form').scrollIntoView({ 
+                    behavior: 'smooth',
+                    block: 'center'
+                });
+                
+                // Highlight animation
+                this.style.animation = 'none';
+                setTimeout(() => {
+                    this.style.animation = 'pulse 0.5s';
+                }, 10);
+            });
+        });
+
+        // Auto-format phone number
+        document.getElementById('phone').addEventListener('input', function(e) {
+            let value = e.target.value.replace(/\D/g, '');
+            if (value.length > 0) {
+                if (value.length <= 5) {
+                    value = value.replace(/(\d{5})/, '$1');
+                } else if (value.length <= 10) {
+                    value = value.replace(/(\d{5})(\d{5})/, '$1 $2');
+                } else {
+                    value = value.replace(/(\d{5})(\d{5})(\d{0,5})/, '$1 $2 $3');
+                }
+            }
+            e.target.value = value;
+        });
+
+        // Add smooth animations on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animated');
+                }
+            });
+        }, observerOptions);
+
+        // Observe all cards for animation
+        document.querySelectorAll('.poster-card, .student-form, .testimonial-slider, .contact-info').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Add confetti effect on successful registration (optional)
+        function showConfetti() {
+            const confettiCount = 50;
+            for (let i = 0; i < confettiCount; i++) {
+                const confetti = document.createElement('div');
+                confetti.style.position = 'fixed';
+                confetti.style.width = '10px';
+                confetti.style.height = '10px';
+                confetti.style.background = `hsl(${Math.random() * 360}, 100%, 50%)`;
+                confetti.style.borderRadius = '50%';
+                confetti.style.left = `${Math.random() * 100}vw`;
+                confetti.style.top = '-20px';
+                confetti.style.zIndex = '9999';
+                confetti.style.pointerEvents = 'none';
+                document.body.appendChild(confetti);
+                
+                // Animation
+                confetti.animate([
+                    { transform: 'translateY(0) rotate(0deg)', opacity: 1 },
+                    { transform: `translateY(${window.innerHeight + 20}px) rotate(${Math.random() * 360}deg)`, opacity: 0 }
+                ], {
+                    duration: 1000 + Math.random() * 1000,
+                    easing: 'cubic-bezier(0.215, 0.610, 0.355, 1)'
+                }).onfinish = () => confetti.remove();
+            }
+        }
+
+        // Add to submit button
+        const submitBtn = document.querySelector('.whatsapp-btn');
+        submitBtn.addEventListener('click', showConfetti);
+    </script>
+
+    <!-- TAWK.TO AI CHATBOT -->
+    <!-- Replace YOUR_WIDGET_ID with actual ID from tawk.to -->
+    <script>
+        // Tawk.to Configuration for Mobile
+        var Tawk_API = Tawk_API || {}, Tawk_LoadStart = new Date();
+        
+        Tawk_API.onLoad = function() {
+            // Customize for internship page
+            Tawk_API.setAttributes({
+                'name': 'Internship Student',
+                'email': '',
+                'page': 'mobile-internship-landing',
+                'source': 'poster-link'
+            });
+            
+            // Set welcome message specific to internships
+            const welcomeMessage = `🤖 *AI INTERNSHIP ASSISTANT* 🤖
+
+Hello! I'm your AI guide for Creative Code Hub Internships. 
+
+I can help you with:
+• Choosing the right internship
+• Course combinations
+• Registration process
+• Fee structure & discounts
+• Placement opportunities
+• Any other questions!
+
+Just type your question below 👇`;
+
+            Tawk_API.setChatMessage(welcomeMessage);
+            
+            // Auto-open after 45 seconds on mobile
+            if (window.innerWidth < 768) {
+                setTimeout(function() {
+                    if (!Tawk_API.getVisitorId()) {
+                        Tawk_API.toggle();
+                    }
+                }, 45000);
+            }
+        };
+
+       

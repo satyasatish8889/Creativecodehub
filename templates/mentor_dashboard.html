@@ -1,0 +1,1291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Creative Code Hub - Teacher Dashboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #6c63ff;
+            --secondary-color: #4d44db;
+            --light-color: #f8f9fa;
+            --dark-color: #343a40;
+            --success-color: #28a745;
+            --warning-color: #ffc107;
+            --danger-color: #dc3545;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f5f7fa;
+        }
+        
+        .sidebar {
+            background-color: var(--dark-color);
+            color: white;
+            height: 100vh;
+            position: fixed;
+            padding-top: 20px;
+        }
+        
+        .sidebar .nav-link {
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 5px;
+            border-radius: 5px;
+            padding: 10px 15px;
+        }
+        
+        .sidebar .nav-link:hover, .sidebar .nav-link.active {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        
+        .sidebar .nav-link i {
+            margin-right: 10px;
+        }
+        
+        .main-content {
+            margin-left: 250px;
+            padding: 20px;
+        }
+        
+        .dashboard-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+        
+        .card {
+            border: none;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+            transition: transform 0.3s;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .card-header {
+            background-color: white;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+            font-weight: 600;
+            padding: 15px 20px;
+            border-radius: 10px 10px 0 0 !important;
+        }
+        
+        .stat-card {
+            text-align: center;
+            padding: 20px;
+        }
+        
+        .stat-card .stat-value {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+        
+        .stat-card .stat-label {
+            color: #6c757d;
+            font-size: 0.9rem;
+        }
+        
+        .avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+        
+        .progress {
+            height: 8px;
+            border-radius: 4px;
+        }
+        
+        .badge-primary {
+            background-color: var(--primary-color);
+        }
+        
+        .notification-badge {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+        }
+        
+        .course-progress {
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .course-item {
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            background-color: white;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+        
+        .course-item img {
+            width: 50px;
+            height: 50px;
+            border-radius: 8px;
+            margin-right: 15px;
+            object-fit: cover;
+        }
+        
+        /* Modal styles */
+        .modal-content {
+            border-radius: 10px;
+        }
+        
+        .question-card {
+            border-left: 4px solid var(--primary-color);
+            margin-bottom: 15px;
+            transition: all 0.3s;
+        }
+        
+        .question-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .question-card .options {
+            margin-top: 15px;
+        }
+        
+        .option-item {
+            padding: 10px;
+            margin-bottom: 8px;
+            border-radius: 5px;
+            background-color: #f8f9fa;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .option-item:hover {
+            background-color: #e9ecef;
+        }
+        
+        .option-item.selected {
+            background-color: #d1e7dd;
+            border-left: 3px solid var(--success-color);
+        }
+        
+        .option-item.correct {
+            background-color: #d1e7dd;
+            border-left: 3px solid var(--success-color);
+        }
+        
+        .option-item.incorrect {
+            background-color: #f8d7da;
+            border-left: 3px solid var(--danger-color);
+        }
+        
+        .explanation {
+            margin-top: 15px;
+            padding: 10px;
+            background-color: #f8f9fa;
+            border-radius: 5px;
+            display: none;
+        }
+        
+        .submit-btn {
+            margin-top: 20px;
+        }
+        
+        .nav-tabs .nav-link.active {
+            color: var(--primary-color);
+            font-weight: 600;
+            border-bottom: 2px solid var(--primary-color);
+        }
+        
+        .tab-content {
+            padding: 20px 0;
+        }
+        
+        .toast-container {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1100;
+        }
+        
+        .action-completed {
+            background-color: var(--success-color);
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <!-- Toast Notifications -->
+    <div class="toast-container">
+        <div class="toast align-items-center text-white bg-success" role="alert" aria-live="assertive" aria-atomic="true" id="actionToast">
+            <div class="d-flex">
+                <div class="toast-body" id="toastMessage">
+                    Action completed successfully!
+                </div>
+                <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Sidebar -->
+    <div class="sidebar col-md-3 col-lg-2 d-md-block">
+        <div class="text-center mb-4">
+            <img src="https://via.placeholder.com/150" alt="Creative Code Hub Logo" class="img-fluid mb-2" style="max-width: 120px;">
+            <h5>Creative Code Hub</h5>
+            <p class="text-muted small">Teacher Dashboard</p>
+        </div>
+        
+        <ul class="nav flex-column">
+            <li class="nav-item">
+                <a class="nav-link active" href="#" id="dashboard-link">
+                    <i class="fas fa-tachometer-alt"></i> Dashboard
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#" id="classes-link">
+                    <i class="fas fa-users"></i> My Classes
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#" id="projects-link">
+                    <i class="fas fa-project-diagram"></i> Projects
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#" id="assignments-link">
+                    <i class="fas fa-tasks"></i> Assignments
+                    <span class="badge bg-danger notification-badge">3</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#" id="students-link">
+                    <i class="fas fa-graduation-cap"></i> Students
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#" id="practice-link">
+                    <i class="fas fa-laptop-code"></i> Practice Questions
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#" id="analytics-link">
+                    <i class="fas fa-chart-line"></i> Analytics
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#" id="settings-link">
+                    <i class="fas fa-cog"></i> Settings
+                </a>
+            </li>
+        </ul>
+        
+        <div class="mt-auto p-3">
+            <div class="d-flex align-items-center">
+                <img src="https://via.placeholder.com/40" alt="User" class="avatar me-2">
+                <div>
+                    <div class="fw-bold">John Doe</div>
+                    <small class="text-muted">Teacher</small>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <div class="dashboard-header">
+            <h2>Teacher Dashboard</h2>
+            <div class="d-flex align-items-center">
+                <div class="input-group me-3" style="width: 300px;">
+                    <input type="text" class="form-control" placeholder="Search..." id="searchInput">
+                    <button class="btn btn-outline-secondary" type="button" id="searchButton">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </div>
+                <div class="dropdown">
+                    <button class="btn btn-light dropdown-toggle" type="button" id="notificationDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="fas fa-bell"></i>
+                        <span class="badge bg-danger notification-badge">4</span>
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="notificationDropdown">
+                        <li><h6 class="dropdown-header">Notifications</h6></li>
+                        <li><a class="dropdown-item notification-item" href="#" data-id="1">New assignment submitted</a></li>
+                        <li><a class="dropdown-item notification-item" href="#" data-id="2">3 new students joined</a></li>
+                        <li><a class="dropdown-item notification-item" href="#" data-id="3">Upcoming deadline reminder</a></li>
+                        <li><a class="dropdown-item notification-item" href="#" data-id="4">System update available</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item text-primary" href="#" id="viewAllNotifications">View all notifications</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Stats Cards -->
+        <div class="row">
+            <div class="col-md-3">
+                <div class="card stat-card">
+                    <div class="stat-value">24</div>
+                    <div class="stat-label">Active Classes</div>
+                    <div class="mt-2">
+                        <span class="text-success"><i class="fas fa-arrow-up"></i> 12%</span> from last month
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card stat-card">
+                    <div class="stat-value">187</div>
+                    <div class="stat-label">Total Students</div>
+                    <div class="mt-2">
+                        <span class="text-success"><i class="fas fa-arrow-up"></i> 8%</span> from last month
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card stat-card">
+                    <div class="stat-value">63</div>
+                    <div class="stat-label">Projects Submitted</div>
+                    <div class="mt-2">
+                        <span class="text-danger"><i class="fas fa-arrow-down"></i> 5%</span> from last week
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card stat-card">
+                    <div class="stat-value">92%</div>
+                    <div class="stat-label">Completion Rate</div>
+                    <div class="mt-2">
+                        <span class="text-success"><i class="fas fa-arrow-up"></i> 3%</span> from last month
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-4">
+            <!-- Recent Activity -->
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <span>Recent Activity</span>
+                        <button class="btn btn-sm btn-outline-primary" id="viewAllActivity">View All</button>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-hover" id="activityTable">
+                                <thead>
+                                    <tr>
+                                        <th>Student</th>
+                                        <th>Activity</th>
+                                        <th>Course</th>
+                                        <th>Time</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <div class="d-flex align-items-center">
+                                                <img src="https://via.placeholder.com/40" alt="Student" class="avatar me-2">
+                                                <span>Sarah Johnson</span>
+                                            </div>
+                                        </td>
+                                        <td>Submitted assignment</td>
+                                        <td>Web Development</td>
+                                        <td>10 min ago</td>
+                                        <td><button class="btn btn-sm btn-outline-primary review-btn" data-id="101">Review</button></td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div class="d-flex align-items-center">
+                                                <img src="https://via.placeholder.com/40" alt="Student" class="avatar me-2">
+                                                <span>Michael Chen</span>
+                                            </div>
+                                        </td>
+                                        <td>Completed project</td>
+                                        <td>Python Basics</td>
+                                        <td>25 min ago</td>
+                                        <td><button class="btn btn-sm btn-outline-primary grade-btn" data-id="102">Grade</button></td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div class="d-flex align-items-center">
+                                                <img src="https://via.placeholder.com/40" alt="Student" class="avatar me-2">
+                                                <span>Emma Rodriguez</span>
+                                            </div>
+                                        </td>
+                                        <td>Asked a question</td>
+                                        <td>JavaScript Advanced</td>
+                                        <td>1 hour ago</td>
+                                        <td><button class="btn btn-sm btn-outline-primary reply-btn" data-id="103">Reply</button></td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div class="d-flex align-items-center">
+                                                <img src="https://via.placeholder.com/40" alt="Student" class="avatar me-2">
+                                                <span>David Kim</span>
+                                            </div>
+                                        </td>
+                                        <td>Joined your class</td>
+                                        <td>Data Science</td>
+                                        <td>2 hours ago</td>
+                                        <td><button class="btn btn-sm btn-outline-primary welcome-btn" data-id="104">Welcome</button></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Upcoming Deadlines -->
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <span>Upcoming Deadlines</span>
+                        <button class="btn btn-sm btn-outline-primary" id="addDeadlineBtn">Add New</button>
+                    </div>
+                    <div class="card-body">
+                        <div class="list-group" id="deadlineList">
+                            <div class="list-group-item border-0 mb-2 rounded deadline-item" data-id="201">
+                                <div class="d-flex justify-content-between">
+                                    <h6 class="mb-1">Final Project Submission</h6>
+                                    <small class="text-danger">Due Tomorrow</small>
+                                </div>
+                                <small class="text-muted">Web Development - Class A</small>
+                                <div class="progress mt-2">
+                                    <div class="progress-bar bg-warning" style="width: 65%"></div>
+                                </div>
+                                <small>13/20 students submitted</small>
+                                <div class="mt-2 d-flex justify-content-end">
+                                    <button class="btn btn-sm btn-outline-secondary me-2 edit-deadline">Edit</button>
+                                    <button class="btn btn-sm btn-outline-danger delete-deadline">Delete</button>
+                                </div>
+                            </div>
+                            <div class="list-group-item border-0 mb-2 rounded deadline-item" data-id="202">
+                                <div class="d-flex justify-content-between">
+                                    <h6 class="mb-1">Quiz #3</h6>
+                                    <small class="text-warning">Due in 3 days</small>
+                                </div>
+                                <small class="text-muted">Python Basics - Class B</small>
+                                <div class="progress mt-2">
+                                    <div class="progress-bar bg-info" style="width: 40%"></div>
+                                </div>
+                                <small>8/20 students completed</small>
+                                <div class="mt-2 d-flex justify-content-end">
+                                    <button class="btn btn-sm btn-outline-secondary me-2 edit-deadline">Edit</button>
+                                    <button class="btn btn-sm btn-outline-danger delete-deadline">Delete</button>
+                                </div>
+                            </div>
+                            <div class="list-group-item border-0 mb-2 rounded deadline-item" data-id="203">
+                                <div class="d-flex justify-content-between">
+                                    <h6 class="mb-1">Midterm Exam</h6>
+                                    <small class="text-primary">Due in 1 week</small>
+                                </div>
+                                <small class="text-muted">JavaScript Advanced</small>
+                                <div class="progress mt-2">
+                                    <div class="progress-bar bg-success" style="width: 15%"></div>
+                                </div>
+                                <small>3/15 students started</small>
+                                <div class="mt-2 d-flex justify-content-end">
+                                    <button class="btn btn-sm btn-outline-secondary me-2 edit-deadline">Edit</button>
+                                    <button class="btn btn-sm btn-outline-danger delete-deadline">Delete</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-4">
+            <!-- Course Progress -->
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <span>Course Progress Overview</span>
+                        <div class="dropdown">
+                            <button class="btn btn-sm btn-outline-secondary dropdown-toggle" type="button" id="courseDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                                All Courses
+                            </button>
+                            <ul class="dropdown-menu" aria-labelledby="courseDropdown">
+                                <li><a class="dropdown-item course-filter" href="#" data-course="all">All Courses</a></li>
+                                <li><a class="dropdown-item course-filter" href="#" data-course="web">Web Development</a></li>
+                                <li><a class="dropdown-item course-filter" href="#" data-course="python">Python Basics</a></li>
+                                <li><a class="dropdown-item course-filter" href="#" data-course="js">JavaScript Advanced</a></li>
+                                <li><a class="dropdown-item course-filter" href="#" data-course="data">Data Science</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="card-body course-progress" id="courseProgressContainer">
+                        <div class="course-item" data-course="web">
+                            <img src="https://via.placeholder.com/50" alt="Web Dev">
+                            <div class="flex-grow-1">
+                                <h6 class="mb-1">Web Development</h6>
+                                <div class="d-flex justify-content-between">
+                                    <small class="text-muted">Class A - 20 students</small>
+                                    <strong>78%</strong>
+                                </div>
+                                <div class="progress mt-1">
+                                    <div class="progress-bar" style="width: 78%"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="course-item" data-course="python">
+                            <img src="https://via.placeholder.com/50" alt="Python">
+                            <div class="flex-grow-1">
+                                <h6 class="mb-1">Python Basics</h6>
+                                <div class="d-flex justify-content-between">
+                                    <small class="text-muted">Class B - 18 students</small>
+                                    <strong>65%</strong>
+                                </div>
+                                <div class="progress mt-1">
+                                    <div class="progress-bar" style="width: 65%"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="course-item" data-course="js">
+                            <img src="https://via.placeholder.com/50" alt="JavaScript">
+                            <div class="flex-grow-1">
+                                <h6 class="mb-1">JavaScript Advanced</h6>
+                                <div class="d-flex justify-content-between">
+                                    <small class="text-muted">Class C - 15 students</small>
+                                    <strong>92%</strong>
+                                </div>
+                                <div class="progress mt-1">
+                                    <div class="progress-bar" style="width: 92%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quick Actions -->
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">
+                        <span>Quick Actions</span>
+                    </div>
+                    <div class="card-body">
+                        <div class="row text-center">
+                            <div class="col-6 mb-4">
+                                <button class="btn btn-light p-3 rounded-circle mb-2 quick-action-btn" style="width: 70px; height: 70px;" data-action="assignment">
+                                    <i class="fas fa-plus fa-lg text-primary"></i>
+                                </button>
+                                <div>New Assignment</div>
+                            </div>
+                            <div class="col-6 mb-4">
+                                <button class="btn btn-light p-3 rounded-circle mb-2 quick-action-btn" style="width: 70px; height: 70px;" data-action="class">
+                                    <i class="fas fa-users fa-lg text-primary"></i>
+                                </button>
+                                <div>Create Class</div>
+                            </div>
+                            <div class="col-6 mb-4">
+                                <button class="btn btn-light p-3 rounded-circle mb-2 quick-action-btn" style="width: 70px; height: 70px;" data-action="report">
+                                    <i class="fas fa-chart-bar fa-lg text-primary"></i>
+                                </button>
+                                <div>View Reports</div>
+                            </div>
+                            <div class="col-6 mb-4">
+                                <button class="btn btn-light p-3 rounded-circle mb-2 quick-action-btn" style="width: 70px; height: 70px;" data-action="announcement">
+                                    <i class="fas fa-envelope fa-lg text-primary"></i>
+                                </button>
+                                <div>Send Announcement</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Practice Questions Modal -->
+    <div class="modal fade" id="practiceQuestionsModal" tabindex="-1" aria-labelledby="practiceQuestionsModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="practiceQuestionsModalLabel">Multiple Choice Practice Questions</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <ul class="nav nav-tabs" id="practiceTabs" role="tablist">
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link active" id="python-tab" data-bs-toggle="tab" data-bs-target="#python" type="button" role="tab">Python</button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="java-tab" data-bs-toggle="tab" data-bs-target="#java" type="button" role="tab">Java</button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="javascript-tab" data-bs-toggle="tab" data-bs-target="#javascript" type="button" role="tab">JavaScript</button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="web-tab" data-bs-toggle="tab" data-bs-target="#web" type="button" role="tab">Web Dev</button>
+                        </li>
+                    </ul>
+                    <div class="tab-content" id="practiceTabContent">
+                        <!-- Python Questions -->
+                        <div class="tab-pane fade show active" id="python" role="tabpanel">
+                            <div class="card question-card">
+                                <div class="card-body">
+                                    <h5>1. What is the output of the following Python code?</h5>
+                                    <pre><code>print(3 * 'abc' + 'xyz')</code></pre>
+                                    <div class="options">
+                                        <div class="option-item" data-correct="false">abcxyz</div>
+                                        <div class="option-item" data-correct="false">abcabcxyzxyz</div>
+                                        <div class="option-item" data-correct="true">abcabcabcxyz</div>
+                                        <div class="option-item" data-correct="false">Error</div>
+                                    </div>
+                                    <div class="explanation">
+                                        <strong>Explanation:</strong> The * operator with strings performs repetition, so 'abc' repeated 3 times is 'abcabcabc', then concatenated with 'xyz'.
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="card question-card">
+                                <div class="card-body">
+                                    <h5>2. Which of these is NOT a valid Python variable name?</h5>
+                                    <div class="options">
+                                        <div class="option-item" data-correct="false">my_var</div>
+                                        <div class="option-item" data-correct="false">_private</div>
+                                        <div class="option-item" data-correct="true">3rd_var</div>
+                                        <div class="option-item" data-correct="false">var3</div>
+                                    </div>
+                                    <div class="explanation">
+                                        <strong>Explanation:</strong> Variable names cannot start with a number in Python.
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="card question-card">
+                                <div class="card-body">
+                                    <h5>3. What does the 'pass' keyword do in Python?</h5>
+                                    <div class="options">
+                                        <div class="option-item" data-correct="false">Terminates the program</div>
+                                        <div class="option-item" data-correct="false">Skips the current iteration in a loop</div>
+                                        <div class="option-item" data-correct="true">Acts as a placeholder for empty code blocks</div>
+                                        <div class="option-item" data-correct="false">Passes arguments to a function</div>
+                                    </div>
+                                    <div class="explanation">
+                                        <strong>Explanation:</strong> 'pass' is a null operation that does nothing, used when syntax requires a statement but no action is needed.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Java Questions -->
+                        <div class="tab-pane fade" id="java" role="tabpanel">
+                            <div class="card question-card">
+                                <div class="card-body">
+                                    <h5>1. Which of these is NOT a primitive data type in Java?</h5>
+                                    <div class="options">
+                                        <div class="option-item" data-correct="false">int</div>
+                                        <div class="option-item" data-correct="false">char</div>
+                                        <div class="option-item" data-correct="true">String</div>
+                                        <div class="option-item" data-correct="false">boolean</div>
+                                    </div>
+                                    <div class="explanation">
+                                        <strong>Explanation:</strong> String is a class in Java, not a primitive type.
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="card question-card">
+                                <div class="card-body">
+                                    <h5>2. What is the default value of a boolean variable in Java?</h5>
+                                    <div class="options">
+                                        <div class="option-item" data-correct="false">true</div>
+                                        <div class="option-item" data-correct="true">false</div>
+                                        <div class="option-item" data-correct="false">null</div>
+                                        <div class="option-item" data-correct="false">0</div>
+                                    </div>
+                                    <div class="explanation">
+                                        <strong>Explanation:</strong> The default value for boolean instance variables is false.
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="card question-card">
+                                <div class="card-body">
+                                    <h5>3. Which keyword is used to inherit a class in Java?</h5>
+                                    <div class="options">
+                                        <div class="option-item" data-correct="false">implement</div>
+                                        <div class="option-item" data-correct="false">super</div>
+                                        <div class="option-item" data-correct="true">extends</div>
+                                        <div class="option-item" data-correct="false">inherit</div>
+                                    </div>
+                                    <div class="explanation">
+                                        <strong>Explanation:</strong> The 'extends' keyword is used to create a subclass that inherits from a superclass.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- JavaScript Questions -->
+                        <div class="tab-pane fade" id="javascript" role="tabpanel">
+                            <div class="card question-card">
+                                <div class="card-body">
+                                    <h5>1. What will be logged to the console?</h5>
+                                    <pre><code>console.log(1 + "2" + "2");</code></pre>
+                                    <div class="options">
+                                        <div class="option-item" data-correct="false">5</div>
+                                        <div class="option-item" data-correct="false">122</div>
+                                        <div class="option-item" data-correct="true">"122"</div>
+                                        <div class="option-item" data-correct="false">32</div>
+                                    </div>
+                                    <div class="explanation">
+                                        <strong>Explanation:</strong> JavaScript performs type coercion. The + operator with a string performs string concatenation.
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="card question-card">
+                                <div class="card-body">
+                                    <h5>2. Which method creates a new array with all elements that pass a test?</h5>
+                                    <div class="options">
+                                        <div class="option-item" data-correct="false">map()</div>
+                                        <div class="option-item" data-correct="true">filter()</div>
+                                        <div class="option-item" data-correct="false">reduce()</div>
+                                        <div class="option-item" data-correct="false">forEach()</div>
+                                    </div>
+                                    <div class="explanation">
+                                        <strong>Explanation:</strong> The filter() method creates a new array with all elements that pass the test implemented by the provided function.
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="card question-card">
+                                <div class="card-body">
+                                    <h5>3. What is the purpose of the 'this' keyword in JavaScript?</h5>
+                                    <div class="options">
+                                        <div class="option-item" data-correct="false">Refers to the previous object</div>
+                                        <div class="option-item" data-correct="true">Refers to the current object</div>
+                                        <div class="option-item" data-correct="false">Refers to the parent object</div>
+                                        <div class="option-item" data-correct="false">Refers to the global object</div>
+                                    </div>
+                                    <div class="explanation">
+                                        <strong>Explanation:</strong> 'this' refers to the object that is executing the current function.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Web Dev Questions -->
+                        <div class="tab-pane fade" id="web" role="tabpanel">
+                            <div class="card question-card">
+                                <div class="card-body">
+                                    <h5>1. What does CSS stand for?</h5>
+                                    <div class="options">
+                                        <div class="option-item" data-correct="false">Computer Style Sheets</div>
+                                        <div class="option-item" data-correct="false">Creative Style System</div>
+                                        <div class="option-item" data-correct="true">Cascading Style Sheets</div>
+                                        <div class="option-item" data-correct="false">Colorful Style Sheets</div>
+                                    </div>
+                                    <div class="explanation">
+                                        <strong>Explanation:</strong> CSS stands for Cascading Style Sheets, which describes how HTML elements are displayed.
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="card question-card">
+                                <div class="card-body">
+                                    <h5>2. Which HTML5 element is used for playing video files?</h5>
+                                    <div class="options">
+                                        <div class="option-item" data-correct="false">&lt;movie&gt;</div>
+                                        <div class="option-item" data-correct="false">&lt;media&gt;</div>
+                                        <div class="option-item" data-correct="true">&lt;video&gt;</div>
+                                        <div class="option-item" data-correct="false">&lt;play&gt;</div>
+                                    </div>
+                                    <div class="explanation">
+                                        <strong>Explanation:</strong> The &lt;video&gt; element is used to embed video content in HTML5.
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="card question-card">
+                                <div class="card-body">
+                                    <h5>3. What is the purpose of the HTML 'alt' attribute?</h5>
+                                    <div class="options">
+                                        <div class="option-item" data-correct="false">To add a title to an image</div>
+                                        <div class="option-item" data-correct="true">To provide alternative text for an image</div>
+                                        <div class="option-item" data-correct="false">To align the image on the page</div>
+                                        <div class="option-item" data-correct="false">To specify the image source</div>
+                                    </div>
+                                    <div class="explanation">
+                                        <strong>Explanation:</strong> The 'alt' attribute provides alternative text for screen readers and when images can't be displayed.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" id="submitQuiz">Submit Answers</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add Deadline Modal -->
+    <div class="modal fade" id="deadlineModal" tabindex="-1" aria-labelledby="deadlineModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="deadlineModalLabel">Add New Deadline</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="deadlineForm">
+                        <input type="hidden" id="deadlineId">
+                        <div class="mb-3">
+                            <label for="deadlineTitle" class="form-label">Title</label>
+                            <input type="text" class="form-control" id="deadlineTitle" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="deadlineCourse" class="form-label">Course</label>
+                            <select class="form-select" id="deadlineCourse" required>
+                                <option value="">Select Course</option>
+                                <option value="Web Development">Web Development</option>
+                                <option value="Python Basics">Python Basics</option>
+                                <option value="JavaScript Advanced">JavaScript Advanced</option>
+                                <option value="Data Science">Data Science</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="deadlineClass" class="form-label">Class</label>
+                            <input type="text" class="form-control" id="deadlineClass" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="deadlineDate" class="form-label">Due Date</label>
+                            <input type="date" class="form-control" id="deadlineDate" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="deadlineStudents" class="form-label">Total Students</label>
+                            <input type="number" class="form-control" id="deadlineStudents" required>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-primary" id="saveDeadline">Save Deadline</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize Bootstrap components
+            const toastEl = document.getElementById('actionToast');
+            const toast = new bootstrap.Toast(toastEl);
+            const practiceModal = new bootstrap.Modal(document.getElementById('practiceQuestionsModal'));
+            const deadlineModal = new bootstrap.Modal(document.getElementById('deadlineModal'));
+            
+            // Show toast notification
+            function showToast(message, isSuccess = true) {
+                const toastMessage = document.getElementById('toastMessage');
+                toastMessage.textContent = message;
+                toastEl.classList.remove('bg-success', 'bg-danger');
+                toastEl.classList.add(isSuccess ? 'bg-success' : 'bg-danger');
+                toast.show();
+            }
+            
+            // Sidebar navigation
+            document.querySelectorAll('.sidebar .nav-link').forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    document.querySelectorAll('.sidebar .nav-link').forEach(l => l.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    // Update main content header
+                    const title = this.querySelector('i').nextSibling.textContent.trim();
+                    document.querySelector('.main-content h2').textContent = title;
+                    
+                    showToast(`${title} page loaded`);
+                });
+            });
+            
+            // Search functionality
+            document.getElementById('searchButton').addEventListener('click', function() {
+                const searchTerm = document.getElementById('searchInput').value.trim();
+                if (searchTerm) {
+                    showToast(`Searching for: ${searchTerm}`);
+                } else {
+                    showToast('Please enter a search term', false);
+                }
+            });
+            
+            // Notification handling
+            document.querySelectorAll('.notification-item').forEach(item => {
+                item.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const notificationId = this.getAttribute('data-id');
+                    showToast(`Notification ${notificationId} clicked`);
+                    
+                    // Mark as read (remove badge if last notification)
+                    const badge = document.querySelector('.notification-badge');
+                    if (badge && badge.textContent === '1') {
+                        badge.remove();
+                    } else if (badge) {
+                        badge.textContent = parseInt(badge.textContent) - 1;
+                    }
+                });
+            });
+            
+            document.getElementById('viewAllNotifications').addEventListener('click', function(e) {
+                e.preventDefault();
+                showToast('Viewing all notifications');
+            });
+            
+            // Activity table actions
+            document.querySelectorAll('.review-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const assignmentId = this.getAttribute('data-id');
+                    showToast(`Reviewing assignment ${assignmentId}`);
+                });
+            });
+            
+            document.querySelectorAll('.grade-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const projectId = this.getAttribute('data-id');
+                    showToast(`Grading project ${projectId}`);
+                });
+            });
+            
+            document.querySelectorAll('.reply-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const questionId = this.getAttribute('data-id');
+                    showToast(`Replying to question ${questionId}`);
+                });
+            });
+            
+            document.querySelectorAll('.welcome-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const studentId = this.getAttribute('data-id');
+                    showToast(`Sending welcome to student ${studentId}`);
+                });
+            });
+            
+            document.getElementById('viewAllActivity').addEventListener('click', function() {
+                showToast('Viewing all activity');
+            });
+            
+            // Deadline management
+            document.getElementById('addDeadlineBtn').addEventListener('click', function() {
+                // Reset form
+                document.getElementById('deadlineForm').reset();
+                document.getElementById('deadlineId').value = '';
+                document.getElementById('deadlineModalLabel').textContent = 'Add New Deadline';
+                deadlineModal.show();
+            });
+            
+            document.querySelectorAll('.edit-deadline').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const deadlineItem = this.closest('.deadline-item');
+                    const deadlineId = deadlineItem.getAttribute('data-id');
+                    
+                    // In a real app, we would fetch this data from a database
+                    document.getElementById('deadlineId').value = deadlineId;
+                    document.getElementById('deadlineModalLabel').textContent = 'Edit Deadline';
+                    
+                    const title = deadlineItem.querySelector('h6').textContent;
+                    const courseClass = deadlineItem.querySelector('small.text-muted').textContent;
+                    const [course, className] = courseClass.split(' - ');
+                    const dueText = deadlineItem.querySelector('small.text-danger, .text-warning, .text-primary').textContent;
+                    const students = deadlineItem.querySelector('small:last-child').textContent.match(/\d+/)[0];
+                    
+                    document.getElementById('deadlineTitle').value = title;
+                    document.getElementById('deadlineCourse').value = course;
+                    document.getElementById('deadlineClass').value = className;
+                    document.getElementById('deadlineStudents').value = students;
+                    
+                    // Set a fake date based on due text (in real app would use actual date)
+                    let dueDate = new Date();
+                    if (dueText.includes('Tomorrow')) {
+                        dueDate.setDate(dueDate.getDate() + 1);
+                    } else if (dueText.includes('3 days')) {
+                        dueDate.setDate(dueDate.getDate() + 3);
+                    } else if (dueText.includes('1 week')) {
+                        dueDate.setDate(dueDate.getDate() + 7);
+                    }
+                    
+                    document.getElementById('deadlineDate').value = dueDate.toISOString().split('T')[0];
+                    
+                    deadlineModal.show();
+                });
+            });
+            
+            document.querySelectorAll('.delete-deadline').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const deadlineItem = this.closest('.deadline-item');
+                    const deadlineId = deadlineItem.getAttribute('data-id');
+                    
+                    if (confirm('Are you sure you want to delete this deadline?')) {
+                        deadlineItem.remove();
+                        showToast(`Deadline ${deadlineId} deleted`);
+                    }
+                });
+            });
+            
+            document.getElementById('saveDeadline').addEventListener('click', function() {
+                const form = document.getElementById('deadlineForm');
+                if (!form.checkValidity()) {
+                    form.classList.add('was-validated');
+                    return;
+                }
+                
+                const deadlineId = document.getElementById('deadlineId').value;
+                const isEdit = !!deadlineId;
+                
+                // In a real app, would save to database here
+                const newDeadline = {
+                    id: isEdit ? deadlineId : `new-${Date.now()}`,
+                    title: document.getElementById('deadlineTitle').value,
+                    course: document.getElementById('deadlineCourse').value,
+                    className: document.getElementById('deadlineClass').value,
+                    date: document.getElementById('deadlineDate').value,
+                    students: document.getElementById('deadlineStudents').value
+                };
+                
+                if (isEdit) {
+                    // Update existing deadline
+                    const deadlineItem = document.querySelector(`.deadline-item[data-id="${deadlineId}"]`);
+                    if (deadlineItem) {
+                        deadlineItem.querySelector('h6').textContent = newDeadline.title;
+                        deadlineItem.querySelector('small.text-muted').textContent = 
+                            `${newDeadline.course} - ${newDeadline.className}`;
+                        
+                        // Update due text and color based on date
+                        const dueDate = new Date(newDeadline.date);
+                        const today = new Date();
+                        const diffDays = Math.ceil((dueDate - today) / (1000 * 60 * 60 * 24));
+                        
+                        let dueText, dueClass;
+                        if (diffDays <= 0) {
+                            dueText = 'Due Today';
+                            dueClass = 'text-danger';
+                        } else if (diffDays === 1) {
+                            dueText = 'Due Tomorrow';
+                            dueClass = 'text-danger';
+                        } else if (diffDays <= 3) {
+                            dueText = `Due in ${diffDays} days`;
+                            dueClass = 'text-warning';
+                        } else {
+                            dueText = `Due in ${diffDays} days`;
+                            dueClass = 'text-primary';
+                        }
+                        
+                        const dueElement = deadlineItem.querySelector('small.text-danger, .text-warning, .text-primary');
+                        dueElement.textContent = dueText;
+                        dueElement.className = '';
+                        dueElement.classList.add(dueClass);
+                        
+                        deadlineItem.querySelector('small:last-child').textContent = 
+                            `0/${newDeadline.students} students submitted`;
+                            
+                        deadlineItem.querySelector('.progress-bar').style.width = '0%';
+                    }
+                } else {
+                    // Add new deadline
+                    const dueDate = new Date(newDeadline.date);
+                    const today = new Date();
+                    const diffDays = Math.ceil((dueDate - today) / (1000 * 60 * 60 * 24));
+                    
+                    let dueText, dueClass;
+                    if (diffDays <= 0) {
+                        dueText = 'Due Today';
+                        dueClass = 'text-danger';
+                    } else if (diffDays === 1) {
+                        dueText = 'Due Tomorrow';
+                        dueClass = 'text-danger';
+                    } else if (diffDays <= 3) {
+                        dueText = `Due in ${diffDays} days`;
+                        dueClass = 'text-warning';
+                    } else {
+                        dueText = `Due in ${diffDays} days`;
+                        dueClass = 'text-primary';
+                    }
+                    
+                    const newDeadlineItem = document.createElement('div');
+                    newDeadlineItem.className = 'list-group-item border-0 mb-2 rounded deadline-item';
+                    newDeadlineItem.setAttribute('data-id', newDeadline.id);
+                    newDeadlineItem.innerHTML = `
+                        <div class="d-flex justify-content-between">
+                            <h6 class="mb-1">${newDeadline.title}</h6>
+                            <small class="${dueClass}">${dueText}</small>
+                        </div>
+                        <small class="text-muted">${newDeadline.course} - ${newDeadline.className}</small>
+                        <div class="progress mt-2">
+                            <div class="progress-bar bg-warning" style="width: 0%"></div>
+                        </div>
+                        <small>0/${newDeadline.students} students submitted</small>
+                        <div class="mt-2 d-flex justify-content-end">
+                            <button class="btn btn-sm btn-outline-secondary me-2 edit-deadline">Edit</button>
+                            <button class="btn btn-sm btn-outline-danger delete-deadline">Delete</button>
+                        </div>
+                    `;
+                    
+                    document.getElementById('deadlineList').prepend(newDeadlineItem);
+                    
+                    // Add event listeners to new buttons
+                    newDeadlineItem.querySelector('.edit-deadline').addEventListener('click', function() {
+                        const deadlineItem = this.closest('.deadline-item');
+                        const deadlineId = deadlineItem.getAttribute('data-id');
+                        
+                        document.getElementById('deadlineId').value = deadlineId;
+                        document.getElementById('deadlineModalLabel').textContent = 'Edit Deadline';
+                        
+                        const title = deadlineItem.querySelector('h6').textContent;
+                        const courseClass = deadlineItem.querySelector('small.text-muted').textContent;
+                        const [course, className] = courseClass.split(' - ');
+                        const students = deadlineItem.querySelector('small:last-child').textContent.match(/\d+/)[1];
+                        
+                        document.getElementById('deadlineTitle').value = title;
+                        document.getElementById('deadlineCourse').value = course;
+                        document.getElementById('deadlineClass').value = className;
+                        document.getElementById('deadlineStudents').value = students;
+                        document.getElementById('deadlineDate').value = newDeadline.date;
+                        
+                        deadlineModal.show();
+                    });
+                    
+                    newDeadlineItem.querySelector('.delete-deadline').addEventListener('click', function() {
+                        const deadlineItem = this.closest('.deadline-item');
+                        const deadlineId = deadlineItem.getAttribute('data-id');
+                        
+                        if (confirm('Are you sure you want to delete this deadline?')) {
+                            deadlineItem.remove();
+                            showToast(`Deadline ${deadlineId} deleted`);
+                        }
+                    });
+                }
+                
+                deadlineModal.hide();
+                showToast(`Deadline ${isEdit ? 'updated' : 'added'} successfully`);
+            });
+            
+            // Course filtering
+            document.querySelectorAll('.course-filter').forEach(filter => {
+                filter.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const course = this.getAttribute('data-course');
+                    document.getElementById('courseDropdown').textContent = this.textContent;
+                    
+                    document.querySelectorAll('.course-item').forEach(item => {
+                        if (course === 'all' || item.getAttribute('data-course') === course) {
+                            item.style.display = 'flex';
+                        } else {
+                            item.style.display = 'none';
+                        }
+                    });
+                });
+            });
+            
+            // Quick actions
+            document.querySelectorAll('.quick-action-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const action = this.getAttribute('data-action');
+                    let message = '';
+                    
+                    switch(action) {
+                        case 'assignment':
+                            message = 'Creating new assignment';
+                            break;
+                        case 'class':
+                            message = 'Creating new class';
+                            break;
+                        case 'report':
+                            message = 'Generating report';
+                            break;
+                        case 'announcement':
+                            message = 'Composing announcement';
+                            break;
+                    }
+                    
+                    showToast(message);
+                });
+            });
+            
+            // Practice questions functionality
+            document.getElementById('practice-link').addEventListener('click', function(e) {
+                e.preventDefault();
+                practiceModal.show();
+            });
+            
+            // Handle option selection
+            document.querySelectorAll('.option-item').forEach(option => {
+                option.addEventListener('click', function() {
+                    // Remove selected class from siblings
+                    this.parentNode.querySelectorAll('.option-item').forEach(item => {
+                        item.classList.remove('selected');
+                    });
+                    
+                    // Add selected class to clicked option
+                    this.classList.add('selected');
+                });
+            });
+            
+            // Submit quiz answers
+            document.getElementById('submitQuiz').addEventListener('click', function() {
+                let correctAnswers = 0;
+                let totalQuestions = 0;
+                
+                document.querySelectorAll('.question-card').forEach(question => {
+                    const selectedOption = question.querySelector('.option-item.selected');
+                    if (selectedOption) {
+                        const isCorrect = selectedOption.getAttribute('data-correct') === 'true';
+                        if (isCorrect) {
+                            correctAnswers++;
+                            selectedOption.classList.add('correct');
+                        } else {
+                            selectedOption.classList.add('incorrect');
+                            // Highlight the correct answer
+                            question.querySelector('.option-item[data-correct="true"]').classList.add('correct');
+                        }
+                        totalQuestions++;
+                    }
+                    
+                    // Show explanation
+                    question.querySelector('.explanation').style.display = 'block';
+                });
+                
+                // Show score
+                const scorePercentage = Math.round((correctAnswers / totalQuestions) * 100);
+                let message = `You got ${correctAnswers} out of ${totalQuestions} correct (${scorePercentage}%)! `;
+                
+                if (scorePercentage >= 80) {
+                    message += 'Excellent work!';
+                } else if (scorePercentage >= 60) {
+                    message += 'Good job!';
+                } else {
+                    message += 'Keep practicing!';
+                }
+                
+                showToast(message);
+            });
+            
+            // Reset quiz when modal is hidden
+            document.getElementById('practiceQuestionsModal').addEventListener('hidden.bs.modal', function() {
+                document.querySelectorAll('.option-item').forEach(option => {
+                    option.classList.remove('selected', 'correct', 'incorrect');
+                });
+                
+                document.querySelectorAll('.explanation').forEach(exp => {
+                    exp.style.display = 'none';
+                });
+            });
+            
+            // Sample data initialization
+            showToast('Dashboard loaded successfully');
+        });
+    </script>
+</body>
+</html>

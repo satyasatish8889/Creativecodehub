@@ -1,0 +1,1976 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Internships - Creative Code Hub</title>
+    <link rel="icon" type="image/png" href="images/logo/cc-hub-logo.png">
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Reduced hero section height */
+        .internship-hero {
+            padding: 80px 0 60px;
+            min-height: 60vh;
+        }
+        
+        /* Additional category styles */
+        .data-science-badge {
+            background: linear-gradient(135deg, #4A00E0, #8E2DE2);
+        }
+        
+        .ai-ml-badge {
+            background: linear-gradient(135deg, #FF512F, #F09819);
+        }
+        
+        .devops-badge {
+            background: linear-gradient(135deg, #11998e, #38ef7d);
+        }
+        
+        .cybersecurity-badge {
+            background: linear-gradient(135deg, #8A2387, #F27121);
+        }
+        
+        .cloud-badge {
+            background: linear-gradient(135deg, #1A2980, #26D0CE);
+        }
+        
+        .game-dev-badge {
+            background: linear-gradient(135deg, #FF416C, #FF4B2B);
+        }
+
+        /* Dark Mode Styles */
+        body.dark-mode {
+            background-color: #121212;
+            color: #e0e0e0;
+        }
+
+        body.dark-mode .navbar,
+        body.dark-mode .footer,
+        body.dark-mode .section-card,
+        body.dark-mode .course-card,
+        body.dark-mode .modal-content {
+            background-color: #1e1e1e;
+            color: #e0e0e0;
+        }
+
+        body.dark-mode .navbar-light .navbar-nav .nav-link,
+        body.dark-mode .footer-links a,
+        body.dark-mode .footer-contact p,
+        body.dark-mode .modal-header,
+        body.dark-mode .modal-body,
+        body.dark-mode .form-label {
+            color: #e0e0e0;
+        }
+
+        body.dark-mode .form-control,
+        body.dark-mode .form-select {
+            background-color: #2d2d2d;
+            border-color: #444;
+            color: #e0e0e0;
+        }
+
+        body.dark-mode .btn-close {
+            filter: invert(1);
+        }
+
+        /* Floating Combo Popup Styles */
+        #comboPopup {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            z-index: 1000;
+            max-width: 300px;
+            display: none;
+        }
+
+        #comboPopup.show {
+            display: block;
+            animation: fadeIn 0.5s;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        #comboPopup .close-btn {
+            position: absolute;
+            top: 5px;
+            right: 10px;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 18px;
+            cursor: pointer;
+        }
+
+        #comboPopup h4 {
+            margin-top: 0;
+            margin-bottom: 10px;
+            font-size: 18px;
+        }
+
+        #comboPopup p {
+            margin-bottom: 15px;
+            font-size: 14px;
+        }
+
+        #comboPopup .btn {
+            width: 100%;
+            background-color: white;
+            color: #667eea;
+            border: none;
+            font-weight: 600;
+        }
+
+        /* Combo Selection Modal Styles */
+        #comboSelectionModal .modal-body {
+            max-height: 60vh;
+            overflow-y: auto;
+        }
+
+        .combo-category {
+            margin-bottom: 20px;
+        }
+
+        .combo-category h5 {
+            margin-bottom: 10px;
+            padding-bottom: 5px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .combo-checkbox {
+            margin-bottom: 8px;
+        }
+
+        body.dark-mode .combo-category h5 {
+            border-bottom-color: #444;
+        }
+
+        /* NEW: Compact Filter Styles */
+        .compact-filters {
+            background: white;
+            border-radius: 10px;
+            padding: 15px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+
+        body.dark-mode .compact-filters {
+            background: #1e1e1e;
+            border: 1px solid #444;
+        }
+
+        .filter-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-bottom: 10px;
+        }
+
+        .filter-group-compact {
+            flex: 1;
+            min-width: 150px;
+        }
+
+        .filter-group-compact label {
+            display: block;
+            font-size: 0.85rem;
+            font-weight: 500;
+            margin-bottom: 5px;
+            color: #555;
+        }
+
+        body.dark-mode .filter-group-compact label {
+            color: #b0b0b0;
+        }
+
+        .filter-select-compact {
+            width: 100%;
+            padding: 8px 12px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 0.9rem;
+            background: white;
+        }
+
+        body.dark-mode .filter-select-compact {
+            background: #2d2d2d;
+            border-color: #444;
+            color: #e0e0e0;
+        }
+
+        .filter-checkboxes-compact {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .filter-checkbox-compact {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 0.85rem;
+        }
+
+        .filter-actions-compact {
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .btn-filter-compact {
+            padding: 8px 15px;
+            border: none;
+            border-radius: 5px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-reset-compact {
+            background: #f8f9fa;
+            color: #495057;
+        }
+
+        body.dark-mode .btn-reset-compact {
+            background: #2d2d2d;
+            color: #e0e0e0;
+        }
+
+        .btn-apply-compact {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+        }
+
+        /* NEW: Compact Courses & Benefits Styles */
+        .highlights-section {
+            padding: 30px 0;
+            background: #f8f9fa;
+        }
+
+        body.dark-mode .highlights-section {
+            background: #1a1a1a;
+        }
+
+        .section-title-compact {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+            text-align: center;
+            color: #333;
+        }
+
+        body.dark-mode .section-title-compact {
+            color: #e0e0e0;
+        }
+
+        .highlights-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .highlight-card {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        body.dark-mode .highlight-card {
+            background: #2d2d2d;
+            border: 1px solid #444;
+        }
+
+        .highlight-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .highlight-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .highlight-icon {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border-radius: 8px;
+            margin-right: 12px;
+            font-size: 1.2rem;
+        }
+
+        .highlight-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin: 0;
+            color: #333;
+        }
+
+        body.dark-mode .highlight-title {
+            color: #e0e0e0;
+        }
+
+        .highlight-content {
+            color: #666;
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        body.dark-mode .highlight-content {
+            color: #b0b0b0;
+        }
+
+        .courses-highlight .highlight-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .courses-highlight .highlight-item {
+            padding: 8px 0;
+            border-bottom: 1px solid #f0f0f0;
+            display: flex;
+            align-items: center;
+        }
+
+        body.dark-mode .courses-highlight .highlight-item {
+            border-bottom-color: #444;
+        }
+
+        .courses-highlight .highlight-item:last-child {
+            border-bottom: none;
+        }
+
+        .courses-highlight .highlight-item i {
+            color: #667eea;
+            margin-right: 10px;
+            font-size: 1rem;
+            width: 20px;
+        }
+
+        .courses-highlight .highlight-item span {
+            font-size: 0.9rem;
+        }
+
+        .category-filter-section {
+        background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-tertiary) 100%);
+        border-bottom: 1px solid var(--border-color);
+    }
+    
+    .filter-heading {
+        font-size: 1.5rem;
+        font-weight: 600;
+        color: var(--text-primary);
+        margin-bottom: 0.5rem;
+    }
+    
+    .category-buttons {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 10px;
+        max-width: 900px;
+        margin: 0 auto;
+    }
+    
+    .category-btn {
+        padding: 10px 20px;
+        background: var(--card-bg);
+        color: var(--text-primary);
+        border: 2px solid var(--border-color);
+        border-radius: 25px;
+        font-weight: 500;
+        font-size: 0.9rem;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        white-space: nowrap;
+    }
+    
+    .category-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        border-color: var(--primary-color);
+    }
+    
+    .category-btn.active {
+        background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+        color: white;
+        border-color: var(--primary-color);
+        box-shadow: 0 4px 12px rgba(24, 119, 242, 0.2);
+    }
+    
+    #categoryCount {
+        font-size: 1rem;
+        padding: 5px 12px;
+    }
+    
+    /* Dark mode adjustments */
+    [data-theme="dark"] .category-filter-section {
+        background: linear-gradient(135deg, var(--bg-tertiary) 0%, #1a2332 100%);
+    }
+    
+    [data-theme="dark"] .category-btn {
+        background: var(--bg-primary);
+        border-color: var(--border-color);
+    }
+    
+    [data-theme="dark"] .category-btn.active {
+        background: linear-gradient(135deg, var(--primary-color), #0d47a1);
+    }
+    
+    /* Responsive design */
+    @media (max-width: 768px) {
+        .category-buttons {
+            gap: 8px;
+        }
+        
+        .category-btn {
+            padding: 8px 16px;
+            font-size: 0.85rem;
+        }
+        
+        .filter-heading {
+            font-size: 1.3rem;
+        }
+    }
+    
+    @media (max-width: 480px) {
+        .category-buttons {
+            gap: 6px;
+        }
+        
+        .category-btn {
+            padding: 6px 14px;
+            font-size: 0.8rem;
+            min-width: 100px;
+        }
+        
+        .category-buttons button:nth-child(1) {
+            width: 100%;
+            border-radius: 8px;
+            margin-bottom: 10px;
+        }
+    }
+    /* Simple Category Filter Styles - UPDATED */
+    .category-filter-section {
+        background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-tertiary) 100%);
+        border-bottom: 1px solid var(--border-color);
+        position: sticky;
+        top: 76px;
+        z-index: 99;
+    }
+    
+    .filter-heading {
+        font-size: 1.5rem;
+        font-weight: 600;
+        color: var(--text-primary);
+        margin-bottom: 0.5rem;
+    }
+    
+    .category-buttons {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 10px;
+        max-width: 1000px;
+        margin: 0 auto;
+    }
+    
+    .category-btn {
+        padding: 10px 20px;
+        background: var(--card-bg);
+        color: var(--text-primary);
+        border: 2px solid var(--border-color);
+        border-radius: 25px;
+        font-weight: 500;
+        font-size: 0.9rem;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        white-space: nowrap;
+        min-width: 120px;
+        text-align: center;
+    }
+    
+    .category-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        border-color: var(--primary-color);
+    }
+    
+    .category-btn.active {
+        background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+        color: white;
+        border-color: var(--primary-color);
+        box-shadow: 0 4px 12px rgba(24, 119, 242, 0.2);
+    }
+    
+    #categoryCount {
+        font-size: 1rem;
+        padding: 5px 12px;
+        background: var(--primary-color) !important;
+    }
+    
+    /* Make sure sections are visible by default */
+    .internship-category {
+        display: block !important;
+    }
+    
+    /* Dark mode adjustments */
+    [data-theme="dark"] .category-filter-section {
+        background: linear-gradient(135deg, var(--bg-tertiary) 0%, #1a2332 100%);
+    }
+    
+    [data-theme="dark"] .category-btn {
+        background: var(--bg-primary);
+        border-color: var(--border-color);
+    }
+    
+    [data-theme="dark"] .category-btn.active {
+        background: linear-gradient(135deg, var(--primary-color), #0d47a1);
+    }
+    
+    /* Responsive design */
+    @media (max-width: 768px) {
+        .category-buttons {
+            gap: 8px;
+        }
+        
+        .category-btn {
+            padding: 8px 16px;
+            font-size: 0.85rem;
+            min-width: 100px;
+        }
+        
+        .filter-heading {
+            font-size: 1.3rem;
+        }
+        
+        .category-filter-section {
+            position: relative;
+            top: 0;
+        }
+    }
+    
+    @media (max-width: 480px) {
+        .category-buttons {
+            gap: 6px;
+        }
+        
+        .category-btn {
+            padding: 6px 12px;
+            font-size: 0.8rem;
+            min-width: 90px;
+        }
+        
+        .category-btn[data-category="all"] {
+            width: 100%;
+            border-radius: 8px;
+            margin-bottom: 10px;
+        }
+    }
+    </style>
+</head>
+<body>
+    <!-- Navigation (unchanged) -->
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top">
+        <div class="container">
+            <!-- Brand Logo -->
+            <a class="navbar-brand" href="index.html">
+                <img src="images/logo/cc-hub-logo.png" alt="Creative Code Hub" class="logo">
+            </a>
+            
+            <!-- Mobile Toggle Button -->
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" 
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <!-- Navigation Links -->
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav mx-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="courses.html">Courses</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="internship.html">Internship</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="project.html">Projects</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="about.html">About Us</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="career.html">Career</a>
+                    </li>
+                </ul>
+
+                <!-- Right Side: Dark Mode Toggle + Enroll Button -->
+                <div class="navbar-right d-flex align-items-center">
+                    <!-- Dark Mode Toggle -->
+                    <div class="nav-dark-mode">
+                        <button id="themeToggle" class="theme-toggle" aria-label="Toggle dark mode">
+                            <span class="sun">☀️</span>
+                            <span class="moon">🌙</span>
+                        </button>
+                    </div>
+                    
+                    <!-- Enroll Button -->
+                    <a href="underprocess.html" class="cc-hub-cta-btn" target="_blank">
+                        <i class="fas fa-rocket me-2"></i>LMS Portal
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section (with reduced height) -->
+    <section class="internship-hero">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-8 mx-auto text-center">
+                    <h1 class="hero-title">Launch Your Tech Career with Industry Internships</h1>
+                    <p class="hero-subtitle">Gain real-world experience, work on live projects, and build your portfolio with our industry-focused internship programs.</p>
+                    
+                    <div class="hero-stats">
+                        <div class="stat-item">
+                            <div class="stat-number">500+</div>
+                            <div class="stat-label">Interns Placed</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">4.8/5</div>
+                            <div class="stat-label">Rating</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">89%</div>
+                            <div class="stat-label">Placement Rate</div>
+                        </div>
+                    </div>
+
+                    <div class="hero-buttons">
+                        <button class="btn btn-hero-primary" onclick="scrollToInternshipCourses()">View Internships</button>
+                        <button class="btn btn-hero-secondary" onclick="openInternshipModal('General Application')">Apply Now</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Simple Category Filter -->
+<section class="category-filter-section py-4">
+    <div class="container">
+        <div class="text-center mb-4">
+            <h4 class="filter-heading">Browse by Category</h4>
+            <p class="text-muted">Select a category to view related internships</p>
+        </div>
+        
+        <div class="category-buttons">
+            <button class="category-btn active" data-category="all">All Internships</button>
+            <button class="category-btn" data-category="fullstack">Full Stack</button>
+            <button class="category-btn" data-category="frontend">Frontend</button>
+            <button class="category-btn" data-category="mobile">Mobile</button>
+            <button class="category-btn" data-category="data-science">Data Science</button>
+            <button class="category-btn" data-category="ai-ml">AI & ML</button>
+            <button class="category-btn" data-category="devops">DevOps</button>
+            <button class="category-btn" data-category="cybersecurity">Cybersecurity</button>
+            <button class="category-btn" data-category="cloud-computing">Cloud Computing</button>
+            <button class="category-btn" data-category="game-dev">Game Dev</button>
+        </div>
+        
+        <div class="text-center mt-3">
+            <p class="mb-0">
+                Showing <span id="categoryCount" class="badge bg-primary">36</span> internships
+            </p>
+        </div>
+    </div>
+</section>
+
+    <!-- Floating Combo Popup -->
+    <div id="comboPopup">
+        <button class="close-btn" id="closeComboPopup">&times;</button>
+        <h4>Customize Your Internship</h4>
+        <p>Choose your own combination of internship courses for a personalized experience!</p>
+        <button class="btn" id="openComboModal">Choose Your Combo</button>
+    </div>
+
+    <!-- Combo Selection Modal -->
+    <div class="modal fade" id="comboSelectionModal" tabindex="-1" aria-labelledby="comboSelectionModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="comboSelectionModalLabel">Create Your Internship Combination</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Select the internship programs you're interested in to create your custom combination:</p>
+                    
+                    <div class="combo-category">
+                        <h5>Full Stack Development</h5>
+                        <div class="combo-checkbox">
+                            <input type="checkbox" id="mern" class="combo-option" value="MERN Stack Internship">
+                            <label for="mern">MERN Stack Internship</label>
+                        </div>
+                        <div class="combo-checkbox">
+                            <input type="checkbox" id="python-django" class="combo-option" value="Python Django Internship">
+                            <label for="python-django">Python Django Internship</label>
+                        </div>
+                        <div class="combo-checkbox">
+                            <input type="checkbox" id="java-spring" class="combo-option" value="Java Spring Boot Internship">
+                            <label for="java-spring">Java Spring Boot Internship</label>
+                        </div>
+                        <div class="combo-checkbox">
+                            <input type="checkbox" id="cloud-fullstack" class="combo-option" value="Cloud Full Stack Internship">
+                            <label for="cloud-fullstack">Cloud Full Stack Internship</label>
+                        </div>
+                    </div>
+                    
+                    <div class="combo-category">
+                        <h5>Frontend Development</h5>
+                        <div class="combo-checkbox">
+                            <input type="checkbox" id="react" class="combo-option" value="React.js Internship">
+                            <label for="react">React.js Internship</label>
+                        </div>
+                        <div class="combo-checkbox">
+                            <input type="checkbox" id="angular" class="combo-option" value="Angular Internship">
+                            <label for="angular">Angular Internship</label>
+                        </div>
+                        <div class="combo-checkbox">
+                            <input type="checkbox" id="vue" class="combo-option" value="Vue.js Internship">
+                            <label for="vue">Vue.js Internship</label>
+                        </div>
+                        <div class="combo-checkbox">
+                            <input type="checkbox" id="javascript" class="combo-option" value="JavaScript Advanced Internship">
+                            <label for="javascript">JavaScript Advanced Internship</label>
+                        </div>
+                    </div>
+                    
+                    <div class="combo-category">
+                        <h5>Mobile Development</h5>
+                        <div class="combo-checkbox">
+                            <input type="checkbox" id="android" class="combo-option" value="Android Internship">
+                            <label for="android">Android Internship</label>
+                        </div>
+                        <div class="combo-checkbox">
+                            <input type="checkbox" id="ios" class="combo-option" value="iOS Internship">
+                            <label for="ios">iOS Internship</label>
+                        </div>
+                        <div class="combo-checkbox">
+                            <input type="checkbox" id="react-native" class="combo-option" value="React Native Internship">
+                            <label for="react-native">React Native Internship</label>
+                        </div>
+                        <div class="combo-checkbox">
+                            <input type="checkbox" id="mobile-game" class="combo-option" value="Mobile Game Development Internship">
+                            <label for="mobile-game">Mobile Game Development Internship</label>
+                        </div>
+                    </div>
+                    
+                    <div class="combo-category">
+                        <h5>Data Science</h5>
+                        <div class="combo-checkbox">
+                            <input type="checkbox" id="data-analytics" class="combo-option" value="Data Analytics Internship">
+                            <label for="data-analytics">Data Analytics Internship</label>
+                        </div>
+                        <div class="combo-checkbox">
+                            <input type="checkbox" id="data-engineering" class="combo-option" value="Data Engineering Internship">
+                            <label for="data-engineering">Data Engineering Internship</label>
+                        </div>
+                        <div class="combo-checkbox">
+                            <input type="checkbox" id="machine-learning" class="combo-option" value="Machine Learning Internship">
+                            <label for="machine-learning">Machine Learning Internship</label>
+                        </div>
+                        <div class="combo-checkbox">
+                            <input type="checkbox" id="business-intelligence" class="combo-option" value="Business Intelligence Internship">
+                            <label for="business-intelligence">Business Intelligence Internship</label>
+                        </div>
+                    </div>
+                    
+                    <div class="combo-category">
+                        <h5>AI & ML</h5>
+                        <div class="combo-checkbox">
+                            <input type="checkbox" id="deep-learning" class="combo-option" value="Deep Learning Internship">
+                            <label for="deep-learning">Deep Learning Internship</label>
+                        </div>
+                        <div class="combo-checkbox">
+                            <input type="checkbox" id="nlp" class="combo-option" value="NLP Internship">
+                            <label for="nlp">NLP Internship</label>
+                        </div>
+                        <div class="combo-checkbox">
+                            <input type="checkbox" id="computer-vision" class="combo-option" value="Computer Vision Internship">
+                            <label for="computer-vision">Computer Vision Internship</label>
+                        </div>
+                        <div class="combo-checkbox">
+                            <input type="checkbox" id="ai-engineering" class="combo-option" value="AI Engineering Internship">
+                            <label for="ai-engineering">AI Engineering Internship</label>
+                        </div>
+                    </div>
+                    
+                    <div class="combo-category">
+                        <h5>DevOps & Cloud</h5>
+                        <div class="combo-checkbox">
+                            <input type="checkbox" id="devops" class="combo-option" value="DevOps Engineering Internship">
+                            <label for="devops">DevOps Engineering Internship</label>
+                        </div>
+                        <div class="combo-checkbox">
+                            <input type="checkbox" id="aws" class="combo-option" value="AWS Cloud Internship">
+                            <label for="aws">AWS Cloud Internship</label>
+                        </div>
+                        <div class="combo-checkbox">
+                            <input type="checkbox" id="azure" class="combo-option" value="Azure Cloud Internship">
+                            <label for="azure">Azure Cloud Internship</label>
+                        </div>
+                        <div class="combo-checkbox">
+                            <input type="checkbox" id="google-cloud" class="combo-option" value="Google Cloud Internship">
+                            <label for="google-cloud">Google Cloud Internship</label>
+                        </div>
+                    </div>
+                    
+                    <div class="combo-category">
+                        <h5>Cybersecurity</h5>
+                        <div class="combo-checkbox">
+                            <input type="checkbox" id="ethical-hacking" class="combo-option" value="Ethical Hacking Internship">
+                            <label for="ethical-hacking">Ethical Hacking Internship</label>
+                        </div>
+                        <div class="combo-checkbox">
+                            <input type="checkbox" id="network-security" class="combo-option" value="Network Security Internship">
+                            <label for="network-security">Network Security Internship</label>
+                        </div>
+                        <div class="combo-checkbox">
+                            <input type="checkbox" id="app-security" class="combo-option" value="Application Security Internship">
+                            <label for="app-security">Application Security Internship</label>
+                        </div>
+                        <div class="combo-checkbox">
+                            <input type="checkbox" id="digital-forensics" class="combo-option" value="Digital Forensics Internship">
+                            <label for="digital-forensics">Digital Forensics Internship</label>
+                        </div>
+                    </div>
+                    
+                    <div class="combo-category">
+                        <h5>Cloud Computing</h5>
+                        <div class="combo-checkbox">
+                            <input type="checkbox" id="multi-cloud" class="combo-option" value="Multi-Cloud Internship">
+                            <label for="multi-cloud">Multi-Cloud Internship</label>
+                        </div>
+                        <div class="combo-checkbox">
+                            <input type="checkbox" id="cloud-architecture" class="combo-option" value="Cloud Architecture Internship">
+                            <label for="cloud-architecture">Cloud Architecture Internship</label>
+                        </div>
+                        <div class="combo-checkbox">
+                            <input type="checkbox" id="cloud-database" class="combo-option" value="Cloud Database Internship">
+                            <label for="cloud-database">Cloud Database Internship</label>
+                        </div>
+                        <div class="combo-checkbox">
+                            <input type="checkbox" id="cloud-networking" class="combo-option" value="Cloud Networking Internship">
+                            <label for="cloud-networking">Cloud Networking Internship</label>
+                        </div>
+                    </div>
+                    
+                    <div class="combo-category">
+                        <h5>Game Development</h5>
+                        <div class="combo-checkbox">
+                            <input type="checkbox" id="unity" class="combo-option" value="Unity Game Development Internship">
+                            <label for="unity">Unity Game Development Internship</label>
+                        </div>
+                        <div class="combo-checkbox">
+                            <input type="checkbox" id="unreal" class="combo-option" value="Unreal Engine Internship">
+                            <label for="unreal">Unreal Engine Internship</label>
+                        </div>
+                        <div class="combo-checkbox">
+                            <input type="checkbox" id="web-game" class="combo-option" value="Web Game Development Internship">
+                            <label for="web-game">Web Game Development Internship</label>
+                        </div>
+                        <div class="combo-checkbox">
+                            <input type="checkbox" id="vr-ar" class="combo-option" value="VR/AR Development Internship">
+                            <label for="vr-ar">VR/AR Development Internship</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-primary" id="submitComboSelection">Submit Combo Selection</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+      
+
+    <!-- All internship sections remain unchanged -->
+    <!-- Full Stack Internships -->
+    <section id="fullstack-internships" class="internship-category">
+
+        <div class="container">
+            <h2 class="category-title">Full Stack Development Internships</h2>
+            <p class="category-subtitle">6-month intensive internships with live project experience and placement assistance</p>
+            
+            <div class="course-grid">
+                <div class="course-card">
+                    <span class="category-badge fullstack-badge">Full Stack</span>
+                    <div class="course-icon"><i class="fab fa-react"></i></div>
+                    <h3 class="course-title">MERN Stack Internship</h3>
+                    <p class="course-description">Build complete web applications using MongoDB, Express, React, and Node.js with modern development practices.</p>
+                    <ul class="course-features">
+                        <li>6 Months Duration</li>
+                        <li>3 Live Projects</li>
+                        <li>Placement Assistance</li>
+                        <li>ISO Certificate</li>
+                    </ul>
+                    <div class="course-meta">
+                        <span class="course-duration"><i class="far fa-clock"></i> 6 Months</span>
+                        <span class="course-level"><i class="fas fa-signal"></i> Intermediate</span>
+                    </div>
+                    <button class="enroll-btn" onclick="openInternshipModal('MERN Stack Internship')">Apply Now</button>
+                </div>
+
+                <div class="course-card">
+                    <span class="category-badge fullstack-badge">Full Stack</span>
+                    <div class="course-icon"><i class="fab fa-python"></i></div>
+                    <h3 class="course-title">Python Django Internship</h3>
+                    <p class="course-description">Develop robust web applications with Python Django framework and modern frontend technologies.</p>
+                    <ul class="course-features">
+                        <li>5 Months Duration</li>
+                        <li>2 Live Projects</li>
+                        <li>Placement Assistance</li>
+                        <li>ISO Certificate</li>
+                    </ul>
+                    <div class="course-meta">
+                        <span class="course-duration"><i class="far fa-clock"></i> 5 Months</span>
+                        <span class="course-level"><i class="fas fa-signal"></i> Intermediate</span>
+                    </div>
+                    <button class="enroll-btn" onclick="openInternshipModal('Python Django Internship')">Apply Now</button>
+                </div>
+
+                <div class="course-card">
+                    <span class="category-badge fullstack-badge">Full Stack</span>
+                    <div class="course-icon"><i class="fab fa-java"></i></div>
+                    <h3 class="course-title">Java Spring Boot Internship</h3>
+                    <p class="course-description">Enterprise application development with Java Spring Boot microservices and modern frontend frameworks.</p>
+                    <ul class="course-features">
+                        <li>6 Months Duration</li>
+                        <li>2 Live Projects</li>
+                        <li>Placement Assistance</li>
+                        <li>ISO Certificate</li>
+                    </ul>
+                    <div class="course-meta">
+                        <span class="course-duration"><i class="far fa-clock"></i> 6 Months</span>
+                        <span class="course-level"><i class="fas fa-signal"></i> Advanced</span>
+                    </div>
+                    <button class="enroll-btn" onclick="openInternshipModal('Java Spring Boot Internship')">Apply Now</button>
+                </div>
+
+                <div class="course-card">
+                    <span class="category-badge fullstack-badge">Full Stack</span>
+                    <div class="course-icon"><i class="fab fa-aws"></i></div>
+                    <h3 class="course-title">Cloud Full Stack Internship</h3>
+                    <p class="course-description">Serverless applications with AWS cloud services, React frontend, and modern deployment strategies.</p>
+                    <ul class="course-features">
+                        <li>5 Months Duration</li>
+                        <li>2 Live Projects</li>
+                        <li>Placement Assistance</li>
+                        <li>ISO Certificate</li>
+                    </ul>
+                    <div class="course-meta">
+                        <span class="course-duration"><i class="far fa-clock"></i> 5 Months</span>
+                        <span class="course-level"><i class="fas fa-signal"></i> Advanced</span>
+                    </div>
+                    <button class="enroll-btn" onclick="openInternshipModal('Cloud Full Stack Internship')">Apply Now</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Frontend Internships -->
+   <section id="frontend-internships" class="internship-category">
+
+        <div class="container">
+            <h2 class="category-title">Frontend Development Internships</h2>
+            <p class="category-subtitle">Master modern frontend technologies and build responsive, interactive web applications</p>
+            
+            <div class="course-grid">
+                <div class="course-card">
+                    <span class="category-badge frontend-badge">Frontend</span>
+                    <div class="course-icon"><i class="fab fa-react"></i></div>
+                    <h3 class="course-title">React.js Internship</h3>
+                    <p class="course-description">Build modern, interactive user interfaces with React, hooks, context API, and state management.</p>
+                    <ul class="course-features">
+                        <li>4 Months Duration</li>
+                        <li>3 Live Projects</li>
+                        <li>Placement Assistance</li>
+                        <li>ISO Certificate</li>
+                    </ul>
+                    <div class="course-meta">
+                        <span class="course-duration"><i class="far fa-clock"></i> 4 Months</span>
+                        <span class="course-level"><i class="fas fa-signal"></i> Intermediate</span>
+                    </div>
+                    <button class="enroll-btn" onclick="openInternshipModal('React.js Internship')">Apply Now</button>
+                </div>
+
+                <div class="course-card">
+                    <span class="category-badge frontend-badge">Frontend</span>
+                    <div class="course-icon"><i class="fab fa-angular"></i></div>
+                    <h3 class="course-title">Angular Internship</h3>
+                    <p class="course-description">Develop enterprise-level applications with Angular framework, TypeScript, and RxJS.</p>
+                    <ul class="course-features">
+                        <li>5 Months Duration</li>
+                        <li>2 Live Projects</li>
+                        <li>Placement Assistance</li>
+                        <li>ISO Certificate</li>
+                    </ul>
+                    <div class="course-meta">
+                        <span class="course-duration"><i class="far fa-clock"></i> 5 Months</span>
+                        <span class="course-level"><i class="fas fa-signal"></i> Intermediate</span>
+                    </div>
+                    <button class="enroll-btn" onclick="openInternshipModal('Angular Internship')">Apply Now</button>
+                </div>
+
+                <div class="course-card">
+                    <span class="category-badge frontend-badge">Frontend</span>
+                    <div class="course-icon"><i class="fab fa-vuejs"></i></div>
+                    <h3 class="course-title">Vue.js Internship</h3>
+                    <p class="course-description">Create progressive web applications with Vue.js ecosystem and modern development tools.</p>
+                    <ul class="course-features">
+                        <li>4 Months Duration</li>
+                        <li>2 Live Projects</li>
+                        <li>Placement Assistance</li>
+                        <li>ISO Certificate</li>
+                    </ul>
+                    <div class="course-meta">
+                        <span class="course-duration"><i class="far fa-clock"></i> 4 Months</span>
+                        <span class="course-level"><i class="fas fa-signal"></i> Intermediate</span>
+                    </div>
+                    <button class="enroll-btn" onclick="openInternshipModal('Vue.js Internship')">Apply Now</button>
+                </div>
+
+                <div class="course-card">
+                    <span class="category-badge frontend-badge">Frontend</span>
+                    <div class="course-icon"><i class="fab fa-js-square"></i></div>
+                    <h3 class="course-title">JavaScript Advanced Internship</h3>
+                    <p class="course-description">Master advanced JavaScript concepts, ES6+, design patterns, and modern web APIs.</p>
+                    <ul class="course-features">
+                        <li>3 Months Duration</li>
+                        <li>2 Live Projects</li>
+                        <li>Placement Assistance</li>
+                        <li>ISO Certificate</li>
+                    </ul>
+                    <div class="course-meta">
+                        <span class="course-duration"><i class="far fa-clock"></i> 3 Months</span>
+                        <span class="course-level"><i class="fas fa-signal"></i> Advanced</span>
+                    </div>
+                    <button class="enroll-btn" onclick="openInternshipModal('JavaScript Advanced Internship')">Apply Now</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Mobile Development Internships -->
+    <section id="mobile-internships" class="internship-category">
+
+        <div class="container">
+            <h2 class="category-title">Mobile Development Internships</h2>
+            <p class="category-subtitle">Build cross-platform and native mobile applications with industry-standard technologies</p>
+            
+            <div class="course-grid">
+                <div class="course-card">
+                    <span class="category-badge mobile-badge">Mobile</span>
+                    <div class="course-icon"><i class="fab fa-android"></i></div>
+                    <h3 class="course-title">Android Internship</h3>
+                    <p class="course-description">Develop native Android applications with Kotlin, Jetpack Compose, and Material Design.</p>
+                    <ul class="course-features">
+                        <li>5 Months Duration</li>
+                        <li>3 Live Projects</li>
+                        <li>Placement Assistance</li>
+                        <li>ISO Certificate</li>
+                    </ul>
+                    <div class="course-meta">
+                        <span class="course-duration"><i class="far fa-clock"></i> 5 Months</span>
+                        <span class="course-level"><i class="fas fa-signal"></i> Intermediate</span>
+                    </div>
+                    <button class="enroll-btn" onclick="openInternshipModal('Android Internship')">Apply Now</button>
+                </div>
+
+                <div class="course-card">
+                    <span class="category-badge mobile-badge">Mobile</span>
+                    <div class="course-icon"><i class="fab fa-apple"></i></div>
+                    <h3 class="course-title">iOS Internship</h3>
+                    <p class="course-description">Build iOS applications with SwiftUI, UIKit, and Apple's latest development frameworks.</p>
+                    <ul class="course-features">
+                        <li>5 Months Duration</li>
+                        <li>2 Live Projects</li>
+                        <li>Placement Assistance</li>
+                        <li>ISO Certificate</li>
+                    </ul>
+                    <div class="course-meta">
+                        <span class="course-duration"><i class="far fa-clock"></i> 5 Months</span>
+                        <span class="course-level"><i class="fas fa-signal"></i> Intermediate</span>
+                    </div>
+                    <button class="enroll-btn" onclick="openInternshipModal('iOS Internship')">Apply Now</button>
+                </div>
+
+                <div class="course-card">
+                    <span class="category-badge mobile-badge">Mobile</span>
+                    <div class="course-icon"><i class="fab fa-react"></i></div>
+                    <h3 class="course-title">React Native Internship</h3>
+                    <p class="course-description">Create cross-platform mobile apps with React Native, Expo, and native modules.</p>
+                    <ul class="course-features">
+                        <li>4 Months Duration</li>
+                        <li>2 Live Projects</li>
+                        <li>Placement Assistance</li>
+                        <li>ISO Certificate</li>
+                    </ul>
+                    <div class="course-meta">
+                        <span class="course-duration"><i class="far fa-clock"></i> 4 Months</span>
+                        <span class="course-level"><i class="fas fa-signal"></i> Intermediate</span>
+                    </div>
+                    <button class="enroll-btn" onclick="openInternshipModal('React Native Internship')">Apply Now</button>
+                </div>
+
+                <div class="course-card">
+                    <span class="category-badge mobile-badge">Mobile</span>
+                    <div class="course-icon"><i class="fas fa-gamepad"></i></div>
+                    <h3 class="course-title">Mobile Game Development Internship</h3>
+                    <p class="course-description">Develop engaging mobile games with Unity engine and C# programming.</p>
+                    <ul class="course-features">
+                        <li>6 Months Duration</li>
+                        <li>2 Live Projects</li>
+                        <li>Placement Assistance</li>
+                        <li>ISO Certificate</li>
+                    </ul>
+                    <div class="course-meta">
+                        <span class="course-duration"><i class="far fa-clock"></i> 6 Months</span>
+                        <span class="course-level"><i class="fas fa-signal"></i> Advanced</span>
+                    </div>
+                    <button class="enroll-btn" onclick="openInternshipModal('Mobile Game Development Internship')">Apply Now</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Data Science Internships -->
+    <section id="data-science-internships" class="internship-category">
+
+        <div class="container">
+            <h2 class="category-title">Data Science Internships</h2>
+            <p class="category-subtitle">Transform data into insights with statistical analysis, machine learning, and data visualization</p>
+            
+            <div class="course-grid">
+                <div class="course-card">
+                    <span class="category-badge data-science-badge">Data Science</span>
+                    <div class="course-icon"><i class="fas fa-chart-bar"></i></div>
+                    <h3 class="course-title">Data Analytics Internship</h3>
+                    <p class="course-description">Analyze and visualize data to derive business insights using Python, SQL, and Tableau.</p>
+                    <ul class="course-features">
+                        <li>5 Months Duration</li>
+                        <li>3 Live Projects</li>
+                        <li>Placement Assistance</li>
+                        <li>ISO Certificate</li>
+                    </ul>
+                    <div class="course-meta">
+                        <span class="course-duration"><i class="far fa-clock"></i> 5 Months</span>
+                        <span class="course-level"><i class="fas fa-signal"></i> Intermediate</span>
+                    </div>
+                    <button class="enroll-btn" onclick="openInternshipModal('Data Analytics Internship')">Apply Now</button>
+                </div>
+
+                <div class="course-card">
+                    <span class="category-badge data-science-badge">Data Science</span>
+                    <div class="course-icon"><i class="fas fa-database"></i></div>
+                    <h3 class="course-title">Data Engineering Internship</h3>
+                    <p class="course-description">Build data pipelines, ETL processes, and data warehouses with modern tools and cloud platforms.</p>
+                    <ul class="course-features">
+                        <li>6 Months Duration</li>
+                        <li>2 Live Projects</li>
+                        <li>Placement Assistance</li>
+                        <li>ISO Certificate</li>
+                    </ul>
+                    <div class="course-meta">
+                        <span class="course-duration"><i class="far fa-clock"></i> 6 Months</span>
+                        <span class="course-level"><i class="fas fa-signal"></i> Advanced</span>
+                    </div>
+                    <button class="enroll-btn" onclick="openInternshipModal('Data Engineering Internship')">Apply Now</button>
+                </div>
+
+                <div class="course-card">
+                    <span class="category-badge data-science-badge">Data Science</span>
+                    <div class="course-icon"><i class="fas fa-brain"></i></div>
+                    <h3 class="course-title">Machine Learning Internship</h3>
+                    <p class="course-description">Implement machine learning algorithms, model training, and deployment with Python.</p>
+                    <ul class="course-features">
+                        <li>6 Months Duration</li>
+                        <li>3 Live Projects</li>
+                        <li>Placement Assistance</li>
+                        <li>ISO Certificate</li>
+                    </ul>
+                    <div class="course-meta">
+                        <span class="course-duration"><i class="far fa-clock"></i> 6 Months</span>
+                        <span class="course-level"><i class="fas fa-signal"></i> Advanced</span>
+                    </div>
+                    <button class="enroll-btn" onclick="openInternshipModal('Machine Learning Internship')">Apply Now</button>
+                </div>
+
+                <div class="course-card">
+                    <span class="category-badge data-science-badge">Data Science</span>
+                    <div class="course-icon"><i class="fas fa-chart-line"></i></div>
+                    <h3 class="course-title">Business Intelligence Internship</h3>
+                    <p class="course-description">Create dashboards, reports, and analytics solutions for business decision making.</p>
+                    <ul class="course-features">
+                        <li>4 Months Duration</li>
+                        <li>2 Live Projects</li>
+                        <li>Placement Assistance</li>
+                        <li>ISO Certificate</li>
+                    </ul>
+                    <div class="course-meta">
+                        <span class="course-duration"><i class="far fa-clock"></i> 4 Months</span>
+                        <span class="course-level"><i class="fas fa-signal"></i> Intermediate</span>
+                    </div>
+                    <button class="enroll-btn" onclick="openInternshipModal('Business Intelligence Internship')">Apply Now</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- AI & ML Internships -->
+    <section id="ai-ml-internships" class="internship-category">
+
+        <div class="container">
+            <h2 class="category-title">AI & Machine Learning Internships</h2>
+            <p class="category-subtitle">Build intelligent systems with cutting-edge artificial intelligence and machine learning technologies</p>
+            
+            <div class="course-grid">
+                <div class="course-card">
+                    <span class="category-badge ai-ml-badge">AI/ML</span>
+                    <div class="course-icon"><i class="fas fa-network-wired"></i></div>
+                    <h3 class="course-title">Deep Learning Internship</h3>
+                    <p class="course-description">Implement neural networks, CNNs, RNNs, and transformers for complex AI applications.</p>
+                    <ul class="course-features">
+                        <li>6 Months Duration</li>
+                        <li>3 Live Projects</li>
+                        <li>Placement Assistance</li>
+                        <li>ISO Certificate</li>
+                    </ul>
+                    <div class="course-meta">
+                        <span class="course-duration"><i class="far fa-clock"></i> 6 Months</span>
+                        <span class="course-level"><i class="fas fa-signal"></i> Advanced</span>
+                    </div>
+                    <button class="enroll-btn" onclick="openInternshipModal('Deep Learning Internship')">Apply Now</button>
+                </div>
+
+                <div class="course-card">
+                    <span class="category-badge ai-ml-badge">AI/ML</span>
+                    <div class="course-icon"><i class="fas fa-language"></i></div>
+                    <h3 class="course-title">NLP Internship</h3>
+                    <p class="course-description">Process and understand human language with transformers, BERT, and modern NLP techniques.</p>
+                    <ul class="course-features">
+                        <li>5 Months Duration</li>
+                        <li>2 Live Projects</li>
+                        <li>Placement Assistance</li>
+                        <li>ISO Certificate</li>
+                    </ul>
+                    <div class="course-meta">
+                        <span class="course-duration"><i class="far fa-clock"></i> 5 Months</span>
+                        <span class="course-level"><i class="fas fa-signal"></i> Advanced</span>
+                    </div>
+                    <button class="enroll-btn" onclick="openInternshipModal('NLP Internship')">Apply Now</button>
+                </div>
+
+                <div class="course-card">
+                    <span class="category-badge ai-ml-badge">AI/ML</span>
+                    <div class="course-icon"><i class="fas fa-eye"></i></div>
+                    <h3 class="course-title">Computer Vision Internship</h3>
+                    <p class="course-description">Develop AI systems that can see, interpret, and understand visual information from the world.</p>
+                    <ul class="course-features">
+                        <li>6 Months Duration</li>
+                        <li>3 Live Projects</li>
+                        <li>Placement Assistance</li>
+                        <li>ISO Certificate</li>
+                    </ul>
+                    <div class="course-meta">
+                        <span class="course-duration"><i class="far fa-clock"></i> 6 Months</span>
+                        <span class="course-level"><i class="fas fa-signal"></i> Advanced</span>
+                    </div>
+                    <button class="enroll-btn" onclick="openInternshipModal('Computer Vision Internship')">Apply Now</button>
+                </div>
+
+                <div class="course-card">
+                    <span class="category-badge ai-ml-badge">AI/ML</span>
+                    <div class="course-icon"><i class="fas fa-robot"></i></div>
+                    <h3 class="course-title">AI Engineering Internship</h3>
+                    <p class="course-description">Build, deploy, and scale AI applications with MLOps, cloud platforms, and production systems.</p>
+                    <ul class="course-features">
+                        <li>6 Months Duration</li>
+                        <li>2 Live Projects</li>
+                        <li>Placement Assistance</li>
+                        <li>ISO Certificate</li>
+                    </ul>
+                    <div class="course-meta">
+                        <span class="course-duration"><i class="far fa-clock"></i> 6 Months</span>
+                        <span class="course-level"><i class="fas fa-signal"></i> Advanced</span>
+                    </div>
+                    <button class="enroll-btn" onclick="openInternshipModal('AI Engineering Internship')">Apply Now</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- DevOps & Cloud Internships -->
+    <section id="devops-internships" class="internship-category">
+        <div class="container">
+            <h2 class="category-title">DevOps & Cloud Internships</h2>
+            <p class="category-subtitle">Master infrastructure automation, cloud platforms, and modern deployment practices</p>
+            
+            <div class="course-grid">
+                <div class="course-card">
+                    <span class="category-badge devops-badge">DevOps</span>
+                    <div class="course-icon"><i class="fas fa-cogs"></i></div>
+                    <h3 class="course-title">DevOps Engineering Internship</h3>
+                    <p class="course-description">Automate infrastructure, CI/CD pipelines, and deployment with Docker, Kubernetes, and cloud tools.</p>
+                    <ul class="course-features">
+                        <li>6 Months Duration</li>
+                        <li>3 Live Projects</li>
+                        <li>Placement Assistance</li>
+                        <li>ISO Certificate</li>
+                    </ul>
+                    <div class="course-meta">
+                        <span class="course-duration"><i class="far fa-clock"></i> 6 Months</span>
+                        <span class="course-level"><i class="fas fa-signal"></i> Advanced</span>
+                    </div>
+                    <button class="enroll-btn" onclick="openInternshipModal('DevOps Engineering Internship')">Apply Now</button>
+                </div>
+
+                <div class="course-card">
+                    <span class="category-badge devops-badge">DevOps</span>
+                    <div class="course-icon"><i class="fab fa-aws"></i></div>
+                    <h3 class="course-title">AWS Cloud Internship</h3>
+                    <p class="course-description">Build and deploy scalable applications on AWS with EC2, S3, Lambda, and other cloud services.</p>
+                    <ul class="course-features">
+                        <li>5 Months Duration</li>
+                        <li>2 Live Projects</li>
+                        <li>Placement Assistance</li>
+                        <li>ISO Certificate</li>
+                    </ul>
+                    <div class="course-meta">
+                        <span class="course-duration"><i class="far fa-clock"></i> 5 Months</span>
+                        <span class="course-level"><i class="fas fa-signal"></i> Intermediate</span>
+                    </div>
+                    <button class="enroll-btn" onclick="openInternshipModal('AWS Cloud Internship')">Apply Now</button>
+                </div>
+
+                <div class="course-card">
+                    <span class="category-badge devops-badge">DevOps</span>
+                    <div class="course-icon"><i class="fab fa-microsoft"></i></div>
+                    <h3 class="course-title">Azure Cloud Internship</h3>
+                    <p class="course-description">Develop cloud-native applications with Microsoft Azure services and enterprise solutions.</p>
+                    <ul class="course-features">
+                        <li>5 Months Duration</li>
+                        <li>2 Live Projects</li>
+                        <li>Placement Assistance</li>
+                        <li>ISO Certificate</li>
+                    </ul>
+                    <div class="course-meta">
+                        <span class="course-duration"><i class="far fa-clock"></i> 5 Months</span>
+                        <span class="course-level"><i class="fas fa-signal"></i> Intermediate</span>
+                    </div>
+                    <button class="enroll-btn" onclick="openInternshipModal('Azure Cloud Internship')">Apply Now</button>
+                </div>
+
+                <div class="course-card">
+                    <span class="category-badge devops-badge">DevOps</span>
+                    <div class="course-icon"><i class="fab fa-google"></i></div>
+                    <h3 class="course-title">Google Cloud Internship</h3>
+                    <p class="course-description">Build scalable applications with Google Cloud Platform, Kubernetes Engine, and Big Data services.</p>
+                    <ul class="course-features">
+                        <li>5 Months Duration</li>
+                        <li>2 Live Projects</li>
+                        <li>Placement Assistance</li>
+                        <li>ISO Certificate</li>
+                    </ul>
+                    <div class="course-meta">
+                        <span class="course-duration"><i class="far fa-clock"></i> 5 Months</span>
+                        <span class="course-level"><i class="fas fa-signal"></i> Intermediate</span>
+                    </div>
+                    <button class="enroll-btn" onclick="openInternshipModal('Google Cloud Internship')">Apply Now</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Cybersecurity Internships -->
+        <section id="cybersecurity-internships" class="internship-category">
+        <div class="container">
+            <h2 class="category-title">Cybersecurity Internships</h2>
+            <p class="category-subtitle">Protect digital assets and build secure systems with ethical hacking and security practices</p>
+            
+            <div class="course-grid">
+                <div class="course-card">
+                    <span class="category-badge cybersecurity-badge">Cybersecurity</span>
+                    <div class="course-icon"><i class="fas fa-user-secret"></i></div>
+                    <h3 class="course-title">Ethical Hacking Internship</h3>
+                    <p class="course-description">Learn penetration testing, vulnerability assessment, and ethical hacking methodologies.</p>
+                    <ul class="course-features">
+                        <li>6 Months Duration</li>
+                        <li>3 Live Projects</li>
+                        <li>Placement Assistance</li>
+                        <li>ISO Certificate</li>
+                    </ul>
+                    <div class="course-meta">
+                        <span class="course-duration"><i class="far fa-clock"></i> 6 Months</span>
+                        <span class="course-level"><i class="fas fa-signal"></i> Advanced</span>
+                    </div>
+                    <button class="enroll-btn" onclick="openInternshipModal('Ethical Hacking Internship')">Apply Now</button>
+                </div>
+
+                <div class="course-card">
+                    <span class="category-badge cybersecurity-badge">Cybersecurity</span>
+                    <div class="course-icon"><i class="fas fa-shield-alt"></i></div>
+                    <h3 class="course-title">Network Security Internship</h3>
+                    <p class="course-description">Secure network infrastructure, implement firewalls, and protect against cyber threats.</p>
+                    <ul class="course-features">
+                        <li>5 Months Duration</li>
+                        <li>2 Live Projects</li>
+                        <li>Placement Assistance</li>
+                        <li>ISO Certificate</li>
+                    </ul>
+                    <div class="course-meta">
+                        <span class="course-duration"><i class="far fa-clock"></i> 5 Months</span>
+                        <span class="course-level"><i class="fas fa-signal"></i> Intermediate</span>
+                    </div>
+                    <button class="enroll-btn" onclick="openInternshipModal('Network Security Internship')">Apply Now</button>
+                </div>
+
+                <div class="course-card">
+                    <span class="category-badge cybersecurity-badge">Cybersecurity</span>
+                    <div class="course-icon"><i class="fas fa-lock"></i></div>
+                    <h3 class="course-title">Application Security Internship</h3>
+                    <p class="course-description">Identify and fix security vulnerabilities in web and mobile applications.</p>
+                    <ul class="course-features">
+                        <li>4 Months Duration</li>
+                        <li>2 Live Projects</li>
+                        <li>Placement Assistance</li>
+                        <li>ISO Certificate</li>
+                    </ul>
+                    <div class="course-meta">
+                        <span class="course-duration"><i class="far fa-clock"></i> 4 Months</span>
+                        <span class="course-level"><i class="fas fa-signal"></i> Intermediate</span>
+                    </div>
+                    <button class="enroll-btn" onclick="openInternshipModal('Application Security Internship')">Apply Now</button>
+                </div>
+
+                <div class="course-card">
+                    <span class="category-badge cybersecurity-badge">Cybersecurity</span>
+                    <div class="course-icon"><i class="fas fa-search"></i></div>
+                    <h3 class="course-title">Digital Forensics Internship</h3>
+                    <p class="course-description">Investigate cyber crimes, recover digital evidence, and analyze security incidents.</p>
+                    <ul class="course-features">
+                        <li>5 Months Duration</li>
+                        <li>2 Live Projects</li>
+                        <li>Placement Assistance</li>
+                        <li>ISO Certificate</li>
+                    </ul>
+                    <div class="course-meta">
+                        <span class="course-duration"><i class="far fa-clock"></i> 5 Months</span>
+                        <span class="course-level"><i class="fas fa-signal"></i> Advanced</span>
+                    </div>
+                    <button class="enroll-btn" onclick="openInternshipModal('Digital Forensics Internship')">Apply Now</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Cloud Computing Internships -->
+    <section id="cloud-computing-internships" class="internship-category">
+
+        <div class="container">
+            <h2 class="category-title">Cloud Computing Internships</h2>
+            <p class="category-subtitle">Master cloud platforms, architecture, and services for modern application deployment</p>
+            
+            <div class="course-grid">
+                <div class="course-card">
+                    <span class="category-badge cloud-badge">Cloud</span>
+                    <div class="course-icon"><i class="fas fa-cloud"></i></div>
+                    <h3 class="course-title">Multi-Cloud Internship</h3>
+                    <p class="course-description">Deploy and manage applications across AWS, Azure, and Google Cloud platforms.</p>
+                    <ul class="course-features">
+                        <li>6 Months Duration</li>
+                        <li>3 Live Projects</li>
+                        <li>Placement Assistance</li>
+                        <li>ISO Certificate</li>
+                    </ul>
+                    <div class="course-meta">
+                        <span class="course-duration"><i class="far fa-clock"></i> 6 Months</span>
+                        <span class="course-level"><i class="fas fa-signal"></i> Advanced</span>
+                    </div>
+                    <button class="enroll-btn" onclick="openInternshipModal('Multi-Cloud Internship')">Apply Now</button>
+                </div>
+
+                <div class="course-card">
+                    <span class="category-badge cloud-badge">Cloud</span>
+                    <div class="course-icon"><i class="fas fa-layer-group"></i></div>
+                    <h3 class="course-title">Cloud Architecture Internship</h3>
+                    <p class="course-description">Design scalable, secure, and cost-effective cloud solutions for enterprise applications.</p>
+                    <ul class="course-features">
+                        <li>6 Months Duration</li>
+                        <li>2 Live Projects</li>
+                        <li>Placement Assistance</li>
+                        <li>ISO Certificate</li>
+                    </ul>
+                    <div class="course-meta">
+                        <span class="course-duration"><i class="far fa-clock"></i> 6 Months</span>
+                        <span class="course-level"><i class="fas fa-signal"></i> Advanced</span>
+                    </div>
+                    <button class="enroll-btn" onclick="openInternshipModal('Cloud Architecture Internship')">Apply Now</button>
+                </div>
+
+                <div class="course-card">
+                    <span class="category-badge cloud-badge">Cloud</span>
+                    <div class="course-icon"><i class="fas fa-database"></i></div>
+                    <h3 class="course-title">Cloud Database Internship</h3>
+                    <p class="course-description">Manage and optimize cloud databases, data lakes, and big data solutions.</p>
+                    <ul class="course-features">
+                        <li>5 Months Duration</li>
+                        <li>2 Live Projects</li>
+                        <li>Placement Assistance</li>
+                        <li>ISO Certificate</li>
+                    </ul>
+                    <div class="course-meta">
+                        <span class="course-duration"><i class="far fa-clock"></i> 5 Months</span>
+                        <span class="course-level"><i class="fas fa-signal"></i> Intermediate</span>
+                    </div>
+                    <button class="enroll-btn" onclick="openInternshipModal('Cloud Database Internship')">Apply Now</button>
+                </div>
+
+                <div class="course-card">
+                    <span class="category-badge cloud-badge">Cloud</span>
+                    <div class="course-icon"><i class="fas fa-network-wired"></i></div>
+                    <h3 class="course-title">Cloud Networking Internship</h3>
+                    <p class="course-description">Design and implement secure cloud network infrastructure and connectivity solutions.</p>
+                    <ul class="course-features">
+                        <li>5 Months Duration</li>
+                        <li>2 Live Projects</li>
+                        <li>Placement Assistance</li>
+                        <li>ISO Certificate</li>
+                    </ul>
+                    <div class="course-meta">
+                        <span class="course-duration"><i class="far fa-clock"></i> 5 Months</span>
+                        <span class="course-level"><i class="fas fa-signal"></i> Intermediate</span>
+                    </div>
+                    <button class="enroll-btn" onclick="openInternshipModal('Cloud Networking Internship')">Apply Now</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Game Development Internships -->
+        <section id="game-dev-internships" class="internship-category">
+        <div class="container">
+            <h2 class="category-title">Game Development Internships</h2>
+            <p class="category-subtitle">Create immersive gaming experiences with industry-standard engines and technologies</p>
+            
+            <div class="course-grid">
+                <div class="course-card">
+                    <span class="category-badge game-dev-badge">Game Dev</span>
+                    <div class="course-icon"><i class="fab fa-unity"></i></div>
+                    <h3 class="course-title">Unity Game Development Internship</h3>
+                    <p class="course-description">Build 2D and 3D games with Unity engine, C# scripting, and game design principles.</p>
+                    <ul class="course-features">
+                        <li>6 Months Duration</li>
+                        <li>3 Live Projects</li>
+                        <li>Placement Assistance</li>
+                        <li>ISO Certificate</li>
+                    </ul>
+                    <div class="course-meta">
+                        <span class="course-duration"><i class="far fa-clock"></i> 6 Months</span>
+                        <span class="course-level"><i class="fas fa-signal"></i> Intermediate</span>
+                    </div>
+                    <button class="enroll-btn" onclick="openInternshipModal('Unity Game Development Internship')">Apply Now</button>
+                </div>
+
+                <div class="course-card">
+                    <span class="category-badge game-dev-badge">Game Dev</span>
+                    <div class="course-icon"><i class="fas fa-gamepad"></i></div>
+                    <h3 class="course-title">Unreal Engine Internship</h3>
+                    <p class="course-description">Create high-fidelity games with Unreal Engine, Blueprints, and C++ programming.</p>
+                    <ul class="course-features">
+                        <li>6 Months Duration</li>
+                        <li>2 Live Projects</li>
+                        <li>Placement Assistance</li>
+                        <li>ISO Certificate</li>
+                    </ul>
+                    <div class="course-meta">
+                        <span class="course-duration"><i class="far fa-clock"></i> 6 Months</span>
+                        <span class="course-level"><i class="fas fa-signal"></i> Advanced</span>
+                    </div>
+                    <button class="enroll-btn" onclick="openInternshipModal('Unreal Engine Internship')">Apply Now</button>
+                </div>
+
+                <div class="course-card">
+                    <span class="category-badge game-dev-badge">Game Dev</span>
+                    <div class="course-icon"><i class="fab fa-html5"></i></div>
+                    <h3 class="course-title">Web Game Development Internship</h3>
+                    <p class="course-description">Create browser-based games with HTML5 Canvas, WebGL, and JavaScript frameworks.</p>
+                    <ul class="course-features">
+                        <li>4 Months Duration</li>
+                        <li>2 Live Projects</li>
+                        <li>Placement Assistance</li>
+                        <li>ISO Certificate</li>
+                    </ul>
+                    <div class="course-meta">
+                        <span class="course-duration"><i class="far fa-clock"></i> 4 Months</span>
+                        <span class="course-level"><i class="fas fa-signal"></i> Intermediate</span>
+                    </div>
+                    <button class="enroll-btn" onclick="openInternshipModal('Web Game Development Internship')">Apply Now</button>
+                </div>
+
+                <div class="course-card">
+                    <span class="category-badge game-dev-badge">Game Dev</span>
+                    <div class="course-icon"><i class="fas fa-vr-cardboard"></i></div>
+                    <h3 class="course-title">VR/AR Development Internship</h3>
+                    <p class="course-description">Build immersive virtual and augmented reality experiences for various platforms.</p>
+                    <ul class="course-features">
+                        <li>6 Months Duration</li>
+                        <li>2 Live Projects</li>
+                        <li>Placement Assistance</li>
+                        <li>ISO Certificate</li>
+                    </ul>
+                    <div class="course-meta">
+                        <span class="course-duration"><i class="far fa-clock"></i> 6 Months</span>
+                        <span class="course-level"><i class="fas fa-signal"></i> Advanced</span>
+                    </div>
+                    <button class="enroll-btn" onclick="openInternshipModal('VR/AR Development Internship')">Apply Now</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+   <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-about">
+                <div class="footer-logo">
+                    <img src="images/logo/cc-hub-logo.png" alt="CodeHub Logo" loading="lazy">
+                </div>
+                <p>Empowering the next generation of developers with quality education and practical skills.</p>
+                <div class="social-links">
+                    <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+            <div class="footer-links">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="underprocess.html" class="cc-hub-cta-btn" target="_blank">Get LMS</a></li>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="internship.html">Internship</a></li>
+                    <li><a href="courses.html">Courses</a></li>
+                    <li><a href="training.html">Training</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                </ul>
+            </div>
+            <div class="footer-links">
+                <h3>Courses</h3>
+                <ul>
+                    <li><a href="courses.html">Full Stack Courses</a></li>
+                    <li><a href="courses.html">Hybrid Courses</a></li>
+                    <li><a href="courses.html">Scratch Training</a></li>
+                    <li><a href="courses.html">Internship Training</a></li>
+                </ul>
+            </div>
+            <div class="footer-contact">
+                <h3>Contact Us</h3>
+                <p><i class="fas fa-map-marker-alt"></i> Kakinada, <i class="fas fa-map-marker-alt"></i> Vishakapatnam</p>
+                <p><i class="fas fa-phone"></i> +91 7075775888, <br> +91 7093947788</p>
+                <p><i class="fas fa-envelope"></i> info@creativecodehub.in</p>
+            </div>
+        </div>
+        <div class="copyright">
+            &copy; 2024 Creative-Code-Hub. All Rights Reserved.
+        </div>
+    </footer>
+
+    <!-- Floating Social Media Button -->
+    <div class="floating-social">
+        <div class="social-toggle">
+            <img src="images/logo/cc-hub-logo.png" width=50% alt="CC-HUB Logo" loading="lazy">
+        </div>
+        <div class="social-links">
+            <a href="https://wa.me/917075779888" target="_blank" class="whatsapp">
+                <i class="fab fa-whatsapp"></i>
+            </a>
+            <a href="https://www.instagram.com/creativecodehub" target="_blank" class="instagram">
+                <i class="fab fa-instagram"></i>
+            </a>
+            <a href="https://www.facebook.com/yourpage" target="_blank" class="facebook">
+                <i class="fab fa-facebook-f"></i>
+            </a>
+            <a href="https://maps.app.goo.gl/8tZUZKWh3uiPoUWJ9?g_st=aw" target="_blank" class="location">
+                <i class="fa-solid fa-location-dot"></i>
+            </a>
+        </div>
+    </div>
+
+    <!-- WhatsApp Floating Icon -->
+    <a href="https://wa.me/917075779888" target="_blank" class="whatsapp-left">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+
+        <!-- Bootstrap & jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        // Dark Mode Toggle
+        const themeToggle = document.getElementById('themeToggle');
+        const body = document.body;
+        
+        // Check for saved theme preference or default to light
+        const savedTheme = localStorage.getItem('theme') || 'light';
+        if (savedTheme === 'dark') {
+            body.classList.add('dark-mode');
+        }
+        
+        themeToggle.addEventListener('click', () => {
+            body.classList.toggle('dark-mode');
+            const isDarkMode = body.classList.contains('dark-mode');
+            localStorage.setItem('theme', isDarkMode ? 'dark' : 'light');
+        });
+
+        // Floating Combo Popup Logic
+        const comboPopup = document.getElementById('comboPopup');
+        const closeComboPopup = document.getElementById('closeComboPopup');
+        const openComboModal = document.getElementById('openComboModal');
+        const comboSelectionModal = new bootstrap.Modal(document.getElementById('comboSelectionModal'));
+        const submitComboSelection = document.getElementById('submitComboSelection');
+        
+        // Show popup after 10 seconds
+        setTimeout(() => {
+            comboPopup.classList.add('show');
+        }, 10000);
+        
+        // Close popup when X is clicked
+        closeComboPopup.addEventListener('click', () => {
+            comboPopup.classList.remove('show');
+        });
+        
+        // Open combo selection modal
+        openComboModal.addEventListener('click', () => {
+            comboPopup.classList.remove('show');
+            comboSelectionModal.show();
+        });
+        
+        // Submit combo selection
+        submitComboSelection.addEventListener('click', () => {
+            const selectedOptions = [];
+            document.querySelectorAll('.combo-option:checked').forEach(checkbox => {
+                selectedOptions.push(checkbox.value);
+            });
+            
+            if (selectedOptions.length === 0) {
+                alert('Please select at least one internship program.');
+                return;
+            }
+            
+            // Format WhatsApp message
+            const currentDate = new Date().toLocaleDateString();
+            const message = `Internship Combo Application - ${currentDate}:\n\nSelected Programs:\n${selectedOptions.join('\n')}\n\nPlease contact me for further details.`;
+            
+            // Encode message for WhatsApp URL
+            const encodedMessage = encodeURIComponent(message);
+            const whatsappURL = `https://wa.me/917093947788?text=${encodedMessage}`;
+            
+            // Open WhatsApp
+            window.open(whatsappURL, '_blank');
+            
+            // Close modal
+            comboSelectionModal.hide();
+            
+            // Show confirmation
+            alert('Your internship combination has been submitted! We will contact you shortly via WhatsApp.');
+        });
+
+        // Existing functions
+        function scrollToInternshipCourses() {
+            document.getElementById('fullstack-internships').scrollIntoView({ 
+                behavior: 'smooth' 
+            });
+        }
+
+        function openInternshipModal(courseName) {
+            // For single internship applications, open WhatsApp with course name
+            const currentDate = new Date().toLocaleDateString();
+            const message = `Internship Application - ${currentDate}:\n\nI'm interested in the ${courseName} program.\n\nPlease contact me for further details.`;
+            const encodedMessage = encodeURIComponent(message);
+            const whatsappURL = `https://wa.me/91917093947788?text=${encodedMessage}`;
+            
+            window.open(whatsappURL, '_blank');
+        }
+
+        // SIMPLE INTERNSHIP CATEGORY FILTER - FIXED VERSION
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('Internship filter script loaded');
+            
+            const categoryButtons = document.querySelectorAll('.category-btn');
+            const categoryCount = document.getElementById('categoryCount');
+            
+            if (categoryButtons.length === 0) {
+                console.error('No category buttons found!');
+                return;
+            }
+            
+            console.log('Found category buttons:', categoryButtons.length);
+            
+            // Initialize - show all sections
+            showAllSections();
+            updateCount('all');
+            
+            // Add click events to category buttons
+            categoryButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const category = this.getAttribute('data-category');
+                    console.log('Clicked category:', category);
+                    
+                    // Remove active class from all buttons
+                    categoryButtons.forEach(btn => btn.classList.remove('active'));
+                    // Add active class to clicked button
+                    this.classList.add('active');
+                    
+                    // Filter sections
+                    if (category === 'all') {
+                        showAllSections();
+                    } else {
+                        filterSections(category);
+                    }
+                    
+                    // Update count
+                    updateCount(category);
+                });
+            });
+            
+            function showAllSections() {
+                const sections = document.querySelectorAll('.internship-category');
+                sections.forEach(section => {
+                    section.style.display = 'block';
+                });
+                console.log('Showing all sections');
+            }
+            
+            function filterSections(category) {
+                const sections = document.querySelectorAll('.internship-category');
+                
+                // Hide all sections first
+                sections.forEach(section => {
+                    section.style.display = 'none';
+                });
+                
+                // Show only the matching section
+                const targetId = getSectionId(category);
+                const targetSection = document.getElementById(targetId);
+                
+                if (targetSection) {
+                    targetSection.style.display = 'block';
+                    console.log('Showing section:', targetId);
+                    
+                    // Scroll to the section
+                    setTimeout(() => {
+                        targetSection.scrollIntoView({ 
+                            behavior: 'smooth', 
+                            block: 'start',
+                            inline: 'nearest'
+                        });
+                    }, 100);
+                } else {
+                    console.error('Section not found:', targetId);
+                    // If section not found, show all
+                    showAllSections();
+                }
+            }
+            
+            function getSectionId(category) {
+                // Map category names to section IDs
+                const sectionMap = {
+                    'fullstack': 'fullstack-internships',
+                    'frontend': 'frontend-internships',
+                    'mobile': 'mobile-internships',
+                    'data-science': 'data-science-internships',
+                    'ai-ml': 'ai-ml-internships',
+                    'devops': 'devops-internships', // This needs to match your section ID
+                    'cybersecurity': 'cybersecurity-internships',
+                    'cloud-computing': 'cloud-computing-internships',
+                    'game-dev': 'game-dev-internships'
+                };
+                
+                return sectionMap[category] || `${category}-internships`;
+            }
+            
+            function updateCount(category) {
+                let count = 0;
+                
+                if (category === 'all') {
+                    // Count all course cards
+                    const allCards = document.querySelectorAll('.course-card');
+                    count = allCards.length;
+                } else {
+                    // Count cards in specific section
+                    const targetId = getSectionId(category);
+                    const targetSection = document.getElementById(targetId);
+                    if (targetSection) {
+                        const cards = targetSection.querySelectorAll('.course-card');
+                        count = cards.length;
+                    }
+                }
+                
+                if (categoryCount) {
+                    categoryCount.textContent = count;
+                }
+                
+                console.log(`Count for ${category}: ${count}`);
+            }
+            
+            // Debug: Log all section IDs
+            console.log('All internship sections:');
+            document.querySelectorAll('.internship-category').forEach(section => {
+                console.log('-', section.id);
+            });
+        });
+
+         // Debug function - test the filter manually
+        function testFilter() {
+            console.log('Testing filter...');
+            console.log('Category buttons:', document.querySelectorAll('.category-btn').length);
+            console.log('Internship sections:', document.querySelectorAll('.internship-category').length);
+            
+            // Test clicking "Frontend" button
+            const frontendBtn = document.querySelector('[data-category="frontend"]');
+            if (frontendBtn) {
+                console.log('Clicking frontend button...');
+                frontendBtn.click();
+            }
+        }
+    </script>
+</body>
+</html>

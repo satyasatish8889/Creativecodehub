@@ -1,0 +1,2420 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Dashboard - Creative Code Hub</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #6C63FF;
+            --secondary-color: #4D44DB;
+            --accent-color: #FF6584;
+            --light-bg: #F8F9FA;
+            --dark-text: #2D3748;
+            --light-text: #718096;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--light-bg);
+            color: var(--dark-text);
+        }
+        
+        .dashboard-container {
+            display: flex;
+            min-height: 100vh;
+            background-color: #f5f7fa;
+        }
+        
+        /* Sidebar Styles */
+        .sidebar {
+            background-color: white;
+            box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+            padding: 20px 0;
+            position: fixed;
+            width: 250px;
+            height: 100vh;
+            overflow-y: auto;
+            z-index: 1000;
+        }
+        
+        .profile-card {
+            text-align: center;
+            padding: 20px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .profile-img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 15px;
+            border: 3px solid var(--primary-color);
+        }
+        
+        .nav-link {
+            color: var(--dark-text);
+            padding: 12px 25px;
+            margin: 5px 10px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            display: block;
+            text-decoration: none;
+        }
+        
+        .nav-link:hover, .nav-link.active {
+            background-color: rgba(108, 99, 255, 0.1);
+            color: var(--primary-color);
+        }
+        
+        .nav-link i {
+            margin-right: 10px;
+            width: 20px;
+            text-align: center;
+        }
+        
+        /* Main Content Styles */
+        .main-content {
+            flex: 1;
+            margin-left: 250px;
+            padding: 30px;
+            background-color: #f5f7fa;
+            min-height: 100vh;
+        }
+        
+        .welcome-section {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 30px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+        }
+        
+        .header {
+            padding: 15px 0;
+            background: white;
+            padding: 15px 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            margin-bottom: 30px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .stat-card {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            margin-bottom: 0;
+            height: 100%;
+            transition: all 0.3s ease;
+            border: 1px solid #f0f0f0;
+            height: 100%;
+        }
+        
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            border-color: #e0e0e0;
+        }
+        
+        .stat-number {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--primary-color);
+            margin: 10px 0;
+        }
+        
+        .project-card {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 15px;
+            border-left: 4px solid var(--primary-color);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        
+        .project-title {
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+        
+        .project-due {
+            font-size: 0.9rem;
+            color: var(--light-text);
+        }
+        
+        .activity-item {
+            padding: 10px 0;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .activity-time {
+            font-size: 0.8rem;
+            color: var(--light-text);
+        }
+        
+        .badge {
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-weight: 500;
+        }
+        
+        .badge-warning {
+            background-color: #FFF3CD;
+            color: #856404;
+        }
+        
+        .badge-success {
+            background-color: #D4EDDA;
+            color: #155724;
+        }
+        
+        .badge-info {
+            background-color: #D1ECF1;
+            color: #0C5460;
+        }
+        
+        .profile-dropdown {
+            position: absolute;
+            top: 60px;
+            right: 20px;
+            background-color: white;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            display: none;
+        }
+        
+        .profile-dropdown a {
+            text-decoration: none;
+            color: var(--dark-text);
+        }
+        
+        .profile-dropdown a:hover {
+            color: var(--primary-color);
+        }
+        
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            background-color: white;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .user-profile {
+            display: flex;
+            align-items: center;
+        }
+        
+        .user-profile img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+        
+        .user-profile span {
+            font-weight: 600;
+        }
+        
+        .profile-dropdown {
+            position: absolute;
+            top: 60px;
+            right: 20px;
+            background-color: white;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            display: none;
+        }
+        
+        .profile-dropdown a {
+            text-decoration: none;
+            color: var(--dark-text);
+        }
+        
+        .profile-dropdown a:hover {
+            color: var(--primary-color);
+        }
+        
+        .dashboard-content {
+            padding: 20px;
+        }
+        
+        .dashboard-cards {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+        
+        .card {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        
+        .card-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.5rem;
+        }
+        
+        .bg-purple {
+            background-color: #6C63FF;
+            color: white;
+        }
+        
+        .bg-blue {
+            background-color: #4D44DB;
+            color: white;
+        }
+        
+        .bg-pink {
+            background-color: #FF6584;
+            color: white;
+        }
+        
+        .progress-section {
+            margin-bottom: 20px;
+        }
+        
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        
+        .progress-bar {
+            width: 100%;
+            height: 6px;
+            background-color: #ddd;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        
+        .progress-fill {
+            width: 56%;
+            height: 100%;
+            background-color: var(--primary-color);
+        }
+        
+        .progress-details {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 10px;
+        }
+        
+        .calendar-section {
+            margin-bottom: 20px;
+        }
+        
+        .calendar-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        
+        .calendar-nav-buttons {
+            display: flex;
+            justify-content: space-between;
+            width: 100px;
+        }
+        
+        .calendar-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            grid-gap: 10px;
+        }
+        
+        .practice-section {
+            margin-bottom: 20px;
+        }
+        
+        .practice-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        
+        .project-card {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            margin-bottom: 15px;
+        }
+        
+        .project-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 10px;
+        }
+        
+        .project-status {
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-weight: 500;
+        }
+        
+        .status-completed {
+            background-color: #D4EDDA;
+            color: #155724;
+        }
+        
+        .status-in-progress {
+            background-color: #FFF3CD;
+            color: #856404;
+        }
+        
+        .status-pending {
+            background-color: #D1ECF1;
+            color: #0C5460;
+        }
+    </style>
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar">
+            <div class="profile-card text-center">
+                <img src="{{ url_for('static', filename='images/' + user.profile_pic) }}" 
+                     alt="{{ user.name }}'s Profile" 
+                     class="profile-img img-fluid mb-3">
+                <h5 class="mb-1 fw-bold">{{ user.name }}</h5>
+                <p class="text-muted small">Student Member</p>
+            </div>
+            
+           <nav class="nav flex-column mt-4 px-3">
+    <a href="#" class="nav-link active mb-2 rounded-3" data-section="dashboard">
+        <i class="fas fa-home me-2"></i> Dashboard
+    </a>
+    <a href="#" class="nav-link mb-2 rounded-3" data-section="courses">
+        <i class="fas fa-book me-2"></i> My Courses
+    </a>
+    <a href="#" class="nav-link mb-2 rounded-3" data-section="projects">
+        <i class="fas fa-project-diagram me-2"></i> Projects
+    </a>
+    <a href="#" class="nav-link mb-2 rounded-3" data-section="assignments">
+        <i class="fas fa-tasks me-2"></i> Assignments
+    </a>
+    <a href="#" class="nav-link mb-2 rounded-3" data-section="progress">
+        <i class="fas fa-chart-line me-2"></i> Progress
+    </a>
+    <a href="#" class="nav-link mb-2 rounded-3" data-section="settings">
+        <i class="fas fa-cog me-2"></i> Settings
+    </a>
+    <div class="mt-4 pt-3 border-top">
+        <a href="{{ url_for('logout') }}" class="nav-link text-danger">
+            <i class="fas fa-sign-out-alt me-2"></i> Logout
+        </a>
+    </div>
+</nav>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="main-content">
+            <!-- Top Navigation Bar -->
+            <header class="header d-flex justify-content-between align-items-center mb-4">
+                <h1 class="h4 mb-0 fw-bold">Internship Dashboard</h1>
+                
+                <!-- User Profile Dropdown -->
+                <div class="user-profile position-relative">
+                    <div class="d-flex align-items-center cursor-pointer" onclick="toggleProfileDropdown()">
+                        <img src="https://via.placeholder.com/40" 
+                             alt="User Profile" 
+                             class="rounded-circle me-2 border"
+                             id="profile-image">
+                        <span class="fw-medium" id="username-display">{{ user.name }}</span>
+                        <i class="fas fa-chevron-down ms-2 small"></i>
+                    </div>
+                    
+                    <!-- Dropdown Menu -->
+                    <div class="profile-dropdown shadow-sm" id="profile-dropdown">
+                        <a href="#" class="dropdown-item">
+                            <i class="fas fa-user me-2"></i> My Profile
+                        </a>
+                        <a href="#" class="dropdown-item">
+                            <i class="fas fa-cog me-2"></i> Account Settings
+                        </a>
+                        <div class="dropdown-divider"></div>
+                        <a href="{{ url_for('logout') }}" class="dropdown-item text-danger" id="logout-btn">
+                            <i class="fas fa-sign-out-alt me-2"></i> Logout
+                        </a>
+                    </div>
+                </div>
+            </header>
+            
+            <!-- Dashboard Content -->
+            <div class="dashboard-content" id="dashboard-content">
+                <!-- Welcome Banner -->
+                <div class="welcome-banner bg-primary text-white p-4 rounded-3 mb-4">
+                    <div class="d-flex align-items-center">
+                        <div class="flex-grow-1">
+                            <h2 class="h4 mb-1">Welcome back, {{ user.name.split(' ')[0] }}! 👋</h2>
+                            <p class="mb-0 opacity-75">Here's what's happening with your internship today</p>
+                        </div>
+                        <div class="ms-3">
+                            <span class="badge bg-white text-primary p-2">{{ current_date }}</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Stats Overview -->
+                <div class="row g-4 mb-4">
+                    <!-- Active Projects -->
+                    <div class="col-md-6 col-lg-3">
+                        <div class="stat-card h-100">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div>
+                                    <h6 class="text-uppercase text-muted small mb-1">Active Projects</h6>
+                                    <h3 class="mb-0">{{ stats.active_projects|default(0) }}</h3>
+                                </div>
+                                <div class="icon-circle bg-primary-light">
+                                    <i class="fas fa-project-diagram text-primary"></i>
+                                </div>
+                            </div>
+                            {% set projects_progress = (stats.active_projects / 10 * 100)|int %}
+                            {% set projects_progress = [projects_progress, 100]|min %}
+                            <div class="progress mt-3" style="height: 4px;">
+                                <div class="progress-bar bg-primary" 
+                                     style="width: {{ projects_progress }}%;">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Tasks Completed -->
+                    <div class="col-md-6 col-lg-3">
+                        <div class="stat-card h-100">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div>
+                                    <h6 class="text-uppercase text-muted small mb-1">Tasks Completed</h6>
+                                    <h3 class="mb-0">{{ stats.tasks_completed|default('0/0') }}</h3>
+                                </div>
+                                <div class="icon-circle bg-success-light">
+                                    <i class="fas fa-check-circle text-success"></i>
+                                </div>
+                            </div>
+                            {% set tasks = stats.tasks_completed.split('/') %}
+                            {% set tasks_completed = tasks[0]|int if tasks|length >= 1 and tasks[0].isdigit() else 0 %}
+                            {% set total_tasks = tasks[1]|int if tasks|length >= 2 and tasks[1].isdigit() else 1 %}
+                            {% set tasks_progress = (tasks_completed / total_tasks * 100) if total_tasks > 0 else 0 %}
+                            {% set tasks_progress = [tasks_progress|round|int, 100]|min %}
+                            <div class="progress mt-3" style="height: 4px;">
+                                <div class="progress-bar bg-success" 
+                                     style="width: {{ tasks_progress }}%;">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Hours This Week -->
+                    <div class="col-md-6 col-lg-3">
+                        <div class="stat-card h-100">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div>
+                                    <h6 class="text-uppercase text-muted small mb-1">Hours This Week</h6>
+                                    <h3 class="mb-0">{{ stats.hours_this_week|default(0)|round(1) }}</h3>
+                                </div>
+                                <div class="icon-circle bg-warning-light">
+                                    <i class="fas fa-clock text-warning"></i>
+                                </div>
+                            </div>
+                            {% set hours_progress = [(stats.hours_this_week / 40 * 100)|round|int, 100]|min %}
+                            <div class="progress mt-3" style="height: 4px;">
+                                <div class="progress-bar bg-warning" 
+                                     style="width: {{ hours_progress }}%;">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Upcoming Deadlines -->
+                    <div class="col-md-6 col-lg-3">
+                        <div class="stat-card h-100">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div>
+                                    <h6 class="text-uppercase text-muted small mb-1">Upcoming Deadlines</h6>
+                                    <h3 class="mb-0">{{ stats.upcoming_deadlines|default(0) }}</h3>
+                                </div>
+                                <div class="icon-circle bg-danger-light">
+                                    <i class="fas fa-calendar-alt text-danger"></i>
+                                </div>
+                            </div>
+                            {% set deadlines_progress = [(stats.upcoming_deadlines / 5 * 100)|round|int, 100]|min %}
+                            <div class="progress mt-3" style="height: 4px;">
+                                <div class="progress-bar bg-danger" 
+                                     style="width: {{ deadlines_progress }}%;">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Main Content Grid -->
+                <div class="row g-4">
+                    <!-- Projects Column -->
+                    <div class="col-lg-8">
+                        <div class="card border-0 shadow-sm h-100">
+                            <div class="card-header bg-white border-0 d-flex justify-content-between align-items-center py-3">
+                                <h5 class="mb-0 fw-bold">Active Projects</h5>
+                                <a href="#" class="btn btn-sm btn-outline-primary">View All</a>
+                            </div>
+                            <div class="card-body p-0">
+                                <div class="list-group list-group-flush">
+                                    <!-- Project Item 1 -->
+                                    <div class="list-group-item border-0 py-3">
+                                        <div class="d-flex align-items-center">
+                                            <div class="flex-shrink-0 me-3">
+                                                <div class="icon-circle bg-primary-light">
+                                                    <i class="fas fa-code text-primary"></i>
+                                                </div>
+                                            </div>
+                                            <div class="flex-grow-1">
+                                                <h6 class="mb-1 fw-semibold">Web Application Development</h6>
+                                                <p class="text-muted small mb-0">Frontend development with React</p>
+                                                <div class="progress mt-2" style="height: 6px;">
+                                                    <div class="progress-bar bg-primary" style="width: 75%"></div>
+                                                </div>
+                                                <div class="d-flex justify-content-between mt-1">
+                                                    <small class="text-muted">75% Complete</small>
+                                                    <small class="text-muted">Due in 3 days</small>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- Project Item 2 -->
+                                    <div class="list-group-item border-0 py-3">
+                                        <div class="d-flex align-items-center">
+                                            <div class="flex-shrink-0 me-3">
+                                                <div class="icon-circle bg-success-light">
+                                                    <i class="fas fa-database text-success"></i>
+                                                </div>
+                                            </div>
+                                            <div class="flex-grow-1">
+                                                <h6 class="mb-1 fw-semibold">Database Optimization</h6>
+                                                <p class="text-muted small mb-0">Improving query performance</p>
+                                                <div class="progress mt-2" style="height: 6px;">
+                                                    <div class="progress-bar bg-success" style="width: 45%"></div>
+                                                </div>
+                                                <div class="d-flex justify-content-between mt-1">
+                                                    <small class="text-muted">45% Complete</small>
+                                                    <small class="text-muted">Due in 1 week</small>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Upcoming Tasks Column -->
+                    <div class="col-lg-4">
+                        <div class="card border-0 shadow-sm h-100">
+                            <div class="card-header bg-white border-0 d-flex justify-content-between align-items-center py-3">
+                                <h5 class="mb-0 fw-bold">Upcoming Tasks</h5>
+                                <a href="#" class="btn btn-sm btn-outline-primary">+ Add</a>
+                            </div>
+                            <div class="card-body p-0">
+                                <div class="list-group list-group-flush">
+                                    <!-- Task Item 1 -->
+                                    <div class="list-group-item border-0 py-2">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" value="" id="task1">
+                                            <label class="form-check-label" for="task1">
+                                                <span class="d-block fw-medium">Review pull request #42</span>
+                                                <small class="text-muted">Today, 3:00 PM</small>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <!-- Task Item 2 -->
+                                    <div class="list-group-item border-0 py-2">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" value="" id="task2">
+                                            <label class="form-check-label" for="task2">
+                                                <span class="d-block fw-medium">Update project documentation</span>
+                                                <small class="text-muted">Tomorrow, 10:00 AM</small>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <!-- Task Item 3 -->
+                                    <div class="list-group-item border-0 py-2">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" value="" id="task3">
+                                            <label class="form-check-label" for="task3">
+                                                <span class="d-block fw-medium">Team standup meeting</span>
+                                                <small class="text-muted">Tomorrow, 11:30 AM</small>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                            </div>
+                            <div class="card-icon bg-purple">
+                                <i class="fas fa-project-diagram"></i>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="card">
+                        <div class="card-header">
+                            <div>
+                                <h3>12</h3>
+                                <p>Completed Tasks</p>
+                            </div>
+                            <div class="card-icon bg-blue">
+                                <i class="fas fa-check-circle"></i>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="card">
+                        <div class="card-header">
+                            <div>
+                                <h3>3</h3>
+                                <p>Pending Reviews</p>
+                            </div>
+                            <div class="card-icon bg-pink">
+                                <i class="fas fa-clock"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Progress Section -->
+                <div class="progress-section">
+                    <div class="section-header">
+                        <h2>Internship Progress</h2>
+                        <span>Day 17 of 30</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill"></div>
+                    </div>
+                    <div class="progress-details">
+                        <span>56% Completed</span>
+                        <span>44% Remaining</span>
+                    </div>
+                </div>
+                
+                <!-- Calendar Section -->
+                <div class="calendar-section">
+                    <div class="section-header">
+                        <h2>Internship Calendar</h2>
+                        <button class="btn btn-primary" id="view-full-calendar">View Full Calendar</button>
+                    </div>
+                    
+                    <div class="calendar-nav">
+                        <h3>Python & Java Course (30 Days)</h3>
+                        <div class="calendar-nav-buttons">
+                            <button id="prev-week"><i class="fas fa-chevron-left"></i></button>
+                            <button id="next-week"><i class="fas fa-chevron-right"></i></button>
+                        </div>
+                    </div>
+                    
+                    <div class="calendar-grid" id="calendar-grid">
+                        <!-- Calendar days will be populated by JavaScript -->
+                    </div>
+                </div>
+                
+                <!-- Practice Section -->
+                <div class="practice-section" id="practice-section">
+                    <div class="practice-header">
+                        <h2 id="practice-title">Today's Practice: Java Strings</h2>
+                        <div>
+                            <button class="btn btn-outline" id="toggle-hint">Show Hint</button>
+                            <button class="btn btn-primary" id="submit-solution">Submit Solution</button>
+                        </div>
+                    </div>
+                    
+                    <div id="practice-content-container"></div>
+                </div>
+                
+                <!-- Projects Section -->
+                <div class="section-header">
+                    <h2>Current Projects</h2>
+                    <button class="btn btn-primary" id="view-all-projects">View All</button>
+                </div>
+                
+                <div class="projects-grid" id="projects-grid">
+                    <div class="project-card">
+                        <h3>Python Calculator App</h3>
+                        <p>Build a calculator application with Python that handles basic arithmetic operations.</p>
+                        <div class="project-meta">
+                            <span>Due: Day 10</span>
+                            <span class="project-status status-completed">Completed</span>
+                        </div>
+                    </div>
+                    
+                    <div class="project-card">
+                        <h3>Java Student Management</h3>
+                        <p>Create a Java program to manage student records with OOP principles.</p>
+                        <div class="project-meta">
+                            <span>Due: Day 25</span>
+                            <span class="project-status status-in-progress">In Progress</span>
+                        </div>
+                    </div>
+                    
+                    <div class="project-card">
+                        <h3>Final Portfolio Project</h3>
+                        <p>Combine Python and Java skills to build a comprehensive portfolio project.</p>
+                        <div class="project-meta">
+                            <span>Due: Day 30</span>
+                            <span class="project-status status-pending">Pending</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Other Sections (initially hidden) -->
+            <div class="section-content" id="projects-content" style="display: none;">
+                <h2>Projects</h2>
+                <p>All your projects will be listed here.</p>
+            </div>
+            
+            <div class="section-content" id="assignments-content" style="display: none;">
+                <h2>Assignments</h2>
+                <p>Your assignments will appear here.</p>
+            </div>
+            
+            <div class="section-content" id="schedule-content" style="display: none;">
+                <h2>Schedule</h2>
+                <p>Your schedule will be displayed here.</p>
+            </div>
+            
+            <div class="section-content" id="learning-path-content" style="display: none;">
+                <h2>Learning Path</h2>
+                <p>Your learning path will be shown here.</p>
+            </div>
+            
+            <div class="section-content" id="messages-content" style="display: none;">
+                <h2>Messages</h2>
+                <p>Your messages will appear here.</p>
+            </div>
+            
+            <div class="section-content" id="settings-content" style="display: none;">
+                <h2>Settings</h2>
+                <p>Configure your settings here.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Full Calendar Modal -->
+    <div class="modal" id="calendar-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Full Internship Calendar</h2>
+                <button class="modal-close" id="close-calendar-modal">&times;</button>
+            </div>
+            <div id="full-calendar-content">
+                <!-- Full calendar content will be inserted here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Projects Modal -->
+    <div class="modal" id="projects-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>All Projects</h2>
+                <button class="modal-close" id="close-projects-modal">&times;</button>
+            </div>
+            <div id="all-projects-content">
+                <!-- All projects content will be inserted here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Notification -->
+    <div class="notification" id="notification">
+        <span id="notification-message">Notification message</span>
+    </div>
+
+    <script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Get DOM elements
+    const profileImage = document.getElementById('profile-image');
+    const profileDropdown = document.getElementById('profile-dropdown');
+    const usernameDisplay = document.getElementById('username-display');
+    const logoutBtn = document.getElementById('logout-btn');
+
+    // Check if user is logged in (you would typically check session/cookies)
+    const isLoggedIn = checkLoginStatus(); // Implement this function based on your auth system
+
+    // Update UI based on login status
+    if (isLoggedIn) {
+        // Get user data (replace with your actual user data retrieval)
+        const userData = getUserData();
+        usernameDisplay.textContent = userData.name;
+        
+        // Update profile image if available
+        if (userData.profilePic) {
+            profileImage.src = userData.profilePic;
+        }
+    } else {
+        usernameDisplay.textContent = "Guest";
+    }
+
+    // Toggle dropdown visibility
+    profileImage.addEventListener('click', function() {
+        profileDropdown.style.display = profileDropdown.style.display === 'block' ? 'none' : 'block';
+    });
+
+    // Close dropdown when clicking outside
+    document.addEventListener('click', function(event) {
+        if (!event.target.closest('.user-profile')) {
+            profileDropdown.style.display = 'none';
+        }
+    });
+
+    // Logout functionality
+    logoutBtn.addEventListener('click', function(e) {
+        e.preventDefault();
+        
+        // Clear user session (implementation depends on your auth system)
+        clearUserSession();
+        
+        // Redirect to login page
+        window.location.href = '/login'; // Update with your login route
+    });
+
+    // Helper functions (implement these according to your authentication system)
+    function checkLoginStatus() {
+        // Check cookies, localStorage, or session to verify login
+        // Example:
+        return localStorage.getItem('authToken') !== null;
+    }
+
+    function getUserData() {
+        // Retrieve user data from your storage
+        // Example:
+        return JSON.parse(localStorage.getItem('userData')) || { name: 'User' };
+    }
+
+    function clearUserSession() {
+        // Clear all authentication-related data
+        // Example:
+        localStorage.removeItem('authToken');
+        localStorage.removeItem('userData');
+        // Also clear session cookies if used
+    }
+});
+</script>
+
+    <script>
+        // Practice content for all 30 days
+        const practiceContent = {
+            1: {
+                title: "Python Basics",
+                code: `# Python Basics Example
+print("Hello, World!")  # This prints a string
+
+# Variables
+x = 5
+y = "John"
+print(x)
+print(y)`,
+                exercise: {
+                    title: "Exercise 1: First Python Program",
+                    task: `<p>Create a Python program that:</p>
+                    <ol>
+                        <li>Prints "Welcome to Creative Code"</li>
+                        <li>Creates a variable called <code>name</code> with your name</li>
+                        <li>Creates a variable called <code>age</code> with your age</li>
+                        <li>Prints both variables</li>
+                    </ol>`,
+                    hint: "<strong>Hint:</strong> Use the print() function to output text. Remember Python is case-sensitive!"
+                }
+            },
+            2: {
+                title: "Variables & Data Types",
+                code: `# Variables and Data Types Example
+name = "Alice"  # String
+age = 25        # Integer
+height = 5.6    # Float
+is_student = True  # Boolean
+
+print(type(name))
+print(type(age))
+print(type(height))
+print(type(is_student)))`,
+                exercise: {
+                    title: "Exercise 1: Variable Practice",
+                    task: `<p>Create a Python program that:</p>
+                    <ol>
+                        <li>Creates variables for your favorite book (string), its publication year (integer), and rating (float)</li>
+                        <li>Prints each variable with a descriptive message</li>
+                        <li>Prints the data type of each variable</li>
+                    </ol>`,
+                    hint: "<strong>Hint:</strong> Use the type() function to check data types. Remember to use meaningful variable names!"
+                }
+            },
+            3: {
+                title: "Operators & Expressions",
+                code: `# Operators and Expressions Example
+x = 10
+y = 3
+
+# Arithmetic operators
+print(x + y)  # Addition
+print(x - y)  # Subtraction
+print(x * y)  # Multiplication
+print(x / y)  # Division
+print(x % y)  # Modulus
+print(x ** y) # Exponentiation
+
+# Comparison operators
+print(x == y) # Equal to
+print(x != y) # Not equal
+print(x > y)  # Greater than`,
+                exercise: {
+                    title: "Exercise 1: Calculator Operations",
+                    task: `<p>Create a Python program that:</p>
+                    <ol>
+                        <li>Takes two numbers as input</li>
+                        <li>Performs all basic arithmetic operations on them</li>
+                        <li>Compares them using comparison operators</li>
+                        <li>Prints all results with clear labels</li>
+                    </ol>`,
+                    hint: "<strong>Hint:</strong> Use input() to get user input. Remember to convert strings to numbers with int() or float()!"
+                }
+            },
+            4: {
+                title: "Control Flow",
+                code: `# Control Flow Example
+age = 20
+
+# If-elif-else
+if age < 13:
+    print("Child")
+elif age < 20:
+    print("Teenager")
+else:
+    print("Adult")
+
+# While loop
+count = 0
+while count < 5:
+    print(count)
+    count += 1`,
+                exercise: {
+                    title: "Exercise 1: Grade Classifier",
+                    task: `<p>Create a Python program that:</p>
+                    <ol>
+                        <li>Takes a numerical grade as input (0-100)</li>
+                        <li>Uses if-elif-else to classify the grade (A, B, C, D, F)</li>
+                        <li>Uses a while loop to print numbers from 1 to the grade value (if grade is less than 10)</li>
+                        <li>Prints appropriate messages for each case</li>
+                    </ol>`,
+                    hint: "<strong>Hint:</strong> For the while loop, remember to include a condition that will eventually become false to avoid infinite loops!"
+                }
+            },
+            5: {
+                title: "Functions",
+                code: `# Functions Example
+def greet(name):
+    return "Hello " + name
+
+def add_numbers(a, b):
+    return a + b
+
+result = greet("Alice")
+print(result)  # Output: Hello Alice
+
+sum = add_numbers(5, 3)
+print(sum)    # Output: 8`,
+                exercise: {
+                    title: "Exercise 1: Create a Calculator Function",
+                    task: `<p>Create a Python program with functions that:</p>
+                    <ol>
+                        <li>Has a function called <code>add</code> that takes two numbers and returns their sum</li>
+                        <li>Has a function called <code>subtract</code> that takes two numbers and returns their difference</li>
+                        <li>Calls both functions with example numbers and prints the results</li>
+                    </ol>`,
+                    hint: "<strong>Hint:</strong> Use the <code>def</code> keyword to define functions. Remember to use <code>return</code> to send back results."
+                }
+            },
+            6: {
+                title: "Lists & Tuples",
+                code: `# Lists and Tuples Example
+# List (mutable)
+fruits = ["apple", "banana", "cherry"]
+fruits.append("orange")
+print(fruits[1])  # banana
+
+# Tuple (immutable)
+colors = ("red", "green", "blue")
+print(colors[2])  # blue
+
+# List operations
+numbers = [1, 2, 3]
+numbers.extend([4, 5])
+print(numbers)    # [1, 2, 3, 4, 5]`,
+                exercise: {
+                    title: "Exercise 1: List Manipulation",
+                    task: `<p>Create a Python program that:</p>
+                    <ol>
+                        <li>Creates a list of your favorite foods</li>
+                        <li>Adds two more items to the list</li>
+                        <li>Removes one item from the list</li>
+                        <li>Creates a tuple of your favorite colors</li>
+                        <li>Prints both the modified list and the tuple</li>
+                    </ol>`,
+                    hint: "<strong>Hint:</strong> Use append() to add to lists and del or remove() to remove items. Remember tuples can't be modified after creation!"
+                }
+            },
+            7: {
+                title: "Dictionaries & Sets",
+                code: `# Dictionaries and Sets Example
+# Dictionary (key-value pairs)
+person = {
+    "name": "Alice",
+    "age": 25,
+    "city": "New York"
+}
+print(person["name"])  # Alice
+
+# Set (unique elements)
+fruits = {"apple", "banana", "cherry", "apple"}
+print(fruits)  # {'banana', 'apple', 'cherry'}`,
+                exercise: {
+                    title: "Exercise 1: Dictionary and Set Practice",
+                    task: `<p>Create a Python program that:</p>
+                    <ol>
+                        <li>Creates a dictionary with information about yourself (name, age, skills)</li>
+                        <li>Adds a new key-value pair to the dictionary</li>
+                        <li>Creates a set of programming languages you know</li>
+                        <li>Adds a new language to the set</li>
+                        <li>Prints both the dictionary and the set</li>
+                    </ol>`,
+                    hint: "<strong>Hint:</strong> Use square brackets [] to access dictionary elements. Sets automatically remove duplicates!"
+                }
+            },
+            8: {
+                title: "Python Modules",
+                code: `# Python Modules Example
+# File: mymodule.py
+"""
+def greet(name):
+    print("Hello", name)
+
+def add(a, b):
+    return a + b
+"""
+
+# Using the module
+import mymodule
+
+mymodule.greet("Alice")
+result = mymodule.add(5, 3)
+print(result)  # 8
+
+# Alternative import
+from math import sqrt
+print(sqrt(16))  # 4.0`,
+                exercise: {
+                    title: "Exercise 1: Create and Use a Module",
+                    task: `<p>Create a Python program that:</p>
+                    <ol>
+                        <li>Creates a module called <code>calculator.py</code> with add, subtract, multiply functions</li>
+                        <li>Creates a main program that imports and uses these functions</li>
+                        <li>Also imports and uses the sqrt function from math module</li>
+                        <li>Prints results of all operations</li>
+                    </ol>`,
+                    hint: "<strong>Hint:</strong> Save your module in the same directory as your main program. Use from...import for specific functions."
+                }
+            },
+            9: {
+                title: "File Handling",
+                code: `# File Handling Example
+# Writing to a file
+with open("example.txt", "w") as file:
+    file.write("Hello, World!\\n")
+    file.write("This is a second line\\n")
+
+# Reading from a file
+with open("example.txt", "r") as file:
+    content = file.read()
+    print(content)`,
+                exercise: {
+                    title: "Exercise 1: File Operations",
+                    task: `<p>Create a Python program that:</p>
+                    <ol>
+                        <li>Creates a new file called <code>notes.txt</code></li>
+                        <li>Writes three lines of text to the file</li>
+                        <li>Reads the file and prints its contents</li>
+                        <li>Appends one more line to the file</li>
+                        <li>Reads and prints the file again</li>
+                    </ol>`,
+                    hint: "<strong>Hint:</strong> Use 'w' mode for writing (overwrites), 'a' for appending, and 'r' for reading. The with statement automatically closes the file."
+                }
+            },
+            10: {
+                title: "OOP in Python",
+                code: `# OOP in Python Example
+class Person:
+    def __init__(self, name, age):
+        self.name = name
+        self.age = age
+    
+    def greet(self):
+        print(f"Hello, my name is {self.name} and I'm {self.age} years old.")
+
+# Create object
+person1 = Person("Alice", 25)
+person1.greet()  # Hello, my name is Alice and I'm 25 years old.`,
+                exercise: {
+                    title: "Exercise 1: Create a Class",
+                    task: `<p>Create a Python program that:</p>
+                    <ol>
+                        <li>Defines a <code>Book</code> class with title, author, and year attributes</li>
+                        <li>Includes a method that returns a formatted string with book info</li>
+                        <li>Creates two book objects</li>
+                        <li>Calls the info method for each book and prints the results</li>
+                    </ol>`,
+                    hint: "<strong>Hint:</strong> The __init__ method is the constructor. Remember to include self as the first parameter in methods!"
+                }
+            },
+            11: {
+                title: "Python Projects",
+                code: `# Python Project Structure Example
+"""
+project/
+│── main.py
+│── utils/
+│   │── __init__.py
+│   │── helpers.py
+│── tests/
+│   │── test_helpers.py
+"""
+
+# File: utils/helpers.py
+"""
+def format_name(first, last):
+    return f"{first} {last}".title()
+"""
+
+# File: main.py
+"""
+from utils.helpers import format_name
+
+name = format_name("john", "doe")
+print(name)  # John Doe
+"""`,
+                exercise: {
+                    title: "Exercise 1: Organize a Project",
+                    task: `<p>Create a small Python project that:</p>
+                    <ol>
+                        <li>Has a main script that uses functions from a module</li>
+                        <li>Organizes code into appropriate directories</li>
+                        <li>Includes at least one test file</li>
+                        <li>Demonstrates importing between modules</li>
+                    </ol>`,
+                    hint: "<strong>Hint:</strong> Use __init__.py files to make directories importable as packages. Keep related functionality together."
+                }
+            },
+            12: {
+                title: "Java Intro",
+                code: `// Java Introduction Example
+public class Main {
+    public static void main(String[] args) {
+        System.out.println("Hello World");
+        int myNum = 15;
+        System.out.println(myNum);
+    }
+}`,
+                exercise: {
+                    title: "Exercise 1: First Java Program",
+                    task: `<p>Create a Java program that:</p>
+                    <ol>
+                        <li>Prints "Welcome to Java Programming"</li>
+                        <li>Declares an integer variable called <code>courseDays</code> with value 30</li>
+                        <li>Prints the variable</li>
+                    </ol>`,
+                    hint: "<strong>Hint:</strong> Java programs must have a main method. Use System.out.println() for output."
+                }
+            },
+            13: {
+                title: "Java Syntax",
+                code: `// Java Syntax Example
+public class Main {
+    public static void main(String[] args) {
+        // Variables
+        String name = "John";
+        int age = 24;
+        double height = 5.9;
+        
+        // Output
+        System.out.println("Name: " + name);
+        System.out.println("Age: " + age);
+        System.out.println("Height: " + height + " feet");
+        
+        // If statement
+        if (age >= 18) {
+            System.out.println(name + " is an adult");
+        }
+    }
+}`,
+                exercise: {
+                    title: "Exercise 1: Java Syntax Practice",
+                    task: `<p>Create a Java program that:</p>
+                    <ol>
+                        <li>Declares variables for your name (String), age (int), and GPA (double)</li>
+                        <li>Prints all variables with descriptive messages</li>
+                        <li>Uses an if statement to check if GPA is above 3.5 and prints a message</li>
+                    </ol>`,
+                    hint: "<strong>Hint:</strong> Java is strongly typed - declare variable types explicitly. Use + for string concatenation."
+                }
+            },
+            14: {
+                title: "Java Variables",
+                code: `// Java Variables Example
+public class Main {
+    public static void main(String[] args) {
+        // Primitive types
+        byte smallNum = 100;
+        short mediumNum = 5000;
+        int number = 100000;
+        long bigNumber = 15000000000L;
+        float decimal = 5.75f;
+        double precise = 19.99d;
+        boolean isJavaFun = true;
+        char letter = 'A';
+        
+        // Print variables
+        System.out.println(number);
+        System.out.println(isJavaFun);
+        System.out.println(letter);
+        
+        // Final (constant) variable
+        final int BIRTH_YEAR = 1985;
+        System.out.println(BIRTH_YEAR);
+    }
+}`,
+                exercise: {
+                    title: "Exercise 1: Variable Types",
+                    task: `<p>Create a Java program that:</p>
+                    <ol>
+                        <li>Declares variables of all primitive types with appropriate values</li>
+                        <li>Declares a final variable for PI (3.14159)</li>
+                        <li>Prints all variables with their types</li>
+                        <li>Attempts to change the final variable (observe the error)</li>
+                    </ol>`,
+                    hint: "<strong>Hint:</strong> Use descriptive variable names. Remember the 'L', 'f', 'd' suffixes for long, float, double literals."
+                }
+            },
+            15: {
+                title: "Java Data Types",
+                code: `// Java Data Types Example
+public class Main {
+    public static void main(String[] args) {
+        // Primitive data types
+        int num = 5;               // Integer
+        float floatNum = 5.99f;    // Floating point
+        char letter = 'D';         // Character
+        boolean bool = true;       // Boolean
+        
+        // Non-primitive data types
+        String text = "Hello";     // String
+        int[] numbers = {1, 2, 3}; // Array
+        
+        System.out.println(num);
+        System.out.println(text);
+        System.out.println(numbers[0]);
+        
+        // Type casting
+        double myDouble = 9.78;
+        int myInt = (int) myDouble; // Manual casting
+        System.out.println(myDouble);
+        System.out.println(myInt);
+    }
+}`,
+                exercise: {
+                    title: "Exercise 1: Data Type Operations",
+                    task: `<p>Create a Java program that:</p>
+                    <ol>
+                        <li>Declares variables of different primitive types</li>
+                        <li>Creates a String and an array</li>
+                        <li>Demonstrates widening and narrowing type casting</li>
+                        <li>Prints all values with appropriate messages</li>
+                    </ol>`,
+                    hint: "<strong>Hint:</strong> Widening happens automatically (small to large type), narrowing requires explicit casting. Arrays are zero-indexed."
+                }
+            },
+            16: {
+                title: "Java Operators",
+                code: `// Java Operators Example
+public class Main {
+    public static void main(String[] args) {
+        int x = 10;
+        int y = 3;
+        
+        // Arithmetic operators
+        System.out.println(x + y);  // 13
+        System.out.println(x - y);  // 7
+        System.out.println(x * y);  // 30
+        System.out.println(x / y);  // 3 (integer division)
+        System.out.println(x % y);  // 1
+        
+        // Assignment operators
+        x += 5;  // x = x + 5
+        System.out.println(x);  // 15
+        
+        // Comparison operators
+        System.out.println(x == y); // false
+        System.out.println(x != y); // true
+        System.out.println(x > y);  // true
+        
+        // Logical operators
+        boolean a = true;
+        boolean b = false;
+        System.out.println(a && b); // false
+        System.out.println(a || b); // true
+        System.out.println(!a);     // false
+    }
+}`,
+                exercise: {
+                    title: "Exercise 1: Operator Practice",
+                    task: `<p>Create a Java program that:</p>
+                    <ol>
+                        <li>Takes two numbers as input</li>
+                        <li>Performs all arithmetic operations on them</li>
+                        <li>Uses assignment operators to modify the values</li>
+                        <li>Compares them using comparison operators</li>
+                        <li>Uses logical operators with boolean variables</li>
+                        <li>Prints all results with clear labels</li>
+                    </ol>`,
+                    hint: "<strong>Hint:</strong> Use Scanner class for input. Remember that && is logical AND, || is logical OR."
+                }
+            },
+            17: {
+                title: "Java Strings",
+                code: `// Java Strings Example
+public class Main {
+    public static void main(String[] args) {
+        String greeting = "Hello World";
+        
+        // String methods
+        System.out.println(greeting.length());      // 11
+        System.out.println(greeting.toUpperCase()); // HELLO WORLD
+        System.out.println(greeting.toLowerCase()); // hello world
+        System.out.println(greeting.indexOf("World")); // 6
+        
+        // String concatenation
+        String firstName = "John";
+        String lastName = "Doe";
+        System.out.println(firstName + " " + lastName);
+        
+        // Special characters
+        System.out.println("Hello\\nWorld");  // New line
+        System.out.println("Hello\\tWorld"); // Tab
+    }
+}`,
+                exercise: {
+                    title: "Exercise 1: String Manipulation",
+                    task: `<p>Create a Java program that:</p>
+                    <ol>
+                        <li>Declares a string variable with the value "Creative Code"</li>
+                        <li>Prints the length of the string</li>
+                        <li>Prints the string in uppercase</li>
+                        <li>Prints the index of the word "Code"</li>
+                        <li>Concatenates it with another string and prints the result</li>
+                    </ol>`,
+                    hint: "<strong>Hint:</strong> Remember that string indices start at 0. Use the length(), toUpperCase(), and indexOf() methods."
+                }
+            },
+            18: {
+                title: "Java Math",
+                code: `// Java Math Example
+public class Main {
+    public static void main(String[] args) {
+        // Math methods
+        System.out.println(Math.max(5, 10));  // 10
+        System.out.println(Math.min(5, 10));  // 5
+        System.out.println(Math.sqrt(64));    // 8
+        System.out.println(Math.abs(-4.7));   // 4.7
+        System.out.println(Math.random());    // Random number between 0 and 1
+        
+        // Generate random number between 1 and 100
+        int randomNum = (int)(Math.random() * 100) + 1;
+        System.out.println(randomNum);
+    }
+}`,
+                exercise: {
+                    title: "Exercise 1: Math Operations",
+                    task: `<p>Create a Java program that:</p>
+                    <ol>
+                        <li>Calculates and prints the square root of 144</li>
+                        <li>Finds and prints the maximum of three numbers</li>
+                        <li>Generates and prints a random number between 1 and 6 (simulating a die roll)</li>
+                        <li>Calculates and prints the area of a circle with radius 7 (πr²)</li>
+                    </ol>`,
+                    hint: "<strong>Hint:</strong> Use Math.PI for π. For random numbers, multiply by the range and add the minimum value."
+                }
+            },
+            19: {
+                title: "Java Booleans",
+                code: `// Java Booleans Example
+public class Main {
+    public static void main(String[] args) {
+        boolean isJavaFun = true;
+        boolean isFishTasty = false;
+        System.out.println(isJavaFun);     // true
+        System.out.println(isFishTasty);   // false
+        
+        // Boolean expressions
+        int x = 10;
+        int y = 9;
+        System.out.println(x > y);  // true
+        System.out.println(x == 10); // true
+        System.out.println(10 == 15); // false
+        
+        // Real-life example
+        int myAge = 25;
+        int votingAge = 18;
+        System.out.println(myAge >= votingAge); // true
+        
+        if (myAge >= votingAge) {
+            System.out.println("Old enough to vote!");
+        } else {
+            System.out.println("Not old enough to vote.");
+        }
+    }
+}`,
+                exercise: {
+                    title: "Exercise 1: Boolean Logic",
+                    task: `<p>Create a Java program that:</p>
+                    <ol>
+                        <li>Declares boolean variables for weather conditions (isRaining, isSunny)</li>
+                        <li>Uses boolean expressions to compare two numbers</li>
+                        <li>Creates an age check for driving (legal age 16)</li>
+                        <li>Uses if-else to print appropriate messages based on the checks</li>
+                    </ol>`,
+                    hint: "<strong>Hint:</strong> Boolean variables can only be true or false. Use comparison operators (>, <, ==, etc.) to create boolean expressions."
+                }
+            },
+            20: {
+                title: "Java If...Else",
+                code: `// Java If...Else Example
+public class Main {
+    public static void main(String[] args) {
+        int time = 20;
+        
+        // If statement
+        if (time < 18) {
+            System.out.println("Good day.");
+        } else {
+            System.out.println("Good evening.");
+        }
+        
+        // Else if
+        if (time < 10) {
+            System.out.println("Good morning.");
+        } else if (time < 20) {
+            System.out.println("Good day.");
+        } else {
+            System.out.println("Good evening.");
+        }
+        
+        // Short hand if...else (ternary operator)
+        String result = (time < 18) ? "Good day." : "Good evening.";
+        System.out.println(result);
+    }
+}`,
+                exercise: {
+                    title: "Exercise 1: Conditional Statements",
+                    task: `<p>Create a Java program that:</p>
+                    <ol>
+                        <li>Takes user input for a test score (0-100)</li>
+                        <li>Uses if-else-if to assign a letter grade (A, B, C, D, F)</li>
+                        <li>Uses a ternary operator to print "Pass" or "Fail" (passing >= 60)</li>
+                        <li>Prints the letter grade and pass/fail status</li>
+                    </ol>`,
+                    hint: "<strong>Hint:</strong> Use Scanner for input. The ternary operator is: variable = (condition) ? expressionTrue : expressionFalse;"
+                }
+            },
+            21: {
+                title: "Java Switch",
+                code: `// Java Switch Example
+public class Main {
+    public static void main(String[] args) {
+        int day = 4;
+        
+        // Switch statement
+        switch (day) {
+            case 1:
+                System.out.println("Monday");
+                break;
+            case 2:
+                System.out.println("Tuesday");
+                break;
+            case 3:
+                System.out.println("Wednesday");
+                break;
+            case 4:
+                System.out.println("Thursday");
+                break;
+            case 5:
+                System.out.println("Friday");
+                break;
+            case 6:
+                System.out.println("Saturday");
+                break;
+            case 7:
+                System.out.println("Sunday");
+                break;
+            default:
+                System.out.println("Invalid day");
+        }
+        
+        // Enhanced switch (Java 14+)
+        String dayType = switch (day) {
+            case 1, 2, 3, 4, 5 -> "Weekday";
+            case 6, 7 -> "Weekend";
+            default -> "Invalid";
+        };
+        System.out.println(dayType);
+    }
+}`,
+                exercise: {
+                    title: "Exercise 1: Switch Statement",
+                    task: `<p>Create a Java program that:</p>
+                    <ol>
+                        <li>Takes user input for a month number (1-12)</li>
+                        <li>Uses a switch statement to print the month name</li>
+                        <li>Groups months into seasons (Winter, Spring, Summer, Fall)</li>
+                        <li>Prints both the month name and season</li>
+                    </ol>`,
+                    hint: "<strong>Hint:</strong> Don't forget break statements in regular switch. For seasons, you can use fall-through cases or enhanced switch."
+                }
+            },
+            22: {
+                title: "Java While Loop",
+                code: `// Java While Loop Example
+public class Main {
+    public static void main(String[] args) {
+        // While loop
+        int i = 0;
+        while (i < 5) {
+            System.out.println(i);
+            i++;
+        }
+        
+        // Do/while loop
+        int j = 0;
+        do {
+            System.out.println(j);
+            j++;
+        } while (j < 5);
+        
+        // Break and continue
+        int k = 0;
+        while (k < 10) {
+            if (k == 4) {
+                k++;
+                continue;  // Skip iteration
+            }
+            if (k == 8) {
+                break;     // Exit loop
+            }
+            System.out.println(k);
+            k++;
+        }
+    }
+}`,
+                exercise: {
+                    title: "Exercise 1: Loop Practice",
+                    task: `<p>Create a Java program that:</p>
+                    <ol>
+                        <li>Uses a while loop to print numbers from 1 to 10</li>
+                        <li>Uses a do-while loop to print even numbers between 20 and 30</li>
+                        <li>Uses a while loop with break to print numbers until their sum exceeds 100</li>
+                        <li>Uses continue to skip printing multiples of 3 in a loop from 1 to 20</li>
+                    </ol>`,
+                    hint: "<strong>Hint:</strong> Remember to update loop counters to avoid infinite loops. Use % operator to check for even numbers or multiples."
+                }
+            },
+            23: {
+                title: "Java For Loop",
+                code: `// Java For Loop Example
+public class Main {
+    public static void main(String[] args) {
+        // Standard for loop
+        for (int i = 0; i < 5; i++) {
+            System.out.println(i);
+        }
+        
+        // For-each loop
+        String[] cars = {"Volvo", "BMW", "Ford"};
+        for (String car : cars) {
+            System.out.println(car);
+        }
+        
+        // Nested loops
+        for (int i = 1; i <= 3; i++) {
+            for (int j = 1; j <= 3; j++) {
+                System.out.println(i + " * " + j + " = " + (i * j));
+            }
+        }
+    }
+}`,
+                exercise: {
+                    title: "Exercise 1: For Loop Challenges",
+                    task: `<p>Create a Java program that:</p>
+                    <ol>
+                        <li>Uses a for loop to print numbers from 10 to 1 (countdown)</li>
+                        <li>Uses a for-each loop to print all elements of a String array</li>
+                        <li>Uses nested for loops to print a 5x5 square of asterisks (*)</li>
+                        <li>Calculates and prints the factorial of 5 using a for loop</li>
+                    </ol>`,
+                    hint: "<strong>Hint:</strong> For factorial, initialize a result variable to 1 before the loop. For nested loops, print a new line after each inner loop completes."
+                }
+            },
+            24: {
+                title: "Java Arrays",
+                code: `// Java Arrays Example
+public class Main {
+    public static void main(String[] args) {
+        // Array declaration
+        String[] cars = {"Volvo", "BMW", "Ford"};
+        
+        // Access elements
+        System.out.println(cars[0]);  // Volvo
+        
+        // Change element
+        cars[0] = "Opel";
+        System.out.println(cars[0]);  // Opel
+        
+        // Array length
+        System.out.println(cars.length);  // 3
+        
+        // Loop through array
+        for (int i = 0; i < cars.length; i++) {
+            System.out.println(cars[i]);
+        }
+        
+        // Multi-dimensional array
+        int[][] myNumbers = { {1, 2, 3}, {4, 5, 6} };
+        System.out.println(myNumbers[1][2]); // 6
+    }
+}`,
+                exercise: {
+                    title: "Exercise 1: Array Operations",
+                    task: `<p>Create a Java program that:</p>
+                    <ol>
+                        <li>Creates an array of 5 integers</li>
+                        <li>Uses a loop to fill it with values (1, 3, 5, 7, 9)</li>
+                        <li>Prints all elements in reverse order</li>
+                        <li>Creates a 2D array representing a 3x3 matrix</li>
+                        <li>Prints the sum of all elements in the 2D array</li>
+                    </ol>`,
+                    hint: "<strong>Hint:</strong> For reverse order, start the loop from length-1 down to 0. For 2D array sum, use nested loops."
+                }
+            },
+            25: {
+                title: "Java Methods",
+                code: `// Java Methods Example
+public class Main {
+    
+    // Static method
+    static void myMethod() {
+        System.out.println("I just got executed!");
+    }
+    
+    // Method with parameters
+    static void greet(String name) {
+        System.out.println("Hello " + name);
+    }
+    
+    // Method with return value
+    static int add(int a, int b) {
+        return a + b;
+    }
+    
+    // Method overloading
+    static int add(int a, int b, int c) {
+        return a + b + c;
+    }
+    
+    public static void main(String[] args) {
+        myMethod();
+        greet("John");
+        int sum = add(5, 3);
+        System.out.println(sum);  // 8
+        System.out.println(add(1, 2, 3));  // 6
+    }
+}`,
+                exercise: {
+                    title: "Exercise 1: Method Practice",
+                    task: `<p>Create a Java program that:</p>
+                    <ol>
+                        <li>Has a method to print your name</li>
+                        <li>Has a method that takes a number and returns its square</li>
+                        <li>Has overloaded methods to calculate area (circle, rectangle)</li>
+                        <li>Calls all methods from main with appropriate arguments</li>
+                    </ol>`,
+                    hint: "<strong>Hint:</strong> Method overloading means same name but different parameters. Remember static methods can be called without object creation."
+                }
+            },
+            26: {
+                title: "Java OOP",
+                code: `// Java OOP Example
+public class Main {
+    // Class
+    static class Car {
+        // Attributes
+        String model;
+        int year;
+        
+        // Constructor
+        public Car(String model, int year) {
+            this.model = model;
+            this.year = year;
+        }
+        
+        // Method
+        public void startEngine() {
+            System.out.println("Starting " + model + " engine");
+        }
+    }
+    
+    public static void main(String[] args) {
+        // Create object
+        Car myCar = new Car("Toyota", 2020);
+        
+        // Access attributes and methods
+        System.out.println(myCar.model);
+        System.out.println(myCar.year);
+        myCar.startEngine();
+    }
+}`,
+                exercise: {
+                    title: "Exercise 1: Create a Class",
+                    task: `<p>Create a Java program that:</p>
+                    <ol>
+                        <li>Defines a <code>Book</code> class with title, author, and year attributes</li>
+                        <li>Includes a constructor to initialize these values</li>
+                        <li>Has a method that returns a formatted string with book info</li>
+                        <li>Creates two book objects and calls their methods</li>
+                    </ol>`,
+                    hint: "<strong>Hint:</strong> Use 'this' keyword to refer to instance variables. Remember to make the class static if it's inside another class."
+                }
+            },
+            27: {
+                title: "Java Classes",
+                code: `// Java Classes Example
+public class Main {
+    // Inner class
+    static class Person {
+        private String name;
+        private int age;
+        
+        // Constructor
+        public Person(String name, int age) {
+            this.name = name;
+            this.age = age;
+        }
+        
+        // Getter methods
+        public String getName() {
+            return name;
+        }
+        
+        public int getAge() {
+            return age;
+        }
+        
+        // Setter methods
+        public void setName(String name) {
+            this.name = name;
+        }
+        
+        public void setAge(int age) {
+            this.age = age;
+        }
+    }
+    
+    public static void main(String[] args) {
+        // Create object
+        Person person1 = new Person("Alice", 25);
+        
+        // Use getters
+        System.out.println(person1.getName());
+        System.out.println(person1.getAge());
+        
+        // Use setters
+        person1.setName("Bob");
+        person1.setAge(30);
+        
+        System.out.println(person1.getName());
+        System.out.println(person1.getAge());
+    }
+}`,
+                exercise: {
+                    title: "Exercise 1: Encapsulation",
+                    task: `<p>Create a Java program that:</p>
+                    <ol>
+                        <li>Defines a <code>Student</code> class with private attributes (name, id, gpa)</li>
+                        <li>Implements proper getter and setter methods</li>
+                        <li>Includes a method to print student info</li>
+                        <li>Creates student objects and demonstrates encapsulation</li>
+                    </ol>`,
+                    hint: "<strong>Hint:</strong> Encapsulation means making fields private and providing public methods to access them. Use setters to validate data if needed."
+                }
+            },
+            28: {
+                title: "Java Inheritance",
+                code: `// Java Inheritance Example
+public class Main {
+    // Superclass
+    static class Vehicle {
+        protected String brand = "Ford";
+        
+        public void honk() {
+            System.out.println("Honk honk!");
+        }
+    }
+    
+    // Subclass
+    static class Car extends Vehicle {
+        private String model = "Mustang";
+        
+        public static void main(String[] args) {
+            Car myCar = new Car();
+            myCar.honk();  // Inherited method
+            System.out.println(myCar.brand + " " + myCar.model);
+        }
+    }
+    
+    public static void main(String[] args) {
+        Car myCar = new Car();
+        myCar.honk();
+    }
+}`,
+                exercise: {
+                    title: "Exercise 1: Inheritance Practice",
+                    task: `<p>Create a Java program that:</p>
+                    <ol>
+                        <li>Defines a <code>Animal</code> superclass with sound() method</li>
+                        <li>Creates <code>Dog</code> and <code>Cat</code> subclasses that override sound()</li>
+                        <li>Adds subclass-specific methods (fetch() for Dog, climb() for Cat)</li>
+                        <li>Demonstrates polymorphism by storing subclass objects in Animal references</li>
+                    </ol>`,
+                    hint: "<strong>Hint:</strong> Use 'extends' for inheritance. Override methods with @Override annotation. Polymorphism allows superclass references to hold subclass objects."
+                }
+            },
+            29: {
+                title: "Java Polymorphism",
+                code: `// Java Polymorphism Example
+public class Main {
+    // Abstract class
+    abstract static class Animal {
+        public abstract void animalSound();
+        
+        public void sleep() {
+            System.out.println("Zzz");
+        }
+    }
+    
+    // Subclass
+    static class Pig extends Animal {
+        @Override
+        public void animalSound() {
+            System.out.println("The pig says: wee wee");
+        }
+    }
+    
+    // Subclass
+    static class Dog extends Animal {
+        @Override
+        public void animalSound() {
+            System.out.println("The dog says: bow wow");
+        }
+    }
+    
+    // Interface
+    interface AnimalBehavior {
+        void run();
+    }
+    
+    // Class implementing interface
+    static class Cat implements AnimalBehavior {
+        @Override
+        public void run() {
+            System.out.println("The cat runs fast");
+        }
+    }
+    
+    public static void main(String[] args) {
+        // Polymorphism
+        Animal myPig = new Pig();
+        Animal myDog = new Dog();
+        
+        myPig.animalSound();
+        myDog.animalSound();
+        myPig.sleep();
+        
+        // Interface
+        Cat myCat = new Cat();
+        myCat.run();
+    }
+}`,
+                exercise: {
+                    title: "Exercise 1: Abstract Classes and Interfaces",
+                    task: `<p>Create a Java program that:</p>
+                    <ol>
+                        <li>Defines an abstract <code>Shape</code> class with abstract area() method</li>
+                        <li>Creates <code>Circle</code> and <code>Rectangle</code> subclasses that implement area()</li>
+                        <li>Defines a <code>Drawable</code> interface with draw() method</li>
+                        <li>Implements the interface in the subclasses</li>
+                        <li>Demonstrates polymorphism with Shape references</li>
+                    </ol>`,
+                    hint: "<strong>Hint:</strong> Abstract classes can have both abstract and concrete methods. Interfaces define what a class must do, not how."
+                }
+            },
+            30: {
+                title: "Final Project",
+                code: `// Final Project Structure Example
+/*
+Project: Student Management System
+- Create classes for Student, Course, and Enrollment
+- Implement proper OOP principles
+- Include file I/O for data persistence
+- Add exception handling
+- Create a menu-driven interface
+*/
+
+// File: Student.java
+/*
+public class Student {
+    private String id;
+    private String name;
+    // other attributes, constructors, getters/setters
+}
+*/
+
+// File: Main.java
+/*
+public class Main {
+    public static void main(String[] args) {
+        // Main program logic
+    }
+}
+*/`,
+                exercise: {
+                    title: "Final Project: Student Management System",
+                    task: `<p>Create a comprehensive Java program that:</p>
+                    <ol>
+                        <li>Manages student records (add, view, update, delete)</li>
+                        <li>Uses proper OOP principles (encapsulation, inheritance if applicable)</li>
+                        <li>Includes file I/O to persist data between runs</li>
+                        <li>Has exception handling for robust operation</li>
+                        <li>Provides a text-based menu interface</li>
+                        <li>Demonstrates all concepts learned during the internship</li>
+                    </ol>`,
+                    hint: "<strong>Hint:</strong> Plan your class structure first. Use ArrayList for dynamic collections. Implement Serializable for file storage. Use try-catch blocks for error handling."
+                }
+            }
+        };
+
+        // DOM Elements
+        const profileImage = document.getElementById('profile-image');
+        const profileDropdown = document.getElementById('profile-dropdown');
+        const navItems = document.querySelectorAll('.nav-link[data-section]');
+        const sectionContents = document.querySelectorAll('.section-content');
+        const dashboardContent = document.getElementById('dashboard-content');
+        const viewFullCalendarBtn = document.getElementById('view-full-calendar');
+        const calendarModal = document.getElementById('calendar-modal');
+        const closeCalendarModal = document.getElementById('close-calendar-modal');
+        const fullCalendarContent = document.getElementById('full-calendar-content');
+        const viewAllProjectsBtn = document.getElementById('view-all-projects');
+        const projectsModal = document.getElementById('projects-modal');
+        const closeProjectsModal = document.getElementById('close-projects-modal');
+        const allProjectsContent = document.getElementById('all-projects-content');
+        const toggleHintBtn = document.getElementById('toggle-hint');
+        const submitSolutionBtn = document.getElementById('submit-solution');
+        const prevWeekBtn = document.getElementById('prev-week');
+        const nextWeekBtn = document.getElementById('next-week');
+        const calendarGrid = document.getElementById('calendar-grid');
+        const practiceContentContainer = document.getElementById('practice-content-container');
+        const notification = document.getElementById('notification');
+        const notificationMessage = document.getElementById('notification-message');
+
+        // Current week tracking (0 = week 1, 1 = week 2, etc.)
+        let currentWeek = 2; // Start with week 3 (days 15-21)
+        const totalWeeks = 5;
+
+        // Generate the calendar grid
+        function generateCalendar() {
+            calendarGrid.innerHTML = '';
+            
+            // Add day headers
+            for (let i = 1; i <= 7; i++) {
+                const header = document.createElement('div');
+                header.className = 'calendar-header';
+                header.textContent = `Day ${i + currentWeek * 7}`;
+                calendarGrid.appendChild(header);
+            }
+            
+            // Add calendar days
+            for (let i = 1; i <= 7; i++) {
+                const dayNum = i + currentWeek * 7;
+                const day = document.createElement('div');
+                
+                day.className = 'calendar-day';
+                if (dayNum < 17) day.classList.add('completed-day');
+                else if (dayNum === 17) day.classList.add('current-day');
+                else day.classList.add('upcoming-day');
+                
+                day.onclick = () => showPractice(dayNum);
+                
+                const dayNumber = document.createElement('div');
+                dayNumber.className = 'day-number';
+                dayNumber.textContent = dayNum;
+                
+                const dayTopic = document.createElement('div');
+                dayTopic.className = 'day-topic';
+                
+                const dayStatus = document.createElement('div');
+                dayStatus.className = 'day-status';
+                
+                if (dayNum < 17) {
+                    dayStatus.classList.add('status-completed');
+                    dayTopic.textContent = getDayTopic(dayNum);
+                } else if (dayNum === 17) {
+                    dayStatus.classList.add('status-current');
+                    dayTopic.textContent = getDayTopic(dayNum);
+                } else {
+                    dayStatus.classList.add('status-upcoming');
+                    dayTopic.textContent = getDayTopic(dayNum);
+                }
+                
+                day.appendChild(dayNumber);
+                day.appendChild(dayTopic);
+                day.appendChild(dayStatus);
+                
+                calendarGrid.appendChild(day);
+            }
+        }
+
+        // Get the topic for a specific day
+        function getDayTopic(day) {
+            if (practiceContent[day]) {
+                return practiceContent[day].title;
+            }
+            return "Topic not available";
+        }
+
+        // Show practice content for a specific day
+        function showPractice(day) {
+            const content = practiceContent[day];
+            if (!content) return;
+            
+            // Update practice title
+            document.getElementById('practice-title').textContent = `Day ${day} Practice: ${content.title}`;
+            
+            // Create practice content
+            practiceContentContainer.innerHTML = `
+                <div class="practice-content active">
+                    <div class="code-editor">
+                        <div class="code-toolbar">
+                            <button onclick="copyCode(${day})"><i class="fas fa-copy"></i></button>
+                            <button onclick="resetCode(${day})"><i class="fas fa-redo"></i></button>
+                        </div>
+                        <pre class="code-example" id="code-${day}">${content.code}</pre>
+                    </div>
+                    
+                    <div class="practice-exercise">
+                        <h3 class="exercise-title">${content.exercise.title}</h3>
+                        <div class="exercise-task">${content.exercise.task}</div>
+                        <div class="exercise-hint" id="hint-${day}">${content.exercise.hint}</div>
+                    </div>
+                </div>
+            `;
+            
+            // Scroll to practice section
+            document.getElementById('practice-section').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Toggle hint visibility
+        function toggleHint() {
+            const activePractice = document.querySelector('.practice-content.active');
+            if (activePractice) {
+                const hintId = activePractice.querySelector('.exercise-hint').id;
+                const hint = document.getElementById(hintId);
+                hint.classList.toggle('show');
+                
+                // Update button text
+                const btn = document.getElementById('toggle-hint');
+                btn.textContent = hint.classList.contains('show') ? 'Hide Hint' : 'Show Hint';
+            }
+        }
+
+        // Submit solution
+        function submitSolution() {
+            showNotification('Solution submitted successfully!');
+        }
+
+        // Copy code to clipboard
+        function copyCode(day) {
+            const codeElement = document.getElementById(`code-${day}`);
+            const range = document.createRange();
+            range.selectNode(codeElement);
+            window.getSelection().removeAllRanges();
+            window.getSelection().addRange(range);
+            document.execCommand('copy');
+            window.getSelection().removeAllRanges();
+            
+            showNotification('Code copied to clipboard!');
+        }
+
+        // Reset code (placeholder implementation)
+        function resetCode(day) {
+            showNotification('Code reset to original state!');
+        }
+
+        // Show notification
+        function showNotification(message) {
+            notificationMessage.textContent = message;
+            notification.classList.add('show');
+            
+            setTimeout(() => {
+                notification.classList.remove('show');
+            }, 3000);
+        }
+
+        // Show full calendar
+        function showFullCalendar() {
+            fullCalendarContent.innerHTML = '<h3>Python & Java Course (30 Days)</h3>';
+            
+            // Create a grid for all days
+            const grid = document.createElement('div');
+            grid.style.display = 'grid';
+            grid.style.gridTemplateColumns = 'repeat(7, 1fr)';
+            grid.style.gap = '10px';
+            grid.style.marginTop = '20px';
+            
+            // Add all 30 days
+            for (let day = 1; day <= 30; day++) {
+                const dayElement = document.createElement('div');
+                dayElement.className = 'calendar-day';
+                if (day < 17) dayElement.classList.add('completed-day');
+                else if (day === 17) dayElement.classList.add('current-day');
+                else dayElement.classList.add('upcoming-day');
+                
+                dayElement.onclick = () => {
+                    showPractice(day);
+                    calendarModal.classList.remove('show');
+                };
+                
+                const dayNumber = document.createElement('div');
+                dayNumber.className = 'day-number';
+                dayNumber.textContent = day;
+                
+                const dayTopic = document.createElement('div');
+                dayTopic.className = 'day-topic';
+                dayTopic.textContent = getDayTopic(day);
+                
+                const dayStatus = document.createElement('div');
+                dayStatus.className = 'day-status';
+                
+                if (day < 17) {
+                    dayStatus.classList.add('status-completed');
+                } else if (day === 17) {
+                    dayStatus.classList.add('status-current');
+                } else {
+                    dayStatus.classList.add('status-upcoming');
+                }
+                
+                dayElement.appendChild(dayNumber);
+                dayElement.appendChild(dayTopic);
+                dayElement.appendChild(dayStatus);
+                
+                grid.appendChild(dayElement);
+            }
+            
+            fullCalendarContent.appendChild(grid);
+            calendarModal.classList.add('show');
+        }
+
+        // Show all projects
+        function showAllProjects() {
+            allProjectsContent.innerHTML = `
+                <h3>All Projects</h3>
+                <div class="projects-grid" style="margin-top: 20px;">
+                    <div class="project-card">
+                        <h3>Python Calculator App</h3>
+                        <p>Build a calculator application with Python that handles basic arithmetic operations.</p>
+                        <div class="project-meta">
+                            <span>Due: Day 10</span>
+                            <span class="project-status status-completed">Completed</span>
+                        </div>
+                    </div>
+                    
+                    <div class="project-card">
+                        <h3>Python Data Analysis</h3>
+                        <p>Analyze a dataset using Python's pandas and matplotlib libraries.</p>
+                        <div class="project-meta">
+                            <span>Due: Day 14</span>
+                            <span class="project-status status-completed">Completed</span>
+                        </div>
+                    </div>
+                    
+                    <div class="project-card">
+                        <h3>Java Student Management</h3>
+                        <p>Create a Java program to manage student records with OOP principles.</p>
+                        <div class="project-meta">
+                            <span>Due: Day 25</span>
+                            <span class="project-status status-in-progress">In Progress</span>
+                        </div>
+                    </div>
+                    
+                    <div class="project-card">
+                        <h3>Java Inventory System</h3>
+                        <p>Develop an inventory management system using Java and file I/O.</p>
+                        <div class="project-meta">
+                            <span>Due: Day 28</span>
+                            <span class="project-status status-pending">Pending</span>
+                        </div>
+                    </div>
+                    
+                    <div class="project-card">
+                        <h3>Final Portfolio Project</h3>
+                        <p>Combine Python and Java skills to build a comprehensive portfolio project.</p>
+                        <div class="project-meta">
+                            <span>Due: Day 30</span>
+                            <span class="project-status status-pending">Pending</span>
+                        </div>
+                    </div>
+                </div>
+            `;
+            projectsModal.classList.add('show');
+        }
+
+        // Navigate to previous week
+        function goToPrevWeek() {
+            if (currentWeek > 0) {
+                currentWeek--;
+                generateCalendar();
+            } else {
+                showNotification('You are already at the first week');
+            }
+        }
+
+        // Navigate to next week
+        function goToNextWeek() {
+            if (currentWeek < totalWeeks - 1) {
+                currentWeek++;
+                generateCalendar();
+            } else {
+                showNotification('You are already at the last week');
+            }
+        }
+
+        // Toggle profile dropdown
+        function toggleProfileDropdown() {
+            profileDropdown.classList.toggle('show');
+        }
+
+        // Close all dropdowns when clicking outside
+        document.addEventListener('click', function(event) {
+            if (!event.target.closest('.user-profile')) {
+                profileDropdown.classList.remove('show');
+            }
+        });
+
+        // Switch between sections
+        function switchSection(section) {
+            // Hide all sections
+            sectionContents.forEach(content => {
+                content.style.display = 'none';
+            });
+            
+            // Hide dashboard content
+            dashboardContent.style.display = 'none';
+            
+            // Show selected section
+            document.getElementById(`${section}-content`).style.display = 'block';
+            
+            // Update active nav item
+            navItems.forEach(item => {
+                item.classList.remove('active');
+                if (item.dataset.section === section) {
+                    item.classList.add('active');
+                }
+            });
+            
+            // If dashboard is selected, show dashboard content
+            if (section === 'dashboard') {
+                dashboardContent.style.display = 'block';
+            }
+        }
+
+        // Set up event listeners
+        function setupEventListeners() {
+            // Profile dropdown
+            profileImage.addEventListener('click', toggleProfileDropdown);
+            
+            // Navigation items
+            navItems.forEach(item => {
+                item.addEventListener('click', () => switchSection(item.dataset.section));
+            });
+            
+            // Calendar buttons
+            viewFullCalendarBtn.addEventListener('click', showFullCalendar);
+            closeCalendarModal.addEventListener('click', () => calendarModal.classList.remove('show'));
+            
+            // Projects button
+            viewAllProjectsBtn.addEventListener('click', showAllProjects);
+            closeProjectsModal.addEventListener('click', () => projectsModal.classList.remove('show'));
+            
+            // Practice section buttons
+            toggleHintBtn.addEventListener('click', toggleHint);
+            submitSolutionBtn.addEventListener('click', submitSolution);
+            
+            // Week navigation
+            prevWeekBtn.addEventListener('click', goToPrevWeek);
+            nextWeekBtn.addEventListener('click', goToNextWeek);
+            
+            // Close modals when clicking outside
+            window.addEventListener('click', (event) => {
+                if (event.target === calendarModal) {
+                    calendarModal.classList.remove('show');
+                }
+                if (event.target === projectsModal) {
+                    projectsModal.classList.remove('show');
+                }
+            });
+        }
+    </script>
+</body>
+</html>
