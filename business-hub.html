@@ -1,0 +1,1838 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Business Hub — MBA, BBA &amp; Management Skills | Creative Code Hub</title>
+  <meta name="description" content="Business Hub by Creative Code Hub — MBA & BBA skill development, digital marketing, Power BI, Excel, HR management, WordPress and business analytics." />
+  <link rel="canonical" href="https://creativecodehub.in/business-hub.html" />
+
+  <link rel="icon" type="image/png" href="images/logo/cc-logo.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+
+  <style>
+    /* =========================================================
+       THEME VARIABLES — Self-contained (doesn't depend on styles.css)
+       ========================================================= */
+    :root,
+    [data-theme="light"] {
+      --bg:            #ffffff;
+      --bg-subtle:     #f8fafc;
+      --bg-muted:      #f1f5f9;
+      --surface:       #ffffff;
+      --surface-hover: #f8fafc;
+      --border:        #e2e8f0;
+      --border-strong: #cbd5e1;
+      --text:          #0f172a;
+      --text-muted:    #64748b;
+      --text-subtle:   #94a3b8;
+      --sh-sm: 0 1px 3px rgba(15,23,42,0.08);
+      --sh-md: 0 4px 12px rgba(15,23,42,0.08);
+      --sh-lg: 0 12px 32px rgba(15,23,42,0.10);
+      --navbar-bg: rgba(255,255,255,0.92);
+      --cat-nav-bg: rgba(255,255,255,0.92);
+    }
+
+    [data-theme="dark"] {
+      --bg:            #0b1220;
+      --bg-subtle:     #0f172a;
+      --bg-muted:      #1e293b;
+      --surface:       #131c2e;
+      --surface-hover: #1a2438;
+      --border:        #1e293b;
+      --border-strong: #334155;
+      --text:          #f1f5f9;
+      --text-muted:    #94a3b8;
+      --text-subtle:   #64748b;
+      --sh-sm: 0 1px 3px rgba(0,0,0,0.4);
+      --sh-md: 0 4px 12px rgba(0,0,0,0.35);
+      --sh-lg: 0 12px 32px rgba(0,0,0,0.45);
+      --navbar-bg: rgba(11,18,32,0.92);
+      --cat-nav-bg: rgba(15,23,42,0.92);
+    }
+
+    /* =========================================================
+       BASE + THEME-AWARE BODY
+       ========================================================= */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      padding-top: 80px;
+      transition: background-color 0.3s ease, color 0.3s ease;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+    img { max-width: 100%; display: block; }
+    a { color: inherit; text-decoration: none; }
+    button { font: inherit; cursor: pointer; border: none; background: none; color: inherit; }
+    h1,h2,h3,h4,h5,h6 { margin: 0 0 12px; font-weight: 700; line-height: 1.2; color: var(--text); }
+    p { color: var(--text-muted); }
+    ul { padding: 0; list-style: none; }
+
+    /* =========================================================
+       LAYOUT HELPERS
+       ========================================================= */
+    .container-x {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+    .head-left { max-width: 640px; margin-bottom: 40px; }
+    .head-left h2 { font-size: clamp(1.5rem, 3vw, 2rem); margin-bottom: 8px; }
+    .head-left p { font-size: 1rem; }
+    .section { padding: 72px 0; }
+    .section-sm { padding: 56px 0; }
+
+    .eyebrow {
+      display: inline-block;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #d97706;
+      margin-bottom: 12px;
+    }
+    [data-theme="dark"] .eyebrow { color: #fbbf24; }
+
+    .gradient-text {
+      background: linear-gradient(135deg, #d97706, #ea580c);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    /* =========================================================
+       NAVBAR — Theme Aware
+       ========================================================= */
+    .navbar-x {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      height: 80px;
+      z-index: 1000;
+      background: var(--navbar-bg);
+      backdrop-filter: saturate(180%) blur(16px);
+      -webkit-backdrop-filter: saturate(180%) blur(16px);
+      border-bottom: 1px solid var(--border);
+      transition: background 0.3s ease, border-color 0.3s ease;
+    }
+    .nav-inner {
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+    .brand img { height: 44px; width: auto; }
+    .nav-links { display: flex; align-items: center; gap: 2px; }
+    .nav-links a {
+      padding: 10px 14px;
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: var(--text-muted);
+      border-radius: 8px;
+      transition: all 0.2s ease;
+    }
+    .nav-links a:hover { color: var(--text); background: var(--surface-hover); }
+    .nav-links a.active {
+      color: #d97706;
+      background: rgba(217,119,6,0.10);
+    }
+    [data-theme="dark"] .nav-links a.active {
+      color: #fbbf24;
+      background: rgba(245,158,11,0.12);
+    }
+    @media (max-width: 900px) { .nav-links { display: none; } }
+
+    .nav-actions { display: flex; align-items: center; gap: 12px; }
+
+    .theme-toggle {
+      width: 42px; height: 42px;
+      border-radius: 50%;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      color: var(--text);
+      display: grid;
+      place-items: center;
+      font-size: 1.05rem;
+      transition: all 0.2s ease;
+    }
+    .theme-toggle:hover { border-color: #d97706; transform: rotate(15deg); }
+    .theme-toggle .moon { display: none; }
+    [data-theme="dark"] .theme-toggle .sun { display: none; }
+    [data-theme="dark"] .theme-toggle .moon { display: inline; }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 22px;
+      border-radius: 50px;
+      background: linear-gradient(135deg, #d97706, #ea580c);
+      color: #fff !important;
+      font-size: 0.88rem;
+      font-weight: 600;
+      box-shadow: 0 8px 24px rgba(217,119,6,0.30);
+      transition: transform 0.2s ease;
+    }
+    .btn-primary:hover { transform: translateY(-2px); }
+    .btn-primary.btn-sm { padding: 9px 18px; font-size: 0.82rem; }
+    .btn-primary.btn-lg { padding: 14px 28px; font-size: 0.95rem; border-radius: 12px; }
+
+    .btn-ghost {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 14px 28px;
+      border-radius: 12px;
+      background: transparent;
+      color: var(--text) !important;
+      font-size: 0.95rem;
+      font-weight: 600;
+      border: 1px solid var(--border-strong);
+      transition: all 0.2s ease;
+    }
+    .btn-ghost:hover { background: var(--surface-hover); border-color: #d97706; color: #d97706 !important; }
+
+    .btn-soft {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 22px;
+      border-radius: 10px;
+      background: rgba(217,119,6,0.10);
+      color: #d97706;
+      font-size: 0.9rem;
+      font-weight: 600;
+      transition: all 0.2s ease;
+    }
+    [data-theme="dark"] .btn-soft { background: rgba(245,158,11,0.15); color: #fbbf24; }
+    .btn-soft:hover { background: rgba(217,119,6,0.18); }
+
+    .nav-toggle { display: none; }
+    @media (max-width: 900px) {
+      .nav-toggle {
+        display: grid; place-items: center;
+        width: 42px; height: 42px;
+        border-radius: 10px;
+        background: var(--surface);
+        border: 1px solid var(--border);
+        color: var(--text);
+      }
+    }
+
+    /* =========================================================
+       HERO — Theme Aware
+       ========================================================= */
+    .hub-hero {
+      padding: 64px 0 72px;
+      background: var(--bg);
+      border-bottom: 1px solid var(--border);
+      position: relative;
+      overflow: hidden;
+      transition: background 0.3s ease;
+    }
+    .hub-hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(55% 60% at 85% 15%, rgba(217,119,6,0.10), transparent 70%),
+        radial-gradient(45% 55% at 10% 90%, rgba(245,158,11,0.06), transparent 70%);
+      pointer-events: none;
+    }
+    [data-theme="dark"] .hub-hero::before {
+      background:
+        radial-gradient(55% 60% at 85% 15%, rgba(217,119,6,0.18), transparent 70%),
+        radial-gradient(45% 55% at 10% 90%, rgba(245,158,11,0.10), transparent 70%);
+    }
+    .hub-hero .container-x { position: relative; }
+
+    .hub-hero-grid {
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 64px;
+      align-items: center;
+    }
+    @media (max-width: 960px) { .hub-hero-grid { grid-template-columns: 1fr; gap: 48px; } }
+
+    .hub-hero h1 {
+      font-size: clamp(2rem, 4.5vw, 3.2rem);
+      margin-bottom: 20px;
+      letter-spacing: -0.03em;
+      line-height: 1.15;
+      color: var(--text);
+    }
+    .hub-hero .lead {
+      font-size: 1.08rem;
+      color: var(--text-muted);
+      max-width: 560px;
+      margin-bottom: 32px;
+      line-height: 1.65;
+    }
+
+    .hub-hero .badges { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 28px; }
+    .hub-hero .badge-pill {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 7px 14px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 50px;
+      font-size: 0.83rem;
+      font-weight: 500;
+      color: var(--text-muted);
+    }
+    .hub-hero .badge-pill i { color: #d97706; }
+    [data-theme="dark"] .hub-hero .badge-pill i { color: #fbbf24; }
+
+    .hero-actions { display: flex; gap: 12px; flex-wrap: wrap; }
+
+    /* Showcase (image carousel) — always dark for readability */
+    .showcase {
+      position: relative;
+      aspect-ratio: 4 / 3;
+      border-radius: 24px;
+      overflow: hidden;
+      box-shadow: 0 32px 64px rgba(15,23,42,0.25);
+      background: #0f172a;
+    }
+    .showcase-slide {
+      position: absolute; inset: 0;
+      opacity: 0;
+      transition: opacity 0.9s ease;
+    }
+    .showcase-slide.active { opacity: 1; }
+    .showcase-slide img { width: 100%; height: 100%; object-fit: cover; }
+    .showcase-slide::after {
+      content: '';
+      position: absolute; inset: 0;
+      background: linear-gradient(180deg, transparent 40%, rgba(15,23,42,0.92) 100%);
+    }
+    .showcase-caption {
+      position: absolute;
+      left: 28px; right: 28px; bottom: 28px;
+      z-index: 2;
+      color: #fff;
+    }
+    .showcase-caption .label {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 5px 12px;
+      border-radius: 50px;
+      font-size: 0.7rem; font-weight: 700;
+      letter-spacing: 0.08em; text-transform: uppercase;
+      background: rgba(255,255,255,0.15);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(255,255,255,0.2);
+      margin-bottom: 12px;
+    }
+    .showcase-caption h3 { color: #fff; font-size: 1.5rem; margin: 0 0 4px; font-weight: 700; }
+    .showcase-caption p { color: rgba(255,255,255,0.8); font-size: 0.88rem; margin: 0; }
+
+    .showcase-dots { position: absolute; bottom: 20px; right: 28px; z-index: 3; display: flex; gap: 6px; }
+    .showcase-dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.35);
+      border: none; padding: 0; cursor: pointer;
+      transition: all 0.25s ease;
+    }
+    .showcase-dot.active { width: 20px; background: #fff; }
+
+    /* =========================================================
+       TRENDING SECTION — Theme Aware
+       ========================================================= */
+    .trending-section {
+      padding: 72px 0 80px;
+      background: var(--bg-subtle);
+      border-bottom: 1px solid var(--border);
+      position: relative;
+      overflow: hidden;
+      transition: background 0.3s ease;
+    }
+    .trend-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      gap: 32px;
+      margin-bottom: 40px;
+      flex-wrap: wrap;
+    }
+    .trend-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 6px 14px;
+      border-radius: 50px;
+      font-size: 0.75rem; font-weight: 700;
+      letter-spacing: 0.08em; text-transform: uppercase;
+      background: rgba(217,119,6,0.10);
+      color: #92400e;
+      border: 1px solid rgba(217,119,6,0.25);
+      margin-bottom: 12px;
+    }
+    [data-theme="dark"] .trend-badge {
+      background: rgba(245,158,11,0.15);
+      color: #fbbf24;
+      border-color: rgba(245,158,11,0.3);
+    }
+    .trend-badge .dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: #dc2626;
+      box-shadow: 0 0 0 3px rgba(220,38,38,0.25);
+      animation: pulseDot 1.6s infinite;
+    }
+    @keyframes pulseDot { 0%,100% { opacity: 1; } 50% { opacity: 0.4; } }
+
+    .trend-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+    @media (max-width: 1000px) { .trend-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 560px) { .trend-grid { grid-template-columns: 1fr; } }
+
+    .trend-card {
+      display: flex;
+      flex-direction: column;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      overflow: hidden;
+      transition: all 0.3s ease;
+      color: var(--text);
+    }
+    .trend-card:hover {
+      transform: translateY(-6px);
+      box-shadow: var(--sh-lg);
+      border-color: var(--tc-color, #d97706);
+    }
+
+    .trend-card .media {
+      aspect-ratio: 16 / 9;
+      position: relative;
+      overflow: hidden;
+      background: linear-gradient(135deg, var(--tc-color, #d97706), rgba(0,0,0,0.4));
+    }
+    .trend-card .media img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s ease; }
+    .trend-card:hover .media img { transform: scale(1.07); }
+    .trend-card .media::after { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(0,0,0,0.05) 30%, rgba(0,0,0,0.65) 100%); }
+    .trend-card .media .flag {
+      position: absolute; top: 12px; left: 12px; z-index: 2;
+      padding: 5px 11px;
+      border-radius: 50px;
+      font-size: 0.68rem; font-weight: 800;
+      letter-spacing: 0.06em; text-transform: uppercase;
+      color: #fff;
+      background: var(--tc-color, #d97706);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+    }
+    .trend-card .media .flag.hot { background: linear-gradient(135deg, #dc2626, #ea580c); }
+    .trend-card .media .flag.new { background: linear-gradient(135deg, #059669, #10b981); }
+    .trend-card .media .flag.top { background: linear-gradient(135deg, #7c3aed, #a78bfa); }
+    .trend-card .media .tool {
+      position: absolute; bottom: 12px; left: 12px; right: 12px; z-index: 2;
+      display: flex; gap: 6px; flex-wrap: wrap;
+    }
+    .trend-card .media .tool span {
+      padding: 3px 9px;
+      border-radius: 50px;
+      background: rgba(255,255,255,0.18);
+      backdrop-filter: blur(6px);
+      border: 1px solid rgba(255,255,255,0.25);
+      color: #fff;
+      font-size: 0.7rem; font-weight: 600;
+    }
+
+    .trend-card .body { padding: 22px; display: flex; flex-direction: column; flex: 1; }
+    .trend-card h3 { font-size: 1.08rem; margin-bottom: 8px; color: var(--text); }
+    .trend-card p { font-size: 0.9rem; color: var(--text-muted); margin: 0 0 16px; flex: 1; line-height: 1.55; }
+    .trend-card .meta {
+      display: flex; gap: 14px; flex-wrap: wrap;
+      font-size: 0.82rem; color: var(--text-muted);
+      padding-bottom: 14px; margin-bottom: 14px;
+      border-bottom: 1px solid var(--border);
+    }
+    .trend-card .meta span { display: inline-flex; align-items: center; gap: 6px; }
+    .trend-card .meta span i { color: var(--tc-color, #d97706); font-size: 0.78rem; }
+    .trend-card .cta-row { display: flex; gap: 8px; }
+    .trend-card .cta-row .btn-mini {
+      flex: 1;
+      padding: 10px 14px;
+      border-radius: 10px;
+      font-size: 0.85rem; font-weight: 600;
+      display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+      transition: all 0.2s ease;
+      text-decoration: none;
+    }
+    .trend-card .cta-row .btn-solid {
+      background: linear-gradient(135deg, var(--tc-color, #d97706), var(--tc-color-2, #ea580c));
+      color: #fff;
+      box-shadow: 0 8px 20px rgba(217,119,6,0.25);
+    }
+    .trend-card .cta-row .btn-solid:hover { transform: translateY(-1px); }
+    .trend-card .cta-row .btn-ghost-mini {
+      background: transparent;
+      color: var(--text);
+      border: 1px solid var(--border-strong);
+    }
+    .trend-card .cta-row .btn-ghost-mini:hover { border-color: var(--tc-color, #d97706); color: var(--tc-color, #d97706); }
+
+    .trend-card.t-dm  { --tc-color: #db2777; --tc-color-2: #be185d; }
+    .trend-card.t-smm { --tc-color: #7c3aed; --tc-color-2: #5b21b6; }
+    .trend-card.t-pbi { --tc-color: #d97706; --tc-color-2: #b45309; }
+    .trend-card.t-exl { --tc-color: #059669; --tc-color-2: #065f46; }
+    .trend-card.t-hrm { --tc-color: #0891b2; --tc-color-2: #155e75; }
+    .trend-card.t-wp  { --tc-color: #2563eb; --tc-color-2: #1e40af; }
+
+    /* =========================================================
+       CATEGORY NAV — Theme Aware
+       ========================================================= */
+    .cat-nav {
+      position: sticky;
+      top: 80px;
+      z-index: 40;
+      background: var(--cat-nav-bg);
+      backdrop-filter: saturate(180%) blur(14px);
+      -webkit-backdrop-filter: saturate(180%) blur(14px);
+      border-bottom: 1px solid var(--border);
+      padding: 12px 0;
+      transition: background 0.3s ease;
+    }
+    .cat-nav-inner {
+      display: flex; align-items: center; gap: 8px;
+      flex-wrap: nowrap;
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
+    .cat-nav-inner::-webkit-scrollbar { display: none; }
+    .cat-tab {
+      padding: 9px 16px;
+      border-radius: 50px;
+      font-size: 0.85rem; font-weight: 500;
+      color: var(--text-muted);
+      background: transparent;
+      border: 1px solid transparent;
+      white-space: nowrap;
+      transition: all 0.2s ease;
+    }
+    .cat-tab:hover { color: var(--text); background: var(--surface-hover); }
+    .cat-tab.active {
+      color: #fff;
+      background: linear-gradient(135deg, #d97706, #ea580c);
+      border-color: transparent;
+      box-shadow: 0 6px 16px rgba(217,119,6,0.28);
+    }
+
+    /* =========================================================
+       CATEGORY SECTIONS — Theme Aware
+       ========================================================= */
+    .cat-section {
+      padding: 72px 0;
+      scroll-margin-top: 140px;
+      border-bottom: 1px solid var(--border);
+      background: var(--bg);
+      transition: background 0.3s ease;
+    }
+    .cat-section:nth-of-type(even) { background: var(--bg-subtle); }
+
+    .cat-head { display: grid; grid-template-columns: 1.2fr 1fr; gap: 40px; align-items: end; margin-bottom: 40px; }
+    @media (max-width: 800px) { .cat-head { grid-template-columns: 1fr; gap: 20px; } }
+    .cat-head h2 { font-size: clamp(1.75rem, 3vw, 2.4rem); margin-bottom: 12px; color: var(--text); }
+    .cat-head p { font-size: 1rem; color: var(--text-muted); margin: 0; max-width: 520px; line-height: 1.65; }
+    .cat-head .meta { display: flex; gap: 24px; flex-wrap: wrap; justify-content: flex-end; }
+    .cat-head .meta-item { text-align: right; }
+    .cat-head .meta-item .v { font-size: 1.5rem; font-weight: 800; color: var(--text); display: block; line-height: 1; margin-bottom: 4px; }
+    .cat-head .meta-item .l { font-size: 0.78rem; color: var(--text-subtle); text-transform: uppercase; letter-spacing: 0.08em; font-weight: 600; }
+
+    /* Course cards */
+    .tech-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; }
+    .tech-card {
+      display: flex;
+      flex-direction: column;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-top: 3px solid var(--track-color, #d97706);
+      border-radius: 20px;
+      overflow: hidden;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .tech-card:hover { transform: translateY(-5px); box-shadow: var(--sh-lg); }
+    .tech-card .thumb { aspect-ratio: 16/10; position: relative; overflow: hidden; background: linear-gradient(135deg, var(--track-color, #d97706), rgba(0,0,0,0.4)); }
+    .tech-card .thumb img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s ease; }
+    .tech-card:hover .thumb img { transform: scale(1.06); }
+    .tech-card .thumb::after { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(0,0,0,0.05) 40%, rgba(0,0,0,0.55) 100%); }
+    .tech-card .thumb .badge { position: absolute; top: 12px; left: 12px; z-index: 2; padding: 4px 10px; border-radius: 50px; font-size: 0.68rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: #fff; background: var(--track-color, #6366f1); box-shadow: 0 6px 16px rgba(0,0,0,0.25); }
+    .tech-card .thumb .tool { position: absolute; bottom: 12px; left: 12px; right: 12px; z-index: 2; color: #fff; font-size: 0.72rem; font-weight: 600; display: flex; gap: 6px; flex-wrap: wrap; }
+    .tech-card .thumb .tool span { padding: 2px 8px; border-radius: 50px; background: rgba(255,255,255,0.18); backdrop-filter: blur(6px); border: 1px solid rgba(255,255,255,0.25); }
+    .tech-card .body { padding: 22px; display: flex; flex-direction: column; flex: 1; }
+    .tech-card h3 { font-size: 1.05rem; margin-bottom: 8px; color: var(--text); }
+    .tech-card p { font-size: 0.9rem; color: var(--text-muted); margin: 0 0 16px; flex: 1; line-height: 1.55; }
+    .tech-card .tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 16px; }
+    .tech-card .tags span { padding: 3px 10px; border-radius: 50px; background: var(--bg-muted); border: 1px solid var(--border); font-size: 0.72rem; font-weight: 500; color: var(--text-muted); }
+    .tech-card .foot { display: flex; justify-content: space-between; align-items: center; padding-top: 14px; border-top: 1px solid var(--border); }
+    .tech-card .dur { font-size: 0.8rem; color: var(--text-subtle); display: flex; align-items: center; gap: 6px; }
+    .tech-card .link { font-size: 0.85rem; font-weight: 700; color: var(--track-color, #d97706); display: inline-flex; align-items: center; gap: 6px; transition: gap 0.2s ease; }
+    .tech-card .link:hover { gap: 10px; }
+
+    .cat-section[data-track="mba"]       .tech-card { --track-color: #d97706; }
+    .cat-section[data-track="bba"]       .tech-card { --track-color: #f59e0b; }
+    .cat-section[data-track="mgmt"]      .tech-card { --track-color: #ea580c; }
+    .cat-section[data-track="mktg"]      .tech-card { --track-color: #db2777; }
+    .cat-section[data-track="fin"]       .tech-card { --track-color: #059669; }
+    .cat-section[data-track="hr"]        .tech-card { --track-color: #7c3aed; }
+    .cat-section[data-track="entre"]     .tech-card { --track-color: #dc2626; }
+    .cat-section[data-track="analytics"] .tech-card { --track-color: #0ea5e9; }
+    .cat-section[data-track="comm"]      .tech-card { --track-color: #8b5cf6; }
+    .cat-section[data-track="leader"]    .tech-card { --track-color: #0891b2; }
+
+    /* Media grid */
+    .media-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    @media (max-width: 900px) { .media-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 520px) { .media-grid { grid-template-columns: 1fr; } }
+    .media-tile { position: relative; aspect-ratio: 4/3; border-radius: 16px; overflow: hidden; box-shadow: var(--sh-md); cursor: pointer; transition: transform 0.3s ease; }
+    .media-tile:hover { transform: translateY(-4px); }
+    .media-tile img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s ease; }
+    .media-tile:hover img { transform: scale(1.07); }
+    .media-tile::after { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, transparent 50%, rgba(15,23,42,0.85)); }
+    .media-tile .tag { position: absolute; top: 12px; left: 12px; z-index: 2; padding: 4px 10px; border-radius: 50px; background: rgba(255,255,255,0.9); color: #0f172a; font-size: 0.68rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; }
+    .media-tile .caption { position: absolute; left: 16px; right: 16px; bottom: 14px; z-index: 2; color: #fff; font-size: 0.85rem; font-weight: 600; }
+    .media-tile .caption small { display: block; font-size: 0.72rem; opacity: 0.75; font-weight: 500; margin-top: 2px; }
+
+    /* =========================================================
+       PROJECT SECTION — Theme Aware (was always dark)
+       ========================================================= */
+    .project-section {
+      padding: 72px 0;
+      background: linear-gradient(135deg, #fef3c7 0%, #fde68a 50%, #fcd34d 100%);
+      color: #1e1b4b;
+      position: relative;
+      overflow: hidden;
+      transition: background 0.3s ease;
+    }
+    [data-theme="dark"] .project-section {
+      background: linear-gradient(135deg, #1e1b4b 0%, #312e81 50%, #4c1d95 100%);
+      color: #fff;
+    }
+    .project-section::before {
+      content: '';
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(50% 60% at 15% 20%, rgba(217,119,6,0.20), transparent 60%),
+        radial-gradient(50% 60% at 85% 80%, rgba(219,39,119,0.12), transparent 60%);
+      pointer-events: none;
+    }
+    [data-theme="dark"] .project-section::before {
+      background:
+        radial-gradient(50% 60% at 15% 20%, rgba(245,158,11,0.28), transparent 60%),
+        radial-gradient(50% 60% at 85% 80%, rgba(219,39,119,0.20), transparent 60%);
+    }
+    .project-section .container-x { position: relative; }
+    .project-grid { display: grid; grid-template-columns: 1.05fr 0.95fr; gap: 56px; align-items: center; }
+    @media (max-width: 900px) { .project-grid { grid-template-columns: 1fr; gap: 40px; } }
+
+    .project-copy .eyebrow { color: #d97706; }
+    [data-theme="dark"] .project-copy .eyebrow { color: #fbbf24; }
+    .project-copy h2 { color: #1e1b4b; margin-bottom: 16px; font-size: clamp(1.75rem, 3vw, 2.4rem); }
+    [data-theme="dark"] .project-copy h2 { color: #fff; }
+    .project-copy p { color: rgba(30,27,75,0.85); font-size: 1.02rem; margin-bottom: 24px; max-width: 520px; line-height: 1.65; }
+    [data-theme="dark"] .project-copy p { color: rgba(255,255,255,0.78); }
+
+    .project-features { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 32px; }
+    @media (max-width: 520px) { .project-features { grid-template-columns: 1fr; } }
+    .project-feature {
+      display: flex; align-items: flex-start; gap: 10px;
+      padding: 14px 16px;
+      background: rgba(255,255,255,0.65);
+      border: 1px solid rgba(217,119,6,0.25);
+      border-radius: 12px;
+      transition: all 0.2s ease;
+    }
+    [data-theme="dark"] .project-feature {
+      background: rgba(255,255,255,0.06);
+      border-color: rgba(255,255,255,0.10);
+    }
+    .project-feature:hover { transform: translateY(-2px); }
+    .project-feature i { color: #d97706; font-size: 1rem; margin-top: 2px; flex-shrink: 0; }
+    [data-theme="dark"] .project-feature i { color: #fbbf24; }
+    .project-feature span { font-size: 0.88rem; color: #1e1b4b; font-weight: 500; line-height: 1.4; }
+    [data-theme="dark"] .project-feature span { color: rgba(255,255,255,0.9); }
+
+    .project-cta { display: flex; gap: 12px; flex-wrap: wrap; }
+    .project-cta .btn-gold {
+      background: linear-gradient(135deg, #d97706, #ea580c);
+      color: #fff;
+      padding: 14px 26px;
+      border-radius: 12px;
+      font-weight: 700;
+      display: inline-flex; align-items: center; gap: 10px;
+      box-shadow: 0 12px 28px rgba(217,119,6,0.35);
+      text-decoration: none;
+      transition: transform 0.2s ease;
+    }
+    .project-cta .btn-gold:hover { transform: translateY(-2px); }
+    .project-cta .btn-outline-light {
+      background: transparent;
+      color: #1e1b4b;
+      padding: 13px 24px;
+      border-radius: 12px;
+      font-weight: 600;
+      display: inline-flex; align-items: center; gap: 10px;
+      border: 1px solid rgba(30,27,75,0.4);
+      text-decoration: none;
+      transition: all 0.2s ease;
+    }
+    [data-theme="dark"] .project-cta .btn-outline-light {
+      color: #fff;
+      border-color: rgba(255,255,255,0.3);
+    }
+    .project-cta .btn-outline-light:hover { background: rgba(30,27,75,0.08); border-color: #1e1b4b; }
+    [data-theme="dark"] .project-cta .btn-outline-light:hover { background: rgba(255,255,255,0.08); border-color: #fff; }
+
+    /* Paper mock */
+    .paper-mock {
+      background: rgba(255,255,255,0.7);
+      border: 1px solid rgba(217,119,6,0.25);
+      border-radius: 20px;
+      padding: 24px;
+      backdrop-filter: blur(20px);
+      position: relative;
+    }
+    [data-theme="dark"] .paper-mock {
+      background: rgba(15,23,42,0.55);
+      border-color: rgba(255,255,255,0.12);
+    }
+    .paper-mock .paper-head { display: flex; justify-content: space-between; align-items: center; padding-bottom: 14px; border-bottom: 1px solid rgba(30,27,75,0.12); margin-bottom: 16px; }
+    [data-theme="dark"] .paper-mock .paper-head { border-bottom-color: rgba(255,255,255,0.10); }
+    .paper-mock .paper-title { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(30,27,75,0.6); font-family: 'JetBrains Mono', monospace; }
+    [data-theme="dark"] .paper-mock .paper-title { color: rgba(255,255,255,0.6); }
+    .paper-mock .paper-badge { font-size: 0.68rem; font-weight: 700; padding: 3px 10px; border-radius: 50px; background: rgba(16,185,129,0.15); color: #059669; border: 1px solid rgba(16,185,129,0.3); }
+    [data-theme="dark"] .paper-mock .paper-badge { background: rgba(16,185,129,0.2); color: #34d399; }
+    .paper-mock .paper-page { background: #fff; border-radius: 12px; padding: 20px; color: #0f172a; font-size: 0.85rem; line-height: 1.5; box-shadow: 0 20px 40px rgba(0,0,0,0.15); }
+    .paper-mock .paper-page .p-title { font-size: 0.95rem; font-weight: 800; margin-bottom: 4px; color: #0f172a; line-height: 1.3; }
+    .paper-mock .paper-page .p-meta { font-size: 0.7rem; color: #64748b; margin-bottom: 14px; font-family: 'JetBrains Mono', monospace; }
+    .paper-mock .paper-page .p-section { display: flex; gap: 8px; align-items: flex-start; padding: 5px 0; font-size: 0.78rem; color: #334155; border-bottom: 1px dashed #e2e8f0; }
+    .paper-mock .paper-page .p-section:last-child { border-bottom: none; }
+    .paper-mock .paper-page .p-section .p-num { color: #d97706; font-weight: 700; flex-shrink: 0; font-family: 'JetBrains Mono', monospace; }
+    .paper-mock .paper-stamp { position: absolute; top: 60%; right: 30px; transform: rotate(-12deg); padding: 6px 14px; border: 2px solid rgba(16,185,129,0.7); color: #059669; font-size: 0.72rem; font-weight: 800; letter-spacing: 0.1em; border-radius: 8px; background: rgba(16,185,129,0.1); text-transform: uppercase; }
+    [data-theme="dark"] .paper-mock .paper-stamp { color: #34d399; border-color: rgba(16,185,129,0.7); }
+
+    /* =========================================================
+       FLOW BAND — Theme Aware (was always dark brown)
+       ========================================================= */
+    .flow-band {
+      padding: 72px 0;
+      background: linear-gradient(135deg, #fef3c7, #fed7aa 50%, #fdba74 100%);
+      position: relative;
+      overflow: hidden;
+      transition: background 0.3s ease;
+    }
+    [data-theme="dark"] .flow-band {
+      background: linear-gradient(135deg, #451a03, #78350f 50%, #b45309 100%);
+    }
+    .flow-band::before {
+      content: '';
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(50% 60% at 15% 20%, rgba(217,119,6,0.18), transparent 60%),
+        radial-gradient(50% 60% at 85% 80%, rgba(220,38,38,0.10), transparent 60%);
+      pointer-events: none;
+    }
+    [data-theme="dark"] .flow-band::before {
+      background:
+        radial-gradient(50% 60% at 15% 20%, rgba(245,158,11,0.28), transparent 60%),
+        radial-gradient(50% 60% at 85% 80%, rgba(220,38,38,0.20), transparent 60%);
+    }
+    .flow-band .container-x { position: relative; }
+    .flow-band .head-left h2 { color: #1e1b4b; }
+    [data-theme="dark"] .flow-band .head-left h2 { color: #fff; }
+    .flow-band .head-left p { color: rgba(30,27,75,0.75); }
+    [data-theme="dark"] .flow-band .head-left p { color: rgba(255,255,255,0.75); }
+    .flow-band .head-left .eyebrow { color: #92400e; }
+    [data-theme="dark"] .flow-band .head-left .eyebrow { color: #fbbf24; }
+
+    .flow-wrap { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; }
+    @media (max-width: 1000px) { .flow-wrap { grid-template-columns: repeat(3, 1fr); } }
+    @media (max-width: 600px) { .flow-wrap { grid-template-columns: 1fr; } }
+
+    .flow-step {
+      padding: 24px 18px;
+      background: rgba(255,255,255,0.7);
+      border: 1px solid rgba(217,119,6,0.20);
+      border-radius: 16px;
+      text-align: center;
+      transition: all 0.3s ease;
+    }
+    [data-theme="dark"] .flow-step {
+      background: rgba(255,255,255,0.05);
+      border-color: rgba(255,255,255,0.12);
+    }
+    .flow-step:hover { transform: translateY(-4px); }
+    .flow-step .n {
+      display: inline-grid; place-items: center;
+      width: 32px; height: 32px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #d97706, #ea580c);
+      color: #fff;
+      font-weight: 700; font-size: 0.8rem;
+      margin-bottom: 14px;
+      box-shadow: 0 6px 16px rgba(217,119,6,0.4);
+    }
+    .flow-step h4 { font-size: 0.92rem; margin-bottom: 6px; font-weight: 600; color: #1e1b4b; }
+    [data-theme="dark"] .flow-step h4 { color: #fff; }
+    .flow-step p { font-size: 0.78rem; color: rgba(30,27,75,0.75); margin: 0; line-height: 1.5; }
+    [data-theme="dark"] .flow-step p { color: rgba(255,255,255,0.7); }
+
+    /* =========================================================
+       CASE / STATS
+       ========================================================= */
+    .case-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+    @media (max-width: 900px) { .case-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 560px) { .case-grid { grid-template-columns: 1fr; } }
+    .case-card {
+      padding: 32px 28px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      transition: all 0.3s ease;
+    }
+    .case-card:hover { transform: translateY(-4px); border-color: #d97706; box-shadow: var(--sh-lg); }
+    .case-card .metric {
+      font-size: 2.4rem;
+      font-weight: 800;
+      letter-spacing: -0.04em;
+      background: linear-gradient(135deg, #d97706, #ea580c);
+      -webkit-background-clip: text; background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 8px;
+      line-height: 1;
+    }
+    .case-card h4 { font-size: 1rem; margin-bottom: 6px; color: var(--text); }
+    .case-card p { font-size: 0.88rem; color: var(--text-muted); margin: 0; line-height: 1.55; }
+
+    /* =========================================================
+       CTA BAND
+       ========================================================= */
+    .cta-band {
+      background: linear-gradient(135deg, #d97706, #ea580c);
+      border-radius: 24px;
+      padding: 56px 48px;
+      color: #fff;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 32px;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .cta-band::before {
+      content: '';
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(50% 60% at 10% 10%, rgba(255,255,255,0.18), transparent 60%),
+        radial-gradient(50% 60% at 90% 90%, rgba(255,255,255,0.12), transparent 60%);
+    }
+    .cta-band > * { position: relative; }
+    .cta-band h2 { color: #fff; margin-bottom: 8px; }
+    .cta-band p { color: rgba(255,255,255,0.9); margin: 0; max-width: 520px; }
+    .cta-band .eyebrow { color: rgba(255,255,255,0.85); }
+    .cta-band .btn-light {
+      background: #fff;
+      color: #d97706;
+      padding: 14px 26px;
+      border-radius: 12px;
+      font-weight: 600;
+      display: inline-flex; align-items: center; gap: 10px;
+      text-decoration: none;
+      transition: transform 0.2s ease;
+    }
+    .cta-band .btn-light:hover { transform: translateY(-2px); }
+    @media (max-width: 800px) { .cta-band { grid-template-columns: 1fr; padding: 40px 28px; } }
+
+    /* =========================================================
+       FOOTER
+       ========================================================= */
+    .footer-x {
+      margin-top: 0;
+      background: var(--bg-subtle);
+      border-top: 1px solid var(--border);
+      padding: 64px 0 24px;
+      color: var(--text);
+    }
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1.5fr 1fr 1fr 1.2fr;
+      gap: 40px;
+      margin-bottom: 40px;
+    }
+    @media (max-width: 900px) { .footer-grid { grid-template-columns: 1fr 1fr; } }
+    @media (max-width: 560px) { .footer-grid { grid-template-columns: 1fr; } }
+    .footer-x h5 { font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-subtle); margin-bottom: 16px; font-weight: 700; }
+    .footer-x ul { display: flex; flex-direction: column; gap: 10px; }
+    .footer-x a { color: var(--text-muted); font-size: 0.92rem; transition: color 0.2s ease; }
+    .footer-x a:hover { color: #d97706; }
+    .footer-x .brand-row { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; }
+    .footer-x .brand-row img { height: 40px; }
+    .footer-x .brand-row strong { color: var(--text); }
+    .footer-x .copy {
+      border-top: 1px solid var(--border);
+      padding-top: 24px;
+      display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px;
+      font-size: 0.85rem; color: var(--text-subtle);
+    }
+    .footer-contact li { display: flex; align-items: flex-start; gap: 8px; color: var(--text-muted); font-size: 0.9rem; }
+    .footer-contact li i { color: #d97706; margin-top: 4px; }
+
+    /* Floating buttons */
+    .whatsapp-left {
+      position: fixed;
+      left: 20px; bottom: 20px;
+      width: 52px; height: 52px;
+      border-radius: 50%;
+      background: #25D366;
+      color: #fff;
+      display: grid; place-items: center;
+      font-size: 1.5rem;
+      box-shadow: 0 12px 32px rgba(0,0,0,0.20);
+      z-index: 999;
+      transition: transform 0.2s ease;
+    }
+    .whatsapp-left:hover { transform: scale(1.08); }
+
+    .floating-social { position: fixed; right: 20px; bottom: 20px; z-index: 999; }
+    .floating-social .social-toggle {
+      width: 56px; height: 56px;
+      border-radius: 50%;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      display: grid; place-items: center;
+      box-shadow: 0 12px 32px rgba(0,0,0,0.20);
+      cursor: pointer;
+    }
+    .floating-social .social-toggle img { width: 60%; }
+    .floating-social .social-links {
+      position: absolute;
+      bottom: 68px; right: 0;
+      display: flex; flex-direction: column; gap: 8px;
+      opacity: 0; pointer-events: none; transform: translateY(8px);
+      transition: all 0.25s ease;
+    }
+    .floating-social.active .social-links { opacity: 1; pointer-events: auto; transform: translateY(0); }
+    .floating-social .social-links a {
+      width: 44px; height: 44px;
+      border-radius: 50%;
+      display: grid; place-items: center;
+      color: #fff;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    }
+    .floating-social .whatsapp  { background: #25D366; }
+    .floating-social .instagram { background: #E1306C; }
+    .floating-social .facebook  { background: #1877F2; }
+    .floating-social .location  { background: #9b59b6; }
+
+    /* Reveal animation */
+    .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.7s ease, transform 0.7s ease; }
+    .reveal.in-view { opacity: 1; transform: translateY(0); }
+  </style>
+</head>
+
+<body>
+  <!-- NAVBAR -->
+  <header class="navbar-x">
+    <div class="container-x nav-inner">
+      <a href="index.html" class="brand"><img src="images/logo/cc-logo.png" alt="Creative Code Hub" /></a>
+      <nav class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="tech-hub.html">Tech Hub</a>
+        <a href="creative-hub.html">Creative Hub</a>
+        <a href="business-hub.html" class="active">Business Hub</a>
+        <a href="career-prep.html">Career Prep</a>
+        <a href="career-connect.html">Career Connect</a>
+        <a href="about.html">About</a>
+      </nav>
+      <div class="nav-actions">
+        <button id="themeToggle" class="theme-toggle" aria-label="Toggle dark mode">
+          <span class="sun">☀️</span>
+          <span class="moon">🌙</span>
+        </button>
+        <a href="underprocess.html" class="btn-primary btn-sm">
+          <i class="fas fa-rocket"></i> LMS Portal
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="hub-hero">
+    <div class="container-x">
+      <div class="hub-hero-grid">
+        <div>
+          <div class="badges">
+            <span class="badge-pill"><i class="fas fa-chart-pie"></i> Business Hub</span>
+            <span class="badge-pill"><i class="fas fa-briefcase"></i> MBA · BBA · Management</span>
+          </div>
+          <h1>Learn business. <span class="gradient-text">Lead the future</span>.<br />Practical skills for real roles.</h1>
+          <p class="lead">Beyond the textbook — digital marketing, Power BI, Excel, HR management, WordPress, analytics and leadership taught through real case studies, live projects and industry mentorship.</p>
+          <div class="hero-actions">
+            <a href="#trending" class="btn-primary btn-lg"><i class="fas fa-fire"></i> Trending courses</a>
+            <a href="#projects" class="btn-ghost"><i class="fas fa-file-lines"></i> Projects &amp; research</a>
+          </div>
+        </div>
+
+        <div class="showcase" id="heroShowcase">
+          <div class="showcase-slide active">
+            <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=900&q=80&auto=format&fit=crop" alt="Business strategy" />
+            <div class="showcase-caption">
+              <span class="label"><i class="fas fa-chart-pie"></i> Business Strategy</span>
+              <h3>Think like a leader</h3>
+              <p>Frameworks, case studies and decision-making</p>
+            </div>
+          </div>
+          <div class="showcase-slide">
+            <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=900&q=80&auto=format&fit=crop" alt="Analytics" />
+            <div class="showcase-caption">
+              <span class="label"><i class="fas fa-chart-line"></i> Analytics</span>
+              <h3>Data-driven decisions</h3>
+              <p>Excel, SQL, Power BI and modern analytics</p>
+            </div>
+          </div>
+          <div class="showcase-slide">
+            <img src="https://images.unsplash.com/photo-1611926653458-09294b3142bf?w=900&q=80&auto=format&fit=crop" alt="Marketing" />
+            <div class="showcase-caption">
+              <span class="label"><i class="fas fa-bullhorn"></i> Marketing</span>
+              <h3>Brand &amp; growth</h3>
+              <p>Digital marketing, social media, brand strategy</p>
+            </div>
+          </div>
+          <div class="showcase-slide">
+            <img src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=900&q=80&auto=format&fit=crop" alt="Finance" />
+            <div class="showcase-caption">
+              <span class="label"><i class="fas fa-coins"></i> Finance</span>
+              <h3>Numbers that matter</h3>
+              <p>Accounting, financial analysis, valuation</p>
+            </div>
+          </div>
+          <div class="showcase-slide">
+            <img src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=900&q=80&auto=format&fit=crop" alt="Leadership" />
+            <div class="showcase-caption">
+              <span class="label"><i class="fas fa-users"></i> Leadership</span>
+              <h3>Lead with clarity</h3>
+              <p>Team management, negotiation, executive presence</p>
+            </div>
+          </div>
+          <div class="showcase-dots" id="showcaseDots">
+            <button class="showcase-dot active" data-show="0"></button>
+            <button class="showcase-dot" data-show="1"></button>
+            <button class="showcase-dot" data-show="2"></button>
+            <button class="showcase-dot" data-show="3"></button>
+            <button class="showcase-dot" data-show="4"></button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TRENDING -->
+  <section class="trending-section" id="trending">
+    <div class="container-x">
+      <div class="trend-head">
+        <div class="head-left" style="margin-bottom:0;">
+          <span class="trend-badge"><span class="dot"></span> Most Enrolled This Month</span>
+          <h2>Latest &amp; trending courses</h2>
+          <p>Practical, job-ready skills that MBA &amp; BBA students are hiring for right now.</p>
+        </div>
+        <a href="quote.html" class="btn-soft">Talk to an advisor <i class="fas fa-arrow-right"></i></a>
+      </div>
+
+      <div class="trend-grid">
+        <article class="trend-card t-dm reveal">
+          <div class="media">
+            <img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=600&q=80&auto=format&fit=crop" alt="Digital marketing" />
+            <span class="flag hot">🔥 Trending</span>
+            <div class="tool"><span>SEO</span><span>Google Ads</span></div>
+          </div>
+          <div class="body">
+            <h3>Digital Marketing</h3>
+            <p>Run real campaigns — SEO, SEM, paid ads, content and analytics.</p>
+            <div class="meta">
+              <span><i class="far fa-clock"></i> 3 months</span>
+              <span><i class="fas fa-certificate"></i> Certified</span>
+            </div>
+            <div class="cta-row">
+              <a href="quote.html?course=digital-marketing" class="btn-mini btn-solid">Enroll <i class="fas fa-arrow-right"></i></a>
+              <a href="quote.html?course=digital-marketing&mode=info" class="btn-mini btn-ghost-mini">Details</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="trend-card t-smm reveal">
+          <div class="media">
+            <img src="https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?w=600&q=80&auto=format&fit=crop" alt="Social media" />
+            <span class="flag new">New</span>
+            <div class="tool"><span>Instagram</span><span>LinkedIn</span></div>
+          </div>
+          <div class="body">
+            <h3>Social Media Marketing</h3>
+            <p>Content strategy, influencer marketing, reels and paid social.</p>
+            <div class="meta"><span><i class="far fa-clock"></i> 2 months</span><span><i class="fas fa-certificate"></i> Certified</span></div>
+            <div class="cta-row">
+              <a href="quote.html?course=social-media" class="btn-mini btn-solid">Enroll <i class="fas fa-arrow-right"></i></a>
+              <a href="quote.html?course=social-media&mode=info" class="btn-mini btn-ghost-mini">Details</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="trend-card t-pbi reveal">
+          <div class="media">
+            <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600&q=80&auto=format&fit=crop" alt="Power BI" />
+            <span class="flag top">Top Rated</span>
+            <div class="tool"><span>Power BI</span><span>DAX</span></div>
+          </div>
+          <div class="body">
+            <h3>Power BI for Business</h3>
+            <p>Build interactive dashboards, data models and executive reports.</p>
+            <div class="meta"><span><i class="far fa-clock"></i> 2 months</span><span><i class="fas fa-certificate"></i> Certified</span></div>
+            <div class="cta-row">
+              <a href="quote.html?course=powerbi" class="btn-mini btn-solid">Enroll <i class="fas fa-arrow-right"></i></a>
+              <a href="quote.html?course=powerbi&mode=info" class="btn-mini btn-ghost-mini">Details</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="trend-card t-exl reveal">
+          <div class="media">
+            <img src="https://images.unsplash.com/photo-1587614382346-4ec70e388b28?w=600&q=80&auto=format&fit=crop" alt="Excel" />
+            <span class="flag top">Top Rated</span>
+            <div class="tool"><span>Advanced Excel</span><span>VBA</span></div>
+          </div>
+          <div class="body">
+            <h3>Advanced Excel for Business</h3>
+            <p>Pivots, lookups, what-if, macros and dashboards.</p>
+            <div class="meta"><span><i class="far fa-clock"></i> 2 months</span><span><i class="fas fa-certificate"></i> Certified</span></div>
+            <div class="cta-row">
+              <a href="quote.html?course=excel" class="btn-mini btn-solid">Enroll <i class="fas fa-arrow-right"></i></a>
+              <a href="quote.html?course=excel&mode=info" class="btn-mini btn-ghost-mini">Details</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="trend-card t-hrm reveal">
+          <div class="media">
+            <img src="https://images.unsplash.com/photo-1521737711867-e3b97375f902?w=600&q=80&auto=format&fit=crop" alt="HR" />
+            <span class="flag">Popular</span>
+            <div class="tool"><span>HRM</span><span>Recruiting</span></div>
+          </div>
+          <div class="body">
+            <h3>HR Management</h3>
+            <p>Recruitment, performance management, HR analytics and compliance.</p>
+            <div class="meta"><span><i class="far fa-clock"></i> 3 months</span><span><i class="fas fa-certificate"></i> Certified</span></div>
+            <div class="cta-row">
+              <a href="quote.html?course=hr-management" class="btn-mini btn-solid">Enroll <i class="fas fa-arrow-right"></i></a>
+              <a href="quote.html?course=hr-management&mode=info" class="btn-mini btn-ghost-mini">Details</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="trend-card t-wp reveal">
+          <div class="media">
+            <img src="https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?w=600&q=80&auto=format&fit=crop" alt="WordPress" />
+            <span class="flag new">New</span>
+            <div class="tool"><span>WordPress</span><span>Elementor</span></div>
+          </div>
+          <div class="body">
+            <h3>Website Building with WordPress</h3>
+            <p>Launch real business websites — themes, plugins, WooCommerce.</p>
+            <div class="meta"><span><i class="far fa-clock"></i> 2 months</span><span><i class="fas fa-certificate"></i> Certified</span></div>
+            <div class="cta-row">
+              <a href="quote.html?course=wordpress" class="btn-mini btn-solid">Enroll <i class="fas fa-arrow-right"></i></a>
+              <a href="quote.html?course=wordpress&mode=info" class="btn-mini btn-ghost-mini">Details</a>
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- CATEGORY NAV -->
+  <nav class="cat-nav">
+    <div class="container-x cat-nav-inner">
+      <a href="#mba" class="cat-tab active">MBA Skills</a>
+      <a href="#bba" class="cat-tab">BBA Skills</a>
+      <a href="#management" class="cat-tab">Management</a>
+      <a href="#marketing" class="cat-tab">Marketing</a>
+      <a href="#finance" class="cat-tab">Finance</a>
+      <a href="#hr" class="cat-tab">Human Resources</a>
+      <a href="#entrepreneurship" class="cat-tab">Entrepreneurship</a>
+      <a href="#analytics" class="cat-tab">Analytics</a>
+      <a href="#communication" class="cat-tab">Communication</a>
+      <a href="#leadership" class="cat-tab">Leadership</a>
+    </div>
+  </nav>
+
+  <!-- MBA -->
+  <section class="cat-section" id="mba" data-track="mba">
+    <div class="container-x">
+      <div class="cat-head">
+        <div>
+          <span class="eyebrow">Track 01 · MBA Skill Development</span>
+          <h2>MBA skills that get you hired.</h2>
+          <p>Strategy, financial thinking, data fluency and executive communication.</p>
+        </div>
+        <div class="meta">
+          <div class="meta-item"><span class="v">4</span><span class="l">Modules</span></div>
+          <div class="meta-item"><span class="v">3-5</span><span class="l">Months</span></div>
+        </div>
+      </div>
+      <div class="tech-grid">
+        <article class="tech-card">
+          <div class="thumb"><img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=600&q=80&auto=format&fit=crop" alt="Strategy" /><span class="badge">Advanced</span></div>
+          <div class="body">
+            <h3>Strategic Management</h3>
+            <p>Porter, BCG, SWOT, value-chain — analyse real companies.</p>
+            <div class="tags"><span>3 months</span></div>
+            <div class="foot"><span class="dur"><i class="far fa-clock"></i> 70 hrs</span><a href="quote.html?course=mba-strategy" class="link">View <i class="fas fa-arrow-right"></i></a></div>
+          </div>
+        </article>
+        <article class="tech-card">
+          <div class="thumb"><img src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=600&q=80&auto=format&fit=crop" alt="Finance" /><span class="badge">Intermediate</span></div>
+          <div class="body">
+            <h3>Corporate Finance</h3>
+            <p>Financial statements, ratios, capital budgeting and valuation.</p>
+            <div class="tags"><span>3 months</span></div>
+            <div class="foot"><span class="dur"><i class="far fa-clock"></i> 70 hrs</span><a href="quote.html?course=mba-finance" class="link">View <i class="fas fa-arrow-right"></i></a></div>
+          </div>
+        </article>
+        <article class="tech-card">
+          <div class="thumb"><img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600&q=80&auto=format&fit=crop" alt="Analytics" /><span class="badge">Intermediate</span></div>
+          <div class="body">
+            <h3>Business Analytics for Managers</h3>
+            <p>Excel, SQL, Power BI and dashboards.</p>
+            <div class="tags"><span>3 months</span></div>
+            <div class="foot"><span class="dur"><i class="far fa-clock"></i> 70 hrs</span><a href="quote.html?course=mba-analytics" class="link">View <i class="fas fa-arrow-right"></i></a></div>
+          </div>
+        </article>
+        <article class="tech-card">
+          <div class="thumb"><img src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=600&q=80&auto=format&fit=crop" alt="Communication" /><span class="badge">Advanced</span></div>
+          <div class="body">
+            <h3>Executive Communication</h3>
+            <p>Presentations, boardroom pitches, storytelling with data.</p>
+            <div class="tags"><span>2 months</span></div>
+            <div class="foot"><span class="dur"><i class="far fa-clock"></i> 50 hrs</span><a href="quote.html?course=mba-comms" class="link">View <i class="fas fa-arrow-right"></i></a></div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- BBA -->
+  <section class="cat-section" id="bba" data-track="bba">
+    <div class="container-x">
+      <div class="cat-head">
+        <div>
+          <span class="eyebrow">Track 02 · BBA Skill Development</span>
+          <h2>BBA skills with a head start.</h2>
+          <p>Practical business training from foundational concepts to internship-ready skills.</p>
+        </div>
+        <div class="meta">
+          <div class="meta-item"><span class="v">3</span><span class="l">Modules</span></div>
+          <div class="meta-item"><span class="v">2-3</span><span class="l">Months</span></div>
+        </div>
+      </div>
+      <div class="tech-grid">
+        <article class="tech-card">
+          <div class="thumb"><img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=600&q=80&auto=format&fit=crop" alt="Fundamentals" /><span class="badge">Beginner</span></div>
+          <div class="body">
+            <h3>Business Fundamentals</h3>
+            <p>How companies actually work — operations, marketing, finance.</p>
+            <div class="tags"><span>2 months</span></div>
+            <div class="foot"><span class="dur"><i class="far fa-clock"></i> 50 hrs</span><a href="quote.html?course=bba-fundamentals" class="link">View <i class="fas fa-arrow-right"></i></a></div>
+          </div>
+        </article>
+        <article class="tech-card">
+          <div class="thumb"><img src="https://images.unsplash.com/photo-1521737711867-e3b97375f902?w=600&q=80&auto=format&fit=crop" alt="Corporate" /><span class="badge">Beginner</span></div>
+          <div class="body">
+            <h3>Corporate Readiness</h3>
+            <p>Business etiquette, email writing, presentations.</p>
+            <div class="tags"><span>2 months</span></div>
+            <div class="foot"><span class="dur"><i class="far fa-clock"></i> 50 hrs</span><a href="quote.html?course=bba-corporate" class="link">View <i class="fas fa-arrow-right"></i></a></div>
+          </div>
+        </article>
+        <article class="tech-card">
+          <div class="thumb"><img src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=600&q=80&auto=format&fit=crop" alt="Project" /><span class="badge">Intermediate</span></div>
+          <div class="body">
+            <h3>Business Project Workshop</h3>
+            <p>Work on a real business problem for a partner company.</p>
+            <div class="tags"><span>3 months</span></div>
+            <div class="foot"><span class="dur"><i class="far fa-clock"></i> 70 hrs</span><a href="quote.html?course=bba-project" class="link">View <i class="fas fa-arrow-right"></i></a></div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- MANAGEMENT -->
+  <section class="cat-section" id="management" data-track="mgmt">
+    <div class="container-x">
+      <div class="cat-head">
+        <div>
+          <span class="eyebrow">Track 03 · Management</span>
+          <h2>Manage teams. Manage work.</h2>
+          <p>Operations, project management, decision-making and organisational behaviour.</p>
+        </div>
+        <div class="meta">
+          <div class="meta-item"><span class="v">3</span><span class="l">Modules</span></div>
+          <div class="meta-item"><span class="v">3</span><span class="l">Months</span></div>
+        </div>
+      </div>
+      <div class="tech-grid">
+        <article class="tech-card">
+          <div class="thumb"><img src="https://images.unsplash.com/photo-1531482615713-2afd69097998?w=600&q=80&auto=format&fit=crop" alt="Ops" /><span class="badge">Intermediate</span></div>
+          <div class="body">
+            <h3>Operations Management</h3>
+            <p>Process design, quality control, lean principles.</p>
+            <div class="tags"><span>3 months</span></div>
+            <div class="foot"><span class="dur"><i class="far fa-clock"></i> 70 hrs</span><a href="quote.html?course=mgmt-ops" class="link">View <i class="fas fa-arrow-right"></i></a></div>
+          </div>
+        </article>
+        <article class="tech-card">
+          <div class="thumb"><img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=600&q=80&auto=format&fit=crop" alt="Project" /><span class="badge">Intermediate</span></div>
+          <div class="body">
+            <h3>Project Management</h3>
+            <p>Agile, Scrum, Kanban and traditional PMBOK.</p>
+            <div class="tags"><span>3 months</span></div>
+            <div class="foot"><span class="dur"><i class="far fa-clock"></i> 70 hrs</span><a href="quote.html?course=mgmt-project" class="link">View <i class="fas fa-arrow-right"></i></a></div>
+          </div>
+        </article>
+        <article class="tech-card">
+          <div class="thumb"><img src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=600&q=80&auto=format&fit=crop" alt="OB" /><span class="badge">Intermediate</span></div>
+          <div class="body">
+            <h3>Organisational Behaviour</h3>
+            <p>Motivation, culture, team dynamics and decision-making.</p>
+            <div class="tags"><span>2 months</span></div>
+            <div class="foot"><span class="dur"><i class="far fa-clock"></i> 50 hrs</span><a href="quote.html?course=mgmt-ob" class="link">View <i class="fas fa-arrow-right"></i></a></div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- MARKETING -->
+  <section class="cat-section" id="marketing" data-track="mktg">
+    <div class="container-x">
+      <div class="cat-head">
+        <div>
+          <span class="eyebrow">Track 04 · Marketing</span>
+          <h2>Brand. Growth. Demand.</h2>
+          <p>Digital marketing, branding, consumer behaviour and campaign management.</p>
+        </div>
+        <div class="meta">
+          <div class="meta-item"><span class="v">4</span><span class="l">Modules</span></div>
+          <div class="meta-item"><span class="v">2-3</span><span class="l">Months</span></div>
+        </div>
+      </div>
+      <div class="tech-grid">
+        <article class="tech-card">
+          <div class="thumb"><img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=600&q=80&auto=format&fit=crop" alt="Strategy" /><span class="badge">Intermediate</span></div>
+          <div class="body">
+            <h3>Marketing Strategy</h3>
+            <p>Segmentation, positioning, 4Ps and go-to-market.</p>
+            <div class="tags"><span>3 months</span></div>
+            <div class="foot"><span class="dur"><i class="far fa-clock"></i> 70 hrs</span><a href="quote.html?course=mktg-strategy" class="link">View <i class="fas fa-arrow-right"></i></a></div>
+          </div>
+        </article>
+        <article class="tech-card">
+          <div class="thumb"><img src="https://images.unsplash.com/photo-1611926653458-09294b3142bf?w=600&q=80&auto=format&fit=crop" alt="Digital" /><span class="badge">Intermediate</span></div>
+          <div class="body">
+            <h3>Digital Marketing</h3>
+            <p>SEO, SEM, social ads, content and analytics.</p>
+            <div class="tags"><span>3 months</span></div>
+            <div class="foot"><span class="dur"><i class="far fa-clock"></i> 70 hrs</span><a href="quote.html?course=mktg-digital" class="link">View <i class="fas fa-arrow-right"></i></a></div>
+          </div>
+        </article>
+        <article class="tech-card">
+          <div class="thumb"><img src="https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?w=600&q=80&auto=format&fit=crop" alt="Brand" /><span class="badge">Intermediate</span></div>
+          <div class="body">
+            <h3>Brand Management</h3>
+            <p>Positioning, identity, storytelling and equity building.</p>
+            <div class="tags"><span>2 months</span></div>
+            <div class="foot"><span class="dur"><i class="far fa-clock"></i> 50 hrs</span><a href="quote.html?course=mktg-brand" class="link">View <i class="fas fa-arrow-right"></i></a></div>
+          </div>
+        </article>
+        <article class="tech-card">
+          <div class="thumb"><img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600&q=80&auto=format&fit=crop" alt="Consumer" /><span class="badge">Intermediate</span></div>
+          <div class="body">
+            <h3>Consumer Behaviour</h3>
+            <p>Why people buy — psychology and decision-making.</p>
+            <div class="tags"><span>2 months</span></div>
+            <div class="foot"><span class="dur"><i class="far fa-clock"></i> 50 hrs</span><a href="quote.html?course=mktg-consumer" class="link">View <i class="fas fa-arrow-right"></i></a></div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- FINANCE -->
+  <section class="cat-section" id="finance" data-track="fin">
+    <div class="container-x">
+      <div class="cat-head">
+        <div>
+          <span class="eyebrow">Track 05 · Finance</span>
+          <h2>Numbers that tell stories.</h2>
+          <p>Accounting, financial analysis, valuation and business finance.</p>
+        </div>
+        <div class="meta">
+          <div class="meta-item"><span class="v">3</span><span class="l">Modules</span></div>
+          <div class="meta-item"><span class="v">3</span><span class="l">Months</span></div>
+        </div>
+      </div>
+      <div class="tech-grid">
+        <article class="tech-card">
+          <div class="thumb"><img src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=600&q=80&auto=format&fit=crop" alt="Accounting" /><span class="badge">Beginner</span></div>
+          <div class="body">
+            <h3>Accounting Fundamentals</h3>
+            <p>Journal, ledger, P&amp;L, balance sheet, cash flow.</p>
+            <div class="tags"><span>3 months</span></div>
+            <div class="foot"><span class="dur"><i class="far fa-clock"></i> 70 hrs</span><a href="quote.html?course=fin-accounting" class="link">View <i class="fas fa-arrow-right"></i></a></div>
+          </div>
+        </article>
+        <article class="tech-card">
+          <div class="thumb"><img src="https://images.unsplash.com/photo-1590283603385-17ffb3a7f29f?w=600&q=80&auto=format&fit=crop" alt="Valuation" /><span class="badge">Intermediate</span></div>
+          <div class="body">
+            <h3>Financial Analysis &amp; Valuation</h3>
+            <p>Ratio analysis, DCF, comparables and valuation.</p>
+            <div class="tags"><span>3 months</span></div>
+            <div class="foot"><span class="dur"><i class="far fa-clock"></i> 70 hrs</span><a href="quote.html?course=fin-valuation" class="link">View <i class="fas fa-arrow-right"></i></a></div>
+          </div>
+        </article>
+        <article class="tech-card">
+          <div class="thumb"><img src="https://images.unsplash.com/photo-1579532537598-459ecdaf39cc?w=600&q=80&auto=format&fit=crop" alt="Investment" /><span class="badge">Advanced</span></div>
+          <div class="body">
+            <h3>Investment &amp; Portfolio Management</h3>
+            <p>Stocks, bonds, mutual funds, risk and portfolio.</p>
+            <div class="tags"><span>3 months</span></div>
+            <div class="foot"><span class="dur"><i class="far fa-clock"></i> 70 hrs</span><a href="quote.html?course=fin-investment" class="link">View <i class="fas fa-arrow-right"></i></a></div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- HR -->
+  <section class="cat-section" id="hr" data-track="hr">
+    <div class="container-x">
+      <div class="cat-head">
+        <div>
+          <span class="eyebrow">Track 06 · Human Resources</span>
+          <h2>People are the business.</h2>
+          <p>Hiring, managing, developing and retaining talent.</p>
+        </div>
+        <div class="meta">
+          <div class="meta-item"><span class="v">2</span><span class="l">Modules</span></div>
+          <div class="meta-item"><span class="v">2-3</span><span class="l">Months</span></div>
+        </div>
+      </div>
+      <div class="tech-grid">
+        <article class="tech-card">
+          <div class="thumb"><img src="https://images.unsplash.com/photo-1521737711867-e3b97375f902?w=600&q=80&auto=format&fit=crop" alt="HRM" /><span class="badge">Intermediate</span></div>
+          <div class="body">
+            <h3>Human Resource Management</h3>
+            <p>Recruitment, performance management, HR compliance.</p>
+            <div class="tags"><span>3 months</span></div>
+            <div class="foot"><span class="dur"><i class="far fa-clock"></i> 70 hrs</span><a href="quote.html?course=hr-hrm" class="link">View <i class="fas fa-arrow-right"></i></a></div>
+          </div>
+        </article>
+        <article class="tech-card">
+          <div class="thumb"><img src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=600&q=80&auto=format&fit=crop" alt="Talent" /><span class="badge">Intermediate</span></div>
+          <div class="body">
+            <h3>Talent Acquisition &amp; Culture</h3>
+            <p>Sourcing, interviewing, employer branding.</p>
+            <div class="tags"><span>2 months</span></div>
+            <div class="foot"><span class="dur"><i class="far fa-clock"></i> 50 hrs</span><a href="quote.html?course=hr-talent" class="link">View <i class="fas fa-arrow-right"></i></a></div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ENTREPRENEURSHIP -->
+  <section class="cat-section" id="entrepreneurship" data-track="entre">
+    <div class="container-x">
+      <div class="cat-head">
+        <div>
+          <span class="eyebrow">Track 07 · Entrepreneurship</span>
+          <h2>Build something of your own.</h2>
+          <p>Ideation, validation, fundraising and building a startup.</p>
+        </div>
+        <div class="meta">
+          <div class="meta-item"><span class="v">2</span><span class="l">Modules</span></div>
+          <div class="meta-item"><span class="v">3</span><span class="l">Months</span></div>
+        </div>
+      </div>
+      <div class="tech-grid">
+        <article class="tech-card">
+          <div class="thumb"><img src="https://images.unsplash.com/photo-1556761175-b413da4baf72?w=600&q=80&auto=format&fit=crop" alt="Startup" /><span class="badge">Beginner</span></div>
+          <div class="body">
+            <h3>Startup Fundamentals</h3>
+            <p>Idea validation, MVP, customer discovery, business models.</p>
+            <div class="tags"><span>3 months</span></div>
+            <div class="foot"><span class="dur"><i class="far fa-clock"></i> 70 hrs</span><a href="quote.html?course=entre-fundamentals" class="link">View <i class="fas fa-arrow-right"></i></a></div>
+          </div>
+        </article>
+        <article class="tech-card">
+          <div class="thumb"><img src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=600&q=80&auto=format&fit=crop" alt="Pitch" /><span class="badge">Intermediate</span></div>
+          <div class="body">
+            <h3>Pitching &amp; Fundraising</h3>
+            <p>Investor pitch decks, financial models, term sheets.</p>
+            <div class="tags"><span>3 months</span></div>
+            <div class="foot"><span class="dur"><i class="far fa-clock"></i> 70 hrs</span><a href="quote.html?course=entre-pitch" class="link">View <i class="fas fa-arrow-right"></i></a></div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ANALYTICS -->
+  <section class="cat-section" id="analytics" data-track="analytics">
+    <div class="container-x">
+      <div class="cat-head">
+        <div>
+          <span class="eyebrow">Track 08 · Business Analytics</span>
+          <h2>Decide with data.</h2>
+          <p>Excel, SQL, Power BI, dashboards and storytelling with data.</p>
+        </div>
+        <div class="meta">
+          <div class="meta-item"><span class="v">3</span><span class="l">Modules</span></div>
+          <div class="meta-item"><span class="v">2-3</span><span class="l">Months</span></div>
+        </div>
+      </div>
+      <div class="tech-grid">
+        <article class="tech-card">
+          <div class="thumb"><img src="https://images.unsplash.com/photo-1587614382346-4ec70e388b28?w=600&q=80&auto=format&fit=crop" alt="Excel" /><span class="badge">Beginner</span></div>
+          <div class="body">
+            <h3>Business Analytics with Excel</h3>
+            <p>Pivot tables, lookups, what-if analysis.</p>
+            <div class="tags"><span>2 months</span></div>
+            <div class="foot"><span class="dur"><i class="far fa-clock"></i> 50 hrs</span><a href="quote.html?course=analytics-excel" class="link">View <i class="fas fa-arrow-right"></i></a></div>
+          </div>
+        </article>
+        <article class="tech-card">
+          <div class="thumb"><img src="https://images.unsplash.com/photo-1544383835-bda2bc66a55d?w=600&q=80&auto=format&fit=crop" alt="SQL" /><span class="badge">Intermediate</span></div>
+          <div class="body">
+            <h3>SQL for Business Analysts</h3>
+            <p>Query databases, join tables, build reports.</p>
+            <div class="tags"><span>3 months</span></div>
+            <div class="foot"><span class="dur"><i class="far fa-clock"></i> 70 hrs</span><a href="quote.html?course=analytics-sql" class="link">View <i class="fas fa-arrow-right"></i></a></div>
+          </div>
+        </article>
+        <article class="tech-card">
+          <div class="thumb"><img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600&q=80&auto=format&fit=crop" alt="Power BI" /><span class="badge">Intermediate</span></div>
+          <div class="body">
+            <h3>Power BI &amp; Data Visualization</h3>
+            <p>Interactive dashboards and executive storytelling.</p>
+            <div class="tags"><span>3 months</span></div>
+            <div class="foot"><span class="dur"><i class="far fa-clock"></i> 70 hrs</span><a href="quote.html?course=analytics-powerbi" class="link">View <i class="fas fa-arrow-right"></i></a></div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- COMMUNICATION -->
+  <section class="cat-section" id="communication" data-track="comm">
+    <div class="container-x">
+      <div class="cat-head">
+        <div>
+          <span class="eyebrow">Track 09 · Business Communication</span>
+          <h2>Communicate with impact.</h2>
+          <p>Presentations, negotiation, business writing and executive presence.</p>
+        </div>
+        <div class="meta">
+          <div class="meta-item"><span class="v">2</span><span class="l">Modules</span></div>
+          <div class="meta-item"><span class="v">2</span><span class="l">Months</span></div>
+        </div>
+      </div>
+      <div class="tech-grid">
+        <article class="tech-card">
+          <div class="thumb"><img src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=600&q=80&auto=format&fit=crop" alt="Presentation" /><span class="badge">Intermediate</span></div>
+          <div class="body">
+            <h3>Presentation &amp; Storytelling</h3>
+            <p>Structure, storytelling, slides and stage presence.</p>
+            <div class="tags"><span>2 months</span></div>
+            <div class="foot"><span class="dur"><i class="far fa-clock"></i> 50 hrs</span><a href="quote.html?course=comm-presentation" class="link">View <i class="fas fa-arrow-right"></i></a></div>
+          </div>
+        </article>
+        <article class="tech-card">
+          <div class="thumb"><img src="https://images.unsplash.com/photo-1556761175-b413da4baf72?w=600&q=80&auto=format&fit=crop" alt="Negotiation" /><span class="badge">Advanced</span></div>
+          <div class="body">
+            <h3>Negotiation &amp; Persuasion</h3>
+            <p>BATNA, tactics, psychology of persuasion.</p>
+            <div class="tags"><span>2 months</span></div>
+            <div class="foot"><span class="dur"><i class="far fa-clock"></i> 50 hrs</span><a href="quote.html?course=comm-negotiation" class="link">View <i class="fas fa-arrow-right"></i></a></div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- LEADERSHIP -->
+  <section class="cat-section" id="leadership" data-track="leader">
+    <div class="container-x">
+      <div class="cat-head">
+        <div>
+          <span class="eyebrow">Track 10 · Leadership</span>
+          <h2>Lead with clarity.</h2>
+          <p>Team management, coaching, decision-making and executive presence.</p>
+        </div>
+        <div class="meta">
+          <div class="meta-item"><span class="v">2</span><span class="l">Modules</span></div>
+          <div class="meta-item"><span class="v">2-3</span><span class="l">Months</span></div>
+        </div>
+      </div>
+      <div class="tech-grid">
+        <article class="tech-card">
+          <div class="thumb"><img src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=600&q=80&auto=format&fit=crop" alt="Team" /><span class="badge">Intermediate</span></div>
+          <div class="body">
+            <h3>Team Leadership</h3>
+            <p>Build, manage and motivate teams.</p>
+            <div class="tags"><span>3 months</span></div>
+            <div class="foot"><span class="dur"><i class="far fa-clock"></i> 70 hrs</span><a href="quote.html?course=leader-team" class="link">View <i class="fas fa-arrow-right"></i></a></div>
+          </div>
+        </article>
+        <article class="tech-card">
+          <div class="thumb"><img src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=600&q=80&auto=format&fit=crop" alt="Executive" /><span class="badge">Advanced</span></div>
+          <div class="body">
+            <h3>Executive Presence &amp; Strategy</h3>
+            <p>Think like a CXO — organisational strategy, board communication.</p>
+            <div class="tags"><span>2 months</span></div>
+            <div class="foot"><span class="dur"><i class="far fa-clock"></i> 50 hrs</span><a href="quote.html?course=leader-exec" class="link">View <i class="fas fa-arrow-right"></i></a></div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJECTS + RESEARCH -->
+  <section class="project-section" id="projects">
+    <div class="container-x">
+      <div class="project-grid">
+        <div class="project-copy">
+          <span class="eyebrow">MBA / BBA Projects &amp; Research Papers</span>
+          <h2>We do projects and research papers for you.</h2>
+          <p>From topic selection to final submission — our mentors help MBA and BBA students design, execute and document real business projects and publishable research papers.</p>
+          <div class="project-features">
+            <div class="project-feature"><i class="fas fa-lightbulb"></i><span>Topic selection &amp; scope guidance</span></div>
+            <div class="project-feature"><i class="fas fa-chart-line"></i><span>Primary &amp; secondary research design</span></div>
+            <div class="project-feature"><i class="fas fa-database"></i><span>Data collection, cleaning &amp; analysis</span></div>
+            <div class="project-feature"><i class="fas fa-file-lines"></i><span>Report writing &amp; formatting</span></div>
+            <div class="project-feature"><i class="fas fa-book"></i><span>Literature review &amp; citations</span></div>
+            <div class="project-feature"><i class="fas fa-microphone"></i><span>Viva / defense preparation</span></div>
+          </div>
+          <div class="project-cta">
+            <a href="quote.html?service=mba-project" class="btn-gold"><i class="fas fa-paper-plane"></i> Request project help</a>
+            <a href="quote.html?service=research-paper" class="btn-outline-light"><i class="fas fa-book-open"></i> Research paper support</a>
+          </div>
+        </div>
+        <div class="paper-mock">
+          <div class="paper-head">
+            <span class="paper-title">research_paper.pdf</span>
+            <span class="paper-badge">✓ Peer-reviewed</span>
+          </div>
+          <div class="paper-page">
+            <div class="p-title">Impact of Digital Marketing on Consumer Purchase Intention</div>
+            <div class="p-meta">MBA Thesis · 2025 · Creative Code Hub</div>
+            <div class="p-section"><span class="p-num">01</span> Introduction &amp; problem statement</div>
+            <div class="p-section"><span class="p-num">02</span> Literature review (45+ sources)</div>
+            <div class="p-section"><span class="p-num">03</span> Research methodology</div>
+            <div class="p-section"><span class="p-num">04</span> Data analysis (SPSS / Excel)</div>
+            <div class="p-section"><span class="p-num">05</span> Findings &amp; discussion</div>
+            <div class="p-section"><span class="p-num">06</span> Conclusion &amp; recommendations</div>
+            <div class="p-section"><span class="p-num">07</span> References (APA 7th)</div>
+          </div>
+          <div class="paper-stamp">Approved ✓</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FLOW -->
+  <section class="flow-band">
+    <div class="container-x">
+      <div class="head-left" style="max-width: 640px; margin-bottom: 48px;">
+        <span class="eyebrow">Practical Business Learning</span>
+        <h2>Concepts → Case Studies → Activities → Presentations → Projects.</h2>
+        <p>Not just theory. Every module ends with real application.</p>
+      </div>
+      <div class="flow-wrap">
+        <div class="flow-step"><div class="n">01</div><h4>Concepts</h4><p>Frameworks and fundamentals</p></div>
+        <div class="flow-step"><div class="n">02</div><h4>Case Studies</h4><p>Real companies, real decisions</p></div>
+        <div class="flow-step"><div class="n">03</div><h4>Activities</h4><p>Simulations and role plays</p></div>
+        <div class="flow-step"><div class="n">04</div><h4>Presentations</h4><p>Pitch your analysis</p></div>
+        <div class="flow-step"><div class="n">05</div><h4>Business Projects</h4><p>Solve for a partner company</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- OUTCOMES -->
+  <section class="section">
+    <div class="container-x">
+      <div class="head-left">
+        <span class="eyebrow">Where students end up</span>
+        <h2>Real business outcomes.</h2>
+        <p>Numbers from our Business Hub alumni across marketing, finance, HR, analytics and consulting roles.</p>
+      </div>
+      <div class="case-grid">
+        <div class="case-card reveal"><div class="metric">86%</div><h4>Placement rate</h4><p>Recent MBA / BBA cohorts placed within 4 months.</p></div>
+        <div class="case-card reveal"><div class="metric">₹6.2L</div><h4>Average package</h4><p>Across marketing, finance, HR, analytics, consulting.</p></div>
+        <div class="case-card reveal"><div class="metric">15+</div><h4>Hiring partners</h4><p>Banks, NBFCs, FMCG brands, consulting firms.</p></div>
+        <div class="case-card reveal"><div class="metric">200+</div><h4>Case studies</h4><p>Live business cases analysed by students.</p></div>
+        <div class="case-card reveal"><div class="metric">40+</div><h4>Startups launched</h4><p>Student-founded ventures from our programs.</p></div>
+        <div class="case-card reveal"><div class="metric">300+</div><h4>Projects &amp; papers</h4><p>Completed with our mentor support.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="section-sm">
+    <div class="container-x">
+      <div class="cta-band reveal">
+        <div>
+          <span class="eyebrow">Ready to lead?</span>
+          <h2>Talk to a Business Hub advisor.</h2>
+          <p>Free consultation — we'll map the right track to your goals, whether you're in an MBA, BBA, or early career.</p>
+        </div>
+        <div style="display:flex; gap:12px; flex-wrap:wrap;">
+          <a href="quote.html" class="btn-light"><i class="fas fa-paper-plane"></i> Get guidance</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer-x">
+    <div class="container-x">
+      <div class="footer-grid">
+        <div>
+          <div class="brand-row">
+            <img src="images/logo/cc-logo.png" alt="Creative Code Hub" />
+            <strong>Creative Code Hub</strong>
+          </div>
+          <p style="max-width: 340px; color: var(--text-muted);">A learning and career development platform — technical, creative and business education with internships and placement support.</p>
+          <div style="display:flex; gap:12px; margin-top:16px;">
+            <a href="#" class="theme-toggle" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" class="theme-toggle" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+            <a href="#" class="theme-toggle" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+            <a href="#" class="theme-toggle" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+          </div>
+        </div>
+        <div>
+          <h5>Hubs</h5>
+          <ul>
+            <li><a href="tech-hub.html">Tech Hub</a></li>
+            <li><a href="creative-hub.html">Creative Hub</a></li>
+            <li><a href="business-hub.html">Business Hub</a></li>
+            <li><a href="career-prep.html">Career Prep</a></li>
+            <li><a href="career-connect.html">Career Connect</a></li>
+          </ul>
+        </div>
+        <div>
+          <h5>Company</h5>
+          <ul>
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="project.html">Projects</a></li>
+            <li><a href="career.html">Careers</a></li>
+            <li><a href="quote.html">Contact</a></li>
+            <li><a href="underprocess.html">LMS Portal</a></li>
+          </ul>
+        </div>
+        <div>
+          <h5>Contact</h5>
+          <ul class="footer-contact">
+            <li><i class="fas fa-map-marker-alt"></i> Kakinada &amp; Visakhapatnam, AP</li>
+            <li><i class="fas fa-phone"></i> +91 70757 75888</li>
+            <li><i class="fas fa-phone"></i> +91 70939 47788</li>
+            <li><i class="fas fa-envelope"></i> info@creativecodehub.in</li>
+          </ul>
+        </div>
+      </div>
+      <div class="copy">
+        <span>© 2025 Creative Code Hub. All rights reserved.</span>
+        <span>ISO 9001:2015 Certified · Made in Andhra Pradesh 🇮🇳</span>
+      </div>
+    </div>
+  </footer>
+
+  <div class="floating-social" id="floatingSocial">
+    <div class="social-toggle" id="socialToggle">
+      <img src="images/logo/cc-logo.png" alt="Social menu" />
+    </div>
+    <div class="social-links">
+      <a href="https://wa.me/917075779888" target="_blank" class="whatsapp"><i class="fab fa-whatsapp"></i></a>
+      <a href="https://www.instagram.com/creativecodehub" target="_blank" class="instagram"><i class="fab fa-instagram"></i></a>
+      <a href="https://www.facebook.com/yourpage" target="_blank" class="facebook"><i class="fab fa-facebook-f"></i></a>
+      <a href="https://maps.app.goo.gl/8tZUZKWh3uiPoUWJ9" target="_blank" class="location"><i class="fas fa-location-dot"></i></a>
+    </div>
+  </div>
+
+  <a href="https://wa.me/917075779888" target="_blank" class="whatsapp-left"><i class="fab fa-whatsapp"></i></a>
+
+  <script>
+    /* Dark mode toggle */
+    (function () {
+      const root = document.documentElement;
+      const toggle = document.getElementById('themeToggle');
+      const saved = localStorage.getItem('theme');
+      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      root.setAttribute('data-theme', saved || (prefersDark ? 'dark' : 'light'));
+
+      toggle.addEventListener('click', () => {
+        const next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+        root.setAttribute('data-theme', next);
+        localStorage.setItem('theme', next);
+      });
+    })();
+
+    /* Hero carousel */
+    (function () {
+      const wrap = document.getElementById('heroShowcase');
+      if (!wrap) return;
+      const slides = wrap.querySelectorAll('.showcase-slide');
+      const dots = document.querySelectorAll('#showcaseDots .showcase-dot');
+      let current = 0;
+      const INTERVAL = 4500;
+
+      function goTo(i) {
+        current = (i + slides.length) % slides.length;
+        slides.forEach((s, idx) => s.classList.toggle('active', idx === current));
+        dots.forEach((d, idx) => d.classList.toggle('active', idx === current));
+      }
+      function auto() { setInterval(() => goTo(current + 1), INTERVAL); }
+      dots.forEach(d => d.addEventListener('click', () => goTo(+d.dataset.show)));
+      goTo(0);
+      auto();
+    })();
+
+    /* Smooth scroll */
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+      a.addEventListener('click', e => {
+        const id = a.getAttribute('href');
+        if (id.length > 1) {
+          const t = document.querySelector(id);
+          if (t) {
+            e.preventDefault();
+            window.scrollTo({ top: t.getBoundingClientRect().top + window.scrollY - 100, behavior: 'smooth' });
+          }
+        }
+      });
+    });
+
+    /* Floating social */
+    (function () {
+      const fs = document.getElementById('floatingSocial');
+      const st = document.getElementById('socialToggle');
+      st.addEventListener('click', e => { e.stopPropagation(); fs.classList.toggle('active'); });
+      document.addEventListener('click', e => { if (!fs.contains(e.target)) fs.classList.remove('active'); });
+    })();
+  </script>
+</body>
+</html>

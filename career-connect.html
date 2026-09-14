@@ -1,0 +1,1095 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Career Connect — Internships &amp; Placement Support | Creative Code Hub</title>
+  <meta name="description" content="Career Connect by Creative Code Hub — internship opportunities, live projects, mentor support and placement assistance. From learning to opportunity, with real hiring partners." />
+  <link rel="canonical" href="https://creativecodehub.in/career-connect.html" />
+
+  <meta property="og:title" content="Career Connect — Creative Code Hub" />
+  <meta property="og:description" content="Internships, live projects and placement support — from learning to opportunity." />
+  <meta property="og:url" content="https://creativecodehub.in/career-connect.html" />
+  <meta property="og:type" content="website" />
+
+  <link rel="icon" type="image/png" href="images/logo/cc-logo.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+  <link rel="stylesheet" href="styles.css" />
+
+  <style>
+    /* =========================================================
+       CAREER CONNECT — Blue / Sky theme
+       ========================================================= */
+    :root {
+      --cc-intern:  #2563eb;  /* blue */
+      --cc-project: #0ea5e9;  /* sky */
+      --cc-mentor:  #8b5cf6;  /* violet */
+      --cc-cert:    #059669;  /* emerald */
+      --cc-guide:   #d97706;  /* amber */
+      --cc-resume:  #db2777;  /* pink */
+      --cc-prep:    #dc2626;  /* red */
+      --cc-jobs:    #0891b2;  /* cyan */
+      --cc-offer:   #f59e0b;  /* gold */
+    }
+
+    /* ---------- HERO ---------- */
+    .hub-hero {
+      padding: 64px 0 72px;
+      border-bottom: 1px solid var(--border);
+      background: linear-gradient(180deg, var(--bg) 0%, var(--bg-subtle) 100%);
+      position: relative;
+      overflow: hidden;
+    }
+    .hub-hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(55% 60% at 85% 15%, rgba(37,99,235,0.16), transparent 70%),
+        radial-gradient(45% 55% at 10% 90%, rgba(14,165,233,0.10), transparent 70%);
+      pointer-events: none;
+    }
+    .hub-hero .container-x { position: relative; }
+    .hub-hero-grid {
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 64px;
+      align-items: center;
+    }
+    @media (max-width: 960px) { .hub-hero-grid { grid-template-columns: 1fr; gap: 48px; } }
+
+    .hub-hero h1 {
+      font-size: clamp(2rem, 4.5vw, 3.2rem);
+      margin-bottom: 20px;
+      letter-spacing: -0.03em;
+      line-height: 1.15;
+    }
+    .hub-hero .lead {
+      font-size: 1.08rem;
+      color: var(--text-muted);
+      max-width: 560px;
+      margin-bottom: 32px;
+      line-height: 1.65;
+    }
+    .hub-hero .badges {
+      display: flex; gap: 12px; flex-wrap: wrap;
+      margin-bottom: 28px;
+    }
+    .hub-hero .badge-pill {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 7px 14px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--r-full);
+      font-size: 0.83rem;
+      font-weight: 500;
+      color: var(--text-muted);
+    }
+    .hub-hero .badge-pill i { color: var(--cc-intern); }
+
+    /* ---------- HERO SHOWCASE ---------- */
+    .showcase {
+      position: relative;
+      aspect-ratio: 4 / 3;
+      border-radius: var(--r-2xl);
+      overflow: hidden;
+      box-shadow: 0 32px 64px rgba(15,23,42,0.25);
+      background: #0f172a;
+    }
+    .showcase-slide {
+      position: absolute; inset: 0;
+      opacity: 0;
+      transition: opacity 900ms var(--ease-out);
+    }
+    .showcase-slide.active { opacity: 1; }
+    .showcase-slide img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .showcase-slide::after {
+      content: '';
+      position: absolute; inset: 0;
+      background: linear-gradient(180deg, transparent 40%, rgba(15,23,42,0.92) 100%);
+    }
+    .showcase-caption {
+      position: absolute;
+      left: 28px; right: 28px; bottom: 28px;
+      z-index: 2;
+      color: #fff;
+    }
+    .showcase-caption .label {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 5px 12px;
+      border-radius: var(--r-full);
+      font-size: 0.7rem; font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      background: rgba(255,255,255,0.15);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(255,255,255,0.2);
+      margin-bottom: 12px;
+    }
+    .showcase-caption h3 { color: #fff; font-size: 1.5rem; margin: 0 0 4px; font-weight: 700; }
+    .showcase-caption p { color: rgba(255,255,255,0.8); font-size: 0.88rem; margin: 0; }
+    .showcase-dots {
+      position: absolute;
+      bottom: 20px; right: 28px;
+      z-index: 3;
+      display: flex; gap: 6px;
+    }
+    .showcase-dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.35);
+      border: none; padding: 0; cursor: pointer;
+      transition: all var(--dur) var(--ease);
+    }
+    .showcase-dot.active { width: 20px; background: #fff; }
+
+    /* ---------- STATS BAND ---------- */
+    .stat-band {
+      padding: 40px 0;
+      background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #1e40af 100%);
+      color: #fff;
+      position: relative;
+      overflow: hidden;
+    }
+    .stat-band::before {
+      content: '';
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(50% 60% at 15% 20%, rgba(37,99,235,0.28), transparent 60%),
+        radial-gradient(50% 60% at 85% 80%, rgba(14,165,233,0.20), transparent 60%);
+      pointer-events: none;
+    }
+    .stat-band .container-x { position: relative; }
+    .stat-band-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+    }
+    @media (max-width: 800px) { .stat-band-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 420px) { .stat-band-grid { grid-template-columns: 1fr; } }
+
+    .stat-band-item { text-align: center; }
+    .stat-band-item .v {
+      font-size: clamp(1.75rem, 3vw, 2.5rem);
+      font-weight: 800;
+      letter-spacing: -0.04em;
+      background: linear-gradient(135deg, #60a5fa, #34d399);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      display: block;
+      margin-bottom: 6px;
+      line-height: 1;
+    }
+    .stat-band-item .l { font-size: 0.88rem; color: rgba(255,255,255,0.85); font-weight: 500; }
+
+    /* ---------- SECTION NAV (two-tab toggle) ---------- */
+    .section-nav {
+      position: sticky;
+      top: var(--nav-h);
+      z-index: 40;
+      background: rgba(255,255,255,0.92);
+      backdrop-filter: saturate(180%) blur(14px);
+      -webkit-backdrop-filter: saturate(180%) blur(14px);
+      border-bottom: 1px solid var(--border);
+      padding: 12px 0;
+    }
+    [data-theme="dark"] .section-nav { background: rgba(15,23,42,0.92); }
+    .section-nav-inner {
+      display: flex; align-items: center; gap: 8px;
+      flex-wrap: nowrap;
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
+    .section-nav-inner::-webkit-scrollbar { display: none; }
+    .section-tab {
+      padding: 9px 18px;
+      border-radius: var(--r-full);
+      font-size: 0.88rem; font-weight: 600;
+      color: var(--text-muted);
+      background: transparent;
+      border: 1px solid transparent;
+      white-space: nowrap;
+      transition: all var(--dur) var(--ease);
+      text-decoration: none;
+    }
+    .section-tab:hover { color: var(--text); background: var(--surface-hover); }
+    .section-tab.active {
+      color: #fff;
+      background: linear-gradient(135deg, var(--cc-intern), var(--cc-jobs));
+      border-color: transparent;
+      box-shadow: 0 6px 16px rgba(37,99,235,0.28);
+    }
+
+    /* ---------- CATEGORY SECTION ---------- */
+    .cat-section {
+      padding: 72px 0;
+      scroll-margin-top: calc(var(--nav-h) + 60px);
+      position: relative;
+      border-bottom: 1px solid var(--border);
+    }
+    .cat-section:last-of-type { border-bottom: none; }
+
+    .cat-section[data-track="intern"]  { background: linear-gradient(180deg, rgba(37,99,235,0.05) 0%, transparent 300px); }
+    .cat-section[data-track="project"] { background: linear-gradient(180deg, rgba(14,165,233,0.05) 0%, transparent 300px); }
+    .cat-section[data-track="mentor"]  { background: linear-gradient(180deg, rgba(139,92,246,0.05) 0%, transparent 300px); }
+    .cat-section[data-track="guide"]   { background: linear-gradient(180deg, rgba(217,119,6,0.05) 0%, transparent 300px); }
+    .cat-section[data-track="resume"]  { background: linear-gradient(180deg, rgba(219,39,119,0.05) 0%, transparent 300px); }
+    .cat-section[data-track="prep"]    { background: linear-gradient(180deg, rgba(220,38,38,0.05) 0%, transparent 300px); }
+    .cat-section[data-track="jobs"]    { background: linear-gradient(180deg, rgba(8,145,178,0.05) 0%, transparent 300px); }
+    .cat-section[data-track="offer"]   { background: linear-gradient(180deg, rgba(245,158,11,0.05) 0%, transparent 300px); }
+
+    .cat-head {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap: 40px;
+      align-items: end;
+      margin-bottom: 40px;
+    }
+    @media (max-width: 800px) { .cat-head { grid-template-columns: 1fr; gap: 20px; } }
+    .cat-head h2 { font-size: clamp(1.75rem, 3vw, 2.4rem); margin-bottom: 12px; letter-spacing: -0.02em; }
+    .cat-head p { font-size: 1rem; color: var(--text-muted); margin: 0; max-width: 520px; line-height: 1.65; }
+    .cat-head .meta { display: flex; gap: 24px; flex-wrap: wrap; justify-content: flex-end; }
+    .cat-head .meta-item { text-align: right; }
+    .cat-head .meta-item .v { font-size: 1.5rem; font-weight: 800; letter-spacing: -0.03em; color: var(--text); display: block; line-height: 1; margin-bottom: 4px; }
+    .cat-head .meta-item .l { font-size: 0.78rem; color: var(--text-subtle); text-transform: uppercase; letter-spacing: 0.08em; font-weight: 600; }
+
+    .cat-section[data-track="intern"]  .eyebrow { color: var(--cc-intern); }
+    .cat-section[data-track="project"] .eyebrow { color: var(--cc-project); }
+    .cat-section[data-track="mentor"]  .eyebrow { color: var(--cc-mentor); }
+    .cat-section[data-track="guide"]   .eyebrow { color: var(--cc-guide); }
+    .cat-section[data-track="resume"]  .eyebrow { color: var(--cc-resume); }
+    .cat-section[data-track="prep"]    .eyebrow { color: var(--cc-prep); }
+    .cat-section[data-track="jobs"]    .eyebrow { color: var(--cc-jobs); }
+    .cat-section[data-track="offer"]   .eyebrow { color: var(--cc-offer); }
+
+    /* ---------- COURSE CARDS ---------- */
+    .tech-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 20px;
+    }
+    .tech-card {
+      display: flex;
+      flex-direction: column;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-top: 3px solid var(--track-color, var(--brand-500));
+      border-radius: var(--r-xl);
+      overflow: hidden;
+      transition: transform var(--dur) var(--ease), box-shadow var(--dur) var(--ease);
+    }
+    .tech-card:hover { transform: translateY(-5px); box-shadow: 0 20px 40px rgba(15,23,42,0.12); }
+    .tech-card .thumb { aspect-ratio: 16 / 10; position: relative; overflow: hidden; background: linear-gradient(135deg, var(--track-color, var(--brand-500)), rgba(0,0,0,0.4)); }
+    .tech-card .thumb img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform 600ms var(--ease); }
+    .tech-card:hover .thumb img { transform: scale(1.06); }
+    .tech-card .thumb::after { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(0,0,0,0.05) 40%, rgba(0,0,0,0.55) 100%); }
+    .tech-card .thumb .badge { position: absolute; top: 12px; left: 12px; z-index: 2; padding: 4px 10px; border-radius: var(--r-full); font-size: 0.68rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: #fff; background: var(--track-color, #6366f1); box-shadow: 0 6px 16px rgba(0,0,0,0.25); }
+    .tech-card .thumb .tool { position: absolute; bottom: 12px; left: 12px; right: 12px; z-index: 2; color: #fff; font-size: 0.72rem; font-weight: 600; display: flex; gap: 6px; flex-wrap: wrap; }
+    .tech-card .thumb .tool span { padding: 2px 8px; border-radius: var(--r-full); background: rgba(255,255,255,0.18); backdrop-filter: blur(6px); border: 1px solid rgba(255,255,255,0.25); }
+    .tech-card .body { padding: 22px 22px 20px; display: flex; flex-direction: column; flex: 1; }
+    .tech-card h3 { font-size: 1.05rem; margin-bottom: 8px; line-height: 1.3; }
+    .tech-card p { font-size: 0.9rem; color: var(--text-muted); margin: 0 0 16px; flex: 1; line-height: 1.55; }
+    .tech-card .tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 16px; }
+    .tech-card .tags span { padding: 3px 10px; border-radius: var(--r-full); background: var(--bg-subtle); border: 1px solid var(--border); font-size: 0.72rem; font-weight: 500; color: var(--text-muted); }
+    [data-theme="dark"] .tech-card .tags span { background: var(--bg-muted); }
+    .tech-card .foot { display: flex; justify-content: space-between; align-items: center; padding-top: 14px; border-top: 1px solid var(--border); }
+    .tech-card .dur { font-size: 0.8rem; color: var(--text-subtle); display: flex; align-items: center; gap: 6px; }
+    .tech-card .link { font-size: 0.85rem; font-weight: 700; color: var(--track-color, var(--brand-600)); display: inline-flex; align-items: center; gap: 6px; transition: gap var(--dur) var(--ease); }
+    .tech-card .link:hover { gap: 10px; }
+
+    .cat-section[data-track="intern"]  .tech-card { --track-color: var(--cc-intern); }
+    .cat-section[data-track="project"] .tech-card { --track-color: var(--cc-project); }
+    .cat-section[data-track="mentor"]  .tech-card { --track-color: var(--cc-mentor); }
+    .cat-section[data-track="guide"]   .tech-card { --track-color: var(--cc-guide); }
+    .cat-section[data-track="resume"]  .tech-card { --track-color: var(--cc-resume); }
+    .cat-section[data-track="prep"]    .tech-card { --track-color: var(--cc-prep); }
+    .cat-section[data-track="jobs"]    .tech-card { --track-color: var(--cc-jobs); }
+    .cat-section[data-track="offer"]   .tech-card { --track-color: var(--cc-offer); }
+
+    /* ---------- MEDIA STRIP ---------- */
+    .media-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    @media (max-width: 900px) { .media-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 520px) { .media-grid { grid-template-columns: 1fr; } }
+    .media-tile { position: relative; aspect-ratio: 4 / 3; border-radius: var(--r-lg); overflow: hidden; box-shadow: var(--sh-md); cursor: pointer; transition: transform var(--dur) var(--ease); }
+    .media-tile:hover { transform: translateY(-4px); }
+    .media-tile img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 600ms var(--ease); }
+    .media-tile:hover img { transform: scale(1.07); }
+    .media-tile::after { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, transparent 50%, rgba(15,23,42,0.85)); }
+    .media-tile .tag { position: absolute; top: 12px; left: 12px; z-index: 2; padding: 4px 10px; border-radius: var(--r-full); background: rgba(255,255,255,0.9); color: #0f172a; font-size: 0.68rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; }
+    .media-tile .caption { position: absolute; left: 16px; right: 16px; bottom: 14px; z-index: 2; color: #fff; font-size: 0.85rem; font-weight: 600; }
+    .media-tile .caption small { display: block; font-size: 0.72rem; opacity: 0.75; font-weight: 500; margin-top: 2px; }
+
+    /* ---------- SUCCESS STORIES ---------- */
+    .story-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+    @media (max-width: 900px) { .story-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 560px) { .story-grid { grid-template-columns: 1fr; } }
+
+    .story-card {
+      padding: 28px 26px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--r-xl);
+      display: flex;
+      flex-direction: column;
+      transition: transform var(--dur) var(--ease), box-shadow var(--dur) var(--ease), border-color var(--dur) var(--ease);
+    }
+    .story-card:hover {
+      transform: translateY(-4px);
+      border-color: var(--cc-intern);
+      box-shadow: var(--sh-lg);
+    }
+    .story-card .company {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 5px 12px;
+      border-radius: var(--r-full);
+      background: var(--bg-subtle);
+      border: 1px solid var(--border);
+      font-size: 0.72rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+      align-self: flex-start;
+    }
+    [data-theme="dark"] .story-card .company { background: var(--bg-muted); }
+    .story-card .company i { color: var(--cc-intern); }
+    .story-card blockquote {
+      font-size: 0.95rem;
+      color: var(--text);
+      line-height: 1.65;
+      margin: 0 0 20px;
+      flex: 1;
+    }
+    .story-card .who {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding-top: 16px;
+      border-top: 1px solid var(--border);
+    }
+    .story-card .avatar {
+      width: 44px; height: 44px;
+      border-radius: var(--r-full);
+      background: linear-gradient(135deg, var(--cc-intern), var(--cc-jobs));
+      color: #fff;
+      display: grid; place-items: center;
+      font-weight: 700;
+      font-size: 0.9rem;
+      flex-shrink: 0;
+    }
+    .story-card .who h5 { margin: 0; font-size: 0.92rem; color: var(--text); }
+    .story-card .who small { color: var(--text-muted); font-size: 0.8rem; }
+
+    /* ---------- HIRING PARTNERS ---------- */
+    .partners-band {
+      padding: 64px 0;
+      background: var(--bg-subtle);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+    .partners-grid {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 20px;
+      align-items: center;
+    }
+    @media (max-width: 900px) { .partners-grid { grid-template-columns: repeat(3, 1fr); } }
+    @media (max-width: 520px) { .partners-grid { grid-template-columns: repeat(2, 1fr); } }
+
+    .partner-cell {
+      aspect-ratio: 3 / 2;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--r-lg);
+      display: grid;
+      place-items: center;
+      padding: 16px;
+      transition: all var(--dur) var(--ease);
+      font-weight: 700;
+      font-size: 0.85rem;
+      color: var(--text-subtle);
+      text-align: center;
+    }
+    .partner-cell:hover {
+      border-color: var(--cc-intern);
+      color: var(--cc-intern);
+      transform: translateY(-3px);
+      box-shadow: var(--sh-sm);
+    }
+
+    /* ---------- APPLICATION FLOW (dark) ---------- */
+    .apply-band {
+      background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 50%, #1e40af 100%);
+      padding: 72px 0;
+      position: relative;
+      overflow: hidden;
+    }
+    .apply-band::before {
+      content: '';
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(50% 60% at 15% 20%, rgba(37,99,235,0.28), transparent 60%),
+        radial-gradient(50% 60% at 85% 80%, rgba(16,185,129,0.20), transparent 60%);
+      pointer-events: none;
+    }
+    .apply-band .container-x { position: relative; }
+    .apply-band .head-left h2 { color: #fff; }
+    .apply-band .head-left p { color: rgba(255,255,255,0.75); }
+    .apply-band .head-left .eyebrow { color: #60a5fa; }
+
+    .apply-flow {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 12px;
+    }
+    @media (max-width: 1000px) { .apply-flow { grid-template-columns: repeat(3, 1fr); } }
+    @media (max-width: 600px)  { .apply-flow { grid-template-columns: 1fr; } }
+
+    .aflow-step {
+      padding: 24px 18px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: var(--r-lg);
+      text-align: center;
+      transition: all var(--dur) var(--ease);
+      position: relative;
+    }
+    .aflow-step:hover {
+      transform: translateY(-4px);
+      background: rgba(255,255,255,0.10);
+      border-color: rgba(96,165,250,0.55);
+    }
+    .aflow-step .n {
+      display: inline-grid; place-items: center;
+      width: 32px; height: 32px;
+      border-radius: var(--r-full);
+      background: linear-gradient(135deg, var(--cc-intern), var(--cc-jobs));
+      color: #fff;
+      font-weight: 700; font-size: 0.8rem;
+      margin-bottom: 14px;
+      box-shadow: 0 6px 16px rgba(37,99,235,0.5);
+    }
+    .aflow-step h4 { font-size: 0.92rem; margin-bottom: 6px; font-weight: 600; color: #fff; }
+    .aflow-step p  { font-size: 0.78rem; color: rgba(255,255,255,0.7); margin: 0; line-height: 1.5; }
+
+    /* ---------- CTA ---------- */
+    .cta-band { background: linear-gradient(135deg, var(--cc-intern), var(--cc-jobs)); border-radius: var(--r-2xl); padding: 56px 48px; color: #fff; display: grid; grid-template-columns: 1fr auto; gap: 32px; align-items: center; position: relative; overflow: hidden; }
+    .cta-band::before { content: ''; position: absolute; inset: 0; background: radial-gradient(50% 60% at 10% 10%, rgba(255,255,255,0.18), transparent 60%), radial-gradient(50% 60% at 90% 90%, rgba(255,255,255,0.12), transparent 60%); }
+    .cta-band > * { position: relative; }
+    .cta-band h2 { color: #fff; margin-bottom: 8px; }
+    .cta-band p { color: rgba(255,255,255,0.9); margin: 0; max-width: 520px; }
+    .cta-band .btn-light { background: #fff; color: var(--cc-intern); padding: 14px 26px; border-radius: var(--r-md); font-weight: 600; display: inline-flex; align-items: center; gap: 10px; transition: transform var(--dur) var(--ease); box-shadow: 0 12px 28px rgba(0,0,0,0.2); text-decoration: none; }
+    .cta-band .btn-light:hover { transform: translateY(-2px); }
+    @media (max-width: 800px) { .cta-band { grid-template-columns: 1fr; padding: 40px 28px; } }
+  </style>
+</head>
+
+<body>
+  <!-- ==================== NAVBAR ==================== -->
+  <header class="navbar-x">
+    <div class="container-x nav-inner">
+      <a href="index.html" class="brand" aria-label="Creative Code Hub home">
+        <img src="images/logo/cc-logo.png" alt="Creative Code Hub" />
+      </a>
+      <nav class="nav-links" id="navLinks">
+        <a href="index.html">Home</a>
+        <a href="tech-hub.html">Tech Hub</a>
+        <a href="creative-hub.html">Creative Hub</a>
+        <a href="business-hub.html">Business Hub</a>
+        <a href="career-prep.html">Career Prep</a>
+        <a href="career-connect.html" class="active">Career Connect</a>
+        <a href="about.html">About</a>
+      </nav>
+      <div class="nav-actions">
+        <button id="themeToggle" class="theme-toggle" aria-label="Toggle dark mode">
+          <span class="sun">☀️</span><span class="moon">🌙</span>
+        </button>
+        <a href="underprocess.html" class="btn btn-primary btn-sm">
+          <i class="fas fa-rocket"></i> LMS Portal
+        </a>
+        <button class="nav-toggle" id="navToggle" aria-label="Open menu">
+          <i class="fas fa-bars"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ==================== HERO ==================== -->
+  <section class="hub-hero">
+    <div class="container-x">
+      <div class="hub-hero-grid">
+        <div>
+          <div class="badges">
+            <span class="badge-pill"><i class="fas fa-briefcase"></i> Career Connect</span>
+            <span class="badge-pill"><i class="fas fa-handshake"></i> Internships &amp; Placement</span>
+          </div>
+          <h1>
+            From learning<br />
+            to <span class="gradient-text">opportunity</span>.
+          </h1>
+          <p class="lead">
+            Internships, live projects and placement support — all in one place.
+            We connect students to real roles, real mentors and real hiring
+            partners. Career Connect is where the journey turns into a job.
+          </p>
+          <div class="hero-actions" style="display:flex; gap:12px; flex-wrap:wrap;">
+            <a href="#internships" class="btn btn-primary btn-lg" style="background: linear-gradient(135deg, var(--cc-intern), var(--cc-jobs));">
+              <i class="fas fa-briefcase"></i> See internships
+            </a>
+            <a href="#placement" class="btn btn-ghost btn-lg">
+              <i class="fas fa-trophy"></i> Placement support
+            </a>
+          </div>
+        </div>
+
+        <!-- HERO SHOWCASE -->
+        <div class="showcase" id="heroShowcase">
+          <div class="showcase-slide active">
+            <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=900&q=80&auto=format&fit=crop" alt="Team collaboration" loading="eager" />
+            <div class="showcase-caption">
+              <span class="label"><i class="fas fa-briefcase"></i> Internships</span>
+              <h3>Real work experience</h3>
+              <p>Live projects with mentors, real deadlines and real feedback</p>
+            </div>
+          </div>
+
+          <div class="showcase-slide">
+            <img src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=900&q=80&auto=format&fit=crop" alt="Interview" loading="lazy" />
+            <div class="showcase-caption">
+              <span class="label"><i class="fas fa-user-tie"></i> Placements</span>
+              <h3>Get placed with confidence</h3>
+              <p>Resume, mocks, referrals — until the offer letter arrives</p>
+            </div>
+          </div>
+
+          <div class="showcase-slide">
+            <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=900&q=80&auto=format&fit=crop" alt="Mentor meeting" loading="lazy" />
+            <div class="showcase-caption">
+              <span class="label"><i class="fas fa-user-group"></i> Mentorship</span>
+              <h3>Learn from people who ship</h3>
+              <p>One-on-one guidance from working professionals</p>
+            </div>
+          </div>
+
+          <div class="showcase-slide">
+            <img src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?w=900&q=80&auto=format&fit=crop" alt="Real project" loading="lazy" />
+            <div class="showcase-caption">
+              <span class="label"><i class="fas fa-diagram-project"></i> Live Projects</span>
+              <h3>Build for real users</h3>
+              <p>Project-based internships with real deliverables</p>
+            </div>
+          </div>
+
+          <div class="showcase-slide">
+            <img src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=900&q=80&auto=format&fit=crop" alt="Offer letter" loading="lazy" />
+            <div class="showcase-caption">
+              <span class="label"><i class="fas fa-trophy"></i> Careers</span>
+              <h3>From student to professional</h3>
+              <p>40+ hiring partners, 500+ offers facilitated</p>
+            </div>
+          </div>
+
+          <div class="showcase-dots" id="showcaseDots">
+            <button class="showcase-dot active" data-show="0" aria-label="Internships"></button>
+            <button class="showcase-dot" data-show="1" aria-label="Placements"></button>
+            <button class="showcase-dot" data-show="2" aria-label="Mentorship"></button>
+            <button class="showcase-dot" data-show="3" aria-label="Projects"></button>
+            <button class="showcase-dot" data-show="4" aria-label="Careers"></button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== STATS BAND ==================== -->
+  <section class="stat-band">
+    <div class="container-x">
+      <div class="stat-band-grid">
+        <div class="stat-band-item"><span class="v">500+</span><span class="l">Internships placed</span></div>
+        <div class="stat-band-item"><span class="v">40+</span><span class="l">Hiring partners</span></div>
+        <div class="stat-band-item"><span class="v">89%</span><span class="l">Placement rate</span></div>
+        <div class="stat-band-item"><span class="v">₹6.2L</span><span class="l">Average package</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== SECTION NAV ==================== -->
+  <nav class="section-nav" id="sectionNav">
+    <div class="container-x section-nav-inner">
+      <a href="#internships" class="section-tab active">Internships</a>
+      <a href="#placement" class="section-tab">Placement Support</a>
+      <a href="#stories" class="section-tab">Success Stories</a>
+      <a href="#partners" class="section-tab">Hiring Partners</a>
+      <a href="#apply" class="section-tab">How It Works</a>
+    </div>
+  </nav>
+
+  <!-- ==================== INTERNSHIPS (HEADING) ==================== -->
+  <section class="cat-section" id="internships" data-track="intern">
+    <div class="container-x">
+      <div class="cat-head">
+        <div>
+          <span class="eyebrow">Internship Opportunities</span>
+          <h2>Real internships. Real experience.</h2>
+          <p>The experience recruiters actually look for — technical, project-based and mentor-supported internships, on live products with real deadlines.</p>
+        </div>
+        <div class="meta">
+          <div class="meta-item"><span class="v">500+</span><span class="l">Interns placed</span></div>
+          <div class="meta-item"><span class="v">3-6</span><span class="l">Months</span></div>
+          <div class="meta-item"><span class="v">ISO</span><span class="l">Certified</span></div>
+        </div>
+      </div>
+
+      <div class="tech-grid">
+        <article class="tech-card">
+          <div class="thumb">
+            <img src="https://images.unsplash.com/photo-1517180102446-f3ece451e9d8?w=600&q=80&auto=format&fit=crop" alt="Technical internship" loading="lazy" />
+            <span class="badge">Most popular</span>
+            <div class="tool"><span>Full Stack</span><span>AI/ML</span></div>
+          </div>
+          <div class="body">
+            <h3>Technical Internship</h3>
+            <p>Work with real engineering teams on production-grade projects — code reviews, sprints, deployment.</p>
+            <div class="tags"><span>3-6 months</span><span>Placement-linked</span></div>
+            <div class="foot">
+              <span class="dur"><i class="far fa-clock"></i> 6 months</span>
+              <a href="quote.html?internship=technical" class="link">Apply <i class="fas fa-arrow-right"></i></a>
+            </div>
+          </div>
+        </article>
+
+        <article class="tech-card">
+          <div class="thumb">
+            <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&q=80&auto=format&fit=crop" alt="Project internship" loading="lazy" />
+            <span class="badge">Portfolio-first</span>
+            <div class="tool"><span>Live projects</span></div>
+          </div>
+          <div class="body">
+            <h3>Project-Based Internship</h3>
+            <p>Pick a real project brief, ship it with mentor guidance, and finish with a portfolio you're proud of.</p>
+            <div class="tags"><span>3-4 months</span><span>Portfolio</span></div>
+            <div class="foot">
+              <span class="dur"><i class="far fa-clock"></i> 4 months</span>
+              <a href="quote.html?internship=project" class="link">Apply <i class="fas fa-arrow-right"></i></a>
+            </div>
+          </div>
+        </article>
+
+        <article class="tech-card">
+          <div class="thumb">
+            <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=600&q=80&auto=format&fit=crop" alt="Mentor-supported" loading="lazy" />
+            <span class="badge">Guided</span>
+            <div class="tool"><span>1-on-1 mentor</span></div>
+          </div>
+          <div class="body">
+            <h3>Mentor-Supported Internship</h3>
+            <p>Weekly 1-on-1 sessions with an industry mentor — code reviews, career guidance and interview prep.</p>
+            <div class="tags"><span>3-6 months</span><span>Mentored</span></div>
+            <div class="foot">
+              <span class="dur"><i class="far fa-clock"></i> 6 months</span>
+              <a href="quote.html?internship=mentor" class="link">Apply <i class="fas fa-arrow-right"></i></a>
+            </div>
+          </div>
+        </article>
+      </div>
+
+      <!-- What you get -->
+      <div style="margin-top: 56px;">
+        <h3 style="font-size: 1.25rem; margin-bottom: 24px;">What you get in every internship</h3>
+        <div class="media-grid">
+          <div class="media-tile">
+            <img src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?w=800&q=80&auto=format&fit=crop" alt="Real projects" loading="lazy" />
+            <span class="tag">Live projects</span>
+            <div class="caption">Real Work<small>Production-grade deliverables</small></div>
+          </div>
+          <div class="media-tile">
+            <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=800&q=80&auto=format&fit=crop" alt="Mentorship" loading="lazy" />
+            <span class="tag">Mentorship</span>
+            <div class="caption">1-on-1 Guidance<small>Weekly reviews + feedback</small></div>
+          </div>
+          <div class="media-tile">
+            <img src="https://images.unsplash.com/photo-1589330694653-ded6df03f754?w=800&q=80&auto=format&fit=crop" alt="Certificate" loading="lazy" />
+            <span class="tag">Certificate</span>
+            <div class="caption">ISO Certificate<small>Verified completion letter</small></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== PLACEMENT SUPPORT ==================== -->
+  <section class="cat-section" id="placement" data-track="guide">
+    <div class="container-x">
+      <div class="cat-head">
+        <div>
+          <span class="eyebrow">Placement Support</span>
+          <h2>We don't stop until you're hired.</h2>
+          <p>Career guidance, resume building, aptitude preparation, technical preparation, mock interviews and job referrals — the complete placement pipeline.</p>
+        </div>
+        <div class="meta">
+          <div class="meta-item"><span class="v">89%</span><span class="l">Placement rate</span></div>
+          <div class="meta-item"><span class="v">₹6.2L</span><span class="l">Avg. package</span></div>
+          <div class="meta-item"><span class="v">40+</span><span class="l">Partners</span></div>
+        </div>
+      </div>
+
+      <div class="tech-grid">
+        <article class="tech-card">
+          <div class="thumb">
+            <img src="https://images.unsplash.com/photo-1551836022-d5d88e9218df?w=600&q=80&auto=format&fit=crop" alt="Career guidance" loading="lazy" />
+            <span class="badge">Step 1</span>
+            <div class="tool"><span>1-on-1</span></div>
+          </div>
+          <div class="body">
+            <h3>Career Guidance</h3>
+            <p>1-on-1 sessions to map your strengths to the right roles, industries and companies.</p>
+            <div class="tags"><span>1-on-1</span><span>Roadmap</span></div>
+            <div class="foot">
+              <span class="dur"><i class="far fa-clock"></i> Personal</span>
+              <a href="quote.html?service=career-guidance" class="link">Start <i class="fas fa-arrow-right"></i></a>
+            </div>
+          </div>
+        </article>
+
+        <article class="tech-card">
+          <div class="thumb">
+            <img src="https://images.unsplash.com/photo-1586281380349-632531db7ed4?w=600&q=80&auto=format&fit=crop" alt="Resume" loading="lazy" />
+            <span class="badge">Step 2</span>
+            <div class="tool"><span>ATS</span><span>Reviews</span></div>
+          </div>
+          <div class="body">
+            <h3>Resume Building</h3>
+            <p>ATS-optimized resumes reviewed line-by-line. Plus LinkedIn and portfolio setup.</p>
+            <div class="tags"><span>1-on-1</span><span>ATS</span></div>
+            <div class="foot">
+              <span class="dur"><i class="far fa-clock"></i> Personal</span>
+              <a href="quote.html?service=resume" class="link">Start <i class="fas fa-arrow-right"></i></a>
+            </div>
+          </div>
+        </article>
+
+        <article class="tech-card">
+          <div class="thumb">
+            <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=600&q=80&auto=format&fit=crop" alt="Aptitude prep" loading="lazy" />
+            <span class="badge">Step 3</span>
+            <div class="tool"><span>Aptitude</span></div>
+          </div>
+          <div class="body">
+            <h3>Aptitude Preparation</h3>
+            <p>Quant, logical and verbal — full-length mocks, topic tests and score tracking on the LMS.</p>
+            <div class="tags"><span>Online</span><span>LMS</span></div>
+            <div class="foot">
+              <span class="dur"><i class="far fa-clock"></i> Ongoing</span>
+              <a href="career-prep.html" class="link">Open <i class="fas fa-arrow-right"></i></a>
+            </div>
+          </div>
+        </article>
+
+        <article class="tech-card">
+          <div class="thumb">
+            <img src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?w=600&q=80&auto=format&fit=crop" alt="Technical prep" loading="lazy" />
+            <span class="badge">Step 4</span>
+            <div class="tool"><span>DSA</span><span>System Design</span></div>
+          </div>
+          <div class="body">
+            <h3>Technical Preparation</h3>
+            <p>DSA patterns, core CS, system design and project deep-dives — prepare for the round that decides your level.</p>
+            <div class="tags"><span>Interview-ready</span></div>
+            <div class="foot">
+              <span class="dur"><i class="far fa-clock"></i> 8 weeks</span>
+              <a href="career-prep.html" class="link">Open <i class="fas fa-arrow-right"></i></a>
+            </div>
+          </div>
+        </article>
+
+        <article class="tech-card">
+          <div class="thumb">
+            <img src="https://images.unsplash.com/photo-1521737711867-e3b97375f902?w=600&q=80&auto=format&fit=crop" alt="Mock interviews" loading="lazy" />
+            <span class="badge">Step 5</span>
+            <div class="tool"><span>Recorded</span></div>
+          </div>
+          <div class="body">
+            <h3>Mock Interviews</h3>
+            <p>Technical and HR mock interviews with industry interviewers — recorded with detailed feedback.</p>
+            <div class="tags"><span>Recorded</span><span>Feedback</span></div>
+            <div class="foot">
+              <span class="dur"><i class="far fa-clock"></i> 1-on-1</span>
+              <a href="career-prep.html" class="link">Open <i class="fas fa-arrow-right"></i></a>
+            </div>
+          </div>
+        </article>
+
+        <article class="tech-card">
+          <div class="thumb">
+            <img src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=600&q=80&auto=format&fit=crop" alt="Job referrals" loading="lazy" />
+            <span class="badge">Step 6</span>
+            <div class="tool"><span>Referrals</span><span>Drives</span></div>
+          </div>
+          <div class="body">
+            <h3>Job Referrals &amp; Drives</h3>
+            <p>Direct referrals to hiring partners, campus drives and off-campus opportunities — matched to your profile.</p>
+            <div class="tags"><span>Direct</span><span>40+ partners</span></div>
+            <div class="foot">
+              <span class="dur"><i class="far fa-clock"></i> Ongoing</span>
+              <a href="quote.html?service=job-referrals" class="link">Start <i class="fas fa-arrow-right"></i></a>
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== SUCCESS STORIES ==================== -->
+  <section class="cat-section" id="stories" data-track="offer">
+    <div class="container-x">
+      <div class="cat-head">
+        <div>
+          <span class="eyebrow">Success Stories</span>
+          <h2>From Career Connect to career.</h2>
+          <p>Real students who came in with a dream, and walked out with an offer letter. Here's what they say.</p>
+        </div>
+        <div class="meta">
+          <div class="meta-item"><span class="v">500+</span><span class="l">Placed</span></div>
+          <div class="meta-item"><span class="v">4.8/5</span><span class="l">Rating</span></div>
+        </div>
+      </div>
+
+      <div class="story-grid">
+        <div class="story-card reveal">
+          <span class="company"><i class="fas fa-building"></i> Product Company</span>
+          <blockquote>“Career Connect matched me to an internship at a real product company. Three months later, I got a full-time offer. The interview prep was brutal but worth it.”</blockquote>
+          <div class="who">
+            <div class="avatar">RK</div>
+            <div><h5>Rahul K.</h5><small>Software Engineer · 2024</small></div>
+          </div>
+        </div>
+
+        <div class="story-card reveal">
+          <span class="company"><i class="fas fa-chart-line"></i> Analytics Firm</span>
+          <blockquote>“The resume review and mock interviews changed everything. I went from zero callbacks to 4 interviews in a week — and chose the best one.”</blockquote>
+          <div class="who">
+            <div class="avatar">PS</div>
+            <div><h5>Priya S.</h5><small>Data Analyst · 2024</small></div>
+          </div>
+        </div>
+
+        <div class="story-card reveal">
+          <span class="company"><i class="fas fa-code"></i> Full-Stack Role</span>
+          <blockquote>“The internship wasn't just a certificate. It was real code, real reviews, real deadlines. That's what got me my first developer job.”</blockquote>
+          <div class="who">
+            <div class="avatar">AM</div>
+            <div><h5>Anjali M.</h5><small>Full-Stack Developer · 2023</small></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== HIRING PARTNERS ==================== -->
+  <section class="partners-band" id="partners">
+    <div class="container-x">
+      <div class="head-left" style="margin-bottom: 32px;">
+        <span class="eyebrow" style="color: var(--cc-intern);">Hiring Partners</span>
+        <h2>Companies that trust our students.</h2>
+        <p>Our hiring partners include product companies, analytics firms, agencies, banks, FMCG brands and fast-growing startups.</p>
+      </div>
+
+      <div class="partners-grid">
+        <div class="partner-cell">Product Co.</div>
+        <div class="partner-cell">Analytics Co.</div>
+        <div class="partner-cell">Digital Agency</div>
+        <div class="partner-cell">Bank / NBFC</div>
+        <div class="partner-cell">FMCG Brand</div>
+        <div class="partner-cell">SaaS Startup</div>
+        <div class="partner-cell">EdTech Co.</div>
+        <div class="partner-cell">Consulting Firm</div>
+        <div class="partner-cell">Cloud Services</div>
+        <div class="partner-cell">HealthTech</div>
+        <div class="partner-cell">FinTech</div>
+        <div class="partner-cell">E-commerce</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== APPLICATION FLOW ==================== -->
+  <section class="apply-band" id="apply">
+    <div class="container-x">
+      <div class="head-left" style="max-width: 640px; margin-bottom: 48px;">
+        <span class="eyebrow">How Career Connect works</span>
+        <h2>Five steps from profile to offer letter.</h2>
+        <p>A structured pipeline — no guessing, no waiting. Every stage has a mentor, a review and a next action.</p>
+      </div>
+
+      <div class="apply-flow">
+        <div class="aflow-step"><div class="n">01</div><h4>Profile</h4><p>Resume, skills, goals — onboarded and reviewed</p></div>
+        <div class="aflow-step"><div class="n">02</div><h4>Internship</h4><p>Matched to a live project with a mentor</p></div>
+        <div class="aflow-step"><div class="n">03</div><h4>Preparation</h4><p>Aptitude, DSA, interviews, mocks</p></div>
+        <div class="aflow-step"><div class="n">04</div><h4>Referrals</h4><p>Matched to hiring partners and drives</p></div>
+        <div class="aflow-step"><div class="n">05</div><h4>Offer</h4><p>Negotiation guidance and onboarding</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== CTA ==================== -->
+  <section class="section-sm">
+    <div class="container-x">
+      <div class="cta-band reveal">
+        <div>
+          <span class="eyebrow" style="color: rgba(255,255,255,0.85);">Ready to get hired?</span>
+          <h2>Talk to a Career Connect advisor.</h2>
+          <p>Free consultation — we'll map your profile to the right internships, mock interviews and hiring partners.</p>
+        </div>
+        <div style="display:flex; gap:12px; flex-wrap:wrap;">
+          <a href="quote.html" class="btn-light"><i class="fas fa-paper-plane"></i> Get connected</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== FOOTER ==================== -->
+  <footer class="footer-x">
+    <div class="container-x">
+      <div class="footer-grid">
+        <div>
+          <div class="brand-row">
+            <img src="images/logo/cc-logo.png" alt="Creative Code Hub" />
+            <strong>Creative Code Hub</strong>
+          </div>
+          <p style="max-width: 340px;">
+            A learning and career development platform — technical, creative and
+            business education with internships and placement support.
+          </p>
+          <div style="display:flex; gap:12px; margin-top:16px;">
+            <a href="#" class="theme-toggle" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" class="theme-toggle" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+            <a href="#" class="theme-toggle" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+            <a href="#" class="theme-toggle" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+          </div>
+        </div>
+        <div>
+          <h5>Hubs</h5>
+          <ul>
+            <li><a href="tech-hub.html">Tech Hub</a></li>
+            <li><a href="creative-hub.html">Creative Hub</a></li>
+            <li><a href="business-hub.html">Business Hub</a></li>
+            <li><a href="career-prep.html">Career Prep</a></li>
+            <li><a href="career-connect.html">Career Connect</a></li>
+          </ul>
+        </div>
+        <div>
+          <h5>Company</h5>
+          <ul>
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="project.html">Projects</a></li>
+            <li><a href="career.html">Careers</a></li>
+            <li><a href="quote.html">Contact</a></li>
+            <li><a href="underprocess.html">LMS Portal</a></li>
+          </ul>
+        </div>
+        <div>
+          <h5>Contact</h5>
+          <ul>
+            <li><i class="fas fa-map-marker-alt"></i> Kakinada &amp; Visakhapatnam, AP</li>
+            <li><i class="fas fa-phone"></i> +91 70757 75888</li>
+            <li><i class="fas fa-phone"></i> +91 70939 47788</li>
+            <li><i class="fas fa-envelope"></i> info@creativecodehub.in</li>
+          </ul>
+        </div>
+      </div>
+      <div class="copy">
+        <span>© 2025 Creative Code Hub. All rights reserved.</span>
+        <span>ISO 9001:2015 Certified · Made in Andhra Pradesh 🇮🇳</span>
+      </div>
+    </div>
+  </footer>
+
+  <div class="floating-social" id="floatingSocial">
+    <div class="social-toggle" id="socialToggle">
+      <img src="images/logo/cc-logo.png" alt="Social menu" />
+    </div>
+    <div class="social-links">
+      <a href="https://wa.me/917075779888" target="_blank" class="whatsapp" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+      <a href="https://www.instagram.com/creativecodehub" target="_blank" class="instagram" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+      <a href="https://www.facebook.com/yourpage" target="_blank" class="facebook" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+      <a href="https://maps.app.goo.gl/8tZUZKWh3uiPoUWJ9" target="_blank" class="location" aria-label="Location"><i class="fas fa-location-dot"></i></a>
+    </div>
+  </div>
+
+  <a href="https://wa.me/917075779888" target="_blank" class="whatsapp-left" aria-label="Chat on WhatsApp">
+    <i class="fab fa-whatsapp"></i>
+  </a>
+
+  <!-- ==================== PAGE SCRIPTS ==================== -->
+  <script>
+    /* Hero showcase rotation */
+    (function () {
+      const wrap = document.getElementById('heroShowcase');
+      if (!wrap) return;
+      const slides = Array.from(wrap.querySelectorAll('.showcase-slide'));
+      const dots   = Array.from(document.querySelectorAll('#showcaseDots .showcase-dot'));
+      if (!slides.length) return;
+
+      let current = 0, timer = null;
+      const INTERVAL = 4500;
+
+      function goTo(i) {
+        current = (i + slides.length) % slides.length;
+        slides.forEach((s, idx) => s.classList.toggle('active', idx === current));
+        dots.forEach((d, idx) => d.classList.toggle('active', idx === current));
+      }
+      function auto() { timer = setInterval(() => goTo(current + 1), INTERVAL); }
+      function stop() { clearInterval(timer); }
+
+      dots.forEach(d => d.addEventListener('click', () => {
+        goTo(parseInt(d.getAttribute('data-show'), 10));
+        stop(); auto();
+      }));
+      wrap.addEventListener('mouseenter', stop);
+      wrap.addEventListener('mouseleave', auto);
+      auto();
+    })();
+
+    /* Section scroll-spy */
+    (function () {
+      const tabs = Array.from(document.querySelectorAll('.section-tab'));
+      const sections = tabs.map(t => document.querySelector(t.getAttribute('href'))).filter(Boolean);
+      if (!tabs.length || !sections.length) return;
+
+      tabs.forEach(tab => {
+        tab.addEventListener('click', (e) => {
+          e.preventDefault();
+          const target = document.querySelector(tab.getAttribute('href'));
+          if (!target) return;
+          const top = target.getBoundingClientRect().top + window.scrollY - 132;
+          window.scrollTo({ top, behavior: 'smooth' });
+        });
+      });
+
+      if ('IntersectionObserver' in window) {
+        const spy = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              const id = entry.target.id;
+              tabs.forEach(t => t.classList.toggle('active', t.getAttribute('href') === '#' + id));
+            }
+          });
+        }, { rootMargin: '-140px 0px -60% 0px', threshold: 0 });
+        sections.forEach(s => spy.observe(s));
+      }
+    })();
+  </script>
+
+  <script src="script.js"></script>
+</body>
+</html>

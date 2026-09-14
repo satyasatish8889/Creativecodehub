@@ -1,0 +1,1490 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Creative Hub — Animation, VFX &amp; Game Development | Creative Code Hub</title>
+  <meta name="description" content="Creative Hub by Creative Code Hub — 2D &amp; 3D animation, VFX, motion graphics, game development and creative design courses. Build a professional portfolio with industry mentors." />
+  <link rel="canonical" href="https://creativecodehub.in/creative-hub.html" />
+
+  <meta property="og:title" content="Creative Hub — Creative Code Hub" />
+  <meta property="og:description" content="Animation, VFX, motion graphics, game dev and creative design — build a portfolio studios respect." />
+  <meta property="og:url" content="https://creativecodehub.in/creative-hub.html" />
+  <meta property="og:type" content="website" />
+
+  <link rel="icon" type="image/png" href="images/logo/cc-logo.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+  <link rel="stylesheet" href="styles.css" />
+
+  <style>
+    /* =========================================================
+       CREATIVE HUB — Track colors + Image thumbnails
+       ========================================================= */
+
+    /* Per-track color system */
+    :root {
+      --tr-2d:     #f43f5e;   /* rose */
+      --tr-3d:     #f97316;   /* orange */
+      --tr-mod:    #eab308;   /* amber */
+      --tr-vfx:    #8b5cf6;   /* violet */
+      --tr-motion: #ec4899;   /* pink */
+      --tr-game:   #10b981;   /* emerald */
+      --tr-design: #0ea5e9;   /* sky */
+    }
+
+    /* ---------- HERO ---------- */
+    .hub-hero {
+      padding: 64px 0 72px;
+      border-bottom: 1px solid var(--border);
+      background: linear-gradient(180deg, var(--bg) 0%, var(--bg-subtle) 100%);
+      position: relative;
+      overflow: hidden;
+    }
+    .hub-hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(55% 60% at 85% 15%, rgba(219,39,119,0.14), transparent 70%),
+        radial-gradient(45% 55% at 10% 90%, rgba(124,58,237,0.10), transparent 70%);
+      pointer-events: none;
+    }
+    .hub-hero .container-x { position: relative; }
+    .hub-hero-grid {
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 64px;
+      align-items: center;
+    }
+    @media (max-width: 960px) { .hub-hero-grid { grid-template-columns: 1fr; gap: 48px; } }
+
+    .hub-hero h1 {
+      font-size: clamp(2rem, 4.5vw, 3.2rem);
+      margin-bottom: 20px;
+      letter-spacing: -0.03em;
+      line-height: 1.15;
+    }
+    .hub-hero .lead {
+      font-size: 1.08rem;
+      color: var(--text-muted);
+      max-width: 560px;
+      margin-bottom: 32px;
+      line-height: 1.65;
+    }
+    .hub-hero .badges {
+      display: flex; gap: 12px; flex-wrap: wrap;
+      margin-bottom: 28px;
+    }
+    .hub-hero .badge-pill {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 7px 14px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--r-full);
+      font-size: 0.80rem;
+      font-weight: 500;
+      color: var(--text-muted);
+    }
+    .hub-hero .badge-pill i { color: #db2777; }
+
+    /* ---------- HERO SHOWCASE (rotating images) ---------- */
+    .showcase {
+      position: relative;
+      aspect-ratio: 4 / 3;
+      border-radius: var(--r-2xl);
+      overflow: hidden;
+      box-shadow: 0 32px 64px rgba(15,23,42,0.25);
+      background: #0f172a;
+    }
+    .showcase-slide {
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      transition: opacity 900ms var(--ease-out);
+    }
+    .showcase-slide.active { opacity: 1; }
+    .showcase-slide img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .showcase-slide::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, transparent 40%, rgba(15,23,42,0.92) 100%);
+    }
+    .showcase-caption {
+      position: absolute;
+      left: 28px; right: 28px; bottom: 28px;
+      z-index: 2;
+      color: #fff;
+    }
+    .showcase-caption .label {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 5px 12px;
+      border-radius: var(--r-full);
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      background: rgba(255,255,255,0.15);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(255,255,255,0.2);
+      margin-bottom: 12px;
+    }
+    .showcase-caption h3 {
+      color: #fff;
+      font-size: 1.5rem;
+      margin: 0 0 4px;
+      font-weight: 700;
+    }
+    .showcase-caption p {
+      color: rgba(255,255,255,0.8);
+      font-size: 0.88rem;
+      margin: 0;
+    }
+    /* Dots */
+    .showcase-dots {
+      position: absolute;
+      bottom: 20px;
+      right: 28px;
+      z-index: 3;
+      display: flex;
+      gap: 6px;
+    }
+    .showcase-dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.35);
+      border: none;
+      padding: 0;
+      cursor: pointer;
+      transition: all var(--dur) var(--ease);
+    }
+    .showcase-dot.active {
+      width: 20px;
+      background: #fff;
+    }
+
+    /* ---------- CATEGORY NAV ---------- */
+    .cat-nav {
+      position: sticky;
+      top: var(--nav-h);
+      z-index: 40;
+      background: rgba(255,255,255,0.92);
+      backdrop-filter: saturate(180%) blur(14px);
+      -webkit-backdrop-filter: saturate(180%) blur(14px);
+      border-bottom: 1px solid var(--border);
+      padding: 12px 0;
+    }
+    [data-theme="dark"] .cat-nav { background: rgba(15,23,42,0.92); }
+    .cat-nav-inner {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: nowrap;
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
+    .cat-nav-inner::-webkit-scrollbar { display: none; }
+    .cat-tab {
+      padding: 9px 16px;
+      border-radius: var(--r-full);
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: var(--text-muted);
+      background: transparent;
+      border: 1px solid transparent;
+      white-space: nowrap;
+      transition: all var(--dur) var(--ease);
+    }
+    .cat-tab:hover { color: var(--text); background: var(--surface-hover); }
+    .cat-tab.active {
+      color: #fff;
+      background: linear-gradient(135deg, #db2777, #7c3aed);
+      border-color: transparent;
+      box-shadow: 0 6px 16px rgba(219,39,119,0.28);
+    }
+
+    /* ---------- CATEGORY SECTION ---------- */
+    .cat-section {
+      padding: 72px 0;
+      scroll-margin-top: calc(var(--nav-h) + 60px);
+      position: relative;
+      border-bottom: 1px solid var(--border);
+    }
+    .cat-section:last-of-type { border-bottom: none; }
+
+    /* Tinted backgrounds by track */
+    .cat-section[data-track="2d"]     { background: linear-gradient(180deg, rgba(244,63,94,0.05) 0%, transparent 300px); }
+    .cat-section[data-track="3d"]     { background: linear-gradient(180deg, rgba(249,115,22,0.05) 0%, transparent 300px); }
+    .cat-section[data-track="mod"]    { background: linear-gradient(180deg, rgba(234,179,8,0.05) 0%, transparent 300px); }
+    .cat-section[data-track="vfx"]    { background: linear-gradient(180deg, rgba(139,92,246,0.05) 0%, transparent 300px); }
+    .cat-section[data-track="motion"] { background: linear-gradient(180deg, rgba(236,72,153,0.05) 0%, transparent 300px); }
+    .cat-section[data-track="game"]   { background: linear-gradient(180deg, rgba(16,185,129,0.05) 0%, transparent 300px); }
+    .cat-section[data-track="design"] { background: linear-gradient(180deg, rgba(14,165,233,0.05) 0%, transparent 300px); }
+
+    .cat-head {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap: 40px;
+      align-items: end;
+      margin-bottom: 40px;
+    }
+    @media (max-width: 800px) { .cat-head { grid-template-columns: 1fr; gap: 20px; } }
+    .cat-head h2 {
+      font-size: clamp(1.75rem, 3vw, 2.4rem);
+      margin-bottom: 12px;
+      letter-spacing: -0.02em;
+    }
+    .cat-head p {
+      font-size: 1rem;
+      color: var(--text-muted);
+      margin: 0;
+      max-width: 520px;
+      line-height: 1.65;
+    }
+    .cat-head .meta {
+      display: flex;
+      gap: 24px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+    .cat-head .meta-item { text-align: right; }
+    .cat-head .meta-item .v {
+      font-size: 1.5rem;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      color: var(--text);
+      display: block;
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+    .cat-head .meta-item .l {
+      font-size: 0.78rem;
+      color: var(--text-subtle);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      font-weight: 600;
+    }
+
+    /* Track eyebrow color */
+    .cat-section[data-track="2d"]     .eyebrow { color: var(--tr-2d); }
+    .cat-section[data-track="3d"]     .eyebrow { color: var(--tr-3d); }
+    .cat-section[data-track="mod"]    .eyebrow { color: var(--tr-mod); }
+    .cat-section[data-track="vfx"]    .eyebrow { color: var(--tr-vfx); }
+    .cat-section[data-track="motion"] .eyebrow { color: var(--tr-motion); }
+    .cat-section[data-track="game"]   .eyebrow { color: var(--tr-game); }
+    .cat-section[data-track="design"] .eyebrow { color: var(--tr-design); }
+
+    /* ---------- COURSE CARDS with thumbnails ---------- */
+    .tech-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 20px;
+    }
+    .tech-card {
+      display: flex;
+      flex-direction: column;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-top: 3px solid var(--track-color, var(--brand-500));
+      border-radius: var(--r-xl);
+      overflow: hidden;
+      transition: transform var(--dur) var(--ease), box-shadow var(--dur) var(--ease), border-color var(--dur) var(--ease);
+    }
+    .tech-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 20px 40px rgba(15,23,42,0.12);
+    }
+
+    /* Thumbnail image area */
+    .tech-card .thumb {
+      aspect-ratio: 16 / 10;
+      position: relative;
+      overflow: hidden;
+      background: linear-gradient(135deg, var(--track-color, var(--brand-500)), rgba(0,0,0,0.4));
+      display: grid;
+      place-items: center;
+    }
+    .tech-card .thumb img {
+      position: absolute;
+      inset: 0;
+      width: 100%; height: 100%;
+      object-fit: cover;
+      transition: transform 600ms var(--ease);
+    }
+    .tech-card:hover .thumb img { transform: scale(1.06); }
+    .tech-card .thumb::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(0,0,0,0.05) 40%, rgba(0,0,0,0.55) 100%);
+    }
+    .tech-card .thumb .badge {
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      z-index: 2;
+      padding: 4px 10px;
+      border-radius: var(--r-full);
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: #fff;
+      background: var(--track-color, #6366f1);
+      box-shadow: 0 6px 16px rgba(0,0,0,0.25);
+    }
+    .tech-card .thumb .tool {
+      position: absolute;
+      bottom: 12px;
+      left: 12px;
+      right: 12px;
+      z-index: 2;
+      color: #fff;
+      font-size: 0.75rem;
+      font-weight: 600;
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+    .tech-card .thumb .tool span {
+      padding: 2px 8px;
+      border-radius: var(--r-full);
+      background: rgba(255,255,255,0.18);
+      backdrop-filter: blur(6px);
+      border: 1px solid rgba(255,255,255,0.25);
+    }
+
+    /* Card body */
+    .tech-card .body {
+      padding: 22px 22px 20px;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+    }
+    .tech-card h3 {
+      font-size: 1.05rem;
+      margin-bottom: 8px;
+      line-height: 1.3;
+    }
+    .tech-card p {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      margin: 0 0 16px;
+      flex: 1;
+      line-height: 1.55;
+    }
+    .tech-card .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 16px;
+    }
+    .tech-card .tags span {
+      padding: 3px 10px;
+      border-radius: var(--r-full);
+      background: var(--bg-subtle);
+      border: 1px solid var(--border);
+      font-size: 0.72rem;
+      font-weight: 500;
+      color: var(--text-muted);
+    }
+    [data-theme="dark"] .tech-card .tags span { background: var(--bg-muted); }
+    .tech-card .foot {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 14px;
+      border-top: 1px solid var(--border);
+    }
+    .tech-card .dur {
+      font-size: 0.8rem;
+      color: var(--text-subtle);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .tech-card .link {
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--track-color, var(--brand-600));
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: gap var(--dur) var(--ease);
+    }
+    .tech-card .link:hover { gap: 10px; }
+
+    /* Per-track color assignment */
+    .cat-section[data-track="2d"]     .tech-card { --track-color: var(--tr-2d); }
+    .cat-section[data-track="3d"]     .tech-card { --track-color: var(--tr-3d); }
+    .cat-section[data-track="mod"]    .tech-card { --track-color: var(--tr-mod); }
+    .cat-section[data-track="vfx"]    .tech-card { --track-color: var(--tr-vfx); }
+    .cat-section[data-track="motion"] .tech-card { --track-color: var(--tr-motion); }
+    .cat-section[data-track="game"]   .tech-card { --track-color: var(--tr-game); }
+    .cat-section[data-track="design"] .tech-card { --track-color: var(--tr-design); }
+
+    /* ---------- FEATURED VIDEO GRID (game / AR/VR / 3D) ---------- */
+    .media-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+    @media (max-width: 900px) { .media-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 520px) { .media-grid { grid-template-columns: 1fr; } }
+
+    .media-tile {
+      position: relative;
+      aspect-ratio: 4 / 3;
+      border-radius: var(--r-lg);
+      overflow: hidden;
+      box-shadow: var(--sh-md);
+      cursor: pointer;
+      transition: transform var(--dur) var(--ease);
+    }
+    .media-tile:hover { transform: translateY(-4px); }
+    .media-tile img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 600ms var(--ease);
+    }
+    .media-tile:hover img { transform: scale(1.07); }
+    .media-tile::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, transparent 50%, rgba(15,23,42,0.85));
+    }
+    .media-tile .tag {
+      position: absolute;
+      top: 12px; left: 12px;
+      z-index: 2;
+      padding: 4px 10px;
+      border-radius: var(--r-full);
+      background: rgba(255,255,255,0.9);
+      color: #0f172a;
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+    .media-tile .caption {
+      position: absolute;
+      left: 16px; right: 16px; bottom: 14px;
+      z-index: 2;
+      color: #fff;
+      font-size: 0.85rem;
+      font-weight: 600;
+    }
+    .media-tile .caption small {
+      display: block;
+      font-size: 0.72rem;
+      opacity: 0.75;
+      font-weight: 500;
+      margin-top: 2px;
+    }
+    .media-tile .play {
+      position: absolute;
+      right: 16px; bottom: 14px;
+      z-index: 2;
+      width: 34px; height: 34px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: rgba(255,255,255,0.2);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255,255,255,0.3);
+      color: #fff;
+      font-size: 0.75rem;
+    }
+
+    /* ---------- LEARNING FLOW (dark) ---------- */
+    .flow-band {
+      background: linear-gradient(135deg, #1a0b2e, #2d1b4e 50%, #4c1d95 100%);
+      padding: 72px 0;
+      position: relative;
+      overflow: hidden;
+    }
+    .flow-band::before {
+      content: '';
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(50% 60% at 15% 20%, rgba(219,39,119,0.25), transparent 60%),
+        radial-gradient(50% 60% at 85% 80%, rgba(124,58,237,0.20), transparent 60%);
+      pointer-events: none;
+    }
+    .flow-band .container-x { position: relative; }
+    .flow-band .head-left h2 { color: #fff; }
+    .flow-band .head-left p { color: rgba(255,255,255,0.7); }
+    .flow-band .head-left .eyebrow { color: #f472b6; }
+
+    .flow-wrap {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 12px;
+    }
+    @media (max-width: 1000px) { .flow-wrap { grid-template-columns: repeat(3, 1fr); } }
+    @media (max-width: 600px)  { .flow-wrap { grid-template-columns: 1fr; } }
+
+    .flow-step {
+      padding: 24px 18px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.10);
+      border-radius: var(--r-lg);
+      text-align: center;
+      position: relative;
+      transition: all var(--dur) var(--ease);
+    }
+    .flow-step:hover {
+      transform: translateY(-4px);
+      background: rgba(255,255,255,0.08);
+      border-color: rgba(244,114,182,0.5);
+    }
+    .flow-step .n {
+      display: inline-grid;
+      place-items: center;
+      width: 32px; height: 32px;
+      border-radius: var(--r-full);
+      background: linear-gradient(135deg, #db2777, #7c3aed);
+      color: #fff;
+      font-weight: 700;
+      font-size: 0.8rem;
+      margin-bottom: 14px;
+      box-shadow: 0 6px 16px rgba(219,39,119,0.4);
+    }
+    .flow-step h4 { font-size: 0.92rem; margin-bottom: 6px; font-weight: 600; color: #fff; }
+    .flow-step p  { font-size: 0.78rem; color: rgba(255,255,255,0.65); margin: 0; line-height: 1.5; }
+
+    /* ---------- CTA ---------- */
+    .cta-band {
+      background: linear-gradient(135deg, #db2777, #7c3aed);
+      border-radius: var(--r-2xl);
+      padding: 56px 48px;
+      color: #fff;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 32px;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .cta-band::before {
+      content: '';
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(50% 60% at 10% 10%, rgba(255,255,255,0.18), transparent 60%),
+        radial-gradient(50% 60% at 90% 90%, rgba(255,255,255,0.12), transparent 60%);
+    }
+    .cta-band > * { position: relative; }
+    .cta-band h2 { color: #fff; margin-bottom: 8px; }
+    .cta-band p { color: rgba(255,255,255,0.85); margin: 0; max-width: 520px; }
+    .cta-band .btn-light {
+      background: #fff;
+      color: #7c3aed;
+      padding: 14px 26px;
+      border-radius: var(--r-md);
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      transition: transform var(--dur) var(--ease);
+      box-shadow: 0 12px 28px rgba(0,0,0,0.2);
+    }
+    .cta-band .btn-light:hover { transform: translateY(-2px); }
+    @media (max-width: 800px) { .cta-band { grid-template-columns: 1fr; padding: 40px 28px; } }
+  </style>
+</head>
+
+<body>
+  <!-- ==================== NAVBAR ==================== -->
+  <header class="navbar-x">
+    <div class="container-x nav-inner">
+      <a href="index.html" class="brand" aria-label="Creative Code Hub home">
+        <img src="images/logo/cc-logo.png" alt="Creative Code Hub" />
+      </a>
+      <nav class="nav-links" id="navLinks">
+        <a href="index.html">Home</a>
+        <a href="tech-hub.html">Tech Hub</a>
+        <a href="creative-hub.html" class="active">Creative Hub</a>
+        <a href="business-hub.html">Business Hub</a>
+        <a href="career-prep.html">Career Prep</a>
+        <a href="career-connect.html">Career Connect</a>
+        <a href="about.html">About</a>
+      </nav>
+      <div class="nav-actions">
+        <button id="themeToggle" class="theme-toggle" aria-label="Toggle dark mode">
+          <span class="sun">☀️</span><span class="moon">🌙</span>
+        </button>
+        <a href="underprocess.html" class="btn btn-primary btn-sm">
+          <i class="fas fa-rocket"></i> LMS Portal
+        </a>
+        <button class="nav-toggle" id="navToggle" aria-label="Open menu">
+          <i class="fas fa-bars"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ==================== HERO ==================== -->
+  <section class="hub-hero">
+    <div class="container-x">
+      <div class="hub-hero-grid">
+        <div>
+          <div class="badges">
+            <span class="badge-pill"><i class="fas fa-palette"></i> Creative Hub</span>
+            <span class="badge-pill"><i class="fas fa-certificate"></i> Portfolio-first training</span>
+          </div>
+          <h1>
+            Turn creativity <span class="gradient-text">into a career</span>.<br />
+            Animation, VFX, games &amp; design.
+          </h1>
+          <p class="lead">
+            From your first keyframe to a studio-ready reel — practical training in
+            2D/3D animation, VFX, motion graphics, game development and creative
+            design, guided by working professionals.
+          </p>
+          <div class="hero-actions" style="display:flex; gap:12px; flex-wrap:wrap;">
+            <a href="#categories" class="btn btn-primary btn-lg" style="background: linear-gradient(135deg, #db2777, #7c3aed);">
+              <i class="fas fa-layer-group"></i> Browse tracks
+            </a>
+            <a href="quote.html" class="btn btn-ghost btn-lg">
+              <i class="fas fa-comments"></i> Talk to a mentor
+            </a>
+          </div>
+        </div>
+
+        <!-- ===== HERO SHOWCASE (rotating images) ===== -->
+        <div class="showcase" id="heroShowcase">
+          <div class="showcase-slide active">
+            <img src="images/3D.jpg"
+                 alt="3D animation Rig" loading="eager" />
+            <div class="showcase-caption">
+              <span class="label"><i class="fas fa-pencil-ruler"></i> 2D Animation</span>
+              <h3>Frame-by-frame storytelling</h3>
+              <p>Traditional &amp; digital 2D — from principles to full animated shorts</p>
+            </div>
+          </div>
+
+          <div class="showcase-slide">
+            <img src="images/3D1.jpg"
+                 alt="3D character render" loading="lazy" />
+            <div class="showcase-caption">
+              <span class="label"><i class="fas fa-cube"></i> 3D Animation</span>
+              <h3>Bring characters to life</h3>
+              <p>Rigging, keyframing and cinematic sequences in Blender &amp; Maya</p>
+            </div>
+          </div>
+
+          <div class="showcase-slide">
+            <img src="images/game.jpg"
+                 alt="Game development workspace" loading="lazy" />
+            <div class="showcase-caption">
+              <span class="label"><i class="fas fa-gamepad"></i> Game Development</span>
+              <h3>Ship real games</h3>
+              <p>Unity &amp; Unreal — 2D indie titles to full 3D worlds</p>
+            </div>
+          </div>
+
+          <div class="showcase-slide">
+            <img src="images/game1.jpg"
+                 alt="Game development workspace" loading="lazy" />
+            <div class="showcase-caption">
+              <span class="label"><i class="fas fa-gamepad"></i> Game Development</span>
+              <h3>Ship real games</h3>
+              <p>Unity &amp; Unreal — 2D indie titles to full 3D worlds</p>
+            </div>
+          </div>
+
+          <div class="showcase-slide">
+            <img src="images/vfx.jpg"
+                 alt="VFX workspace" loading="lazy" />
+            <div class="showcase-caption">
+              <span class="label"><i class="fas fa-film"></i> VFX</span>
+              <h3>Visual effects magic</h3>
+              <p>Compositing, particle systems and cinematic visual effects</p>
+            </div>
+          </div>
+
+          <div class="showcase-slide">
+            <img src="images/vfx1.jpg"
+                 alt="VFX workspace" loading="lazy" />
+            <div class="showcase-caption">
+              <span class="label"><i class="fas fa-film"></i> VFX</span>
+              <h3>Visual effects magic</h3>
+              <p>Compositing, particle systems and cinematic visual effects</p>
+            </div>
+          </div>
+
+
+
+
+
+          <div class="showcase-dots" id="showcaseDots">
+            <button class="showcase-dot active" data-show="0" aria-label="2D Animation"></button>
+            <button class="showcase-dot" data-show="1" aria-label="3D Animation"></button>
+            <button class="showcase-dot" data-show="2" aria-label="Game Development"></button>
+            <button class="showcase-dot" data-show="3" aria-label="AR / VR"></button>
+            <button class="showcase-dot" data-show="4" aria-label="Motion Graphics"></button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== CATEGORY NAV ==================== -->
+  <nav class="cat-nav" id="categoryNav">
+    <div class="container-x cat-nav-inner">
+      <a href="#animation-2d" class="cat-tab active">2D Animation</a>
+      <a href="#animation-3d" class="cat-tab">3D Animation</a>
+      <a href="#modelling" class="cat-tab">3D Modelling</a>
+      <a href="#vfx" class="cat-tab">VFX</a>
+      <a href="#motion" class="cat-tab">Motion Graphics</a>
+      <a href="#game" class="cat-tab">Game Dev</a>
+      <a href="#xr" class="cat-tab">AR / VR</a>
+      <a href="#design" class="cat-tab">Creative Design</a>
+      <a href="#flow" class="cat-tab">Learning Flow</a>
+    </div>
+  </nav>
+
+  <!-- ==================== 2D ANIMATION ==================== -->
+  <section class="cat-section" id="animation-2d" data-track="2d">
+    <div class="container-x">
+      <div class="cat-head">
+        <div>
+          <span class="eyebrow">Track 01 · 2D Animation</span>
+          <h2>Frame-by-frame storytelling.</h2>
+          <p>Traditional and digital 2D animation — from fundamental drawing principles to a complete animated short.</p>
+        </div>
+        <div class="meta">
+          <div class="meta-item"><span class="v">3</span><span class="l">Courses</span></div>
+          <div class="meta-item"><span class="v">3-5</span><span class="l">Months</span></div>
+          <div class="meta-item"><span class="v">Reel</span><span class="l">Ready</span></div>
+        </div>
+      </div>
+
+      <div class="tech-grid">
+        <article class="tech-card">
+          <div class="thumb">
+            <img src="https://images.unsplash.com/photo-1618005198919-d3d4b5a92ead?w=600&q=80&auto=format&fit=crop" alt="Animation principles sketch" loading="lazy" />
+            <span class="badge">Beginner</span>
+            <div class="tool"><span>Pencil</span><span>Paper</span></div>
+          </div>
+          <div class="body">
+            <h3>Animation Principles</h3>
+            <p>The 12 principles every animator must master. Timing, spacing, squash, stretch and appeal.</p>
+            <div class="tags"><span>2 months</span><span>Foundation</span></div>
+            <div class="foot">
+              <span class="dur"><i class="far fa-clock"></i> 40 hrs</span>
+              <a href="quote.html?course=2d-principles" class="link">View <i class="fas fa-arrow-right"></i></a>
+            </div>
+          </div>
+        </article>
+
+        <article class="tech-card">
+          <div class="thumb">
+            <img src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=600&q=80&auto=format&fit=crop" alt="Traditional animation" loading="lazy" />
+            <span class="badge">Intermediate</span>
+            <div class="tool"><span>TVPaint</span><span>Krita</span></div>
+          </div>
+          <div class="body">
+            <h3>Traditional 2D Animation</h3>
+            <p>Frame-by-frame character animation — walk cycles, action, expression and storytelling.</p>
+            <div class="tags"><span>3 months</span><span>Character</span></div>
+            <div class="foot">
+              <span class="dur"><i class="far fa-clock"></i> 70 hrs</span>
+              <a href="quote.html?course=2d-traditional" class="link">View <i class="fas fa-arrow-right"></i></a>
+            </div>
+          </div>
+        </article>
+
+        <article class="tech-card">
+          <div class="thumb">
+            <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=600&q=80&auto=format&fit=crop" alt="Digital 2D animation" loading="lazy" />
+            <span class="badge">Intermediate</span>
+            <div class="tool"><span>Animate</span><span>Toon Boom</span></div>
+          </div>
+          <div class="body">
+            <h3>Digital 2D Animation</h3>
+            <p>Adobe Animate, Toon Boom Harmony and modern digital workflows for production.</p>
+            <div class="tags"><span>3 months</span><span>Production</span></div>
+            <div class="foot">
+              <span class="dur"><i class="far fa-clock"></i> 70 hrs</span>
+              <a href="quote.html?course=2d-digital" class="link">View <i class="fas fa-arrow-right"></i></a>
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== 3D ANIMATION ==================== -->
+  <section class="cat-section" id="animation-3d" data-track="3d">
+    <div class="container-x">
+      <div class="cat-head">
+        <div>
+          <span class="eyebrow">Track 02 · 3D Animation</span>
+          <h2>Bring characters to life.</h2>
+          <p>Rigging, keyframing, camera work and rendering — build cinematic sequences in Maya and Blender.</p>
+        </div>
+        <div class="meta">
+          <div class="meta-item"><span class="v">3</span><span class="l">Courses</span></div>
+          <div class="meta-item"><span class="v">3-5</span><span class="l">Months</span></div>
+          <div class="meta-item"><span class="v">Studio</span><span class="l">Ready</span></div>
+        </div>
+      </div>
+
+      <div class="tech-grid">
+        <article class="tech-card">
+          <div class="thumb">
+            <img src="https://images.unsplash.com/photo-1633356122544-f134324a6cee?w=600&q=80&auto=format&fit=crop" alt="Blender 3D animation" loading="lazy" />
+            <span class="badge">Beginner</span>
+            <div class="tool"><span>Blender</span></div>
+          </div>
+          <div class="body">
+            <h3>Blender 3D Animation</h3>
+            <p>Blender's complete animation pipeline — free, powerful, and used by studios worldwide.</p>
+            <div class="tags"><span>3 months</span><span>Open source</span></div>
+            <div class="foot">
+              <span class="dur"><i class="far fa-clock"></i> 70 hrs</span>
+              <a href="quote.html?course=3d-blender" class="link">View <i class="fas fa-arrow-right"></i></a>
+            </div>
+          </div>
+        </article>
+
+        <article class="tech-card">
+          <div class="thumb">
+            <img src="https://images.unsplash.com/photo-1620641788421-7a1c342ea42e?w=600&q=80&auto=format&fit=crop" alt="Character rigging" loading="lazy" />
+            <span class="badge">Intermediate</span>
+            <div class="tool"><span>Maya</span><span>Blender</span></div>
+          </div>
+          <div class="body">
+            <h3>Character Rigging</h3>
+            <p>Build professional character rigs — skeletons, constraints, IK/FK and facial rigs.</p>
+            <div class="tags"><span>3 months</span><span>Technical</span></div>
+            <div class="foot">
+              <span class="dur"><i class="far fa-clock"></i> 70 hrs</span>
+              <a href="quote.html?course=3d-rigging" class="link">View <i class="fas fa-arrow-right"></i></a>
+            </div>
+          </div>
+        </article>
+
+        <article class="tech-card">
+          <div class="thumb">
+            <img src="https://images.unsplash.com/photo-1633356122102-3fe601e05bd2?w=600&q=80&auto=format&fit=crop" alt="3D character animation" loading="lazy" />
+            <span class="badge">Advanced</span>
+            <div class="tool"><span>Maya</span></div>
+          </div>
+          <div class="body">
+            <h3>3D Character Animation</h3>
+            <p>Body mechanics, acting, and cinematic sequences — animate like a pro.</p>
+            <div class="tags"><span>5 months</span><span>Cinematic</span></div>
+            <div class="foot">
+              <span class="dur"><i class="far fa-clock"></i> 100 hrs</span>
+              <a href="quote.html?course=3d-character" class="link">View <i class="fas fa-arrow-right"></i></a>
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== 3D MODELLING ==================== -->
+  <section class="cat-section" id="modelling" data-track="mod">
+    <div class="container-x">
+      <div class="cat-head">
+        <div>
+          <span class="eyebrow">Track 03 · 3D Modelling</span>
+          <h2>Build assets and worlds.</h2>
+          <p>Hard-surface models, organic characters, environments — plus texturing and look-development.</p>
+        </div>
+        <div class="meta">
+          <div class="meta-item"><span class="v">3</span><span class="l">Courses</span></div>
+          <div class="meta-item"><span class="v">3-4</span><span class="l">Months</span></div>
+        </div>
+      </div>
+
+      <div class="tech-grid">
+        <article class="tech-card">
+          <div class="thumb">
+            <img src="https://images.unsplash.com/photo-1620641788421-7a1c342ea42e?w=600&q=80&auto=format&fit=crop" alt="Hard surface model" loading="lazy" />
+            <span class="badge">Intermediate</span>
+            <div class="tool"><span>Maya</span><span>Blender</span></div>
+          </div>
+          <div class="body">
+            <h3>Hard-Surface Modelling</h3>
+            <p>Vehicles, props, weapons and machinery — clean topology and subdivision workflow.</p>
+            <div class="tags"><span>3 months</span><span>Game-ready</span></div>
+            <div class="foot">
+              <span class="dur"><i class="far fa-clock"></i> 70 hrs</span>
+              <a href="quote.html?course=3d-hard" class="link">View <i class="fas fa-arrow-right"></i></a>
+            </div>
+          </div>
+        </article>
+
+        <article class="tech-card">
+          <div class="thumb">
+            <img src="https://images.unsplash.com/photo-1618005198919-d3d4b5a92ead?w=600&q=80&auto=format&fit=crop" alt="Organic modelling" loading="lazy" />
+            <span class="badge">Advanced</span>
+            <div class="tool"><span>ZBrush</span><span>Blender</span></div>
+          </div>
+          <div class="body">
+            <h3>Organic / Character Modelling</h3>
+            <p>Sculpting, retopology and anatomy for characters and creatures.</p>
+            <div class="tags"><span>4 months</span><span>Sculpting</span></div>
+            <div class="foot">
+              <span class="dur"><i class="far fa-clock"></i> 90 hrs</span>
+              <a href="quote.html?course=3d-organic" class="link">View <i class="fas fa-arrow-right"></i></a>
+            </div>
+          </div>
+        </article>
+
+        <article class="tech-card">
+          <div class="thumb">
+            <img src="https://images.unsplash.com/photo-1626785774573-4b799315345d?w=600&q=80&auto=format&fit=crop" alt="Texturing" loading="lazy" />
+            <span class="badge">Intermediate</span>
+            <div class="tool"><span>Substance</span></div>
+          </div>
+          <div class="body">
+            <h3>Texturing &amp; Shading</h3>
+            <p>Substance Painter, PBR workflows and photoreal material authoring.</p>
+            <div class="tags"><span>3 months</span><span>Look-dev</span></div>
+            <div class="foot">
+              <span class="dur"><i class="far fa-clock"></i> 70 hrs</span>
+              <a href="quote.html?course=3d-texturing" class="link">View <i class="fas fa-arrow-right"></i></a>
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== VFX ==================== -->
+  <section class="cat-section" id="vfx" data-track="vfx">
+    <div class="container-x">
+      <div class="cat-head">
+        <div>
+          <span class="eyebrow">Track 04 · VFX &amp; Compositing</span>
+          <h2>The magic behind the shot.</h2>
+          <p>Rotoscoping, keying, tracking, particle simulation and final compositing in Nuke and After Effects.</p>
+        </div>
+        <div class="meta">
+          <div class="meta-item"><span class="v">2</span><span class="l">Courses</span></div>
+          <div class="meta-item"><span class="v">4-5</span><span class="l">Months</span></div>
+        </div>
+      </div>
+
+      <div class="tech-grid">
+        <article class="tech-card">
+          <div class="thumb">
+            <img src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=600&q=80&auto=format&fit=crop" alt="VFX compositing" loading="lazy" />
+            <span class="badge">Advanced</span>
+            <div class="tool"><span>Nuke</span><span>AE</span></div>
+          </div>
+          <div class="body">
+            <h3>VFX for Film &amp; Ads</h3>
+            <p>Green screen, tracking, keying, 3D integration and photoreal compositing.</p>
+            <div class="tags"><span>5 months</span><span>Film</span></div>
+            <div class="foot">
+              <span class="dur"><i class="far fa-clock"></i> 110 hrs</span>
+              <a href="quote.html?course=vfx-film" class="link">View <i class="fas fa-arrow-right"></i></a>
+            </div>
+          </div>
+        </article>
+
+        <article class="tech-card">
+          <div class="thumb">
+            <img src="https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?w=600&q=80&auto=format&fit=crop" alt="Nuke compositing" loading="lazy" />
+            <span class="badge">Advanced</span>
+            <div class="tool"><span>Nuke</span></div>
+          </div>
+          <div class="body">
+            <h3>Compositing with Nuke</h3>
+            <p>The industry-standard compositing tool used in every major studio pipeline.</p>
+            <div class="tags"><span>4 months</span><span>Studio</span></div>
+            <div class="foot">
+              <span class="dur"><i class="far fa-clock"></i> 90 hrs</span>
+              <a href="quote.html?course=vfx-nuke" class="link">View <i class="fas fa-arrow-right"></i></a>
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== MOTION GRAPHICS ==================== -->
+  <section class="cat-section" id="motion" data-track="motion">
+    <div class="container-x">
+      <div class="cat-head">
+        <div>
+          <span class="eyebrow">Track 05 · Motion Graphics</span>
+          <h2>Design in motion.</h2>
+          <p>Kinetic typography, logo animation, explainer videos and social-media ready content — the highest in-demand creative skill.</p>
+        </div>
+        <div class="meta">
+          <div class="meta-item"><span class="v">2</span><span class="l">Courses</span></div>
+          <div class="meta-item"><span class="v">2-3</span><span class="l">Months</span></div>
+        </div>
+      </div>
+
+      <div class="tech-grid">
+        <article class="tech-card">
+          <div class="thumb">
+            <img src="https://images.unsplash.com/photo-1626785774625-0b1c2c4eab67?w=600&q=80&auto=format&fit=crop" alt="Motion graphics" loading="lazy" />
+            <span class="badge">Beginner</span>
+            <div class="tool"><span>After Effects</span></div>
+          </div>
+          <div class="body">
+            <h3>After Effects Essentials</h3>
+            <p>Animation, keyframing, text animation and the modern AE workflow.</p>
+            <div class="tags"><span>2 months</span><span>Foundation</span></div>
+            <div class="foot">
+              <span class="dur"><i class="far fa-clock"></i> 50 hrs</span>
+              <a href="quote.html?course=mg-ae" class="link">View <i class="fas fa-arrow-right"></i></a>
+            </div>
+          </div>
+        </article>
+
+        <article class="tech-card">
+          <div class="thumb">
+            <img src="https://images.unsplash.com/photo-1626785774573-4b799315345d?w=600&q=80&auto=format&fit=crop" alt="Brand motion" loading="lazy" />
+            <span class="badge">Intermediate</span>
+            <div class="tool"><span>AE</span><span>Illustrator</span></div>
+          </div>
+          <div class="body">
+            <h3>Motion Design for Brands</h3>
+            <p>Logo animations, social reels and brand-consistent motion systems.</p>
+            <div class="tags"><span>3 months</span><span>Brand</span></div>
+            <div class="foot">
+              <span class="dur"><i class="far fa-clock"></i> 70 hrs</span>
+              <a href="quote.html?course=mg-brand" class="link">View <i class="fas fa-arrow-right"></i></a>
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== GAME DEV ==================== -->
+  <section class="cat-section" id="game" data-track="game">
+    <div class="container-x">
+      <div class="cat-head">
+        <div>
+          <span class="eyebrow">Track 06 · Game Development</span>
+          <h2>From idea to shipped game.</h2>
+          <p>Design, code and publish real games — from 2D indie titles to 3D multiplayer worlds.</p>
+        </div>
+        <div class="meta">
+          <div class="meta-item"><span class="v">3</span><span class="l">Courses</span></div>
+          <div class="meta-item"><span class="v">4-6</span><span class="l">Months</span></div>
+          <div class="meta-item"><span class="v">Shipped</span><span class="l">Games</span></div>
+        </div>
+      </div>
+
+      <div class="tech-grid">
+        <article class="tech-card">
+          <div class="thumb">
+            <img src="https://images.unsplash.com/photo-1552820728-8b83bb6b773f?w=600&q=80&auto=format&fit=crop" alt="Unity game dev" loading="lazy" />
+            <span class="badge">Intermediate</span>
+            <div class="tool"><span>Unity</span><span>C#</span></div>
+          </div>
+          <div class="body">
+            <h3>Unity Game Development</h3>
+            <p>2D &amp; 3D games with Unity and C#. Physics, UI, level design and publishing.</p>
+            <div class="tags"><span>5 months</span><span>2D + 3D</span></div>
+            <div class="foot">
+              <span class="dur"><i class="far fa-clock"></i> 120 hrs</span>
+              <a href="quote.html?course=game-unity" class="link">View <i class="fas fa-arrow-right"></i></a>
+            </div>
+          </div>
+        </article>
+
+        <article class="tech-card">
+          <div class="thumb">
+            <img src="https://images.unsplash.com/photo-1542751371-adc38448a05e?w=600&q=80&auto=format&fit=crop" alt="Unreal engine" loading="lazy" />
+            <span class="badge">Advanced</span>
+            <div class="tool"><span>Unreal</span><span>C++</span></div>
+          </div>
+          <div class="body">
+            <h3>Unreal Engine</h3>
+            <p>High-fidelity 3D games with Unreal, Blueprints and C++ scripting.</p>
+            <div class="tags"><span>6 months</span><span>AAA</span></div>
+            <div class="foot">
+              <span class="dur"><i class="far fa-clock"></i> 140 hrs</span>
+              <a href="quote.html?course=game-unreal" class="link">View <i class="fas fa-arrow-right"></i></a>
+            </div>
+          </div>
+        </article>
+
+        <article class="tech-card">
+          <div class="thumb">
+            <img src="https://images.unsplash.com/photo-1493711662062-fa541adb3fc8?w=600&q=80&auto=format&fit=crop" alt="Mobile game dev" loading="lazy" />
+            <span class="badge">Mobile</span>
+            <div class="tool"><span>Unity</span><span>Android</span></div>
+          </div>
+          <div class="body">
+            <h3>Mobile Game Development</h3>
+            <p>Ship 2D &amp; 3D mobile games to Play Store &amp; App Store — monetization, ads and analytics.</p>
+            <div class="tags"><span>4 months</span><span>Play Store</span></div>
+            <div class="foot">
+              <span class="dur"><i class="far fa-clock"></i> 90 hrs</span>
+              <a href="quote.html?course=game-mobile" class="link">View <i class="fas fa-arrow-right"></i></a>
+            </div>
+          </div>
+        </article>
+      </div>
+
+      <!-- Game / Mobile showcase strip -->
+      <div style="margin-top: 40px;">
+        <div class="media-grid">
+          <div class="media-tile">
+            <img src="https://images.unsplash.com/photo-1552820728-8b83bb6b773f?w=800&q=80&auto=format&fit=crop" alt="Game demo" loading="lazy" />
+            <span class="tag">Student Game</span>
+            <div class="caption">Pixel Runner — 2D Platformer<small>Unity · 2024 batch</small></div>
+            <span class="play"><i class="fas fa-play"></i></span>
+          </div>
+          <div class="media-tile">
+            <img src="https://images.unsplash.com/photo-1542751371-adc38448a05e?w=800&q=80&auto=format&fit=crop" alt="3D game" loading="lazy" />
+            <span class="tag">Student Game</span>
+            <div class="caption">Space Shooter 3D<small>Unity · 2024 batch</small></div>
+            <span class="play"><i class="fas fa-play"></i></span>
+          </div>
+          <div class="media-tile">
+            <img src="https://images.unsplash.com/photo-1493711662062-fa541adb3fc8?w=800&q=80&auto=format&fit=crop" alt="Mobile game" loading="lazy" />
+            <span class="tag">Mobile Game</span>
+            <div class="caption">Candy Match — Puzzle<small>Android · Play Store</small></div>
+            <span class="play"><i class="fas fa-play"></i></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== AR / VR ==================== -->
+  <section class="cat-section" id="xr" data-track="vfx">
+    <div class="container-x">
+      <div class="cat-head">
+        <div>
+          <span class="eyebrow">Track 07 · AR / VR</span>
+          <h2>The next interface.</h2>
+          <p>Immersive experiences for headsets, mobile AR and the emerging spatial computing era. Built with Unity XR and WebXR.</p>
+        </div>
+        <div class="meta">
+          <div class="meta-item"><span class="v">2</span><span class="l">Courses</span></div>
+          <div class="meta-item"><span class="v">4-5</span><span class="l">Months</span></div>
+        </div>
+      </div>
+
+      <div class="tech-grid">
+        <article class="tech-card">
+          <div class="thumb">
+            <img src="https://images.unsplash.com/photo-1622979135225-d2ba269cf1ac?w=600&q=80&auto=format&fit=crop" alt="VR headset" loading="lazy" />
+            <span class="badge">VR</span>
+            <div class="tool"><span>Unity XR</span><span>Meta Quest</span></div>
+          </div>
+          <div class="body">
+            <h3>VR Experience Development</h3>
+            <p>Build immersive virtual worlds — hand tracking, locomotion, spatial audio and comfort design.</p>
+            <div class="tags"><span>4 months</span><span>Meta Quest</span></div>
+            <div class="foot">
+              <span class="dur"><i class="far fa-clock"></i> 90 hrs</span>
+              <a href="quote.html?course=xr-vr" class="link">View <i class="fas fa-arrow-right"></i></a>
+            </div>
+          </div>
+        </article>
+
+        <article class="tech-card">
+          <div class="thumb">
+            <img src="https://images.unsplash.com/photo-1592478411213-6153e4ebc696?w=600&q=80&auto=format&fit=crop" alt="AR app" loading="lazy" />
+            <span class="badge">AR</span>
+            <div class="tool"><span>ARKit</span><span>ARCore</span></div>
+          </div>
+          <div class="body">
+            <h3>AR App Development</h3>
+            <p>Face filters, product previews, AR navigation and marker-based experiences.</p>
+            <div class="tags"><span>4 months</span><span>Mobile AR</span></div>
+            <div class="foot">
+              <span class="dur"><i class="far fa-clock"></i> 90 hrs</span>
+              <a href="quote.html?course=xr-ar" class="link">View <i class="fas fa-arrow-right"></i></a>
+            </div>
+          </div>
+        </article>
+      </div>
+
+      <!-- AR / VR showcase -->
+      <div style="margin-top: 40px;">
+        <div class="media-grid">
+          <div class="media-tile">
+            <img src="https://images.unsplash.com/photo-1622979135225-d2ba269cf1ac?w=800&q=80&auto=format&fit=crop" alt="VR demo" loading="lazy" />
+            <span class="tag">VR Project</span>
+            <div class="caption">Virtual Art Gallery<small>Unity XR · Meta Quest</small></div>
+          </div>
+          <div class="media-tile">
+            <img src="https://images.unsplash.com/photo-1592478411213-6153e4ebc696?w=800&q=80&auto=format&fit=crop" alt="AR demo" loading="lazy" />
+            <span class="tag">AR Project</span>
+            <div class="caption">Furniture AR Preview<small>ARCore · Android</small></div>
+          </div>
+          <div class="media-tile">
+            <img src="https://images.unsplash.com/photo-1617802690992-15d93263d3a9?w=800&q=80&auto=format&fit=crop" alt="XR education" loading="lazy" />
+            <span class="tag">XR Project</span>
+            <div class="caption">VR Classroom Training<small>Unity · Enterprise</small></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== CREATIVE DESIGN ==================== -->
+  <section class="cat-section" id="design" data-track="design">
+    <div class="container-x">
+      <div class="cat-head">
+        <div>
+          <span class="eyebrow">Track 08 · Creative Design</span>
+          <h2>Design thinking + production skills.</h2>
+          <p>Graphic design, UI/UX, branding and illustration — everything a modern creative needs.</p>
+        </div>
+        <div class="meta">
+          <div class="meta-item"><span class="v">3</span><span class="l">Courses</span></div>
+          <div class="meta-item"><span class="v">2-4</span><span class="l">Months</span></div>
+        </div>
+      </div>
+
+      <div class="tech-grid">
+        <article class="tech-card">
+          <div class="thumb">
+            <img src="https://images.unsplash.com/photo-1626785774573-4b799315345d?w=600&q=80&auto=format&fit=crop" alt="Graphic design" loading="lazy" />
+            <span class="badge">Beginner</span>
+            <div class="tool"><span>Photoshop</span><span>Illustrator</span></div>
+          </div>
+          <div class="body">
+            <h3>Graphic Design</h3>
+            <p>Photoshop, Illustrator and the fundamentals of visual communication and layout.</p>
+            <div class="tags"><span>2 months</span><span>Foundation</span></div>
+            <div class="foot">
+              <span class="dur"><i class="far fa-clock"></i> 50 hrs</span>
+              <a href="quote.html?course=design-graphic" class="link">View <i class="fas fa-arrow-right"></i></a>
+            </div>
+          </div>
+        </article>
+
+        <article class="tech-card">
+          <div class="thumb">
+            <img src="https://images.unsplash.com/photo-1626785774625-0b1c2c4eab67?w=600&q=80&auto=format&fit=crop" alt="UI UX design" loading="lazy" />
+            <span class="badge">Intermediate</span>
+            <div class="tool"><span>Figma</span></div>
+          </div>
+          <div class="body">
+            <h3>UI / UX Design</h3>
+            <p>Design systems, wireframes, prototypes and modern UI patterns with Figma.</p>
+            <div class="tags"><span>3 months</span><span>Product</span></div>
+            <div class="foot">
+              <span class="dur"><i class="far fa-clock"></i> 70 hrs</span>
+              <a href="quote.html?course=design-uiux" class="link">View <i class="fas fa-arrow-right"></i></a>
+            </div>
+          </div>
+        </article>
+
+        <article class="tech-card">
+          <div class="thumb">
+            <img src="https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?w=600&q=80&auto=format&fit=crop" alt="Brand identity" loading="lazy" />
+            <span class="badge">Intermediate</span>
+            <div class="tool"><span>Illustrator</span><span>Figma</span></div>
+          </div>
+          <div class="body">
+            <h3>Brand Identity Design</h3>
+            <p>Logos, colour systems, typography and complete brand guidelines.</p>
+            <div class="tags"><span>3 months</span><span>Brand</span></div>
+            <div class="foot">
+              <span class="dur"><i class="far fa-clock"></i> 70 hrs</span>
+              <a href="quote.html?course=design-brand" class="link">View <i class="fas fa-arrow-right"></i></a>
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== LEARNING FLOW ==================== -->
+  <section class="flow-band" id="flow">
+    <div class="container-x">
+      <div class="head-left" style="max-width: 640px; margin-bottom: 48px;">
+        <span class="eyebrow">Creative Learning Journey</span>
+        <h2>Learn → Create → Practice → Project → Portfolio.</h2>
+        <p>You don't just watch tutorials. You produce real work — and you leave with a portfolio that gets you hired.</p>
+      </div>
+
+      <div class="flow-wrap">
+        <div class="flow-step"><div class="n">01</div><h4>Learn</h4><p>Concept sessions and demo reels</p></div>
+        <div class="flow-step"><div class="n">02</div><h4>Create</h4><p>Hands-on software practice</p></div>
+        <div class="flow-step"><div class="n">03</div><h4>Practice</h4><p>Guided exercises &amp; critiques</p></div>
+        <div class="flow-step"><div class="n">04</div><h4>Project</h4><p>Real client-style briefs</p></div>
+        <div class="flow-step"><div class="n">05</div><h4>Portfolio</h4><p>Reel, site, and case studies</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== CTA ==================== -->
+  <section class="section-sm">
+    <div class="container-x">
+      <div class="cta-band reveal">
+        <div>
+          <span class="eyebrow" style="color: rgba(255,255,255,0.85);">Ready to create?</span>
+          <h2>Book a free demo class.</h2>
+          <p>Sit in on a live session, meet the mentors, and see what our Creative Hub is really like.</p>
+        </div>
+        <div style="display:flex; gap:12px; flex-wrap:wrap;">
+          <a href="quote.html" class="btn-light"><i class="fas fa-calendar-check"></i> Book a demo</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== FOOTER ==================== -->
+  <footer class="footer-x">
+    <div class="container-x">
+      <div class="footer-grid">
+        <div>
+          <div class="brand-row">
+            <img src="images/logo/cc-hub-logo.png" alt="Creative Code Hub" />
+            <strong>Creative Code Hub</strong>
+          </div>
+          <p style="max-width: 340px;">
+            A learning and career development platform — technical, creative and
+            business education with internships and placement support.
+          </p>
+          <div style="display:flex; gap:12px; margin-top:16px;">
+            <a href="#" class="theme-toggle" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" class="theme-toggle" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+            <a href="#" class="theme-toggle" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+            <a href="#" class="theme-toggle" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+          </div>
+        </div>
+        <div>
+          <h5>Hubs</h5>
+          <ul>
+            <li><a href="tech-hub.html">Tech Hub</a></li>
+            <li><a href="creative-hub.html">Creative Hub</a></li>
+            <li><a href="business-hub.html">Business Hub</a></li>
+            <li><a href="career-prep.html">Career Prep</a></li>
+            <li><a href="career-connect.html">Career Connect</a></li>
+          </ul>
+        </div>
+        <div>
+          <h5>Company</h5>
+          <ul>
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="project.html">Projects</a></li>
+            <li><a href="career.html">Careers</a></li>
+            <li><a href="quote.html">Contact</a></li>
+            <li><a href="underprocess.html">LMS Portal</a></li>
+          </ul>
+        </div>
+        <div>
+          <h5>Contact</h5>
+          <ul>
+            <li><i class="fas fa-map-marker-alt"></i> Kakinada &amp; Visakhapatnam, AP</li>
+            <li><i class="fas fa-phone"></i> +91 70757 75888</li>
+            <li><i class="fas fa-phone"></i> +91 70939 47788</li>
+            <li><i class="fas fa-envelope"></i> info@creativecodehub.in</li>
+          </ul>
+        </div>
+      </div>
+      <div class="copy">
+        <span>© 2025 Creative Code Hub. All rights reserved.</span>
+        <span>ISO 9001:2015 Certified · Made in Andhra Pradesh 🇮🇳</span>
+      </div>
+    </div>
+  </footer>
+
+  <div class="floating-social" id="floatingSocial">
+    <div class="social-toggle" id="socialToggle">
+      <img src="images/logo/cc-logo.png" alt="Social menu" />
+    </div>
+    <div class="social-links">
+      <a href="https://wa.me/917075779888" target="_blank" class="whatsapp" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+      <a href="https://www.instagram.com/creativecodehub" target="_blank" class="instagram" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+      <a href="https://www.facebook.com/yourpage" target="_blank" class="facebook" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+      <a href="https://maps.app.goo.gl/8tZUZKWh3uiPoUWJ9" target="_blank" class="location" aria-label="Location"><i class="fas fa-location-dot"></i></a>
+    </div>
+  </div>
+
+  <a href="https://wa.me/917075779888" target="_blank" class="whatsapp-left" aria-label="Chat on WhatsApp">
+    <i class="fab fa-whatsapp"></i>
+  </a>
+
+  <!-- ==================== PAGE SCRIPTS ==================== -->
+  <script>
+    /* Hero showcase rotation */
+    (function () {
+      const wrap = document.getElementById('heroShowcase');
+      if (!wrap) return;
+      const slides = Array.from(wrap.querySelectorAll('.showcase-slide'));
+      const dots   = Array.from(document.querySelectorAll('#showcaseDots .showcase-dot'));
+      if (!slides.length) return;
+
+      let current = 0;
+      let timer = null;
+      const INTERVAL = 4500;
+
+      function goTo(i) {
+        current = (i + slides.length) % slides.length;
+        slides.forEach((s, idx) => s.classList.toggle('active', idx === current));
+        dots.forEach((d, idx) => d.classList.toggle('active', idx === current));
+      }
+      function auto() {
+        timer = setInterval(() => goTo(current + 1), INTERVAL);
+      }
+      function stop() { clearInterval(timer); }
+
+      dots.forEach(d => d.addEventListener('click', () => {
+        goTo(parseInt(d.getAttribute('data-show'), 10));
+        stop(); auto();
+      }));
+
+      wrap.addEventListener('mouseenter', stop);
+      wrap.addEventListener('mouseleave', auto);
+
+      auto();
+    })();
+
+    /* Category scroll-spy */
+    (function () {
+      const tabs = Array.from(document.querySelectorAll('.cat-tab'));
+      const sections = tabs.map(t => document.querySelector(t.getAttribute('href'))).filter(Boolean);
+      if (!tabs.length || !sections.length) return;
+
+      tabs.forEach(tab => {
+        tab.addEventListener('click', (e) => {
+          e.preventDefault();
+          const target = document.querySelector(tab.getAttribute('href'));
+          if (!target) return;
+          const top = target.getBoundingClientRect().top + window.scrollY - 132;
+          window.scrollTo({ top, behavior: 'smooth' });
+        });
+      });
+
+      if ('IntersectionObserver' in window) {
+        const spy = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              const id = entry.target.id;
+              tabs.forEach(t => t.classList.toggle('active', t.getAttribute('href') === '#' + id));
+            }
+          });
+        }, { rootMargin: '-140px 0px -60% 0px', threshold: 0 });
+        sections.forEach(s => spy.observe(s));
+      }
+    })();
+  </script>
+
+  <script src="script.js"></script>
+</body>
+</html>
