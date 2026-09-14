@@ -1,0 +1,1744 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Tech Hub — Software &amp; Technology Courses | Creative Code Hub</title>
+  <meta name="description" content="Tech Hub by Creative Code Hub — programming, web development, AI/ML, data science, cloud, DevOps and cybersecurity courses. Learn. Practice. Build. Get certified." />
+  <link rel="canonical" href="https://creativecodehub.in/tech-hub.html" />
+
+  <meta property="og:title" content="Tech Hub — Creative Code Hub" />
+  <meta property="og:description" content="Programming, web dev, AI/ML, cloud and cybersecurity — real projects, real mentors." />
+  <meta property="og:url" content="https://creativecodehub.in/tech-hub.html" />
+  <meta property="og:type" content="website" />
+
+  <link rel="icon" type="image/png" href="images/logo/cc-logo.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+  <link rel="stylesheet" href="styles.css" />
+
+  <style>
+    /* =========================================================
+       TECH HUB — Category colors + Image thumbnails
+       ========================================================= */
+    :root {
+      --tc-found:   #3b82f6; /* blue */
+      --tc-web:     #f59e0b; /* amber */
+      --tc-front:   #ec4899; /* pink */
+      --tc-back:    #10b981; /* emerald */
+      --tc-db:      #8b5cf6; /* violet */
+      --tc-ai:      #f43f5e; /* rose */
+      --tc-cloud:   #0ea5e9; /* sky */
+      --tc-devops:  #6366f1; /* indigo */
+      --tc-sec:     #ef4444; /* red */
+      --tc-mobile:  #f97316; /* orange */
+    }
+
+    /* ---------- HERO ---------- */
+    .hub-hero {
+      padding: 64px 0 72px;
+      border-bottom: 1px solid var(--border);
+      background: linear-gradient(180deg, var(--bg) 0%, var(--bg-subtle) 100%);
+      position: relative;
+      overflow: hidden;
+    }
+    .hub-hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(55% 60% at 85% 15%, rgba(99,102,241,0.16), transparent 70%),
+        radial-gradient(45% 55% at 10% 90%, rgba(14,165,233,0.10), transparent 70%);
+      pointer-events: none;
+    }
+    .hub-hero .container-x { position: relative; }
+    .hub-hero-grid {
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 64px;
+      align-items: center;
+    }
+    @media (max-width: 960px) { .hub-hero-grid { grid-template-columns: 1fr; gap: 48px; } }
+
+    .hub-hero h1 {
+      font-size: clamp(2rem, 4.5vw, 3.2rem);
+      margin-bottom: 20px;
+      letter-spacing: -0.03em;
+      line-height: 1.15;
+    }
+    .hub-hero .lead {
+      font-size: 1.08rem;
+      color: var(--text-muted);
+      max-width: 560px;
+      margin-bottom: 32px;
+      line-height: 1.65;
+    }
+    .hub-hero .badges {
+      display: flex; gap: 12px; flex-wrap: wrap;
+      margin-bottom: 28px;
+    }
+    .hub-hero .badge-pill {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 7px 14px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--r-full);
+      font-size: 0.83rem;
+      font-weight: 500;
+      color: var(--text-muted);
+    }
+    .hub-hero .badge-pill i { color: var(--brand-500); }
+
+    /* ---------- HERO SHOWCASE ---------- */
+    .showcase {
+      position: relative;
+      aspect-ratio: 4 / 3;
+      border-radius: var(--r-2xl);
+      overflow: hidden;
+      box-shadow: 0 32px 64px rgba(15,23,42,0.25);
+      background: #0f172a;
+    }
+    .showcase-slide {
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      transition: opacity 900ms var(--ease-out);
+    }
+    .showcase-slide.active { opacity: 1; }
+    .showcase-slide img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .showcase-slide::after {
+      content: '';
+      position: absolute; inset: 0;
+      background: linear-gradient(180deg, transparent 40%, rgba(15,23,42,0.92) 100%);
+    }
+    .showcase-caption {
+      position: absolute;
+      left: 28px; right: 28px; bottom: 28px;
+      z-index: 2;
+      color: #fff;
+    }
+    .showcase-caption .label {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 5px 12px;
+      border-radius: var(--r-full);
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      background: rgba(255,255,255,0.15);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(255,255,255,0.2);
+      margin-bottom: 12px;
+    }
+    .showcase-caption h3 {
+      color: #fff;
+      font-size: 1.5rem;
+      margin: 0 0 4px;
+      font-weight: 700;
+    }
+    .showcase-caption p {
+      color: rgba(255,255,255,0.8);
+      font-size: 0.88rem;
+      margin: 0;
+    }
+    .showcase-dots {
+      position: absolute;
+      bottom: 20px;
+      right: 28px;
+      z-index: 3;
+      display: flex;
+      gap: 6px;
+    }
+    .showcase-dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.35);
+      border: none;
+      padding: 0;
+      cursor: pointer;
+      transition: all var(--dur) var(--ease);
+    }
+    .showcase-dot.active { width: 20px; background: #fff; }
+
+    /* ---------- CATEGORY NAV ---------- */
+    .cat-nav {
+      position: sticky;
+      top: var(--nav-h);
+      z-index: 40;
+      background: rgba(255,255,255,0.92);
+      backdrop-filter: saturate(180%) blur(14px);
+      -webkit-backdrop-filter: saturate(180%) blur(14px);
+      border-bottom: 1px solid var(--border);
+      padding: 12px 0;
+    }
+    [data-theme="dark"] .cat-nav { background: rgba(15,23,42,0.92); }
+    .cat-nav-inner {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: nowrap;
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
+    .cat-nav-inner::-webkit-scrollbar { display: none; }
+    .cat-tab {
+      padding: 9px 16px;
+      border-radius: var(--r-full);
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: var(--text-muted);
+      background: transparent;
+      border: 1px solid transparent;
+      white-space: nowrap;
+      transition: all var(--dur) var(--ease);
+    }
+    .cat-tab:hover { color: var(--text); background: var(--surface-hover); }
+    .cat-tab.active {
+      color: #fff;
+      background: linear-gradient(135deg, var(--brand-500), var(--brand-700));
+      border-color: transparent;
+      box-shadow: 0 6px 16px rgba(99,102,241,0.28);
+    }
+
+    /* ---------- CATEGORY SECTION ---------- */
+    .cat-section {
+      padding: 72px 0;
+      scroll-margin-top: calc(var(--nav-h) + 60px);
+      position: relative;
+      border-bottom: 1px solid var(--border);
+    }
+    .cat-section:last-of-type { border-bottom: none; }
+
+    .cat-section[data-track="found"]  { background: linear-gradient(180deg, rgba(59,130,246,0.05) 0%, transparent 300px); }
+    .cat-section[data-track="web"]    { background: linear-gradient(180deg, rgba(245,158,11,0.05) 0%, transparent 300px); }
+    .cat-section[data-track="front"]  { background: linear-gradient(180deg, rgba(236,72,153,0.05) 0%, transparent 300px); }
+    .cat-section[data-track="back"]   { background: linear-gradient(180deg, rgba(16,185,129,0.05) 0%, transparent 300px); }
+    .cat-section[data-track="db"]     { background: linear-gradient(180deg, rgba(139,92,246,0.05) 0%, transparent 300px); }
+    .cat-section[data-track="ai"]     { background: linear-gradient(180deg, rgba(244,63,94,0.05) 0%, transparent 300px); }
+    .cat-section[data-track="cloud"]  { background: linear-gradient(180deg, rgba(14,165,233,0.05) 0%, transparent 300px); }
+    .cat-section[data-track="devops"] { background: linear-gradient(180deg, rgba(99,102,241,0.05) 0%, transparent 300px); }
+    .cat-section[data-track="sec"]    { background: linear-gradient(180deg, rgba(239,68,68,0.05) 0%, transparent 300px); }
+    .cat-section[data-track="mobile"] { background: linear-gradient(180deg, rgba(249,115,22,0.05) 0%, transparent 300px); }
+
+    .cat-head {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap: 40px;
+      align-items: end;
+      margin-bottom: 40px;
+    }
+    @media (max-width: 800px) { .cat-head { grid-template-columns: 1fr; gap: 20px; } }
+    .cat-head h2 {
+      font-size: clamp(1.75rem, 3vw, 2.4rem);
+      margin-bottom: 12px;
+      letter-spacing: -0.02em;
+    }
+    .cat-head p {
+      font-size: 1rem;
+      color: var(--text-muted);
+      margin: 0;
+      max-width: 520px;
+      line-height: 1.65;
+    }
+    .cat-head .meta {
+      display: flex;
+      gap: 24px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+    .cat-head .meta-item { text-align: right; }
+    .cat-head .meta-item .v {
+      font-size: 1.5rem;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      color: var(--text);
+      display: block;
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+    .cat-head .meta-item .l {
+      font-size: 0.78rem;
+      color: var(--text-subtle);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      font-weight: 600;
+    }
+
+    /* Per-track eyebrow */
+    .cat-section[data-track="found"]  .eyebrow { color: var(--tc-found); }
+    .cat-section[data-track="web"]    .eyebrow { color: var(--tc-web); }
+    .cat-section[data-track="front"]  .eyebrow { color: var(--tc-front); }
+    .cat-section[data-track="back"]   .eyebrow { color: var(--tc-back); }
+    .cat-section[data-track="db"]     .eyebrow { color: var(--tc-db); }
+    .cat-section[data-track="ai"]     .eyebrow { color: var(--tc-ai); }
+    .cat-section[data-track="cloud"]  .eyebrow { color: var(--tc-cloud); }
+    .cat-section[data-track="devops"] .eyebrow { color: var(--tc-devops); }
+    .cat-section[data-track="sec"]    .eyebrow { color: var(--tc-sec); }
+    .cat-section[data-track="mobile"] .eyebrow { color: var(--tc-mobile); }
+
+    /* ---------- COURSE CARDS with thumbnails ---------- */
+    .tech-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 20px;
+    }
+    .tech-card {
+      display: flex;
+      flex-direction: column;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-top: 3px solid var(--track-color, var(--brand-500));
+      border-radius: var(--r-xl);
+      overflow: hidden;
+      transition: transform var(--dur) var(--ease), box-shadow var(--dur) var(--ease);
+    }
+    .tech-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 20px 40px rgba(15,23,42,0.12);
+    }
+
+    .tech-card .thumb {
+      aspect-ratio: 16 / 10;
+      position: relative;
+      overflow: hidden;
+      background: linear-gradient(135deg, var(--track-color, var(--brand-500)), rgba(0,0,0,0.4));
+      display: grid;
+      place-items: center;
+    }
+    .tech-card .thumb img {
+      position: absolute;
+      inset: 0;
+      width: 100%; height: 100%;
+      object-fit: cover;
+      transition: transform 600ms var(--ease);
+    }
+    .tech-card:hover .thumb img { transform: scale(1.06); }
+    .tech-card .thumb::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(0,0,0,0.05) 40%, rgba(0,0,0,0.55) 100%);
+    }
+    .tech-card .thumb .badge {
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      z-index: 2;
+      padding: 4px 10px;
+      border-radius: var(--r-full);
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: #fff;
+      background: var(--track-color, #6366f1);
+      box-shadow: 0 6px 16px rgba(0,0,0,0.25);
+    }
+    .tech-card .thumb .tool {
+      position: absolute;
+      bottom: 12px;
+      left: 12px;
+      right: 12px;
+      z-index: 2;
+      color: #fff;
+      font-size: 0.72rem;
+      font-weight: 600;
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+    .tech-card .thumb .tool span {
+      padding: 2px 8px;
+      border-radius: var(--r-full);
+      background: rgba(255,255,255,0.18);
+      backdrop-filter: blur(6px);
+      border: 1px solid rgba(255,255,255,0.25);
+    }
+
+    .tech-card .body {
+      padding: 22px 22px 20px;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+    }
+    .tech-card h3 {
+      font-size: 1.05rem;
+      margin-bottom: 8px;
+      line-height: 1.3;
+    }
+    .tech-card p {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      margin: 0 0 16px;
+      flex: 1;
+      line-height: 1.55;
+    }
+    .tech-card .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 16px;
+    }
+    .tech-card .tags span {
+      padding: 3px 10px;
+      border-radius: var(--r-full);
+      background: var(--bg-subtle);
+      border: 1px solid var(--border);
+      font-size: 0.72rem;
+      font-weight: 500;
+      color: var(--text-muted);
+    }
+    [data-theme="dark"] .tech-card .tags span { background: var(--bg-muted); }
+    .tech-card .foot {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 14px;
+      border-top: 1px solid var(--border);
+    }
+    .tech-card .dur {
+      font-size: 0.8rem;
+      color: var(--text-subtle);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .tech-card .link {
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--track-color, var(--brand-600));
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: gap var(--dur) var(--ease);
+    }
+    .tech-card .link:hover { gap: 10px; }
+
+    .cat-section[data-track="found"]  .tech-card { --track-color: var(--tc-found); }
+    .cat-section[data-track="web"]    .tech-card { --track-color: var(--tc-web); }
+    .cat-section[data-track="front"]  .tech-card { --track-color: var(--tc-front); }
+    .cat-section[data-track="back"]   .tech-card { --track-color: var(--tc-back); }
+    .cat-section[data-track="db"]     .tech-card { --track-color: var(--tc-db); }
+    .cat-section[data-track="ai"]     .tech-card { --track-color: var(--tc-ai); }
+    .cat-section[data-track="cloud"]  .tech-card { --track-color: var(--tc-cloud); }
+    .cat-section[data-track="devops"] .tech-card { --track-color: var(--tc-devops); }
+    .cat-section[data-track="sec"]    .tech-card { --track-color: var(--tc-sec); }
+    .cat-section[data-track="mobile"] .tech-card { --track-color: var(--tc-mobile); }
+
+    /* ---------- MEDIA STRIP (showcase) ---------- */
+    .media-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+    @media (max-width: 900px) { .media-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 520px) { .media-grid { grid-template-columns: 1fr; } }
+
+    .media-tile {
+      position: relative;
+      aspect-ratio: 4 / 3;
+      border-radius: var(--r-lg);
+      overflow: hidden;
+      box-shadow: var(--sh-md);
+      cursor: pointer;
+      transition: transform var(--dur) var(--ease);
+    }
+    .media-tile:hover { transform: translateY(-4px); }
+    .media-tile img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 600ms var(--ease);
+    }
+    .media-tile:hover img { transform: scale(1.07); }
+    .media-tile::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, transparent 50%, rgba(15,23,42,0.85));
+    }
+    .media-tile .tag {
+      position: absolute;
+      top: 12px; left: 12px;
+      z-index: 2;
+      padding: 4px 10px;
+      border-radius: var(--r-full);
+      background: rgba(255,255,255,0.9);
+      color: #0f172a;
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+    .media-tile .caption {
+      position: absolute;
+      left: 16px; right: 16px; bottom: 14px;
+      z-index: 2;
+      color: #fff;
+      font-size: 0.85rem;
+      font-weight: 600;
+    }
+    .media-tile .caption small {
+      display: block;
+      font-size: 0.72rem;
+      opacity: 0.75;
+      font-weight: 500;
+      margin-top: 2px;
+    }
+
+    /* ---------- CODE WINDOW (hero) ---------- */
+    .code-window {
+      border-radius: var(--r-xl);
+      overflow: hidden;
+      background: linear-gradient(160deg, #0f172a 0%, #1a2544 100%);
+      box-shadow: 0 32px 64px rgba(15,23,42,0.30), 0 0 0 1px rgba(255,255,255,0.06);
+      font-family: var(--font-mono);
+      font-size: 0.82rem;
+      color: #e2e8f0;
+    }
+    .code-window .bar {
+      display: flex; align-items: center; gap: 8px;
+      padding: 12px 16px;
+      background: rgba(255,255,255,0.04);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+    .code-window .dot { width: 10px; height: 10px; border-radius: 50%; }
+    .code-window .dot.red    { background: #ef4444; }
+    .code-window .dot.yellow { background: #f59e0b; }
+    .code-window .dot.green  { background: #10b981; }
+    .code-window .file { margin-left: 12px; color: #94a3b8; font-size: 0.75rem; }
+    .code-window .code { padding: 22px 22px 26px; line-height: 1.75; overflow: hidden; }
+    .code-window .ln { display: flex; gap: 16px; white-space: pre; }
+    .code-window .no { color: #475569; min-width: 20px; text-align: right; user-select: none; }
+    .code-window .k { color: #c4b5fd; }
+    .code-window .s { color: #fda4af; }
+    .code-window .f { color: #6ee7b7; }
+    .code-window .c { color: #64748b; font-style: italic; }
+    .code-window .n { color: #fbbf24; }
+
+    /* ---------- LEARNING MODEL (dark band) ---------- */
+    .flow-band {
+      background: linear-gradient(135deg, #0f172a, #1e293b 50%, #312e81 100%);
+      padding: 72px 0;
+      position: relative;
+      overflow: hidden;
+    }
+    .flow-band::before {
+      content: '';
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(50% 60% at 15% 20%, rgba(99,102,241,0.25), transparent 60%),
+        radial-gradient(50% 60% at 85% 80%, rgba(14,165,233,0.20), transparent 60%);
+      pointer-events: none;
+    }
+    .flow-band .container-x { position: relative; }
+    .flow-band .head-left h2 { color: #fff; }
+    .flow-band .head-left p { color: rgba(255,255,255,0.7); }
+    .flow-band .head-left .eyebrow { color: #a5b4fc; }
+
+    .flow-wrap {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 12px;
+    }
+    @media (max-width: 1000px) { .flow-wrap { grid-template-columns: repeat(3, 1fr); } }
+    @media (max-width: 600px)  { .flow-wrap { grid-template-columns: 1fr; } }
+
+    .flow-step {
+      padding: 24px 18px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.10);
+      border-radius: var(--r-lg);
+      text-align: center;
+      position: relative;
+      transition: all var(--dur) var(--ease);
+    }
+    .flow-step:hover {
+      transform: translateY(-4px);
+      background: rgba(255,255,255,0.08);
+      border-color: rgba(165,180,252,0.5);
+    }
+    .flow-step .n {
+      display: inline-grid;
+      place-items: center;
+      width: 32px; height: 32px;
+      border-radius: var(--r-full);
+      background: linear-gradient(135deg, var(--brand-500), var(--brand-700));
+      color: #fff;
+      font-weight: 700;
+      font-size: 0.8rem;
+      margin-bottom: 14px;
+      box-shadow: 0 6px 16px rgba(99,102,241,0.4);
+    }
+    .flow-step h4 { font-size: 0.92rem; margin-bottom: 6px; font-weight: 600; color: #fff; }
+    .flow-step p  { font-size: 0.78rem; color: rgba(255,255,255,0.65); margin: 0; line-height: 1.5; }
+
+    /* ---------- CTA ---------- */
+    .cta-band {
+      background: linear-gradient(135deg, var(--brand-600), var(--brand-800));
+      border-radius: var(--r-2xl);
+      padding: 56px 48px;
+      color: #fff;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 32px;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .cta-band::before {
+      content: '';
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(50% 60% at 10% 10%, rgba(255,255,255,0.15), transparent 60%),
+        radial-gradient(50% 60% at 90% 90%, rgba(244,63,94,0.25), transparent 60%);
+    }
+    .cta-band > * { position: relative; }
+    .cta-band h2 { color: #fff; margin-bottom: 8px; }
+    .cta-band p { color: rgba(255,255,255,0.85); margin: 0; max-width: 520px; }
+    .cta-band .btn-light {
+      background: #fff;
+      color: var(--brand-700);
+      padding: 14px 26px;
+      border-radius: var(--r-md);
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      transition: transform var(--dur) var(--ease);
+      box-shadow: 0 12px 28px rgba(0,0,0,0.2);
+    }
+    .cta-band .btn-light:hover { transform: translateY(-2px); }
+    @media (max-width: 800px) { .cta-band { grid-template-columns: 1fr; padding: 40px 28px; } }
+  </style>
+</head>
+
+<body>
+  <!-- ==================== NAVBAR ==================== -->
+  <header class="navbar-x">
+    <div class="container-x nav-inner">
+      <a href="index.html" class="brand" aria-label="Creative Code Hub home">
+        <img src="images/logo/cc-logo.png" alt="Creative Code Hub" />
+      </a>
+      <nav class="nav-links" id="navLinks">
+        <a href="index.html">Home</a>
+        <a href="tech-hub.html" class="active">Tech Hub</a>
+        <a href="creative-hub.html">Creative Hub</a>
+        <a href="business-hub.html">Business Hub</a>
+        <a href="career-prep.html">Career Prep</a>
+        <a href="career-connect.html">Career Connect</a>
+        <a href="about.html">About</a>
+      </nav>
+      <div class="nav-actions">
+        <button id="themeToggle" class="theme-toggle" aria-label="Toggle dark mode">
+          <span class="sun">☀️</span><span class="moon">🌙</span>
+        </button>
+        <a href="underprocess.html" class="btn btn-primary btn-sm">
+          <i class="fas fa-rocket"></i> LMS Portal
+        </a>
+        <button class="nav-toggle" id="navToggle" aria-label="Open menu">
+          <i class="fas fa-bars"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ==================== HERO ==================== -->
+  <section class="hub-hero">
+    <div class="container-x">
+      <div class="hub-hero-grid">
+        <div>
+          <div class="badges">
+            <span class="badge-pill"><i class="fas fa-code"></i> Tech Hub</span>
+            <span class="badge-pill"><i class="fas fa-certificate"></i> Industry certifications</span>
+          </div>
+          <h1>
+            Code. Create. Solve.<br />
+            <span class="gradient-text">Build the skills</span> teams hire for.
+          </h1>
+          <p class="lead">
+            From your first line of code to a production-ready portfolio —
+            structured technology programs across programming, web development,
+            AI, cloud, data and security. Real mentors, real projects, real outcomes.
+          </p>
+          <div class="hero-actions" style="display:flex; gap:12px; flex-wrap:wrap;">
+            <a href="#categories" class="btn btn-primary btn-lg">
+              <i class="fas fa-layer-group"></i> Browse tracks
+            </a>
+            <a href="underprocess.html" class="btn btn-ghost btn-lg">
+              <i class="fas fa-rocket"></i> Enter LMS
+            </a>
+          </div>
+        </div>
+
+        <!-- HERO SHOWCASE -->
+        <div class="showcase" id="heroShowcase">
+          <div class="showcase-slide active">
+            <img src="https://images.unsplash.com/photo-1517180102446-f3ece451e9d8?w=900&q=80&auto=format&fit=crop"
+                 alt="Full stack development" loading="eager" />
+            <div class="showcase-caption">
+              <span class="label"><i class="fas fa-layer-group"></i> Full Stack</span>
+              <h3>Build production-grade apps</h3>
+              <p>Frontend + backend + database + deployment — the complete stack</p>
+            </div>
+          </div>
+
+          <div class="showcase-slide">
+            <img src="https://images.unsplash.com/photo-1555949963-aa79dcee981c?w=900&q=80&auto=format&fit=crop"
+                 alt="AI ML code" loading="lazy" />
+            <div class="showcase-caption">
+              <span class="label"><i class="fas fa-brain"></i> AI / ML</span>
+              <h3>Build intelligent systems</h3>
+              <p>Python, TensorFlow and real datasets — models that ship</p>
+            </div>
+          </div>
+
+          <div class="showcase-slide">
+            <img src="https://images.unsplash.com/photo-1667372393119-3d4c48d07fc9?w=900&q=80&auto=format&fit=crop"
+                 alt="Cloud infrastructure" loading="lazy" />
+            <div class="showcase-caption">
+              <span class="label"><i class="fas fa-cloud"></i> Cloud &amp; DevOps</span>
+              <h3>Deploy at scale</h3>
+              <p>AWS, Docker, Kubernetes and CI/CD pipelines</p>
+            </div>
+          </div>
+
+          <div class="showcase-slide">
+            <img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=900&q=80&auto=format&fit=crop"
+                 alt="Cybersecurity" loading="lazy" />
+            <div class="showcase-caption">
+              <span class="label"><i class="fas fa-shield-halved"></i> Cybersecurity</span>
+              <h3>Defend the stack</h3>
+              <p>Ethical hacking, network security and threat modelling</p>
+            </div>
+          </div>
+
+          <div class="showcase-slide">
+            <img src="https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=900&q=80&auto=format&fit=crop"
+                 alt="Mobile app development" loading="lazy" />
+            <div class="showcase-caption">
+              <span class="label"><i class="fas fa-mobile-screen"></i> Mobile Apps</span>
+              <h3>Ship to the app stores</h3>
+              <p>Android, iOS and cross-platform apps that reach millions</p>
+            </div>
+          </div>
+
+          <div class="showcase-dots" id="showcaseDots">
+            <button class="showcase-dot active" data-show="0" aria-label="Full Stack"></button>
+            <button class="showcase-dot" data-show="1" aria-label="AI ML"></button>
+            <button class="showcase-dot" data-show="2" aria-label="Cloud DevOps"></button>
+            <button class="showcase-dot" data-show="3" aria-label="Cybersecurity"></button>
+            <button class="showcase-dot" data-show="4" aria-label="Mobile Apps"></button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== CATEGORY NAV ==================== -->
+  <nav class="cat-nav" id="categoryNav">
+    <div class="container-x cat-nav-inner">
+      <a href="#foundations" class="cat-tab active">Programming</a>
+      <a href="#web" class="cat-tab">Web Development</a>
+      <a href="#frontend" class="cat-tab">Frontend</a>
+      <a href="#backend" class="cat-tab">Backend</a>
+      <a href="#database" class="cat-tab">Databases</a>
+      <a href="#ai" class="cat-tab">AI / ML</a>
+      <a href="#cloud" class="cat-tab">Cloud</a>
+      <a href="#devops" class="cat-tab">DevOps</a>
+      <a href="#security" class="cat-tab">Security</a>
+      <a href="#mobile" class="cat-tab">Mobile</a>
+      <a href="#model" class="cat-tab">Learning Model</a>
+    </div>
+  </nav>
+
+  <!-- ==================== PROGRAMMING / FOUNDATIONS ==================== -->
+  <section class="cat-section" id="foundations" data-track="found">
+    <div class="container-x">
+      <div class="cat-head">
+        <div>
+          <span class="eyebrow">Track 01 · Programming</span>
+          <h2>Build the foundation.</h2>
+          <p>The languages and problem-solving skills that carry across every role. Start here — everything else builds on this.</p>
+        </div>
+        <div class="meta">
+          <div class="meta-item"><span class="v">5</span><span class="l">Languages</span></div>
+          <div class="meta-item"><span class="v">2-4</span><span class="l">Months</span></div>
+          <div class="meta-item"><span class="v">100%</span><span class="l">Hands-on</span></div>
+        </div>
+      </div>
+
+      <div class="tech-grid">
+        <article class="tech-card">
+          <div class="thumb">
+            <img src="https://images.unsplash.com/photo-1526379879527-8559ecfcaec0?w=600&q=80&auto=format&fit=crop" alt="Python" loading="lazy" />
+            <span class="badge">Beginner</span>
+            <div class="tool"><span>Python 3</span></div>
+          </div>
+          <div class="body">
+            <h3>Python Programming</h3>
+            <p>The most versatile language for beginners. Data, automation, web, AI — Python does it all.</p>
+            <div class="tags"><span>2 months</span><span>Foundation</span></div>
+            <div class="foot">
+              <span class="dur"><i class="far fa-clock"></i> 60 hrs</span>
+              <a href="quote.html?course=python" class="link">View <i class="fas fa-arrow-right"></i></a>
+            </div>
+          </div>
+        </article>
+
+        <article class="tech-card">
+          <div class="thumb">
+            <img src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=600&q=80&auto=format&fit=crop" alt="Java" loading="lazy" />
+            <span class="badge">Beginner → Advanced</span>
+            <div class="tool"><span>Java 17</span><span>Spring</span></div>
+          </div>
+          <div class="body">
+            <h3>Java Programming</h3>
+            <p>Enterprise-grade OOP. The language behind banking, Android and large-scale backend systems.</p>
+            <div class="tags"><span>3 months</span><span>Enterprise</span></div>
+            <div class="foot">
+              <span class="dur"><i class="far fa-clock"></i> 90 hrs</span>
+              <a href="quote.html?course=java" class="link">View <i class="fas fa-arrow-right"></i></a>
+            </div>
+          </div>
+        </article>
+
+        <article class="tech-card">
+          <div class="thumb">
+            <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=600&q=80&auto=format&fit=crop" alt="C programming" loading="lazy" />
+            <span class="badge">Foundation</span>
+            <div class="tool"><span>C</span><span>GCC</span></div>
+          </div>
+          <div class="body">
+            <h3>C Programming</h3>
+            <p>Understand how computers really work. Pointers, memory, and the fundamentals every engineer should know.</p>
+            <div class="tags"><span>2 months</span><span>Systems</span></div>
+            <div class="foot">
+              <span class="dur"><i class="far fa-clock"></i> 60 hrs</span>
+              <a href="quote.html?course=c" class="link">View <i class="fas fa-arrow-right"></i></a>
+            </div>
+          </div>
+        </article>
+
+        <article class="tech-card">
+          <div class="thumb">
+            <img src="https://images.unsplash.com/photo-1607706189992-eae578626c86?w=600&q=80&auto=format&fit=crop" alt="C++" loading="lazy" />
+            <span class="badge">Intermediate</span>
+            <div class="tool"><span>C++17</span><span>STL</span></div>
+          </div>
+          <div class="body">
+            <h3>C++ Programming</h3>
+            <p>Object-oriented + systems-level performance. The competitive-programming choice for serious coders.</p>
+            <div class="tags"><span>3 months</span><span>Competitive</span></div>
+            <div class="foot">
+              <span class="dur"><i class="far fa-clock"></i> 90 hrs</span>
+              <a href="quote.html?course=cpp" class="link">View <i class="fas fa-arrow-right"></i></a>
+            </div>
+          </div>
+        </article>
+
+        <article class="tech-card">
+          <div class="thumb">
+            <img src="https://images.unsplash.com/photo-1509228468518-180dd4864904?w=600&q=80&auto=format&fit=crop" alt="DSA" loading="lazy" />
+            <span class="badge">Interview-focused</span>
+            <div class="tool"><span>DSA</span><span>LeetCode</span></div>
+          </div>
+          <div class="body">
+            <h3>Data Structures &amp; Algorithms</h3>
+            <p>The single most important course for interviews. Arrays, trees, graphs, dynamic programming.</p>
+            <div class="tags"><span>4 months</span><span>Placement</span></div>
+            <div class="foot">
+              <span class="dur"><i class="far fa-clock"></i> 120 hrs</span>
+              <a href="quote.html?course=dsa" class="link">View <i class="fas fa-arrow-right"></i></a>
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== WEB DEVELOPMENT (ALL-IN-ONE) ==================== -->
+  <section class="cat-section" id="web" data-track="web">
+    <div class="container-x">
+      <div class="cat-head">
+        <div>
+          <span class="eyebrow">Track 02 · Web Development</span>
+          <h2>Build for the browser.</h2>
+          <p>From static pages to production-grade web apps — the most in-demand skill set in the market today.</p>
+        </div>
+        <div class="meta">
+          <div class="meta-item"><span class="v">3</span><span class="l">Full Stacks</span></div>
+          <div class="meta-item"><span class="v">6</span><span class="l">Months</span></div>
+          <div class="meta-item"><span class="v">5+</span><span class="l">Projects</span></div>
+        </div>
+      </div>
+
+      <div class="tech-grid">
+        <article class="tech-card">
+          <div class="thumb">
+            <img src="https://images.unsplash.com/photo-1633356122544-f134324a6cee?w=600&q=80&auto=format&fit=crop" alt="MERN Stack" loading="lazy" />
+            <span class="badge">Most enrolled</span>
+            <div class="tool"><span>MongoDB</span><span>React</span><span>Node</span></div>
+          </div>
+          <div class="body">
+            <h3>MERN Stack Development</h3>
+            <p>MongoDB, Express, React &amp; Node — build production-grade web apps from scratch.</p>
+            <div class="tags"><span>6 months</span><span>Placement</span></div>
+            <div class="foot">
+              <span class="dur"><i class="far fa-clock"></i> 180 hrs</span>
+              <a href="quote.html?course=mern" class="link">View <i class="fas fa-arrow-right"></i></a>
+            </div>
+          </div>
+        </article>
+
+        <article class="tech-card">
+          <div class="thumb">
+            <img src="https://images.unsplash.com/photo-1526379095098-d400fd0bf935?w=600&q=80&auto=format&fit=crop" alt="Python Django" loading="lazy" />
+            <span class="badge">High demand</span>
+            <div class="tool"><span>Python</span><span>Django</span><span>Postgres</span></div>
+          </div>
+          <div class="body">
+            <h3>Python Full Stack (Django)</h3>
+            <p>Python, Django, REST APIs and modern frontend — the fastest way to ship web apps.</p>
+            <div class="tags"><span>5 months</span><span>Full Stack</span></div>
+            <div class="foot">
+              <span class="dur"><i class="far fa-clock"></i> 150 hrs</span>
+              <a href="quote.html?course=python-fullstack" class="link">View <i class="fas fa-arrow-right"></i></a>
+            </div>
+          </div>
+        </article>
+
+        <article class="tech-card">
+          <div class="thumb">
+            <img src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=600&q=80&auto=format&fit=crop" alt="Java Spring" loading="lazy" />
+            <span class="badge">Enterprise</span>
+            <div class="tool"><span>Java</span><span>Spring Boot</span></div>
+          </div>
+          <div class="body">
+            <h3>Java Full Stack (Spring Boot)</h3>
+            <p>Java, Spring Boot, microservices and modern frontend — the enterprise standard.</p>
+            <div class="tags"><span>6 months</span><span>Enterprise</span></div>
+            <div class="foot">
+              <span class="dur"><i class="far fa-clock"></i> 180 hrs</span>
+              <a href="quote.html?course=java-fullstack" class="link">View <i class="fas fa-arrow-right"></i></a>
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== FRONTEND ==================== -->
+  <section class="cat-section" id="frontend" data-track="front">
+    <div class="container-x">
+      <div class="cat-head">
+        <div>
+          <span class="eyebrow">Track 03 · Frontend</span>
+          <h2>Design what users see.</h2>
+          <p>Interfaces, animations, state management and the modern frontend toolchain.</p>
+        </div>
+        <div class="meta">
+          <div class="meta-item"><span class="v">4</span><span class="l">Courses</span></div>
+          <div class="meta-item"><span class="v">2-4</span><span class="l">Months</span></div>
+        </div>
+      </div>
+
+      <div class="tech-grid">
+        <article class="tech-card">
+          <div class="thumb">
+            <img src="https://images.unsplash.com/photo-1621839673705-6617adf9e890?w=600&q=80&auto=format&fit=crop" alt="HTML CSS" loading="lazy" />
+            <span class="badge">Beginner</span>
+            <div class="tool"><span>HTML5</span><span>CSS3</span></div>
+          </div>
+          <div class="body">
+            <h3>HTML5 &amp; CSS3</h3>
+            <p>The building blocks of the web. Semantic markup, layouts, responsiveness and modern CSS.</p>
+            <div class="tags"><span>2 months</span><span>Foundation</span></div>
+            <div class="foot">
+              <span class="dur"><i class="far fa-clock"></i> 50 hrs</span>
+              <a href="quote.html?course=html-css" class="link">View <i class="fas fa-arrow-right"></i></a>
+            </div>
+          </div>
+        </article>
+
+        <article class="tech-card">
+          <div class="thumb">
+            <img src="https://images.unsplash.com/photo-1579468118864-1b9ea3c0db4a?w=600&q=80&auto=format&fit=crop" alt="JavaScript" loading="lazy" />
+            <span class="badge">Intermediate</span>
+            <div class="tool"><span>JavaScript</span><span>ES6+</span></div>
+          </div>
+          <div class="body">
+            <h3>JavaScript (ES6+)</h3>
+            <p>Make pages interactive. Closures, promises, async/await, and modern JS patterns.</p>
+            <div class="tags"><span>3 months</span><span>Core</span></div>
+            <div class="foot">
+              <span class="dur"><i class="far fa-clock"></i> 80 hrs</span>
+              <a href="quote.html?course=js" class="link">View <i class="fas fa-arrow-right"></i></a>
+            </div>
+          </div>
+        </article>
+
+        <article class="tech-card">
+          <div class="thumb">
+            <img src="https://images.unsplash.com/photo-1633356122544-f134324a6cee?w=600&q=80&auto=format&fit=crop" alt="React" loading="lazy" />
+            <span class="badge">Intermediate</span>
+            <div class="tool"><span>React 18</span><span>Vite</span></div>
+          </div>
+          <div class="body">
+            <h3>React.js Complete Guide</h3>
+            <p>Component-based UIs. Hooks, routing, state management and modern build tools.</p>
+            <div class="tags"><span>4 months</span><span>UI</span></div>
+            <div class="foot">
+              <span class="dur"><i class="far fa-clock"></i> 100 hrs</span>
+              <a href="quote.html?course=react" class="link">View <i class="fas fa-arrow-right"></i></a>
+            </div>
+          </div>
+        </article>
+
+        <article class="tech-card">
+          <div class="thumb">
+            <img src="https://images.unsplash.com/photo-1581291518857-4e27b48ff24e?w=600&q=80&auto=format&fit=crop" alt="Responsive design" loading="lazy" />
+            <span class="badge">Beginner</span>
+            <div class="tool"><span>Flexbox</span><span>Grid</span></div>
+          </div>
+          <div class="body">
+            <h3>Responsive Web Design</h3>
+            <p>Flexbox, Grid and media queries — sites that look great on every screen.</p>
+            <div class="tags"><span>2 months</span><span>Mobile-first</span></div>
+            <div class="foot">
+              <span class="dur"><i class="far fa-clock"></i> 50 hrs</span>
+              <a href="quote.html?course=responsive" class="link">View <i class="fas fa-arrow-right"></i></a>
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== BACKEND ==================== -->
+  <section class="cat-section" id="backend" data-track="back">
+    <div class="container-x">
+      <div class="cat-head">
+        <div>
+          <span class="eyebrow">Track 04 · Backend</span>
+          <h2>Power what users don't see.</h2>
+          <p>Servers, APIs, authentication and business logic — the engine behind every application.</p>
+        </div>
+        <div class="meta">
+          <div class="meta-item"><span class="v">4</span><span class="l">Courses</span></div>
+          <div class="meta-item"><span class="v">3-4</span><span class="l">Months</span></div>
+        </div>
+      </div>
+
+      <div class="tech-grid">
+        <article class="tech-card">
+          <div class="thumb">
+            <img src="https://images.unsplash.com/photo-1627398242454-45a1465c2479?w=600&q=80&auto=format&fit=crop" alt="Node Express" loading="lazy" />
+            <span class="badge">Intermediate</span>
+            <div class="tool"><span>Node.js</span><span>Express</span></div>
+          </div>
+          <div class="body">
+            <h3>Node.js &amp; Express</h3>
+            <p>Server-side JavaScript. REST APIs, authentication, databases and deployment.</p>
+            <div class="tags"><span>4 months</span><span>REST</span></div>
+            <div class="foot">
+              <span class="dur"><i class="far fa-clock"></i> 100 hrs</span>
+              <a href="quote.html?course=node" class="link">View <i class="fas fa-arrow-right"></i></a>
+            </div>
+          </div>
+        </article>
+
+        <article class="tech-card">
+          <div class="thumb">
+            <img src="https://images.unsplash.com/photo-1526379095098-d400fd0bf935?w=600&q=80&auto=format&fit=crop" alt="Django" loading="lazy" />
+            <span class="badge">Intermediate</span>
+            <div class="tool"><span>Django</span><span>DRF</span></div>
+          </div>
+          <div class="body">
+            <h3>Django REST Framework</h3>
+            <p>Full-featured Python web framework. ORM, admin, auth and production-ready APIs.</p>
+            <div class="tags"><span>4 months</span><span>Python</span></div>
+            <div class="foot">
+              <span class="dur"><i class="far fa-clock"></i> 100 hrs</span>
+              <a href="quote.html?course=django" class="link">View <i class="fas fa-arrow-right"></i></a>
+            </div>
+          </div>
+        </article>
+
+        <article class="tech-card">
+          <div class="thumb">
+            <img src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=600&q=80&auto=format&fit=crop" alt="Spring Boot" loading="lazy" />
+            <span class="badge">Intermediate</span>
+            <div class="tool"><span>Spring Boot</span><span>JPA</span></div>
+          </div>
+          <div class="body">
+            <h3>Spring Boot (Java)</h3>
+            <p>Enterprise Java — REST, JPA, security, microservices with Spring.</p>
+            <div class="tags"><span>4 months</span><span>Enterprise</span></div>
+            <div class="foot">
+              <span class="dur"><i class="far fa-clock"></i> 110 hrs</span>
+              <a href="quote.html?course=springboot" class="link">View <i class="fas fa-arrow-right"></i></a>
+            </div>
+          </div>
+        </article>
+
+        <article class="tech-card">
+          <div class="thumb">
+            <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=600&q=80&auto=format&fit=crop" alt="REST API" loading="lazy" />
+            <span class="badge">Intermediate</span>
+            <div class="tool"><span>REST</span><span>GraphQL</span></div>
+          </div>
+          <div class="body">
+            <h3>API Design &amp; Security</h3>
+            <p>Design clean APIs, secure them with JWT/OAuth, version and document them.</p>
+            <div class="tags"><span>3 months</span><span>Design</span></div>
+            <div class="foot">
+              <span class="dur"><i class="far fa-clock"></i> 70 hrs</span>
+              <a href="quote.html?course=api-design" class="link">View <i class="fas fa-arrow-right"></i></a>
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== DATABASES ==================== -->
+  <section class="cat-section" id="database" data-track="db">
+    <div class="container-x">
+      <div class="cat-head">
+        <div>
+          <span class="eyebrow">Track 05 · Databases</span>
+          <h2>Store, query, optimize.</h2>
+          <p>SQL for the world's structured data, NoSQL for the flexible scale of modern apps.</p>
+        </div>
+        <div class="meta">
+          <div class="meta-item"><span class="v">3</span><span class="l">Courses</span></div>
+          <div class="meta-item"><span class="v">2-3</span><span class="l">Months</span></div>
+        </div>
+      </div>
+
+      <div class="tech-grid">
+        <article class="tech-card">
+          <div class="thumb">
+            <img src="https://images.unsplash.com/photo-1548092372-0d1bd40894a3?w=600&q=80&auto=format&fit=crop" alt="SQL" loading="lazy" />
+            <span class="badge">Beginner</span>
+            <div class="tool"><span>SQL</span><span>MySQL</span></div>
+          </div>
+          <div class="body">
+            <h3>SQL &amp; Database Design</h3>
+            <p>Relational modelling, joins, indexing, normalization and query optimization.</p>
+            <div class="tags"><span>2 months</span><span>Foundation</span></div>
+            <div class="foot">
+              <span class="dur"><i class="far fa-clock"></i> 60 hrs</span>
+              <a href="quote.html?course=sql" class="link">View <i class="fas fa-arrow-right"></i></a>
+            </div>
+          </div>
+        </article>
+
+        <article class="tech-card">
+          <div class="thumb">
+            <img src="https://images.unsplash.com/photo-1544383835-bda2bc66a55d?w=600&q=80&auto=format&fit=crop" alt="Postgres" loading="lazy" />
+            <span class="badge">Intermediate</span>
+            <div class="tool"><span>PostgreSQL</span></div>
+          </div>
+          <div class="body">
+            <h3>PostgreSQL Advanced</h3>
+            <p>Advanced SQL, indexing strategies, JSONB, replication and performance tuning.</p>
+            <div class="tags"><span>3 months</span><span>Advanced</span></div>
+            <div class="foot">
+              <span class="dur"><i class="far fa-clock"></i> 80 hrs</span>
+              <a href="quote.html?course=postgres" class="link">View <i class="fas fa-arrow-right"></i></a>
+            </div>
+          </div>
+        </article>
+
+        <article class="tech-card">
+          <div class="thumb">
+            <img src="https://images.unsplash.com/photo-1611273426858-450d8e3c9fce?w=600&q=80&auto=format&fit=crop" alt="MongoDB" loading="lazy" />
+            <span class="badge">Intermediate</span>
+            <div class="tool"><span>MongoDB</span><span>Atlas</span></div>
+          </div>
+          <div class="body">
+            <h3>MongoDB &amp; NoSQL</h3>
+            <p>Document modelling, aggregation pipelines, indexing and Atlas deployments.</p>
+            <div class="tags"><span>3 months</span><span>NoSQL</span></div>
+            <div class="foot">
+              <span class="dur"><i class="far fa-clock"></i> 80 hrs</span>
+              <a href="quote.html?course=mongodb" class="link">View <i class="fas fa-arrow-right"></i></a>
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== AI / ML ==================== -->
+  <section class="cat-section" id="ai" data-track="ai">
+    <div class="container-x">
+      <div class="cat-head">
+        <div>
+          <span class="eyebrow">Track 06 · AI &amp; Machine Learning</span>
+          <h2>The frontier skills.</h2>
+          <p>Build intelligent systems with Python, TensorFlow and real datasets. The highest-paying role in tech right now.</p>
+        </div>
+        <div class="meta">
+          <div class="meta-item"><span class="v">4</span><span class="l">Courses</span></div>
+          <div class="meta-item"><span class="v">4-6</span><span class="l">Months</span></div>
+          <div class="meta-item"><span class="v">₹8L+</span><span class="l">Avg. package</span></div>
+        </div>
+      </div>
+
+      <div class="tech-grid">
+        <article class="tech-card">
+          <div class="thumb">
+            <img src="https://images.unsplash.com/photo-1555255707-c07966088b7b?w=600&q=80&auto=format&fit=crop" alt="ML" loading="lazy" />
+            <span class="badge">Intermediate</span>
+            <div class="tool"><span>scikit-learn</span><span>Pandas</span></div>
+          </div>
+          <div class="body">
+            <h3>Machine Learning Fundamentals</h3>
+            <p>Regression, classification, clustering and model evaluation with real datasets.</p>
+            <div class="tags"><span>5 months</span><span>Core ML</span></div>
+            <div class="foot">
+              <span class="dur"><i class="far fa-clock"></i> 120 hrs</span>
+              <a href="quote.html?course=ml" class="link">View <i class="fas fa-arrow-right"></i></a>
+            </div>
+          </div>
+        </article>
+
+        <article class="tech-card">
+          <div class="thumb">
+            <img src="https://images.unsplash.com/photo-1555949963-aa79dcee981c?w=600&q=80&auto=format&fit=crop" alt="Deep Learning" loading="lazy" />
+            <span class="badge">Advanced</span>
+            <div class="tool"><span>TensorFlow</span><span>PyTorch</span></div>
+          </div>
+          <div class="body">
+            <h3>Deep Learning</h3>
+            <p>Neural networks, CNNs, RNNs and transformers using TensorFlow and PyTorch.</p>
+            <div class="tags"><span>6 months</span><span>Neural Nets</span></div>
+            <div class="foot">
+              <span class="dur"><i class="far fa-clock"></i> 150 hrs</span>
+              <a href="quote.html?course=dl" class="link">View <i class="fas fa-arrow-right"></i></a>
+            </div>
+          </div>
+        </article>
+
+        <article class="tech-card">
+          <div class="thumb">
+            <img src="https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=600&q=80&auto=format&fit=crop" alt="NLP" loading="lazy" />
+            <span class="badge">Advanced</span>
+            <div class="tool"><span>Transformers</span><span>BERT</span></div>
+          </div>
+          <div class="body">
+            <h3>Natural Language Processing</h3>
+            <p>Text processing, embeddings, BERT and modern NLP pipelines.</p>
+            <div class="tags"><span>4 months</span><span>NLP</span></div>
+            <div class="foot">
+              <span class="dur"><i class="far fa-clock"></i> 100 hrs</span>
+              <a href="quote.html?course=nlp" class="link">View <i class="fas fa-arrow-right"></i></a>
+            </div>
+          </div>
+        </article>
+
+        <article class="tech-card">
+          <div class="thumb">
+            <img src="https://images.unsplash.com/photo-1518709268805-4e9042af2176?w=600&q=80&auto=format&fit=crop" alt="Computer Vision" loading="lazy" />
+            <span class="badge">Advanced</span>
+            <div class="tool"><span>OpenCV</span><span>PyTorch</span></div>
+          </div>
+          <div class="body">
+            <h3>Computer Vision</h3>
+            <p>Image classification, detection, segmentation with OpenCV and PyTorch.</p>
+            <div class="tags"><span>4 months</span><span>Vision</span></div>
+            <div class="foot">
+              <span class="dur"><i class="far fa-clock"></i> 100 hrs</span>
+              <a href="quote.html?course=cv" class="link">View <i class="fas fa-arrow-right"></i></a>
+            </div>
+          </div>
+        </article>
+      </div>
+
+      <!-- AI showcase strip -->
+      <div style="margin-top: 40px;">
+        <div class="media-grid">
+          <div class="media-tile">
+            <img src="https://images.unsplash.com/photo-1555949963-aa79dcee981c?w=800&q=80&auto=format&fit=crop" alt="AI project" loading="lazy" />
+            <span class="tag">Student Project</span>
+            <div class="caption">Sentiment Analyzer<small>BERT · Python</small></div>
+          </div>
+          <div class="media-tile">
+            <img src="https://images.unsplash.com/photo-1518709268805-4e9042af2176?w=800&q=80&auto=format&fit=crop" alt="Vision project" loading="lazy" />
+            <span class="tag">Student Project</span>
+            <div class="caption">Face Recognition System<small>OpenCV · PyTorch</small></div>
+          </div>
+          <div class="media-tile">
+            <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&q=80&auto=format&fit=crop" alt="Data science" loading="lazy" />
+            <span class="tag">Student Project</span>
+            <div class="caption">Sales Forecasting Dashboard<small>Pandas · ML</small></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== CLOUD ==================== -->
+  <section class="cat-section" id="cloud" data-track="cloud">
+    <div class="container-x">
+      <div class="cat-head">
+        <div>
+          <span class="eyebrow">Track 07 · Cloud</span>
+          <h2>Deploy at scale.</h2>
+          <p>AWS, Azure and Google Cloud — architect, deploy and manage real production systems.</p>
+        </div>
+        <div class="meta">
+          <div class="meta-item"><span class="v">3</span><span class="l">Clouds</span></div>
+          <div class="meta-item"><span class="v">3-4</span><span class="l">Months</span></div>
+        </div>
+      </div>
+
+      <div class="tech-grid">
+        <article class="tech-card">
+          <div class="thumb">
+            <img src="https://images.unsplash.com/photo-1667372393119-3d4c48d07fc9?w=600&q=80&auto=format&fit=crop" alt="AWS" loading="lazy" />
+            <span class="badge">Beginner</span>
+            <div class="tool"><span>AWS</span><span>EC2</span><span>S3</span></div>
+          </div>
+          <div class="body">
+            <h3>AWS Cloud Practitioner</h3>
+            <p>Core AWS services — EC2, S3, IAM, VPC and cost basics. Get certified.</p>
+            <div class="tags"><span>3 months</span><span>Certification</span></div>
+            <div class="foot">
+              <span class="dur"><i class="far fa-clock"></i> 80 hrs</span>
+              <a href="quote.html?course=aws" class="link">View <i class="fas fa-arrow-right"></i></a>
+            </div>
+          </div>
+        </article>
+
+        <article class="tech-card">
+          <div class="thumb">
+            <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=600&q=80&auto=format&fit=crop" alt="Azure" loading="lazy" />
+            <span class="badge">Intermediate</span>
+            <div class="tool"><span>Azure</span></div>
+          </div>
+          <div class="body">
+            <h3>Microsoft Azure</h3>
+            <p>Azure services, DevOps and enterprise cloud solutions with Microsoft stack.</p>
+            <div class="tags"><span>4 months</span><span>Enterprise</span></div>
+            <div class="foot">
+              <span class="dur"><i class="far fa-clock"></i> 100 hrs</span>
+              <a href="quote.html?course=azure" class="link">View <i class="fas fa-arrow-right"></i></a>
+            </div>
+          </div>
+        </article>
+
+        <article class="tech-card">
+          <div class="thumb">
+            <img src="https://images.unsplash.com/photo-1544197150-b99a580bb7a8?w=600&q=80&auto=format&fit=crop" alt="GCP" loading="lazy" />
+            <span class="badge">Intermediate</span>
+            <div class="tool"><span>GCP</span><span>GKE</span></div>
+          </div>
+          <div class="body">
+            <h3>Google Cloud Platform</h3>
+            <p>GCP services, Kubernetes Engine and BigQuery — for data-heavy applications.</p>
+            <div class="tags"><span>4 months</span><span>Data-cloud</span></div>
+            <div class="foot">
+              <span class="dur"><i class="far fa-clock"></i> 100 hrs</span>
+              <a href="quote.html?course=gcp" class="link">View <i class="fas fa-arrow-right"></i></a>
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== DEVOPS ==================== -->
+  <section class="cat-section" id="devops" data-track="devops">
+    <div class="container-x">
+      <div class="cat-head">
+        <div>
+          <span class="eyebrow">Track 08 · DevOps</span>
+          <h2>Ship reliably at scale.</h2>
+          <p>Containers, orchestration, CI/CD and infrastructure-as-code — the tools behind every modern deployment.</p>
+        </div>
+        <div class="meta">
+          <div class="meta-item"><span class="v">3</span><span class="l">Courses</span></div>
+          <div class="meta-item"><span class="v">3-4</span><span class="l">Months</span></div>
+        </div>
+      </div>
+
+      <div class="tech-grid">
+        <article class="tech-card">
+          <div class="thumb">
+            <img src="https://images.unsplash.com/photo-1627398242454-45a1465c2479?w=600&q=80&auto=format&fit=crop" alt="Docker" loading="lazy" />
+            <span class="badge">Intermediate</span>
+            <div class="tool"><span>Docker</span></div>
+          </div>
+          <div class="body">
+            <h3>Docker &amp; Containerization</h3>
+            <p>Images, containers, volumes, networking and Docker Compose.</p>
+            <div class="tags"><span>3 months</span><span>Containers</span></div>
+            <div class="foot">
+              <span class="dur"><i class="far fa-clock"></i> 70 hrs</span>
+              <a href="quote.html?course=docker" class="link">View <i class="fas fa-arrow-right"></i></a>
+            </div>
+          </div>
+        </article>
+
+        <article class="tech-card">
+          <div class="thumb">
+            <img src="https://images.unsplash.com/photo-1667372393119-3d4c48d07fc9?w=600&q=80&auto=format&fit=crop" alt="Kubernetes" loading="lazy" />
+            <span class="badge">Advanced</span>
+            <div class="tool"><span>Kubernetes</span></div>
+          </div>
+          <div class="body">
+            <h3>Kubernetes Orchestration</h3>
+            <p>Pods, deployments, services, ingress and cluster operations.</p>
+            <div class="tags"><span>4 months</span><span>K8s</span></div>
+            <div class="foot">
+              <span class="dur"><i class="far fa-clock"></i> 100 hrs</span>
+              <a href="quote.html?course=k8s" class="link">View <i class="fas fa-arrow-right"></i></a>
+            </div>
+          </div>
+        </article>
+
+        <article class="tech-card">
+          <div class="thumb">
+            <img src="https://images.unsplash.com/photo-1556075798-4825dfaaf498?w=600&q=80&auto=format&fit=crop" alt="CI CD" loading="lazy" />
+            <span class="badge">Intermediate</span>
+            <div class="tool"><span>GitHub Actions</span></div>
+          </div>
+          <div class="body">
+            <h3>CI / CD Pipelines</h3>
+            <p>GitHub Actions, Jenkins, automated testing and safe releases.</p>
+            <div class="tags"><span>3 months</span><span>Automation</span></div>
+            <div class="foot">
+              <span class="dur"><i class="far fa-clock"></i> 70 hrs</span>
+              <a href="quote.html?course=cicd" class="link">View <i class="fas fa-arrow-right"></i></a>
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== SECURITY ==================== -->
+  <section class="cat-section" id="security" data-track="sec">
+    <div class="container-x">
+      <div class="cat-head">
+        <div>
+          <span class="eyebrow">Track 09 · Cybersecurity</span>
+          <h2>Defend the stack.</h2>
+          <p>Ethical hacking, network security, threat modelling and secure coding — protect systems before attackers do.</p>
+        </div>
+        <div class="meta">
+          <div class="meta-item"><span class="v">2</span><span class="l">Courses</span></div>
+          <div class="meta-item"><span class="v">4-5</span><span class="l">Months</span></div>
+        </div>
+      </div>
+
+      <div class="tech-grid">
+        <article class="tech-card">
+          <div class="thumb">
+            <img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=600&q=80&auto=format&fit=crop" alt="Cybersecurity" loading="lazy" />
+            <span class="badge">Intermediate</span>
+            <div class="tool"><span>Kali</span><span>Wireshark</span></div>
+          </div>
+          <div class="body">
+            <h3>Cybersecurity Fundamentals</h3>
+            <p>Threat models, network security, cryptography and secure coding practices.</p>
+            <div class="tags"><span>4 months</span><span>Foundation</span></div>
+            <div class="foot">
+              <span class="dur"><i class="far fa-clock"></i> 90 hrs</span>
+              <a href="quote.html?course=cyber-fund" class="link">View <i class="fas fa-arrow-right"></i></a>
+            </div>
+          </div>
+        </article>
+
+        <article class="tech-card">
+          <div class="thumb">
+            <img src="https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=600&q=80&auto=format&fit=crop" alt="Ethical hacking" loading="lazy" />
+            <span class="badge">Advanced</span>
+            <div class="tool"><span>Pen-testing</span><span>Burp</span></div>
+          </div>
+          <div class="body">
+            <h3>Ethical Hacking</h3>
+            <p>Penetration testing, vulnerability assessment and responsible disclosure.</p>
+            <div class="tags"><span>5 months</span><span>Red team</span></div>
+            <div class="foot">
+              <span class="dur"><i class="far fa-clock"></i> 120 hrs</span>
+              <a href="quote.html?course=ethical-hacking" class="link">View <i class="fas fa-arrow-right"></i></a>
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== MOBILE ==================== -->
+  <section class="cat-section" id="mobile" data-track="mobile">
+    <div class="container-x">
+      <div class="cat-head">
+        <div>
+          <span class="eyebrow">Track 10 · Mobile</span>
+          <h2>Ship to billions of phones.</h2>
+          <p>Native and cross-platform mobile apps — Android, iOS and React Native.</p>
+        </div>
+        <div class="meta">
+          <div class="meta-item"><span class="v">3</span><span class="l">Tracks</span></div>
+          <div class="meta-item"><span class="v">4</span><span class="l">Months</span></div>
+        </div>
+      </div>
+
+      <div class="tech-grid">
+        <article class="tech-card">
+          <div class="thumb">
+            <img src="https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=600&q=80&auto=format&fit=crop" alt="Android" loading="lazy" />
+            <span class="badge">Intermediate</span>
+            <div class="tool"><span>Kotlin</span><span>Compose</span></div>
+          </div>
+          <div class="body">
+            <h3>Android Development</h3>
+            <p>Kotlin, Jetpack Compose, Room and modern Android architecture.</p>
+            <div class="tags"><span>4 months</span><span>Native</span></div>
+            <div class="foot">
+              <span class="dur"><i class="far fa-clock"></i> 100 hrs</span>
+              <a href="quote.html?course=android" class="link">View <i class="fas fa-arrow-right"></i></a>
+            </div>
+          </div>
+        </article>
+
+        <article class="tech-card">
+          <div class="thumb">
+            <img src="https://images.unsplash.com/photo-1633356122544-f134324a6cee?w=600&q=80&auto=format&fit=crop" alt="React Native" loading="lazy" />
+            <span class="badge">Intermediate</span>
+            <div class="tool"><span>React Native</span></div>
+          </div>
+          <div class="body">
+            <h3>React Native</h3>
+            <p>One codebase, two platforms — build real iOS &amp; Android apps.</p>
+            <div class="tags"><span>4 months</span><span>Cross-platform</span></div>
+            <div class="foot">
+              <span class="dur"><i class="far fa-clock"></i> 100 hrs</span>
+              <a href="quote.html?course=react-native" class="link">View <i class="fas fa-arrow-right"></i></a>
+            </div>
+          </div>
+        </article>
+
+        <article class="tech-card">
+          <div class="thumb">
+            <img src="https://images.unsplash.com/photo-1617042375876-a13e36732a04?w=600&q=80&auto=format&fit=crop" alt="Flutter" loading="lazy" />
+            <span class="badge">Intermediate</span>
+            <div class="tool"><span>Flutter</span><span>Dart</span></div>
+          </div>
+          <div class="body">
+            <h3>Flutter Development</h3>
+            <p>Beautiful native apps with Dart and Flutter widgets.</p>
+            <div class="tags"><span>4 months</span><span>Cross-platform</span></div>
+            <div class="foot">
+              <span class="dur"><i class="far fa-clock"></i> 100 hrs</span>
+              <a href="quote.html?course=flutter" class="link">View <i class="fas fa-arrow-right"></i></a>
+            </div>
+          </div>
+        </article>
+      </div>
+
+      <!-- Mobile showcase strip -->
+      <div style="margin-top: 40px;">
+        <div class="media-grid">
+          <div class="media-tile">
+            <img src="https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=800&q=80&auto=format&fit=crop" alt="Mobile app" loading="lazy" />
+            <span class="tag">Student App</span>
+            <div class="caption">Fitness Tracker<small>Flutter · Android</small></div>
+          </div>
+          <div class="media-tile">
+            <img src="https://images.unsplash.com/photo-1555774698-0b77e0d5fac6?w=800&q=80&auto=format&fit=crop" alt="Mobile UI" loading="lazy" />
+            <span class="tag">Student App</span>
+            <div class="caption">E-commerce Mobile UI<small>React Native · iOS</small></div>
+          </div>
+          <div class="media-tile">
+            <img src="https://images.unsplash.com/photo-1616348436168-de43ad0db179?w=800&q=80&auto=format&fit=crop" alt="Mobile app 2" loading="lazy" />
+            <span class="tag">Student App</span>
+            <div class="caption">Notes App<small>Kotlin · Jetpack Compose</small></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== LEARNING MODEL ==================== -->
+  <section class="flow-band" id="model">
+    <div class="container-x">
+      <div class="head-left" style="max-width: 640px; margin-bottom: 48px;">
+        <span class="eyebrow">How you learn at Tech Hub</span>
+        <h2>A proven six-step learning model.</h2>
+        <p>Every course follows the same cycle. You don't just watch videos — you practice, build, get assessed and get certified.</p>
+      </div>
+
+      <div class="flow-wrap">
+        <div class="flow-step"><div class="n">01</div><h4>Learn</h4><p>Concept sessions with mentors</p></div>
+        <div class="flow-step"><div class="n">02</div><h4>Practice</h4><p>Guided exercises on the LMS</p></div>
+        <div class="flow-step"><div class="n">03</div><h4>Assignments</h4><p>Graded weekly submissions</p></div>
+        <div class="flow-step"><div class="n">04</div><h4>Projects</h4><p>Build real applications</p></div>
+        <div class="flow-step"><div class="n">05</div><h4>Assessment</h4><p>Tests, mocks and reviews</p></div>
+        <div class="flow-step"><div class="n">06</div><h4>Certification</h4><p>Industry-recognized certificate</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== CTA ==================== -->
+  <section class="section-sm">
+    <div class="container-x">
+      <div class="cta-band reveal">
+        <div>
+          <span class="eyebrow" style="color: rgba(255,255,255,0.85);">Not sure which track?</span>
+          <h2>Talk to a Tech Hub advisor.</h2>
+          <p>We'll recommend the right path based on your goals, background and timeline. Free consultation.</p>
+        </div>
+        <div style="display:flex; gap:12px; flex-wrap:wrap;">
+          <a href="quote.html" class="btn-light"><i class="fas fa-paper-plane"></i> Get free guidance</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== FOOTER ==================== -->
+  <footer class="footer-x">
+    <div class="container-x">
+      <div class="footer-grid">
+        <div>
+          <div class="brand-row">
+            <img src="images/logo/cc-logo.png" alt="Creative Code Hub" />
+            <strong>Creative Code Hub</strong>
+          </div>
+          <p style="max-width: 340px;">
+            A learning and career development platform — technical, creative and
+            business education with internships and placement support.
+          </p>
+          <div style="display:flex; gap:12px; margin-top:16px;">
+            <a href="#" class="theme-toggle" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" class="theme-toggle" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+            <a href="#" class="theme-toggle" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+            <a href="#" class="theme-toggle" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+          </div>
+        </div>
+        <div>
+          <h5>Hubs</h5>
+          <ul>
+            <li><a href="tech-hub.html">Tech Hub</a></li>
+            <li><a href="creative-hub.html">Creative Hub</a></li>
+            <li><a href="business-hub.html">Business Hub</a></li>
+            <li><a href="career-prep.html">Career Prep</a></li>
+            <li><a href="career-connect.html">Career Connect</a></li>
+          </ul>
+        </div>
+        <div>
+          <h5>Company</h5>
+          <ul>
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="project.html">Projects</a></li>
+            <li><a href="career.html">Careers</a></li>
+            <li><a href="quote.html">Contact</a></li>
+            <li><a href="underprocess.html">LMS Portal</a></li>
+          </ul>
+        </div>
+        <div>
+          <h5>Contact</h5>
+          <ul>
+            <li><i class="fas fa-map-marker-alt"></i> Kakinada &amp; Visakhapatnam, AP</li>
+            <li><i class="fas fa-phone"></i> +91 70757 75888</li>
+            <li><i class="fas fa-phone"></i> +91 70939 47788</li>
+            <li><i class="fas fa-envelope"></i> info@creativecodehub.in</li>
+          </ul>
+        </div>
+      </div>
+      <div class="copy">
+        <span>© 2025 Creative Code Hub. All rights reserved.</span>
+        <span>ISO 9001:2015 Certified · Made in Andhra Pradesh 🇮🇳</span>
+      </div>
+    </div>
+  </footer>
+
+  <div class="floating-social" id="floatingSocial">
+    <div class="social-toggle" id="socialToggle">
+      <img src="images/logo/cc-logo.png" alt="Social menu" />
+    </div>
+    <div class="social-links">
+      <a href="https://wa.me/917075779888" target="_blank" class="whatsapp" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+      <a href="https://www.instagram.com/creativecodehub" target="_blank" class="instagram" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+      <a href="https://www.facebook.com/yourpage" target="_blank" class="facebook" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+      <a href="https://maps.app.goo.gl/8tZUZKWh3uiPoUWJ9" target="_blank" class="location" aria-label="Location"><i class="fas fa-location-dot"></i></a>
+    </div>
+  </div>
+
+  <a href="https://wa.me/917075779888" target="_blank" class="whatsapp-left" aria-label="Chat on WhatsApp">
+    <i class="fab fa-whatsapp"></i>
+  </a>
+
+  <!-- ==================== PAGE SCRIPTS ==================== -->
+  <script>
+    /* Hero showcase rotation */
+    (function () {
+      const wrap = document.getElementById('heroShowcase');
+      if (!wrap) return;
+      const slides = Array.from(wrap.querySelectorAll('.showcase-slide'));
+      const dots   = Array.from(document.querySelectorAll('#showcaseDots .showcase-dot'));
+      if (!slides.length) return;
+
+      let current = 0;
+      let timer = null;
+      const INTERVAL = 4500;
+
+      function goTo(i) {
+        current = (i + slides.length) % slides.length;
+        slides.forEach((s, idx) => s.classList.toggle('active', idx === current));
+        dots.forEach((d, idx) => d.classList.toggle('active', idx === current));
+      }
+      function auto() { timer = setInterval(() => goTo(current + 1), INTERVAL); }
+      function stop() { clearInterval(timer); }
+
+      dots.forEach(d => d.addEventListener('click', () => {
+        goTo(parseInt(d.getAttribute('data-show'), 10));
+        stop(); auto();
+      }));
+      wrap.addEventListener('mouseenter', stop);
+      wrap.addEventListener('mouseleave', auto);
+      auto();
+    })();
+
+    /* Category scroll-spy */
+    (function () {
+      const tabs = Array.from(document.querySelectorAll('.cat-tab'));
+      const sections = tabs.map(t => document.querySelector(t.getAttribute('href'))).filter(Boolean);
+      if (!tabs.length || !sections.length) return;
+
+      tabs.forEach(tab => {
+        tab.addEventListener('click', (e) => {
+          e.preventDefault();
+          const target = document.querySelector(tab.getAttribute('href'));
+          if (!target) return;
+          const top = target.getBoundingClientRect().top + window.scrollY - 132;
+          window.scrollTo({ top, behavior: 'smooth' });
+        });
+      });
+
+      if ('IntersectionObserver' in window) {
+        const spy = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              const id = entry.target.id;
+              tabs.forEach(t => t.classList.toggle('active', t.getAttribute('href') === '#' + id));
+            }
+          });
+        }, { rootMargin: '-140px 0px -60% 0px', threshold: 0 });
+        sections.forEach(s => spy.observe(s));
+      }
+    })();
+  </script>
+
+  <script src="script.js"></script>
+</body>
+</html>
